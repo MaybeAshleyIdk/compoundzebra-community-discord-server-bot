@@ -1,0 +1,8 @@
+no-hard-tabs:
+  code_blocks: false
+
+line-length:
+  line_length: 120
+  tables: false
+
+emphasis-style: false
