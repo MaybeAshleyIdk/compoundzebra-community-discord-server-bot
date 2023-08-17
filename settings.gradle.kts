@@ -16,4 +16,5 @@ dependencyResolutionManagement {
 
 include(
 	":bot",
+	":utils",
 )
