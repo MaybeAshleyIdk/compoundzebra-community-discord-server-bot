@@ -5,6 +5,7 @@ import dagger.Component
 import dagger.Lazy
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.BotToken
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.ShutdownManager
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.di.LoggingModule
 import net.dv8tion.jda.api.entities.Activity
@@ -16,6 +17,7 @@ import net.dv8tion.jda.api.JDA as Jda
 	modules = [
 		JdaModule::class,
 		LoggingModule::class,
+		CommandsModule::class,
 	],
 )
 @Singleton
