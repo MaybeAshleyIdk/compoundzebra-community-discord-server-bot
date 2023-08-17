@@ -27,5 +27,4 @@ application {
 ktlint {
 	version = "0.50.0"
 	installGitPreCommitHookBeforeBuild = true
-	codeStyle = KtlintOfficial
 }
