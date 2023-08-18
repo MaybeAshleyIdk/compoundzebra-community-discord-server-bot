@@ -21,7 +21,7 @@ import net.dv8tion.jda.api.JDA as Jda
 	],
 )
 @Singleton
-interface JdaComponent {
+internal interface JdaComponent {
 
 	@get:BotTokenString
 	val tokenString: String
@@ -44,13 +44,13 @@ interface JdaComponent {
 	}
 }
 
-val JdaComponent.token: BotToken
+internal val JdaComponent.token: BotToken
 	get() {
 		return BotToken.ofString(this.tokenString)
 	}
 
 @CheckReturnValue
-fun JdaComponent.Factory.build(
+internal fun JdaComponent.Factory.build(
 	token: BotToken,
 	initialActivity: Activity,
 ): JdaComponent {

@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import javax.annotation.CheckReturnValue
 import javax.inject.Inject
 
-class ShutdownCommand @Suppress("ktlint:standard:annotation") @Inject constructor(
+internal class ShutdownCommand @Suppress("ktlint:standard:annotation") @Inject constructor(
 	private val configLoader: ConfigLoader,
 	private val shutdownManager: ShutdownManager,
 ) : Command(name = CommandName.ofString("shutdown")) {

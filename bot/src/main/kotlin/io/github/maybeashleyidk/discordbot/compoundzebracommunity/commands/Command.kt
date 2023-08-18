@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import javax.annotation.CheckReturnValue
 
-abstract class Command(val name: CommandName) {
+internal abstract class Command(val name: CommandName) {
 
 	abstract fun execute(catalystMessage: Message, textChannel: TextChannel)
 

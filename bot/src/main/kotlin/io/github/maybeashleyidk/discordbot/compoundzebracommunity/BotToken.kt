@@ -3,14 +3,14 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 import javax.annotation.CheckReturnValue
 
 @JvmInline
-value class BotToken private constructor(val string: String) {
+public value class BotToken private constructor(public val string: String) {
 
-	companion object {
+	public companion object {
 
-		const val TOKEN_STRING_LENGTH: Int = 72
+		public const val TOKEN_STRING_LENGTH: Int = 72
 
 		@CheckReturnValue
-		fun ofString(tokenString: String): BotToken {
+		public fun ofString(tokenString: String): BotToken {
 			require(tokenString.length == this.TOKEN_STRING_LENGTH) {
 				"Bot token string must be exactly 72 characters long"
 			}

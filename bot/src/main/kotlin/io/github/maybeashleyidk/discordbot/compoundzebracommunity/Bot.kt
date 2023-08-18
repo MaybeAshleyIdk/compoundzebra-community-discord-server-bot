@@ -10,11 +10,11 @@ import net.dv8tion.jda.api.entities.Activity
 import java.time.Duration
 import net.dv8tion.jda.api.JDA as Jda
 
-object Bot {
+public object Bot {
 
 	private val GRACEFUL_SHUTDOWN_TIMEOUT_DURATION: Duration = Duration.ofSeconds(10)
 
-	fun run(token: BotToken) {
+	public fun run(token: BotToken) {
 		val jdaComponent: JdaComponent = DaggerJdaComponent.factory()
 			.build(
 				token,

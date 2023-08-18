@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.requests.restaction.MessageCreateAction
 import javax.annotation.CheckReturnValue
 
-class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInject constructor(
+internal class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInject constructor(
 	@Assisted("name") nameString: String,
 	@Assisted("responseMessage") val responseMessage: String,
 ) : Command(CommandName.ofString(nameString)) {
@@ -30,7 +30,7 @@ class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInject constr
 }
 
 @CheckReturnValue
-fun EchoCommand.Factory.build(
+internal fun EchoCommand.Factory.build(
 	name: CommandName,
 	responseMessage: String,
 ): EchoCommand {
