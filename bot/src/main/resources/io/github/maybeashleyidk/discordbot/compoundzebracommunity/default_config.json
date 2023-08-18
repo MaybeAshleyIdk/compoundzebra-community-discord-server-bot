@@ -5,5 +5,10 @@
 		"command.shutdown.response": "Shutting down. Bye bye...",
 		"command.shutdown.insufficientPermissions": "You are not allowed to use this command",
 		"command.shutdown.error": "Sorry, a problem occurred trying to shutdown"
+	},
+	"echoCommands": {
+		"ping": {
+			"response": "pong"
+		}
 	}
 }
