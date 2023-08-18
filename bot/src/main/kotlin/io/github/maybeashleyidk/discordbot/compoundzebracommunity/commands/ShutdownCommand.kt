@@ -3,7 +3,6 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.ShutdownManager
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigLoader
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.entities.Message
@@ -14,21 +13,11 @@ import javax.inject.Inject
 class ShutdownCommand @Suppress("ktlint:standard:annotation") @Inject constructor(
 	private val configLoader: ConfigLoader,
 	private val shutdownManager: ShutdownManager,
-	private val logger: Logger,
 ) : Command(name = CommandName.ofString("shutdown")) {
 
 	override fun execute(catalystMessage: Message, textChannel: TextChannel) {
-		val authorAsGuildMember: Member? = catalystMessage.getAuthorAsGuildMember()
+		val authorAsGuildMember: Member = catalystMessage.getAuthorAsGuildMember()
 		val config: Config = this.configLoader.load()
-
-		if (authorAsGuildMember == null) {
-			this.logger.logWarning("Guild.getMemberById() returned null for some reason. Bailing out")
-
-			textChannel.sendMessage(config.strings.commandShutdownError)
-				.complete()
-
-			return
-		}
 
 		if (!(authorAsGuildMember.isAllowedToShutdownBot())) {
 			textChannel.sendMessage(config.strings.commandShutdownInsufficientPermissions)
@@ -48,8 +37,9 @@ class ShutdownCommand @Suppress("ktlint:standard:annotation") @Inject constructo
 }
 
 @CheckReturnValue
-private fun Message.getAuthorAsGuildMember(): Member? {
-	return this.guild.getMemberById(this.author.idLong)
+private fun Message.getAuthorAsGuildMember(): Member {
+	return this.guild.retrieveMemberById(this.author.idLong)
+		.complete()
 }
 
 @CheckReturnValue
