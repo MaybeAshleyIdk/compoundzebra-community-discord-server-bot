@@ -16,6 +16,7 @@ dependencyResolutionManagement {
 
 include(
 	":bot",
+	":config",
 	":logging",
 	":utils",
 )
