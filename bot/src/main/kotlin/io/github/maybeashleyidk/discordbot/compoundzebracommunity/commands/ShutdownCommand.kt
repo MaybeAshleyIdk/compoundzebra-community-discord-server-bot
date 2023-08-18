@@ -19,7 +19,7 @@ internal class ShutdownCommand @Suppress("ktlint:standard:annotation") @Inject c
 		val authorAsGuildMember: Member = catalystMessage.getAuthorAsGuildMember()
 		val config: Config = this.configLoader.load()
 
-		if (!(authorAsGuildMember.isAllowedToShutdownBot())) {
+		if (!(authorAsGuildMember.isAllowedToShutdownBot(config.botAdminUserIds.orEmpty()))) {
 			textChannel.sendMessage(config.strings.commandShutdownInsufficientPermissions)
 				.complete()
 
@@ -43,6 +43,6 @@ private fun Message.getAuthorAsGuildMember(): Member {
 }
 
 @CheckReturnValue
-private fun Member.isAllowedToShutdownBot(): Boolean {
-	return (this.isOwner || this.hasPermission(Permission.ADMINISTRATOR))
+private fun Member.isAllowedToShutdownBot(botAdminUserIds: Set<String>): Boolean {
+	return (this.isOwner || this.hasPermission(Permission.ADMINISTRATOR) || (this.id in botAdminUserIds))
 }
