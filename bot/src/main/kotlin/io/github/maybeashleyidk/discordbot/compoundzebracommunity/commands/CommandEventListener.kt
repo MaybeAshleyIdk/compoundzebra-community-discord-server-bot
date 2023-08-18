@@ -31,17 +31,21 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 			return
 		}
 
+		val config: Config = this.configLoader.load()
+		check(config.commandPrefix.isNotBlank()) {
+			"Command prefix must not be blank"
+		}
+
 		val textChannel: TextChannel = channel.asTextChannel()
 		val preparedMessage: String = message.contentStripped.trimAndSqueezeWhitespace()
 
-		if (!(preparedMessage.startsWith("!"))) {
+		if (!(preparedMessage.startsWith(config.commandPrefix))) {
 			return
 		}
 
-		val commandNameStr: String = preparedMessage.removePrefix("!")
+		val commandNameStr: String = preparedMessage.removePrefix(config.commandPrefix)
 		val commandName: CommandName? = CommandName.ofStringOrNull(commandNameStr)
 		if (commandName == null) {
-			val config: Config = this.configLoader.load()
 			textChannel.sendMessage(config.strings.genericInvalidCommandName.format(commandNameStr))
 				.complete()
 
@@ -54,7 +58,6 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 			}
 
 		if (foundCommand == null) {
-			val config: Config = this.configLoader.load()
 			textChannel.sendMessage(config.strings.genericUnknownCommand.format(commandName.string))
 				.complete()
 

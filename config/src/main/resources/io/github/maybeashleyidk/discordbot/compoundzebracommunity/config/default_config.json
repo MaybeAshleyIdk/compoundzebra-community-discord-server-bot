@@ -1,4 +1,5 @@
 {
+	"commandPrefix": "!",
 	"strings": {
 		"generic.invalidCommandName": "Unknown command \"%s\"",
 		"generic.unknownCommand": "Unknown command \"%s\"",
