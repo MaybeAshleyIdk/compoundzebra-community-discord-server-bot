@@ -29,7 +29,7 @@ object CommandsModule {
 	fun providePingCommand(echoCommandFactory: EchoCommand.Factory): Command {
 		return echoCommandFactory
 			.build(
-				nameString = "ping",
+				name = CommandName.ofString("ping"),
 				responseMessage = "pong",
 			)
 	}
