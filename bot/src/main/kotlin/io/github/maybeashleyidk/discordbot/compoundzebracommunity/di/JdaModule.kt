@@ -1,7 +1,9 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.di
 
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
+import dagger.Reusable
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandEventListener
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.requests.GatewayIntent
@@ -11,6 +13,13 @@ import net.dv8tion.jda.api.JDABuilder as JdaBuilder
 
 @Module
 object JdaModule {
+
+	@Provides
+	@Reusable
+	fun provideMoshi(): Moshi {
+		return Moshi.Builder()
+			.build()
+	}
 
 	@Provides
 	@Singleton
