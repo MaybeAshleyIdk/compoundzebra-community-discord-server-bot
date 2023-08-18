@@ -15,7 +15,6 @@ data class LanguageStrings(
 	@Json(name = "generic.unknownCommand") val genericUnknownCommand: String,
 	@Json(name = "command.shutdown.response") val commandShutdownResponse: String,
 	@Json(name = "command.shutdown.insufficientPermissions") val commandShutdownInsufficientPermissions: String,
-	@Json(name = "command.shutdown.error") val commandShutdownError: String,
 )
 
 @JsonClass(generateAdapter = true)
