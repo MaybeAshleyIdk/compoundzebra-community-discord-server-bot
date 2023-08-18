@@ -1,7 +1,7 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.di.DaggerJdaComponent
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.di.JdaComponent
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.di.BotComponent
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.di.DaggerBotComponent
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.di.build
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.di.token
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
@@ -15,20 +15,20 @@ public object Bot {
 	private val GRACEFUL_SHUTDOWN_TIMEOUT_DURATION: Duration = Duration.ofSeconds(10)
 
 	public fun run(token: BotToken) {
-		val jdaComponent: JdaComponent = DaggerJdaComponent.factory()
+		val botComponent: BotComponent = DaggerBotComponent.factory()
 			.build(
 				token,
 				initialActivity = Activity.playing("you like a damn fiddle"),
 			)
 
-		jdaComponent.logToken()
+		botComponent.logToken()
 
-		jdaComponent.logger.logInfo("Waiting until the bot is connected...")
-		jdaComponent.lazyJda.get().awaitReady()
-		jdaComponent.logger.logInfo("Bot connected!")
+		botComponent.logger.logInfo("Waiting until the bot is connected...")
+		botComponent.lazyJda.get().awaitReady()
+		botComponent.logger.logInfo("Bot connected!")
 
-		jdaComponent.shutdownManager.waitForShutdownRequest()
-		this.shutdownGracefully(jdaComponent.lazyJda.get(), jdaComponent.logger)
+		botComponent.shutdownManager.waitForShutdownRequest()
+		this.shutdownGracefully(botComponent.lazyJda.get(), botComponent.logger)
 	}
 
 	private fun shutdownGracefully(jda: Jda, logger: Logger) {
@@ -57,7 +57,7 @@ public object Bot {
 	}
 }
 
-private fun JdaComponent.logToken() {
+private fun BotComponent.logToken() {
 	val msg: String =
 		buildString(13 + BotToken.TOKEN_STRING_LENGTH) {
 			this@buildString.append("Using token: ")

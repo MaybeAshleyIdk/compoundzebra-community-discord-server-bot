@@ -15,13 +15,13 @@ import net.dv8tion.jda.api.JDA as Jda
 
 @Component(
 	modules = [
-		JdaModule::class,
+		BotModule::class,
 		LoggingModule::class,
 		CommandsModule::class,
 	],
 )
 @Singleton
-internal interface JdaComponent {
+internal interface BotComponent {
 
 	@get:BotTokenString
 	val tokenString: String
@@ -40,20 +40,20 @@ internal interface JdaComponent {
 		fun build(
 			@BindsInstance @BotTokenString token: String, // Kapt+Dagger does not support value classes
 			@BindsInstance initialActivity: Activity,
-		): JdaComponent
+		): BotComponent
 	}
 }
 
-internal val JdaComponent.token: BotToken
+internal val BotComponent.token: BotToken
 	get() {
 		return BotToken.ofString(this.tokenString)
 	}
 
 @CheckReturnValue
-internal fun JdaComponent.Factory.build(
+internal fun BotComponent.Factory.build(
 	token: BotToken,
 	initialActivity: Activity,
-): JdaComponent {
+): BotComponent {
 	return this.build(
 		token = token.string,
 		initialActivity = initialActivity,
