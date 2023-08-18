@@ -5,7 +5,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ShutdownManager @Suppress("ktlint:standard:annotation") @Inject constructor() {
+internal class ShutdownManager @Suppress("ktlint:standard:annotation") @Inject constructor() {
 
 	private val semaphore: Semaphore = Semaphore(1)
 

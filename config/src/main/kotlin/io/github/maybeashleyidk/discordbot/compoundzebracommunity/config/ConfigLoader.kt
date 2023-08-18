@@ -11,14 +11,14 @@ import javax.annotation.CheckReturnValue
 import javax.inject.Inject
 
 @Reusable
-class ConfigLoader @Suppress("ktlint:standard:annotation") @Inject constructor(
+public class ConfigLoader @Suppress("ktlint:standard:annotation") @Inject constructor(
 	moshi: Moshi,
 ) {
 
 	private companion object {
 
 		val DEFAULT_CONFIG_JSON_RESOURCE_PATH: Path =
-			"/io/github/maybeashleyidk/discordbot/compoundzebracommunity/default_config.json".toPath()
+			"/io/github/maybeashleyidk/discordbot/compoundzebracommunity/config/default_config.json".toPath()
 
 		val CONFIG_JSON_FILE_DEFAULT_PATH: Path = "bot_config.json".toPath()
 	}
@@ -28,7 +28,7 @@ class ConfigLoader @Suppress("ktlint:standard:annotation") @Inject constructor(
 		.nonNull()
 
 	@CheckReturnValue
-	fun load(): Config {
+	public fun load(): Config {
 		this.ensureConfigJsonFileExists()
 
 		val config: Config? =

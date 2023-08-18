@@ -13,7 +13,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.EventListener
 import javax.inject.Inject
 
-class CommandEventListener @Suppress("ktlint:standard:annotation") @Inject constructor(
+internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inject constructor(
 	private val configLoader: ConfigLoader,
 	private val commands: Set<@JvmSuppressWildcards Command>,
 	private val logger: Logger,

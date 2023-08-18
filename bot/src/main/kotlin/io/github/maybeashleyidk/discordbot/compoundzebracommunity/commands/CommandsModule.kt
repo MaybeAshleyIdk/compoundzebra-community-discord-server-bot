@@ -15,7 +15,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.EchoCom
 		CommandsModule.Bindings::class,
 	],
 )
-object CommandsModule {
+internal object CommandsModule {
 
 	@Module
 	interface Bindings {

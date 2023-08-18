@@ -12,7 +12,7 @@ import net.dv8tion.jda.api.JDA as Jda
 import net.dv8tion.jda.api.JDABuilder as JdaBuilder
 
 @Module
-object JdaModule {
+internal object BotModule {
 
 	@Provides
 	@Reusable

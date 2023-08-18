@@ -3,7 +3,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 import javax.annotation.CheckReturnValue
 
 @JvmInline
-value class CommandName private constructor(val string: String) {
+internal value class CommandName private constructor(val string: String) {
 
 	companion object {
 
