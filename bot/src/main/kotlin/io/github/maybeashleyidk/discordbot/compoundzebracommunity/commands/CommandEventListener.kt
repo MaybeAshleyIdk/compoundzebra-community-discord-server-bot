@@ -1,5 +1,7 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigLoader
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.trimAndSqueezeWhitespace
 import net.dv8tion.jda.api.entities.Message
@@ -12,6 +14,7 @@ import net.dv8tion.jda.api.hooks.EventListener
 import javax.inject.Inject
 
 class CommandEventListener @Suppress("ktlint:standard:annotation") @Inject constructor(
+	private val configLoader: ConfigLoader,
 	private val commands: Set<@JvmSuppressWildcards Command>,
 	private val logger: Logger,
 ) : EventListener {
@@ -38,7 +41,8 @@ class CommandEventListener @Suppress("ktlint:standard:annotation") @Inject const
 		val commandNameStr: String = preparedMessage.removePrefix("!")
 		val commandName: CommandName? = CommandName.ofStringOrNull(commandNameStr)
 		if (commandName == null) {
-			textChannel.sendMessage("Unknown command \"$commandNameStr\"")
+			val config: Config = this.configLoader.load()
+			textChannel.sendMessage(config.strings.genericInvalidCommandName.format(commandNameStr))
 				.complete()
 
 			return
@@ -50,7 +54,8 @@ class CommandEventListener @Suppress("ktlint:standard:annotation") @Inject const
 			}
 
 		if (foundCommand == null) {
-			textChannel.sendMessage("Unknown command \"$commandName\"")
+			val config: Config = this.configLoader.load()
+			textChannel.sendMessage(config.strings.genericUnknownCommand.format(commandName.string))
 				.complete()
 
 			return
