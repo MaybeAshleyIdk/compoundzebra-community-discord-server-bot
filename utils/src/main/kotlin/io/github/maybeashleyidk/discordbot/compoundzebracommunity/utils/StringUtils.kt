@@ -26,3 +26,17 @@ public fun String.quoted(): String {
 		this@buildString.append('"')
 	}
 }
+
+@CheckReturnValue
+public inline fun String.indexOfFirst(startIndex: Int, predicate: (Char) -> Boolean): Int {
+	var i: Int = startIndex
+	while (i < this.length) {
+		if (predicate(this[i])) {
+			return i
+		}
+
+		++i
+	}
+
+	return -1
+}
