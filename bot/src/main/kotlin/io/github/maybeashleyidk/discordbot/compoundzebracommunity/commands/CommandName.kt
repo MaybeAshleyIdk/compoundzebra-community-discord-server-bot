@@ -1,5 +1,6 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.quoted
 import javax.annotation.CheckReturnValue
 
 @JvmInline
@@ -8,9 +9,19 @@ internal value class CommandName private constructor(val string: String) {
 	companion object {
 
 		@CheckReturnValue
+		private fun isValidCommandNameChar(ch: Char): Boolean {
+			return (ch in 'a'..'z') || (ch in 'A'..'Z') || (ch in '0'..'9')
+		}
+
+		@CheckReturnValue
+		fun isValidCommandName(nameString: String): Boolean {
+			return nameString.isNotEmpty() && nameString.all(this::isValidCommandNameChar)
+		}
+
+		@CheckReturnValue
 		fun ofString(nameString: String): CommandName {
-			require(nameString.isNotBlank()) {
-				"Command name string must not be blank"
+			require(this.isValidCommandName(nameString)) {
+				"Invalid command name ${nameString.quoted()}"
 			}
 
 			return CommandName(nameString)
@@ -18,7 +29,7 @@ internal value class CommandName private constructor(val string: String) {
 
 		@CheckReturnValue
 		fun ofStringOrNull(nameString: String): CommandName? {
-			if (nameString.isBlank()) {
+			if (!(this.isValidCommandName(nameString))) {
 				return null
 			}
 
@@ -27,8 +38,9 @@ internal value class CommandName private constructor(val string: String) {
 	}
 
 	init {
-		require(this.string.isNotBlank()) {
-			"Command name string must not be blank"
+		@Suppress("RemoveRedundantQualifierName")
+		require(CommandName.isValidCommandName(this.string)) {
+			"Invalid command name ${this.string.quoted()}"
 		}
 	}
 

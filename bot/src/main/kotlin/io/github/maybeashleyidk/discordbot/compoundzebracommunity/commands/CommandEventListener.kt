@@ -3,17 +3,17 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigLoader
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.trimAndSqueezeWhitespace
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.ChannelType
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion
 import net.dv8tion.jda.api.events.GenericEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.EventListener
+import javax.annotation.CheckReturnValue
 import javax.inject.Inject
 
 internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inject constructor(
+	private val commandMessageParser: CommandMessageParser,
 	private val configLoader: ConfigLoader,
 	private val commands: Set<@JvmSuppressWildcards Command>,
 	private val logger: Logger,
@@ -25,46 +25,62 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 		}
 
 		val message: Message = event.message
-		val channel: MessageChannelUnion = message.channel
 
-		if ((channel.type != ChannelType.TEXT) || message.author.isBot || message.author.isSystem) {
+		if (shouldBotIgnoreMessage(message)) {
 			return
 		}
 
-		val config: Config = this.configLoader.load()
-		check(config.commandPrefix.isNotBlank()) {
-			"Command prefix must not be blank"
+		val textChannel: TextChannel = message.channel.asTextChannel()
+
+		val commandLine: CommandLine = this.tryParseMessageContentToCommandLine(message.contentStripped, textChannel)
+			?: return
+
+		this.tryFindAndExecuteCommand(commandLine, catalystMessage = message, textChannel)
+	}
+
+	@CheckReturnValue
+	private fun tryParseMessageContentToCommandLine(messageContent: String, textChannel: TextChannel): CommandLine? {
+		val commandMessageParseResult: CommandMessageParseResult =
+			this.commandMessageParser.parseMessageContent(messageContent)
+
+		return when (commandMessageParseResult) {
+			is CommandMessageParseResult.NotACommandMessage -> {
+				null
+			}
+
+			is CommandMessageParseResult.InvalidCommandName -> {
+				val config: Config = this.configLoader.load()
+
+				val msg: String = config.strings.genericInvalidCommandName
+					.format(commandMessageParseResult.invalidCommandNameStr)
+
+				textChannel.sendMessage(msg).complete()
+
+				null
+			}
+
+			is CommandMessageParseResult.Success -> {
+				commandMessageParseResult.commandLine
+			}
 		}
+	}
 
-		val textChannel: TextChannel = channel.asTextChannel()
-		val preparedMessage: String = message.contentStripped.trimAndSqueezeWhitespace()
-
-		if (!(preparedMessage.startsWith(config.commandPrefix))) {
-			return
-		}
-
-		val commandNameStr: String = preparedMessage.removePrefix(config.commandPrefix)
-		val commandName: CommandName? = CommandName.ofStringOrNull(commandNameStr)
-		if (commandName == null) {
-			textChannel.sendMessage(config.strings.genericInvalidCommandName.format(commandNameStr))
-				.complete()
-
-			return
-		}
-
+	private fun tryFindAndExecuteCommand(commandLine: CommandLine, catalystMessage: Message, textChannel: TextChannel) {
 		val foundCommand: Command? = this.commands
 			.firstOrNull { command: Command ->
-				command.name == commandName
+				command.name == commandLine.commandName
 			}
 
 		if (foundCommand == null) {
-			textChannel.sendMessage(config.strings.genericUnknownCommand.format(commandName.string))
+			val config: Config = this.configLoader.load()
+
+			textChannel.sendMessage(config.strings.genericUnknownCommand.format(commandLine.commandName.string))
 				.complete()
 
 			return
 		}
 
-		this.executeCommand(foundCommand, catalystMessage = message, textChannel)
+		this.executeCommand(foundCommand, catalystMessage, textChannel)
 	}
 
 	private fun executeCommand(command: Command, catalystMessage: Message, textChannel: TextChannel) {
@@ -78,4 +94,9 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 			this.logger.logError("Command ${command.name.toQuotedString()} threw an exception: $e")
 		}
 	}
+}
+
+@CheckReturnValue
+private fun shouldBotIgnoreMessage(message: Message): Boolean {
+	return (message.channel.type != ChannelType.TEXT) || message.author.isBot || message.author.isSystem
 }
