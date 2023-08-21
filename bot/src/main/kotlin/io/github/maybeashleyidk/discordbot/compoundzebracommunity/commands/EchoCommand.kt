@@ -23,7 +23,7 @@ internal class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInje
 		): EchoCommand
 	}
 
-	override fun execute(catalystMessage: Message, textChannel: TextChannel) {
+	override fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val action: MessageCreateAction = textChannel.sendMessage(this.responseMessage)
 		action.complete()
 	}

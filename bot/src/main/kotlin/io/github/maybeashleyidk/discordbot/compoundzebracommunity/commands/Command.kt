@@ -6,7 +6,7 @@ import javax.annotation.CheckReturnValue
 
 internal abstract class Command(val name: CommandName) {
 
-	abstract fun execute(catalystMessage: Message, textChannel: TextChannel)
+	abstract fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel)
 
 	@CheckReturnValue
 	override fun toString(): String {
