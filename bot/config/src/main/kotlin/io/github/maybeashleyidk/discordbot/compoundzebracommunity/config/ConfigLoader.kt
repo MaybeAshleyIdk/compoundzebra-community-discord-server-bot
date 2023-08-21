@@ -3,6 +3,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapter
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandName
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import okio.BufferedSource
 import java.time.Instant
@@ -138,7 +139,7 @@ private fun Map<String, EchoCommandDetailsJson>.mapToEchoCommandDefinitions(): S
 	return this
 		.mapTo(LinkedHashSet(this.size)) { (commandNameStr: String, details: EchoCommandDetailsJson) ->
 			EchoCommandDefinition(
-				commandNameStr = commandNameStr,
+				commandName = CommandName.ofString(commandNameStr),
 				responseMessage = details.responseMessage,
 			)
 		}

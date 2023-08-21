@@ -74,7 +74,7 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 		if (foundCommand == null) {
 			val config: Config = this.configLoader.load()
 
-			textChannel.sendMessage(config.strings.generic.unknownCommand(commandLine.commandName.string))
+			textChannel.sendMessage(config.strings.generic.unknownCommand(commandLine.commandName))
 				.complete()
 
 			return

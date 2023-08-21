@@ -9,6 +9,7 @@ import dagger.multibindings.Multibinds
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigLoader
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.EchoCommandDefinition
+import javax.annotation.CheckReturnValue
 
 @Module(
 	includes = [
@@ -41,12 +42,15 @@ internal object CommandsModule {
 	): Set<Command> {
 		val config: Config = configLoader.load()
 		return config.echoCommandDefinitions
-			.mapTo(LinkedHashSet(config.echoCommandDefinitions.size)) { echoCommandDefinition: EchoCommandDefinition ->
-				echoCommandFactory
-					.build(
-						name = CommandName.ofString(echoCommandDefinition.commandNameStr),
-						echoCommandDefinition.responseMessage,
-					)
-			}
+			.mapTo(LinkedHashSet(config.echoCommandDefinitions.size), echoCommandFactory::buildFromCommandDefinition)
 	}
+}
+
+@CheckReturnValue
+private fun EchoCommand.Factory.buildFromCommandDefinition(echoCommandDefinition: EchoCommandDefinition): EchoCommand {
+	return this
+		.build(
+			echoCommandDefinition.commandName,
+			echoCommandDefinition.responseMessage,
+		)
 }
