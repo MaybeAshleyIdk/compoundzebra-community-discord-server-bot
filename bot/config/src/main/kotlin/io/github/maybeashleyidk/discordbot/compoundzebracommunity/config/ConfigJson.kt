@@ -4,22 +4,23 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-public data class Config(
+internal data class ConfigJson(
 	@Json(name = "commandPrefix") val commandPrefix: String,
-	@Json(name = "strings") val strings: LanguageStrings,
-	@Json(name = "echoCommands") val echoCommandDefinitions: Map<String, EchoCommandDefinition>,
+	@Json(name = "strings") val strings: LanguageStringsJson,
+	@Json(name = "echoCommands") val echoCommandDetailsMap: Map<String, EchoCommandDetailsJson>,
 	@Json(name = "botAdminUserIds") val botAdminUserIds: Set<String>?,
 )
 
 @JsonClass(generateAdapter = true)
-public data class LanguageStrings(
+internal data class LanguageStringsJson(
 	@Json(name = "generic.invalidCommandName") val genericInvalidCommandName: String,
 	@Json(name = "generic.unknownCommand") val genericUnknownCommand: String,
+	@Json(name = "command.getconfig.insufficientPermissions") val commandGetconfigInsufficientPermissions: String,
 	@Json(name = "command.shutdown.response") val commandShutdownResponse: String,
 	@Json(name = "command.shutdown.insufficientPermissions") val commandShutdownInsufficientPermissions: String,
 )
 
 @JsonClass(generateAdapter = true)
-public data class EchoCommandDefinition(
+internal data class EchoCommandDetailsJson(
 	@Json(name = "response") val responseMessage: String,
 )

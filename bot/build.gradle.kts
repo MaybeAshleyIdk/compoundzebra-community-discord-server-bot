@@ -5,8 +5,8 @@ plugins {
 }
 
 dependencies {
+	implementation(project(":bot:config"))
 	implementation(project(":logging"))
-	implementation(project(":config"))
 	implementation(project(":utils"))
 
 	implementation("com.google.code.findbugs:jsr305:3.0.2")

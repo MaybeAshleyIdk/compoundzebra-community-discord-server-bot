@@ -2,12 +2,18 @@
 
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
+import java.nio.file.Path
 import javax.annotation.CheckReturnValue
 import kotlin.system.exitProcess
 
+private val CONFIG_FILE_PATH: Path = Path.of("bot_config.json")
+
 fun main() {
 	val token: BotToken = getBotTokenFromEnvironmentOrExit()
-	Bot.run(token = token)
+	Bot.run(
+		token = token,
+		configFilePath = CONFIG_FILE_PATH, // TODO: add option parsing and allow to change it via option -c, --config
+	)
 }
 
 @CheckReturnValue

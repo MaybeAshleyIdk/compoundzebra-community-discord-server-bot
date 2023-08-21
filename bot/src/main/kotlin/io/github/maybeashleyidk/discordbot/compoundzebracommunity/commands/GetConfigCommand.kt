@@ -1,38 +1,35 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.ShutdownManager
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigLoader
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.di.ConfigFilePath
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
+import net.dv8tion.jda.api.utils.FileUpload
+import java.nio.file.Path
 import javax.annotation.CheckReturnValue
 import javax.inject.Inject
 
-internal class ShutdownCommand @Suppress("ktlint:standard:annotation") @Inject constructor(
+internal class GetConfigCommand @Suppress("ktlint:standard:annotation") @Inject constructor(
 	private val configLoader: ConfigLoader,
-	private val shutdownManager: ShutdownManager,
-) : Command(name = CommandName.ofString("shutdown")) {
+	@ConfigFilePath private val configFilePath: Path,
+) : Command(name = CommandName.ofString("getconfig")) {
 
 	override fun execute(catalystMessage: Message, textChannel: TextChannel) {
 		val authorAsGuildMember: Member = catalystMessage.getAuthorAsGuildMember()
 		val config: Config = this.configLoader.load()
 
-		if (!(authorAsGuildMember.isAllowedToShutdownBot(config.botAdminUserIds))) {
-			textChannel.sendMessage(config.strings.command.shutdown.insufficientPermissions)
+		if (!(authorAsGuildMember.isAllowedToSeeConfig(config.botAdminUserIds))) {
+			textChannel.sendMessage(config.strings.command.getConfig.insufficientPermissions)
 				.complete()
 
 			return
 		}
 
-		textChannel.sendMessage(config.strings.command.shutdown.response)
+		textChannel.sendFiles(FileUpload.fromData(this.configFilePath))
 			.complete()
-
-		// we can't actually do the shutdown procedure here, since we're still in the event listener.
-		// if we were to call JDA.shutdown(), then it wouldn't do anything and JDA.awaitShutdown() would never return.
-		// it needs to be deferred until we're out of the event listener
-		this.shutdownManager.requestShutdown()
 	}
 }
 
@@ -43,6 +40,6 @@ private fun Message.getAuthorAsGuildMember(): Member {
 }
 
 @CheckReturnValue
-private fun Member.isAllowedToShutdownBot(botAdminUserIds: Set<String>): Boolean {
+private fun Member.isAllowedToSeeConfig(botAdminUserIds: Set<String>): Boolean {
 	return (this.isOwner || this.hasPermission(Permission.ADMINISTRATOR) || (this.id in botAdminUserIds))
 }

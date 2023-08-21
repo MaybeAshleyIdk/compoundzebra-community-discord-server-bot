@@ -3,6 +3,7 @@
 	"strings": {
 		"generic.invalidCommandName": "Unknown command \"%s\"",
 		"generic.unknownCommand": "Unknown command \"%s\"",
+		"command.getconfig.insufficientPermissions": "You are not allowed to use this command",
 		"command.shutdown.response": "Shutting down. Bye bye...",
 		"command.shutdown.insufficientPermissions": "You are not allowed to use this command"
 	},
