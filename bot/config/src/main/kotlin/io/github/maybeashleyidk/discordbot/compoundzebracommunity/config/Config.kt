@@ -1,10 +1,11 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandName
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandPrefix
 import javax.annotation.CheckReturnValue
 
 public data class Config(
-	val commandPrefix: String,
+	val commandPrefix: CommandPrefix,
 	val strings: LanguageStrings,
 	val echoCommandDefinitions: Set<EchoCommandDefinition>,
 	val botAdminUserIds: Set<String>,

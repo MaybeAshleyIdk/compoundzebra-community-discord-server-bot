@@ -42,18 +42,15 @@ internal class CommandMessageParser @Suppress("ktlint:standard:annotation") @Inj
 	@CheckReturnValue
 	fun parseMessageContent(content: String): CommandMessageParseResult {
 		val config: Config = this.configLoader.load()
-		check(config.commandPrefix.isNotBlank()) {
-			"Command prefix must not be blank"
-		}
 
 		val preparedContent: String = content.trimStart()
 
-		if (!(preparedContent.startsWith(config.commandPrefix))) {
+		if (!(preparedContent.startsWith(config.commandPrefix.string))) {
 			return CommandMessageParseResult.NotACommandMessage
 		}
 
 		val commandLineStr: String = preparedContent
-			.removePrefix(config.commandPrefix)
+			.removePrefix(config.commandPrefix.string)
 			.trim()
 
 		return parseCommandLineString(commandLineStr)

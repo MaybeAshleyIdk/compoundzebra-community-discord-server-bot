@@ -4,6 +4,7 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapter
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandName
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandPrefix
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import okio.BufferedSource
 import java.time.Instant
@@ -103,12 +104,8 @@ public class ConfigLoader @Suppress("ktlint:standard:annotation") @Inject intern
 
 @CheckReturnValue
 private fun mapConfigJsonIntoConfig(configJson: ConfigJson): Config {
-	check(configJson.commandPrefix.isNotBlank()) {
-		"Command prefix must not be blank"
-	}
-
 	return Config(
-		commandPrefix = configJson.commandPrefix,
+		commandPrefix = CommandPrefix.ofString(configJson.commandPrefix),
 		strings = configJson.strings.toLanguageStrings(),
 		echoCommandDefinitions = configJson.echoCommandDetailsMap.mapToEchoCommandDefinitions(),
 		botAdminUserIds = configJson.botAdminUserIds.orEmpty(),
