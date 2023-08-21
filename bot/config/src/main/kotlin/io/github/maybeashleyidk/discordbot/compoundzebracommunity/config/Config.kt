@@ -1,9 +1,11 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandName
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandPrefix
 import javax.annotation.CheckReturnValue
 
 public data class Config(
-	val commandPrefix: String,
+	val commandPrefix: CommandPrefix,
 	val strings: LanguageStrings,
 	val echoCommandDefinitions: Set<EchoCommandDefinition>,
 	val botAdminUserIds: Set<String>,
@@ -25,8 +27,8 @@ public data class LanguageStrings(
 		}
 
 		@CheckReturnValue
-		public fun unknownCommand(commandNameStr: String): String {
-			return this.unknownCommandFormat.format(commandNameStr)
+		public fun unknownCommand(commandName: CommandName): String {
+			return this.unknownCommandFormat.format(commandName.string)
 		}
 	}
 
@@ -47,6 +49,6 @@ public data class LanguageStrings(
 }
 
 public data class EchoCommandDefinition(
-	val commandNameStr: String,
+	val commandName: CommandName,
 	val responseMessage: String,
 )
