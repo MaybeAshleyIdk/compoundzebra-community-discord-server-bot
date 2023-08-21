@@ -1,11 +1,12 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.ShutdownAction
 import java.util.concurrent.Semaphore
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-internal class ShutdownManager @Suppress("ktlint:standard:annotation") @Inject constructor() {
+internal class ShutdownManager @Suppress("ktlint:standard:annotation") @Inject constructor() : ShutdownAction {
 
 	private val semaphore: Semaphore = Semaphore(1)
 
@@ -13,7 +14,7 @@ internal class ShutdownManager @Suppress("ktlint:standard:annotation") @Inject c
 		this.semaphore.acquire()
 	}
 
-	fun requestShutdown() {
+	override fun requestShutdown() {
 		this.semaphore.release()
 	}
 
