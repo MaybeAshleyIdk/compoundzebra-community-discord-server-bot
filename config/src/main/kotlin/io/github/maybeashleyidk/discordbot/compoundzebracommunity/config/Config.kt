@@ -1,26 +1,52 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import javax.annotation.CheckReturnValue
 
-@JsonClass(generateAdapter = true)
 public data class Config(
-	@Json(name = "commandPrefix") val commandPrefix: String,
-	@Json(name = "strings") val strings: LanguageStrings,
-	@Json(name = "echoCommands") val echoCommandDefinitions: Map<String, EchoCommandDefinition>,
-	@Json(name = "botAdminUserIds") val botAdminUserIds: Set<String>?,
+	val commandPrefix: String,
+	val strings: LanguageStrings,
+	val echoCommandDefinitions: Set<EchoCommandDefinition>,
+	val botAdminUserIds: Set<String>,
 )
 
-@JsonClass(generateAdapter = true)
 public data class LanguageStrings(
-	@Json(name = "generic.invalidCommandName") val genericInvalidCommandName: String,
-	@Json(name = "generic.unknownCommand") val genericUnknownCommand: String,
-	@Json(name = "command.getconfig.insufficientPermissions") val commandGetconfigInsufficientPermissions: String,
-	@Json(name = "command.shutdown.response") val commandShutdownResponse: String,
-	@Json(name = "command.shutdown.insufficientPermissions") val commandShutdownInsufficientPermissions: String,
-)
+	val generic: Generic,
+	val command: Command,
+) {
 
-@JsonClass(generateAdapter = true)
+	public data class Generic(
+		val invalidCommandNameFormat: String,
+		val unknownCommandFormat: String,
+	) {
+
+		@CheckReturnValue
+		public fun invalidCommandName(commandNameStr: String): String {
+			return this.invalidCommandNameFormat.format(commandNameStr)
+		}
+
+		@CheckReturnValue
+		public fun unknownCommand(commandNameStr: String): String {
+			return this.unknownCommandFormat.format(commandNameStr)
+		}
+	}
+
+	public data class Command(
+		val getConfig: GetConfig,
+		val shutdown: Shutdown,
+	) {
+
+		public data class GetConfig(
+			val insufficientPermissions: String,
+		)
+
+		public data class Shutdown(
+			val response: String,
+			val insufficientPermissions: String,
+		)
+	}
+}
+
 public data class EchoCommandDefinition(
-	@Json(name = "response") val responseMessage: String,
+	val commandNameStr: String,
+	val responseMessage: String,
 )

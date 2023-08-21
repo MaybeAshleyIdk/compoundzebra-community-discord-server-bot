@@ -19,14 +19,14 @@ internal class ShutdownCommand @Suppress("ktlint:standard:annotation") @Inject c
 		val authorAsGuildMember: Member = catalystMessage.getAuthorAsGuildMember()
 		val config: Config = this.configLoader.load()
 
-		if (!(authorAsGuildMember.isAllowedToShutdownBot(config.botAdminUserIds.orEmpty()))) {
-			textChannel.sendMessage(config.strings.commandShutdownInsufficientPermissions)
+		if (!(authorAsGuildMember.isAllowedToShutdownBot(config.botAdminUserIds))) {
+			textChannel.sendMessage(config.strings.command.shutdown.insufficientPermissions)
 				.complete()
 
 			return
 		}
 
-		textChannel.sendMessage(config.strings.commandShutdownResponse)
+		textChannel.sendMessage(config.strings.command.shutdown.response)
 			.complete()
 
 		// we can't actually do the shutdown procedure here, since we're still in the event listener.

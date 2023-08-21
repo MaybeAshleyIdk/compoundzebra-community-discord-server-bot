@@ -21,8 +21,8 @@ internal class GetConfigCommand @Suppress("ktlint:standard:annotation") @Inject 
 		val authorAsGuildMember: Member = catalystMessage.getAuthorAsGuildMember()
 		val config: Config = this.configLoader.load()
 
-		if (!(authorAsGuildMember.isAllowedToSeeConfig(config.botAdminUserIds.orEmpty()))) {
-			textChannel.sendMessage(config.strings.commandGetconfigInsufficientPermissions)
+		if (!(authorAsGuildMember.isAllowedToSeeConfig(config.botAdminUserIds))) {
+			textChannel.sendMessage(config.strings.command.getConfig.insufficientPermissions)
 				.complete()
 
 			return

@@ -41,19 +41,10 @@ internal object CommandsModule {
 	): Set<Command> {
 		val config: Config = configLoader.load()
 		return config.echoCommandDefinitions
-			.mapKeys { (commandNameStr: String, _: EchoCommandDefinition) ->
-				CommandName.ofString(commandNameStr)
-			}
-			.mapTo(LinkedHashSet(config.echoCommandDefinitions.size)) {
-					(
-						commandName: CommandName,
-						echoCommandDefinition: EchoCommandDefinition,
-					),
-				->
-
+			.mapTo(LinkedHashSet(config.echoCommandDefinitions.size)) { echoCommandDefinition: EchoCommandDefinition ->
 				echoCommandFactory
 					.build(
-						commandName,
+						name = CommandName.ofString(echoCommandDefinition.commandNameStr),
 						echoCommandDefinition.responseMessage,
 					)
 			}

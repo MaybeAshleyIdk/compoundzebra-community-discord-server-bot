@@ -51,8 +51,8 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 			is CommandMessageParseResult.InvalidCommandName -> {
 				val config: Config = this.configLoader.load()
 
-				val msg: String = config.strings.genericInvalidCommandName
-					.format(commandMessageParseResult.invalidCommandNameStr)
+				val msg: String =
+					config.strings.generic.invalidCommandName(commandMessageParseResult.invalidCommandNameStr)
 
 				textChannel.sendMessage(msg).complete()
 
@@ -74,7 +74,7 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 		if (foundCommand == null) {
 			val config: Config = this.configLoader.load()
 
-			textChannel.sendMessage(config.strings.genericUnknownCommand.format(commandLine.commandName.string))
+			textChannel.sendMessage(config.strings.generic.unknownCommand(commandLine.commandName.string))
 				.complete()
 
 			return

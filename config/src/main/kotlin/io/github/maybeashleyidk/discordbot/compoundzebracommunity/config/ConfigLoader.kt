@@ -26,7 +26,7 @@ public class ConfigLoader @Suppress("ktlint:standard:annotation") @Inject intern
 	)
 
 	@OptIn(ExperimentalStdlibApi::class)
-	private val configJsonAdapter: JsonAdapter<Config> = moshi.adapter<Config>()
+	private val configJsonAdapter: JsonAdapter<ConfigJson> = moshi.adapter<ConfigJson>()
 		.nonNull()
 
 	private val cachedConfigReadWriteLock: ReadWriteLock = ReentrantReadWriteLock(true)
@@ -80,11 +80,13 @@ public class ConfigLoader @Suppress("ktlint:standard:annotation") @Inject intern
 	private fun updateCachedConfigUnsynchronized(): Config {
 		val readConfig: ConfigFileManager.ReadFile<Config> =
 			this.configFileManager.readFile { source: BufferedSource ->
-				val config: Config? = this@ConfigLoader.configJsonAdapter.fromJson(source)
+				val configJson: ConfigJson? = this@ConfigLoader.configJsonAdapter.fromJson(source)
 
-				checkNotNull(config) {
+				checkNotNull(configJson) {
 					"Config is null"
 				}
+
+				mapConfigJsonIntoConfig(configJson)
 			}
 
 		val cachedConfig =
@@ -96,4 +98,48 @@ public class ConfigLoader @Suppress("ktlint:standard:annotation") @Inject intern
 		this.cachedConfig = cachedConfig
 		return cachedConfig.config
 	}
+}
+
+@CheckReturnValue
+private fun mapConfigJsonIntoConfig(configJson: ConfigJson): Config {
+	check(configJson.commandPrefix.isNotBlank()) {
+		"Command prefix must not be blank"
+	}
+
+	return Config(
+		commandPrefix = configJson.commandPrefix,
+		strings = configJson.strings.toLanguageStrings(),
+		echoCommandDefinitions = configJson.echoCommandDetailsMap.mapToEchoCommandDefinitions(),
+		botAdminUserIds = configJson.botAdminUserIds.orEmpty(),
+	)
+}
+
+@CheckReturnValue
+private fun LanguageStringsJson.toLanguageStrings(): LanguageStrings {
+	return LanguageStrings(
+		generic = LanguageStrings.Generic(
+			invalidCommandNameFormat = this.genericInvalidCommandName,
+			unknownCommandFormat = this.genericUnknownCommand,
+		),
+		command = LanguageStrings.Command(
+			getConfig = LanguageStrings.Command.GetConfig(
+				insufficientPermissions = this.commandGetconfigInsufficientPermissions,
+			),
+			shutdown = LanguageStrings.Command.Shutdown(
+				response = this.commandShutdownResponse,
+				insufficientPermissions = this.commandShutdownInsufficientPermissions,
+			),
+		),
+	)
+}
+
+@CheckReturnValue
+private fun Map<String, EchoCommandDetailsJson>.mapToEchoCommandDefinitions(): Set<EchoCommandDefinition> {
+	return this
+		.mapTo(LinkedHashSet(this.size)) { (commandNameStr: String, details: EchoCommandDetailsJson) ->
+			EchoCommandDefinition(
+				commandNameStr = commandNameStr,
+				responseMessage = details.responseMessage,
+			)
+		}
 }
