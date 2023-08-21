@@ -4,9 +4,9 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.quoted
 import javax.annotation.CheckReturnValue
 
 @JvmInline
-internal value class CommandName private constructor(val string: String) {
+public value class CommandName private constructor(public val string: String) {
 
-	companion object {
+	public companion object {
 
 		@CheckReturnValue
 		private fun isValidCommandNameChar(ch: Char): Boolean {
@@ -14,12 +14,12 @@ internal value class CommandName private constructor(val string: String) {
 		}
 
 		@CheckReturnValue
-		fun isValidCommandName(nameString: String): Boolean {
+		public fun isValidCommandName(nameString: String): Boolean {
 			return nameString.isNotEmpty() && nameString.all(this::isValidCommandNameChar)
 		}
 
 		@CheckReturnValue
-		fun ofString(nameString: String): CommandName {
+		public fun ofString(nameString: String): CommandName {
 			require(this.isValidCommandName(nameString)) {
 				"Invalid command name ${nameString.quoted()}"
 			}
@@ -28,7 +28,7 @@ internal value class CommandName private constructor(val string: String) {
 		}
 
 		@CheckReturnValue
-		fun ofStringOrNull(nameString: String): CommandName? {
+		public fun ofStringOrNull(nameString: String): CommandName? {
 			if (!(this.isValidCommandName(nameString))) {
 				return null
 			}
@@ -45,7 +45,7 @@ internal value class CommandName private constructor(val string: String) {
 	}
 
 	@CheckReturnValue
-	fun toQuotedString(): String {
+	public fun toQuotedString(): String {
 		return buildString(1 + this.string.length + 1) {
 			this@buildString.append('\'')
 			this@buildString.append(this@CommandName.string)

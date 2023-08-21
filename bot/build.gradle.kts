@@ -5,6 +5,7 @@ plugins {
 }
 
 dependencies {
+	implementation(project(":bot:commands:public"))
 	implementation(project(":bot:config"))
 	implementation(project(":logging"))
 	implementation(project(":utils"))
