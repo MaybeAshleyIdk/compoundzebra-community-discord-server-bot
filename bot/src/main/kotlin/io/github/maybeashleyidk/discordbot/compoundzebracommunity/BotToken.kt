@@ -12,7 +12,7 @@ public value class BotToken private constructor(public val string: String) {
 		@CheckReturnValue
 		public fun ofString(tokenString: String): BotToken {
 			require(tokenString.length == this.TOKEN_STRING_LENGTH) {
-				"Bot token string must be exactly 72 characters long"
+				"Bot token string must be exactly ${this.TOKEN_STRING_LENGTH} characters long"
 			}
 
 			return BotToken(tokenString)
@@ -22,7 +22,7 @@ public value class BotToken private constructor(public val string: String) {
 	init {
 		@Suppress("RemoveRedundantQualifierName")
 		require(this.string.length == BotToken.TOKEN_STRING_LENGTH) {
-			"Bot token string must be exactly 72 characters long"
+			"Bot token string must be exactly ${BotToken.TOKEN_STRING_LENGTH} characters long"
 		}
 	}
 
