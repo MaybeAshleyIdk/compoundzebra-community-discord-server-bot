@@ -3,58 +3,97 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapter
-import dagger.Reusable
-import okio.FileSystem
-import okio.Path
-import okio.Path.Companion.toPath
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
+import okio.BufferedSource
+import java.time.Instant
+import java.util.concurrent.locks.ReadWriteLock
+import java.util.concurrent.locks.ReentrantReadWriteLock
 import javax.annotation.CheckReturnValue
 import javax.inject.Inject
+import javax.inject.Singleton
+import kotlin.concurrent.withLock
 
-@Reusable
-public class ConfigLoader @Suppress("ktlint:standard:annotation") @Inject constructor(
+@Singleton
+public class ConfigLoader @Suppress("ktlint:standard:annotation") @Inject internal constructor(
+	private val configFileManager: ConfigFileManager,
+	private val logger: Logger,
 	moshi: Moshi,
 ) {
 
-	private companion object {
-
-		val DEFAULT_CONFIG_JSON_RESOURCE_PATH: Path =
-			"/io/github/maybeashleyidk/discordbot/compoundzebracommunity/config/default_config.json".toPath()
-
-		val CONFIG_JSON_FILE_DEFAULT_PATH: Path = "bot_config.json".toPath()
-	}
+	private data class CachedConfig(
+		val config: Config,
+		val loadingInstant: Instant,
+	)
 
 	@OptIn(ExperimentalStdlibApi::class)
 	private val configJsonAdapter: JsonAdapter<Config> = moshi.adapter<Config>()
 		.nonNull()
 
+	private val cachedConfigReadWriteLock: ReadWriteLock = ReentrantReadWriteLock(true)
+	private var cachedConfig: CachedConfig? = null
+
 	@CheckReturnValue
 	public fun load(): Config {
-		this.ensureConfigJsonFileExists()
+		val validCachedConfig1: Config? = this.cachedConfigReadWriteLock.readLock()
+			.withLock(this::getValidCachedConfigUnsynchronized)
 
-		val config: Config? =
-			@Suppress("RemoveRedundantQualifierName")
-			FileSystem.SYSTEM.read(ConfigLoader.CONFIG_JSON_FILE_DEFAULT_PATH) {
-				this@ConfigLoader.configJsonAdapter.fromJson(this@read)
-			}
-
-		checkNotNull(config) {
-			"Config is null"
+		if (validCachedConfig1 != null) {
+			return validCachedConfig1
 		}
 
-		return config
+		return this.cachedConfigReadWriteLock.writeLock()
+			.withLock {
+				// between the last validity check and now, another thread may have already updated the cached config,
+				// so we need to check the validity of the cache again
+				val validCachedConfig2: Config? = this.getValidCachedConfigUnsynchronized()
+				if (validCachedConfig2 != null) {
+					return@withLock validCachedConfig2
+				}
+
+				this.logger.logInfo("The config cache is either missing or out of date. Updating it...")
+
+				val newConfig: Config = this.updateCachedConfigUnsynchronized()
+
+				this.logger.logInfo("Updated the config cache successfully")
+
+				newConfig
+			}
 	}
 
-	private fun ensureConfigJsonFileExists() {
-		@Suppress("RemoveRedundantQualifierName")
-		if (FileSystem.SYSTEM.exists(ConfigLoader.CONFIG_JSON_FILE_DEFAULT_PATH)) {
-			return
+	@CheckReturnValue
+	private fun getValidCachedConfigUnsynchronized(): Config? {
+		val cachedConfigLocal: CachedConfig = this.cachedConfig
+			?: return null
+
+		val lastConfigFileModificationInstant: Instant = this.configFileManager.getLastModificationInstant()
+
+		if (cachedConfigLocal.loadingInstant < lastConfigFileModificationInstant) {
+			return null
 		}
 
-		@Suppress("RemoveRedundantQualifierName")
-		FileSystem.RESOURCES.read(ConfigLoader.DEFAULT_CONFIG_JSON_RESOURCE_PATH) {
-			FileSystem.SYSTEM.write(ConfigLoader.CONFIG_JSON_FILE_DEFAULT_PATH) {
-				this@write.writeAll(this@read)
+		return cachedConfigLocal.config
+	}
+
+	/**
+	 * Updates the field [cachedConfig] and also returns the new value.
+	 */
+	private fun updateCachedConfigUnsynchronized(): Config {
+		val readConfig: ConfigFileManager.ReadFile<Config> =
+			this.configFileManager.readFile { source: BufferedSource ->
+				val config: Config? = this@ConfigLoader.configJsonAdapter.fromJson(source)
+
+				checkNotNull(config) {
+					"Config is null"
+				}
 			}
-		}
+
+		val cachedConfig =
+			CachedConfig(
+				config = readConfig.data,
+				loadingInstant = readConfig.instant,
+			)
+
+		this.cachedConfig = cachedConfig
+		return cachedConfig.config
 	}
 }

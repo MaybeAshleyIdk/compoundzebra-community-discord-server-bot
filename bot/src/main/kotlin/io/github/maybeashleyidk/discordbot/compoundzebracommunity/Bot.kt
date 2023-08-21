@@ -7,6 +7,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.di.token
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.entities.Activity
+import java.nio.file.Path
 import java.time.Duration
 import net.dv8tion.jda.api.JDA as Jda
 
@@ -14,11 +15,12 @@ public object Bot {
 
 	private val GRACEFUL_SHUTDOWN_TIMEOUT_DURATION: Duration = Duration.ofSeconds(10)
 
-	public fun run(token: BotToken) {
+	public fun run(token: BotToken, configFilePath: Path) {
 		val botComponent: BotComponent = DaggerBotComponent.factory()
 			.build(
 				token,
 				initialActivity = Activity.playing("you like a damn fiddle"),
+				configFilePath,
 			)
 
 		botComponent.logToken()
