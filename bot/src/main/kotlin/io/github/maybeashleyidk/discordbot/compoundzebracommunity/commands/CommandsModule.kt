@@ -9,6 +9,7 @@ import dagger.multibindings.Multibinds
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigLoader
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.EchoCommandDefinition
+import net.dv8tion.jda.api.hooks.EventListener
 import javax.annotation.CheckReturnValue
 
 @Module(
@@ -20,6 +21,10 @@ internal object CommandsModule {
 
 	@Module
 	interface Bindings {
+
+		@Binds
+		@IntoSet
+		fun bindCommandEventListener(commandEventListener: CommandEventListener): EventListener
 
 		@Multibinds
 		fun multibindCommands(): Set<@JvmSuppressWildcards Command>
