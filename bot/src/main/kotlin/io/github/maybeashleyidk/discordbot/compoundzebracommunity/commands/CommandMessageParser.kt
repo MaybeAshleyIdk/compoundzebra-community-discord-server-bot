@@ -118,13 +118,13 @@ private fun parseBeginningCommandName(string: String): CommandNameParseResult {
 		}
 
 	val commandNameStr: String = string.take(commandNameEndIndex)
-	val commandName: CommandName? = CommandName.ofStringOrNull(commandNameStr)
 
-	return if (commandName != null) {
-		CommandNameParseResult.Success(commandName)
-	} else {
-		CommandNameParseResult.InvalidName(commandNameStr)
+	if (!(CommandName.isValidCommandName(commandNameStr))) {
+		return CommandNameParseResult.InvalidName(commandNameStr)
 	}
+
+	val commandName: CommandName = CommandName.ofString(commandNameStr)
+	return CommandNameParseResult.Success(commandName)
 }
 
 /**

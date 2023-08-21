@@ -26,15 +26,6 @@ public value class CommandName private constructor(public val string: String) {
 
 			return CommandName(nameString)
 		}
-
-		@CheckReturnValue
-		public fun ofStringOrNull(nameString: String): CommandName? {
-			if (!(this.isValidCommandName(nameString))) {
-				return null
-			}
-
-			return this.ofString(nameString)
-		}
 	}
 
 	init {
