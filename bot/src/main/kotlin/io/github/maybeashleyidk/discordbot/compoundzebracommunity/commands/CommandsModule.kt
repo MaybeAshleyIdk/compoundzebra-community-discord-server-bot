@@ -25,6 +25,10 @@ internal object CommandsModule {
 
 		@Binds
 		@IntoSet
+		fun bindGetConfigCommand(getConfigCommand: GetConfigCommand): Command
+
+		@Binds
+		@IntoSet
 		fun bindShutdownCommand(shutdownCommand: ShutdownCommand): Command
 	}
 

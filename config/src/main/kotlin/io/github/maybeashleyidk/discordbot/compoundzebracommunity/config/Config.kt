@@ -15,6 +15,7 @@ public data class Config(
 public data class LanguageStrings(
 	@Json(name = "generic.invalidCommandName") val genericInvalidCommandName: String,
 	@Json(name = "generic.unknownCommand") val genericUnknownCommand: String,
+	@Json(name = "command.getconfig.insufficientPermissions") val commandGetconfigInsufficientPermissions: String,
 	@Json(name = "command.shutdown.response") val commandShutdownResponse: String,
 	@Json(name = "command.shutdown.insufficientPermissions") val commandShutdownInsufficientPermissions: String,
 )
