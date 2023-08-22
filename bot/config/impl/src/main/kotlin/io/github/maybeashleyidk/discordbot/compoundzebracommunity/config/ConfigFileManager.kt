@@ -5,7 +5,6 @@ import okio.BufferedSource
 import okio.FileMetadata
 import okio.FileSystem
 import okio.Path.Companion.toOkioPath
-import okio.Path.Companion.toPath
 import java.time.Instant
 import javax.annotation.CheckReturnValue
 import javax.inject.Inject
@@ -23,12 +22,6 @@ internal class ConfigFileManager @Suppress("ktlint:standard:annotation") @Inject
 		val data: T,
 		val instant: Instant,
 	)
-
-	private companion object {
-
-		val DEFAULT_CONFIG_JSON_RESOURCE_PATH: OkioPath =
-			"/io/github/maybeashleyidk/discordbot/compoundzebracommunity/config/default_config.json".toPath()
-	}
 
 	private val configFilePath: OkioPath = configFileNioPath.toOkioPath()
 
@@ -56,10 +49,9 @@ internal class ConfigFileManager @Suppress("ktlint:standard:annotation") @Inject
 			return
 		}
 
-		@Suppress("RemoveRedundantQualifierName")
-		FileSystem.RESOURCES.read(ConfigFileManager.DEFAULT_CONFIG_JSON_RESOURCE_PATH) {
+		DefaultConfigLoader.load { defaultConfigSource: BufferedSource ->
 			FileSystem.SYSTEM.write(this@ConfigFileManager.configFilePath) {
-				this@write.writeAll(this@read)
+				this@write.writeAll(defaultConfigSource)
 			}
 		}
 	}
