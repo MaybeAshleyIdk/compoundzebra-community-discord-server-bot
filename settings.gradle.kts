@@ -16,9 +16,18 @@ dependencyResolutionManagement {
 
 include(
 	":main",
+
 	":bot",
+
+	":bot:features:polls:public",
+	":bot:features:polls:impl",
+
 	":bot:commands:public",
-	":bot:config",
+	":bot:commands:impl",
+
+	":bot:config:public",
+	":bot:config:impl",
+
 	":snowflake",
 	":logging",
 	":utils",

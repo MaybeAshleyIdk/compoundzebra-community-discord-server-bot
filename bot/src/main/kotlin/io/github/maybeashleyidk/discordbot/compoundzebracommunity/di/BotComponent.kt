@@ -7,6 +7,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.BotToken
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.ShutdownManager
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.di.ConfigFilePath
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.di.ConfigModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.di.LoggingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.di.PollsModule
@@ -20,6 +21,7 @@ import net.dv8tion.jda.api.JDA as Jda
 	modules = [
 		BotModule::class,
 		LoggingModule::class,
+		ConfigModule::class,
 		PollsModule::class,
 		CommandsModule::class,
 	],

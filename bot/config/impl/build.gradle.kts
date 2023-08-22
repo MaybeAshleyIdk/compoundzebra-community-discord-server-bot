@@ -5,21 +5,17 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:features:polls:impl"))
-	implementation(project(":bot:commands:impl"))
-	implementation(project(":bot:config:impl"))
-	implementation(project(":snowflake"))
+	api(project(":bot:config:public"))
+	implementation(project(":bot:commands:public"))
 	implementation(project(":logging"))
-	implementation(project(":utils"))
 
 	implementation("com.google.code.findbugs:jsr305:3.0.2")
-
-	implementation("net.dv8tion:JDA:5.0.0-beta.13") {
-		exclude(module = "opus-java")
-	}
 
 	implementation("com.google.dagger:dagger:2.47")
 	kapt("com.google.dagger:dagger-compiler:2.47")
 
+	implementation("com.squareup.okio:okio:3.5.0")
+
 	implementation("com.squareup.moshi:moshi:1.14.0")
+	kapt("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
 }
