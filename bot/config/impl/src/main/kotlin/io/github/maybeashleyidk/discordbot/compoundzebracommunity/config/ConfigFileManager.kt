@@ -49,7 +49,7 @@ internal class ConfigFileManager @Suppress("ktlint:standard:annotation") @Inject
 			return
 		}
 
-		DefaultConfigLoader.load { defaultConfigSource: BufferedSource ->
+		InitConfigLoader.load { defaultConfigSource: BufferedSource ->
 			FileSystem.SYSTEM.write(this@ConfigFileManager.configFilePath) {
 				this@write.writeAll(defaultConfigSource)
 			}
