@@ -108,7 +108,7 @@ private fun mapConfigJsonIntoConfig(configJson: ConfigJson): Config {
 		strings = configJson.strings.toLanguageStrings(),
 		botAdminUserIds = configJson.botAdminUserIds.orEmpty(),
 		commandPrefix = CommandPrefix.ofString(configJson.commandPrefix),
-		echoCommandDefinitions = configJson.echoCommandDetailsMap.mapToEchoCommandDefinitions(),
+		commandDefinitions = configJson.commands.orEmpty().mapToCommandDefinitions(),
 	)
 }
 
@@ -149,12 +149,19 @@ private fun LanguageStringsJson.toLanguageStrings(): LanguageStrings {
 }
 
 @CheckReturnValue
-private fun Map<String, EchoCommandDetailsJson>.mapToEchoCommandDefinitions(): Set<EchoCommandDefinition> {
+private fun Map<String, CommandDetailsJson>.mapToCommandDefinitions(): Set<CommandDefinition> {
 	return this
-		.mapTo(LinkedHashSet(this.size)) { (commandNameStr: String, details: EchoCommandDetailsJson) ->
-			EchoCommandDefinition(
+		.mapTo(LinkedHashSet(this.size)) { (commandNameStr: String, details: CommandDetailsJson) ->
+			CommandDefinition(
 				commandName = CommandName.ofString(commandNameStr),
-				responseMessage = details.responseMessage,
+				action = details.action.mapToAction(),
 			)
 		}
+}
+
+@CheckReturnValue
+private fun ActionJson.mapToAction(): Action {
+	return Action.Response(
+		message = this.responseMessage,
+	)
 }

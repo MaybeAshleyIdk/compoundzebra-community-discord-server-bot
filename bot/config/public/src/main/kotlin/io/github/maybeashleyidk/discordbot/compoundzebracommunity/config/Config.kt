@@ -8,7 +8,7 @@ public data class Config(
 	val strings: LanguageStrings,
 	val botAdminUserIds: Set<String>,
 	val commandPrefix: CommandPrefix,
-	val echoCommandDefinitions: Set<EchoCommandDefinition>,
+	val commandDefinitions: Set<CommandDefinition>,
 )
 
 public data class LanguageStrings(
@@ -92,7 +92,11 @@ public data class LanguageStrings(
 	}
 }
 
-public data class EchoCommandDefinition(
+public data class CommandDefinition(
 	val commandName: CommandName,
-	val responseMessage: String,
+	val action: Action,
 )
+
+public sealed class Action {
+	public data class Response(val message: String) : Action()
+}

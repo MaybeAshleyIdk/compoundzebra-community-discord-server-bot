@@ -8,7 +8,7 @@ internal data class ConfigJson(
 	@Json(name = "strings") val strings: LanguageStringsJson,
 	@Json(name = "botAdminUserIds") val botAdminUserIds: Set<String>?,
 	@Json(name = "commandPrefix") val commandPrefix: String,
-	@Json(name = "echoCommands") val echoCommandDetailsMap: Map<String, EchoCommandDetailsJson>,
+	@Json(name = "commands") val commands: Map<String, CommandDetailsJson>?,
 )
 
 @JsonClass(generateAdapter = true)
@@ -35,6 +35,11 @@ internal data class LanguageStringsJson(
 )
 
 @JsonClass(generateAdapter = true)
-internal data class EchoCommandDetailsJson(
+internal data class CommandDetailsJson(
+	@Json(name = "action") val action: ActionJson,
+)
+
+@JsonClass(generateAdapter = true)
+internal data class ActionJson(
 	@Json(name = "response") val responseMessage: String,
 )

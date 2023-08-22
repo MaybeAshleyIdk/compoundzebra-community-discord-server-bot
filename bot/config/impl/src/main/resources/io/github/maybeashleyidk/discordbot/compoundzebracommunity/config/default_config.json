@@ -25,9 +25,11 @@
 	],
 
 	"commandPrefix": "!",
-	"echoCommands": {
+	"commands": {
 		"ping": {
-			"response": "pong"
+			"action": {
+				"response": "pong"
+			}
 		}
 	}
 }

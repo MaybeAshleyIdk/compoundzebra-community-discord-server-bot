@@ -7,9 +7,10 @@ import dagger.multibindings.ElementsIntoSet
 import dagger.multibindings.IntoSet
 import dagger.multibindings.Multibinds
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.polls.di.PollCommandsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Action
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.CommandDefinition
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigLoader
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.EchoCommandDefinition
 import net.dv8tion.jda.api.hooks.EventListener
 import javax.annotation.CheckReturnValue
 
@@ -48,16 +49,16 @@ public object CommandsModule {
 		configLoader: ConfigLoader,
 	): Set<Command> {
 		val config: Config = configLoader.load()
-		return config.echoCommandDefinitions
-			.mapTo(LinkedHashSet(config.echoCommandDefinitions.size), echoCommandFactory::buildFromCommandDefinition)
+		return config.commandDefinitions
+			.mapTo(LinkedHashSet(config.commandDefinitions.size), echoCommandFactory::buildFromCommandDefinition)
 	}
 }
 
 @CheckReturnValue
-private fun EchoCommand.Factory.buildFromCommandDefinition(echoCommandDefinition: EchoCommandDefinition): EchoCommand {
+private fun EchoCommand.Factory.buildFromCommandDefinition(commandDefinition: CommandDefinition): EchoCommand {
 	return this
 		.build(
-			echoCommandDefinition.commandName,
-			echoCommandDefinition.responseMessage,
+			commandDefinition.commandName,
+			(commandDefinition.action as Action.Response).message,
 		)
 }
