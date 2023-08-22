@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "io.github.maybeashleyidk"
-version = "0.1.0-indev03"
+version = "0.1.0-indev04"
 
 application {
 	applicationName = "czd-bot"
