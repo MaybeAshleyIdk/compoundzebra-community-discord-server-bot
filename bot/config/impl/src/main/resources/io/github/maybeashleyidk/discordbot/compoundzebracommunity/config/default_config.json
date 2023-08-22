@@ -1,5 +1,4 @@
 {
-	"commandPrefix": "!",
 	"strings": {
 		"generic.invalidCommandName": "Unknown command \"%s\"",
 		"generic.unknownCommand": "Unknown command \"%s\"",
@@ -21,11 +20,14 @@
 		"command.shutdown.response": "Shutting down. Bye bye...",
 		"command.shutdown.insufficientPermissions": "You are not allowed to use this command"
 	},
+
+	"botAdminUserIds": [
+	],
+
+	"commandPrefix": "!",
 	"echoCommands": {
 		"ping": {
 			"response": "pong"
 		}
-	},
-	"botAdminUserIds": [
-	]
+	}
 }

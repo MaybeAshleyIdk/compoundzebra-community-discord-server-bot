@@ -5,10 +5,10 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.Comma
 import javax.annotation.CheckReturnValue
 
 public data class Config(
-	val commandPrefix: CommandPrefix,
 	val strings: LanguageStrings,
-	val echoCommandDefinitions: Set<EchoCommandDefinition>,
 	val botAdminUserIds: Set<String>,
+	val commandPrefix: CommandPrefix,
+	val echoCommandDefinitions: Set<EchoCommandDefinition>,
 )
 
 public data class LanguageStrings(

@@ -105,10 +105,10 @@ public class ConfigLoaderImpl @Suppress("ktlint:standard:annotation") @Inject in
 @CheckReturnValue
 private fun mapConfigJsonIntoConfig(configJson: ConfigJson): Config {
 	return Config(
-		commandPrefix = CommandPrefix.ofString(configJson.commandPrefix),
 		strings = configJson.strings.toLanguageStrings(),
-		echoCommandDefinitions = configJson.echoCommandDetailsMap.mapToEchoCommandDefinitions(),
 		botAdminUserIds = configJson.botAdminUserIds.orEmpty(),
+		commandPrefix = CommandPrefix.ofString(configJson.commandPrefix),
+		echoCommandDefinitions = configJson.echoCommandDetailsMap.mapToEchoCommandDefinitions(),
 	)
 }
 

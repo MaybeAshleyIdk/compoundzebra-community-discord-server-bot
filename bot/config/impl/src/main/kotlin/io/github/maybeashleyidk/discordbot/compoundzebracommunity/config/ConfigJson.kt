@@ -5,10 +5,10 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 internal data class ConfigJson(
-	@Json(name = "commandPrefix") val commandPrefix: String,
 	@Json(name = "strings") val strings: LanguageStringsJson,
-	@Json(name = "echoCommands") val echoCommandDetailsMap: Map<String, EchoCommandDetailsJson>,
 	@Json(name = "botAdminUserIds") val botAdminUserIds: Set<String>?,
+	@Json(name = "commandPrefix") val commandPrefix: String,
+	@Json(name = "echoCommands") val echoCommandDetailsMap: Map<String, EchoCommandDetailsJson>,
 )
 
 @JsonClass(generateAdapter = true)
