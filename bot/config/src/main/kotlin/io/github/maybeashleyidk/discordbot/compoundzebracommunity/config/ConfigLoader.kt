@@ -119,7 +119,24 @@ private fun LanguageStringsJson.toLanguageStrings(): LanguageStrings {
 			invalidCommandNameFormat = this.genericInvalidCommandName,
 			unknownCommandFormat = this.genericUnknownCommand,
 		),
+		poll = LanguageStrings.Poll(
+			titleFormat = this.pollTitle,
+			optionFormat = this.pollOption,
+			closedMessageFormat = this.pollClosedMessage,
+			action = LanguageStrings.Poll.Action(
+				close = this.pollActionClose,
+			),
+		),
 		command = LanguageStrings.Command(
+			poll = LanguageStrings.Command.Poll(
+				missingDescription = this.commandPollMissingDescription,
+				lessThan2Options = this.commandPollLessThan2Options,
+			),
+			queryPoll = LanguageStrings.Command.QueryPoll(
+				insufficientPermissions = this.commandQuerypollInsufficientPermissions,
+				missingId = this.commandQuerypollMissingId,
+				noSuchPollWithId = this.commandQuerypollNoSuchPollWithId,
+			),
 			getConfig = LanguageStrings.Command.GetConfig(
 				insufficientPermissions = this.commandGetconfigInsufficientPermissions,
 			),

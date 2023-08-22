@@ -19,7 +19,7 @@ internal class ShutdownCommand @Suppress("ktlint:standard:annotation") @Inject c
 	private val shutdownAction: ShutdownAction,
 ) : Command(name = CommandName.ofString("shutdown")) {
 
-	override fun execute(catalystMessage: Message, textChannel: TextChannel) {
+	override fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val authorAsGuildMember: Member = catalystMessage.getAuthorAsGuildMember()
 		val config: Config = this.configLoader.load()
 

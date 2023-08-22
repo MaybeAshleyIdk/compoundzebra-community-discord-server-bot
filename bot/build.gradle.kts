@@ -7,6 +7,7 @@ plugins {
 dependencies {
 	implementation(project(":bot:commands:public"))
 	implementation(project(":bot:config"))
+	implementation(project(":snowflake"))
 	implementation(project(":logging"))
 	implementation(project(":utils"))
 

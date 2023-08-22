@@ -9,6 +9,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.Comma
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.di.ConfigFilePath
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.di.LoggingModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.di.PollsModule
 import net.dv8tion.jda.api.entities.Activity
 import java.nio.file.Path
 import javax.annotation.CheckReturnValue
@@ -19,6 +20,7 @@ import net.dv8tion.jda.api.JDA as Jda
 	modules = [
 		BotModule::class,
 		LoggingModule::class,
+		PollsModule::class,
 		CommandsModule::class,
 	],
 )

@@ -80,16 +80,21 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 			return
 		}
 
-		this.executeCommand(foundCommand, catalystMessage, textChannel)
+		this.executeCommand(foundCommand, commandLine.arguments, catalystMessage, textChannel)
 	}
 
-	private fun executeCommand(command: Command, catalystMessage: Message, textChannel: TextChannel) {
+	private fun executeCommand(
+		command: Command,
+		arguments: List<String>,
+		catalystMessage: Message,
+		textChannel: TextChannel,
+	) {
 		val logMsg: String = "Executing command ${command.name.toQuotedString()}." +
 			" Triggered by \"${catalystMessage.author.name}\" (${catalystMessage.author.idLong})"
 		this.logger.logInfo(logMsg)
 
 		try {
-			command.execute(catalystMessage, textChannel)
+			command.execute(arguments, catalystMessage, textChannel)
 		} catch (e: Exception) {
 			this.logger.logError("Command ${command.name.toQuotedString()} threw an exception: $e")
 		}

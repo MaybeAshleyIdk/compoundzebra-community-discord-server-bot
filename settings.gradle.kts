@@ -19,6 +19,7 @@ include(
 	":bot",
 	":bot:commands:public",
 	":bot:config",
+	":snowflake",
 	":logging",
 	":utils",
 )
