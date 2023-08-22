@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.multibindings.ElementsIntoSet
 import dagger.multibindings.IntoSet
 import dagger.multibindings.Multibinds
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.polls.di.PollCommandsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigLoader
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.EchoCommandDefinition
@@ -15,6 +16,7 @@ import javax.annotation.CheckReturnValue
 @Module(
 	includes = [
 		CommandsModule.Bindings::class,
+		PollCommandsModule::class,
 	],
 )
 internal object CommandsModule {

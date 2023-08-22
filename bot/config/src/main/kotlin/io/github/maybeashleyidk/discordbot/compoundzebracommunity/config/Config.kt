@@ -13,12 +13,13 @@ public data class Config(
 
 public data class LanguageStrings(
 	val generic: Generic,
+	val poll: Poll,
 	val command: Command,
 ) {
 
 	public data class Generic(
-		val invalidCommandNameFormat: String,
-		val unknownCommandFormat: String,
+		private val invalidCommandNameFormat: String,
+		private val unknownCommandFormat: String,
 	) {
 
 		@CheckReturnValue
@@ -32,10 +33,53 @@ public data class LanguageStrings(
 		}
 	}
 
+	public data class Poll(
+		private val titleFormat: String,
+		private val optionFormat: String,
+		private val closedMessageFormat: String,
+		public val action: Action,
+	) {
+
+		public data class Action(
+			public val close: String,
+		)
+
+		@CheckReturnValue
+		public fun title(authorId: String): String {
+			return this.titleFormat.format("<@$authorId>")
+		}
+
+		// TODO: if we want to support guilds of different languages, then we need the language here to use
+		//       java.text.NumberFormat.
+		//       or we do the formatting before and pass it in
+		@CheckReturnValue
+		public fun option(optionLabel: String, votes: Int): String {
+			return this.optionFormat.format(optionLabel, votes.toString())
+		}
+
+		@CheckReturnValue
+		public fun closedMessage(userId: String): String {
+			return this.closedMessageFormat.format("<@$userId>")
+		}
+	}
+
 	public data class Command(
+		val poll: Poll,
+		val queryPoll: QueryPoll,
 		val getConfig: GetConfig,
 		val shutdown: Shutdown,
 	) {
+
+		public data class Poll(
+			val missingDescription: String,
+			val lessThan2Options: String,
+		)
+
+		public data class QueryPoll(
+			val insufficientPermissions: String,
+			val missingId: String,
+			val noSuchPollWithId: String,
+		)
 
 		public data class GetConfig(
 			val insufficientPermissions: String,
