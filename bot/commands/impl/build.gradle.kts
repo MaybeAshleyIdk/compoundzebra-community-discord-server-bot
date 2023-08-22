@@ -5,10 +5,9 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:features:polls:impl"))
-	implementation(project(":bot:commands:impl"))
-	implementation(project(":bot:config:impl"))
-	implementation(project(":snowflake"))
+	api(project(":bot:commands:public"))
+	implementation(project(":bot:features:polls:public"))
+	implementation(project(":bot:config:public"))
 	implementation(project(":logging"))
 	implementation(project(":utils"))
 
@@ -20,6 +19,4 @@ dependencies {
 
 	implementation("com.google.dagger:dagger:2.47")
 	kapt("com.google.dagger:dagger-compiler:2.47")
-
-	implementation("com.squareup.moshi:moshi:1.14.0")
 }
