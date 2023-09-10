@@ -34,6 +34,10 @@ public object CommandsModule {
 
 		@Binds
 		@IntoSet
+		fun bindMagic8BallCommand(magic8BallCommand: Magic8BallCommand): Command
+
+		@Binds
+		@IntoSet
 		fun bindGetConfigCommand(getConfigCommand: GetConfigCommand): Command
 
 		@Binds
