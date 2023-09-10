@@ -7,7 +7,8 @@ plugins {
 dependencies {
 	api(project(":bot:commands:public"))
 	implementation(project(":bot:features:polls:public"))
-	implementation(project(":bot:config:public"))
+	implementation(project(":bot:config:models"))
+	implementation(project(":bot:config:supplier:public"))
 	implementation(project(":logging"))
 	implementation(project(":utils"))
 

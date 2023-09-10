@@ -25,8 +25,21 @@ include(
 	":bot:commands:public",
 	":bot:commands:impl",
 
-	":bot:config:public",
-	":bot:config:impl",
+	// region config
+	":bot:config:models",
+
+	":bot:config:serialization:public",
+	":bot:config:serialization:impl-json",
+
+	":bot:config:source:public",
+	":bot:config:source:impl-file",
+
+	":bot:config:supplier:public",
+	":bot:config:supplier:impl-cache",
+
+	":bot:config:cache:public",
+	":bot:config:cache:impl-memory",
+	// endregion
 
 	":snowflake",
 	":logging",

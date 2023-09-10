@@ -3,7 +3,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.poll
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.Command
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandName
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigLoader
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollCreator
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollDetails
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollOption
@@ -16,7 +16,7 @@ import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu
 import javax.inject.Inject
 
 internal class PollCreationCommand @Suppress("ktlint:standard:annotation") @Inject constructor(
-	private val configLoader: ConfigLoader,
+	private val configSupplier: ConfigSupplier,
 	private val pollCreator: PollCreator,
 ) : Command(name = CommandName.ofString("poll")) {
 
@@ -26,7 +26,7 @@ internal class PollCreationCommand @Suppress("ktlint:standard:annotation") @Inje
 			.trimAndSqueezeWhitespace()
 
 		if (description.isEmpty()) {
-			val config: Config = this.configLoader.load()
+			val config: Config = this.configSupplier.get()
 			textChannel.sendMessage(config.strings.command.poll.missingDescription)
 				.complete()
 
@@ -51,7 +51,7 @@ internal class PollCreationCommand @Suppress("ktlint:standard:annotation") @Inje
 			}
 
 		if (selectOptions.size < 2) {
-			val config: Config = this.configLoader.load()
+			val config: Config = this.configSupplier.get()
 			textChannel.sendMessage(config.strings.command.poll.lessThan2Options)
 				.complete()
 
@@ -62,7 +62,7 @@ internal class PollCreationCommand @Suppress("ktlint:standard:annotation") @Inje
 			.addOptions(selectOptions)
 			.build()
 
-		val config: Config = this.configLoader.load()
+		val config: Config = this.configSupplier.get()
 
 		val messageContent: String =
 			PollDetails(

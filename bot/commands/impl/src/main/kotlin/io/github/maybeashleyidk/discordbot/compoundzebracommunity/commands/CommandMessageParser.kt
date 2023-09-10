@@ -1,7 +1,7 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigLoader
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.indexOfFirst
 import javax.annotation.CheckReturnValue
 import javax.inject.Inject
@@ -36,12 +36,12 @@ internal sealed class CommandMessageParseResult {
 }
 
 internal class CommandMessageParser @Suppress("ktlint:standard:annotation") @Inject constructor(
-	private val configLoader: ConfigLoader,
+	private val configSupplier: ConfigSupplier,
 ) {
 
 	@CheckReturnValue
 	fun parseMessageContent(content: String): CommandMessageParseResult {
-		val config: Config = this.configLoader.load()
+		val config: Config = this.configSupplier.get()
 
 		val preparedContent: String = content.trimStart()
 

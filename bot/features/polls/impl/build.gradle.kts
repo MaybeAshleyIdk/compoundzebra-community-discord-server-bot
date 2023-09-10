@@ -6,9 +6,10 @@ plugins {
 
 dependencies {
 	api(project(":bot:features:polls:public"))
-	implementation(project(":bot:config:public"))
-	implementation(project(":logging"))
+	implementation(project(":bot:config:models"))
+	implementation(project(":bot:config:supplier:public"))
 	implementation(project(":snowflake"))
+	implementation(project(":logging"))
 
 	implementation("com.google.code.findbugs:jsr305:3.0.2")
 

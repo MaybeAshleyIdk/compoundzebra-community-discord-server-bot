@@ -1,7 +1,7 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigLoader
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.events.GenericEvent
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 internal class PollEventsListener @Suppress("ktlint:standard:annotation") @Inject constructor(
 	private val pollManager: PollManager,
-	private val configLoader: ConfigLoader,
+	private val configSupplier: ConfigSupplier,
 ) : EventListener {
 
 	override fun onEvent(event: GenericEvent) {
@@ -36,7 +36,7 @@ internal class PollEventsListener @Suppress("ktlint:standard:annotation") @Injec
 		val newDetails: PollDetails = this.pollManager.voteOption(member, event.componentId, optionValue)
 			?: return
 
-		val config: Config = this.configLoader.load()
+		val config: Config = this.configSupplier.get()
 		event.hook.editOriginal(newDetails.createMessageContent(config.strings.poll))
 			.complete()
 	}
@@ -56,7 +56,7 @@ internal class PollEventsListener @Suppress("ktlint:standard:annotation") @Injec
 
 			is PollManager.CloseResult.Closed -> {
 				if (closeResult.pollDetails != null) {
-					val config: Config = this.configLoader.load()
+					val config: Config = this.configSupplier.get()
 					event.hook.editOriginal(closeResult.pollDetails.createMessageContent(config.strings.poll))
 						.flatMap { _: Message ->
 							event.hook.editOriginalComponents() // this removes all components

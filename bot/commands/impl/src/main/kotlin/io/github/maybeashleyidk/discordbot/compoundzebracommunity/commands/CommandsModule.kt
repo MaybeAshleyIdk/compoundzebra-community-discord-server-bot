@@ -10,7 +10,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.polls
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Action
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.CommandDefinition
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigLoader
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
 import net.dv8tion.jda.api.hooks.EventListener
 import javax.annotation.CheckReturnValue
 
@@ -46,9 +46,9 @@ public object CommandsModule {
 	@ElementsIntoSet
 	internal fun provideConfiguredEchoCommands(
 		echoCommandFactory: EchoCommand.Factory,
-		configLoader: ConfigLoader,
+		configSupplier: ConfigSupplier,
 	): Set<Command> {
-		val config: Config = configLoader.load()
+		val config: Config = configSupplier.get()
 		return config.commandDefinitions
 			.mapTo(LinkedHashSet(config.commandDefinitions.size), echoCommandFactory::buildFromCommandDefinition)
 	}
