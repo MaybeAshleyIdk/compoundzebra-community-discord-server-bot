@@ -3,7 +3,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.poll
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.Command
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandName
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigLoader
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollDetails
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollHolder
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollId
@@ -15,13 +15,13 @@ import javax.annotation.CheckReturnValue
 import javax.inject.Inject
 
 internal class PollQueryCommand @Suppress("ktlint:standard:annotation") @Inject constructor(
-	private val configLoader: ConfigLoader,
+	private val configSupplier: ConfigSupplier,
 	private val pollHolder: PollHolder,
 ) : Command(name = CommandName.ofString("querypoll")) {
 
 	override fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val authorAsGuildMember: Member = catalystMessage.getAuthorAsGuildMember()
-		val config: Config = this.configLoader.load()
+		val config: Config = this.configSupplier.get()
 
 		if (!(authorAsGuildMember.isAllowedToQueryPoll(config.botAdminUserIds))) {
 			textChannel.sendMessage(config.strings.command.queryPoll.insufficientPermissions)

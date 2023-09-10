@@ -6,8 +6,6 @@ import dagger.Lazy
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.BotToken
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.ShutdownManager
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandsModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.di.ConfigFilePath
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.di.ConfigModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.di.LoggingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.di.PollsModule
@@ -46,7 +44,7 @@ internal interface BotComponent {
 		fun build(
 			@BindsInstance @BotTokenString token: String, // Kapt+Dagger does not support value classes
 			@BindsInstance initialActivity: Activity,
-			@BindsInstance @ConfigFilePath configFilePath: Path,
+			@BindsInstance configFilePath: Path,
 		): BotComponent
 	}
 }
