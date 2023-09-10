@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:config:models"))
+	implementation(project(":bot:config:bot-config-models"))
 
 	implementation("com.google.code.findbugs:jsr305:3.0.2")
 }

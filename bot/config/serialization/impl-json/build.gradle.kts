@@ -5,9 +5,9 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:config:serialization:public"))
-	implementation(project(":bot:config:models"))
-	implementation(project(":bot:commands:public"))
+	api(project(":bot:config:serialization:bot-config-serialization-public"))
+	implementation(project(":bot:config:bot-config-models"))
+	implementation(project(":bot:commands:bot-commands-public"))
 
 	implementation("com.google.code.findbugs:jsr305:3.0.2")
 
