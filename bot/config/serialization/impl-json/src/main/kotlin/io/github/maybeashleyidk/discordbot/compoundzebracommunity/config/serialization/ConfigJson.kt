@@ -28,6 +28,9 @@ internal data class LanguageStringsJson(
 	@Json(name = "command.querypoll.missingId") val commandQuerypollMissingId: String,
 	@Json(name = "command.querypoll.noSuchPollWithId") val commandQuerypollNoSuchPollWithId: String,
 
+	@Json(name = "command.8ball.missingQuestion") val command8ballMissingQuestion: String,
+	@Json(name = "command.8ball.responses") val command8ballResponses: List<String>,
+
 	@Json(name = "command.getconfig.insufficientPermissions") val commandGetconfigInsufficientPermissions: String,
 
 	@Json(name = "command.shutdown.response") val commandShutdownResponse: String,

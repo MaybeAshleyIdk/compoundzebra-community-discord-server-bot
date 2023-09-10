@@ -66,6 +66,7 @@ public data class LanguageStrings(
 	public data class Command(
 		val poll: Poll,
 		val queryPoll: QueryPoll,
+		val magic8Ball: Magic8Ball,
 		val getConfig: GetConfig,
 		val shutdown: Shutdown,
 	) {
@@ -79,6 +80,11 @@ public data class LanguageStrings(
 			val insufficientPermissions: String,
 			val missingId: String,
 			val noSuchPollWithId: String,
+		)
+
+		public data class Magic8Ball(
+			val missingQuestion: String,
+			val responses: List<String>,
 		)
 
 		public data class GetConfig(

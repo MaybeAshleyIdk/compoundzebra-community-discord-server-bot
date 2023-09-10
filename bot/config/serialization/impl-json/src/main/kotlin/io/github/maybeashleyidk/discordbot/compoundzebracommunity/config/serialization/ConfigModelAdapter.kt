@@ -40,6 +40,9 @@ internal class ConfigModelAdapter @Suppress("ktlint:standard:annotation") @Injec
 				commandQuerypollMissingId = config.strings.command.queryPoll.missingId,
 				commandQuerypollNoSuchPollWithId = config.strings.command.queryPoll.noSuchPollWithId,
 
+				command8ballMissingQuestion = config.strings.command.magic8Ball.missingQuestion,
+				command8ballResponses = config.strings.command.magic8Ball.responses,
+
 				commandGetconfigInsufficientPermissions = config.strings.command.getConfig.insufficientPermissions,
 
 				commandShutdownResponse = config.strings.command.shutdown.response,
@@ -89,6 +92,10 @@ private fun LanguageStringsJson.toLanguageStrings(): LanguageStrings {
 				insufficientPermissions = this.commandQuerypollInsufficientPermissions,
 				missingId = this.commandQuerypollMissingId,
 				noSuchPollWithId = this.commandQuerypollNoSuchPollWithId,
+			),
+			magic8Ball = LanguageStrings.Command.Magic8Ball(
+				missingQuestion = this.command8ballMissingQuestion,
+				responses = this.command8ballResponses,
 			),
 			getConfig = LanguageStrings.Command.GetConfig(
 				insufficientPermissions = this.commandGetconfigInsufficientPermissions,
