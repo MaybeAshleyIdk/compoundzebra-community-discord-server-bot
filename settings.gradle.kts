@@ -45,3 +45,20 @@ include(
 	":logging",
 	":utils",
 )
+
+// stupid hacky workaround because gradle has problems if multiple modules have the same name
+fun renameFinalChildren(project: ProjectDescriptor) {
+	if (project.children.isEmpty()) {
+		project.name = project.path
+			.removePrefix(":")
+			.replace(':', '-')
+
+		return
+	}
+
+	for (childProject: ProjectDescriptor in project.children) {
+		renameFinalChildren(childProject)
+	}
+}
+
+renameFinalChildren(rootProject)

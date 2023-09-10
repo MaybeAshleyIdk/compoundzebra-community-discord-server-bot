@@ -5,12 +5,12 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:features:polls:impl"))
-	implementation(project(":bot:commands:impl"))
-	implementation(project(":bot:config:supplier:impl-cache"))
-	implementation(project(":bot:config:cache:impl-memory"))
-	implementation(project(":bot:config:source:impl-file"))
-	implementation(project(":bot:config:serialization:impl-json"))
+	implementation(project(":bot:features:polls:bot-features-polls-impl"))
+	implementation(project(":bot:commands:bot-commands-impl"))
+	implementation(project(":bot:config:supplier:bot-config-supplier-impl-cache"))
+	implementation(project(":bot:config:cache:bot-config-cache-impl-memory"))
+	implementation(project(":bot:config:source:bot-config-source-impl-file"))
+	implementation(project(":bot:config:serialization:bot-config-serialization-impl-json"))
 	implementation(project(":snowflake"))
 	implementation(project(":logging"))
 	implementation(project(":utils"))

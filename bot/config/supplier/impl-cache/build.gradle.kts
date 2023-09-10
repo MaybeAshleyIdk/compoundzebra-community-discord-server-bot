@@ -5,9 +5,9 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:config:supplier:public"))
-	implementation(project(":bot:config:models"))
-	implementation(project(":bot:config:cache:public"))
+	api(project(":bot:config:supplier:bot-config-supplier-public"))
+	implementation(project(":bot:config:bot-config-models"))
+	implementation(project(":bot:config:cache:bot-config-cache-public"))
 
 	implementation("com.google.code.findbugs:jsr305:3.0.2")
 
