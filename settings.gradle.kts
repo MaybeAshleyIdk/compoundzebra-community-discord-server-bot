@@ -14,6 +14,7 @@ dependencyResolutionManagement {
 	}
 }
 
+@Suppress("ktlint:standard:no-blank-line-in-list")
 include(
 	":main",
 

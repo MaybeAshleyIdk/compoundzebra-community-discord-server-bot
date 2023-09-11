@@ -11,11 +11,16 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 max_line_length = 120
 
-[*.{kt,kts}]
 # noinspection EditorConfigKeyCorrectness
+[*.{kt,kts}]
 ktlint_code_style = ktlint_official
+
 ij_kotlin_allow_trailing_comma = true
 ij_kotlin_allow_trailing_comma_on_call_site = true
+
+ktlint_standard_no-empty-first-line-in-class-body = disabled
+ktlint_standard_string-template-indent = disabled
+ktlint_standard_multiline-expression-wrapping = disabled
 
 [*.{diff,patch}]
 trim_trailing_whitespace = false

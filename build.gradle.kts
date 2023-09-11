@@ -5,7 +5,7 @@ plugins {
 	kotlin("jvm") version "1.8.22" apply false
 	kotlin("kapt") version "1.8.22" apply false
 
-	id("io.github.mfederczuk.ktlint") version "0.1.0-indev05" apply false
+	id("io.github.mfederczuk.ktlint") version "0.1.0-indev06" apply false
 }
 
 val javaCompatibilityVersion: JavaVersion = JavaVersion.VERSION_17
