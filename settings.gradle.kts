@@ -23,7 +23,8 @@ include(
 	":bot:features:polls:public",
 	":bot:features:polls:impl",
 
-	":bot:commands:public",
+	":bot:commands:models:name",
+	":bot:commands:models:prefix",
 	":bot:commands:impl",
 
 	// region config
