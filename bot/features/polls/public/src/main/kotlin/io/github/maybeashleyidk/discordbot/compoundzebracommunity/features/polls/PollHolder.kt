@@ -1,4 +1,4 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls
 
 import javax.annotation.CheckReturnValue
 

@@ -8,7 +8,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.ShutdownManage
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.di.LoggingModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.di.PollsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.di.PollsModule
 import net.dv8tion.jda.api.entities.Activity
 import java.nio.file.Path
 import javax.annotation.CheckReturnValue

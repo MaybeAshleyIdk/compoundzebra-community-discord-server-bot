@@ -1,4 +1,4 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.snowflake.SnowflakeId
 import javax.annotation.CheckReturnValue

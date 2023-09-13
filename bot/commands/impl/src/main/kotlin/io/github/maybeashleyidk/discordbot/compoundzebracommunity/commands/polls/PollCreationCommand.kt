@@ -4,9 +4,9 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.Comma
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandName
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollCreator
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollDetails
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollOption
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollCreator
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollDetails
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollOption
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.trimAndSqueezeWhitespace
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
