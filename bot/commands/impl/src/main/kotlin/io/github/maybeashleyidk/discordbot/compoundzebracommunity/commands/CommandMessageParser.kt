@@ -31,7 +31,9 @@ internal data class CommandLine(
 internal sealed class CommandMessageParseResult {
 	// TODO: change to data object once we're using Kotlin 1.9.0
 	object NotACommandMessage : CommandMessageParseResult()
+
 	data class InvalidCommandName(val invalidCommandNameStr: String) : CommandMessageParseResult()
+
 	data class Success(val commandLine: CommandLine) : CommandMessageParseResult()
 }
 
@@ -59,6 +61,7 @@ internal class CommandMessageParser @Suppress("ktlint:standard:annotation") @Inj
 
 private sealed class CommandNameParseResult {
 	data class InvalidName(val invalidNameStr: String) : CommandNameParseResult()
+
 	data class Success(val commandName: CommandName) : CommandNameParseResult()
 }
 

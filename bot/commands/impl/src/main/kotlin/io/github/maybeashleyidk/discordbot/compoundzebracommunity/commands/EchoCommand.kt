@@ -17,10 +17,7 @@ internal class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInje
 	fun interface Factory {
 
 		@CheckReturnValue
-		fun build(
-			@Assisted("name") nameString: String,
-			@Assisted("responseMessage") responseMessage: String,
-		): EchoCommand
+		fun build(@Assisted("name") nameString: String, @Assisted("responseMessage") responseMessage: String): EchoCommand
 	}
 
 	override fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
@@ -30,10 +27,7 @@ internal class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInje
 }
 
 @CheckReturnValue
-internal fun EchoCommand.Factory.build(
-	name: CommandName,
-	responseMessage: String,
-): EchoCommand {
+internal fun EchoCommand.Factory.build(name: CommandName, responseMessage: String): EchoCommand {
 	return this.build(
 		nameString = name.string,
 		responseMessage = responseMessage,

@@ -22,7 +22,9 @@ public class PollManager @Suppress("ktlint:standard:annotation") @Inject interna
 	public sealed class CloseResult {
 		// TODO: change to data object once supported
 		public object WrongComponentId : CloseResult()
+
 		public object InsufficientPermissions : CloseResult()
+
 		public data class Closed(val pollDetails: PollDetails?) : CloseResult()
 	}
 

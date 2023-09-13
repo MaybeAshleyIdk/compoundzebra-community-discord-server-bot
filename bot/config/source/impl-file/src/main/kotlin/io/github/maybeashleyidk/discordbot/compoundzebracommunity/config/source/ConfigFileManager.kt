@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:import-ordering")
+
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.source
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
