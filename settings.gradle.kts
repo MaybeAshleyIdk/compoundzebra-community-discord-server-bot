@@ -16,19 +16,9 @@ dependencyResolutionManagement {
 
 @Suppress("ktlint:standard:no-blank-line-in-list")
 include(
-	":main",
-
-	":bot",
-
-	// region features
-	":bot:features:shutdown:public",
-	":bot:features:shutdown:impl",
-
-	":bot:features:polls:public",
-	":bot:features:polls:impl",
-
-	":bot:features:all-impl",
-	// endregion
+	":utils",
+	":logging",
+	":snowflake",
 
 	// region config
 	":bot:config:models",
@@ -39,11 +29,21 @@ include(
 	":bot:config:source:public",
 	":bot:config:source:impl-file",
 
-	":bot:config:supplier:public",
-	":bot:config:supplier:impl-cache",
-
 	":bot:config:cache:public",
 	":bot:config:cache:impl-memory",
+
+	":bot:config:supplier:public",
+	":bot:config:supplier:impl-cache",
+	// endregion
+
+	// region features
+	":bot:features:polls:public",
+	":bot:features:polls:impl",
+
+	":bot:features:shutdown:public",
+	":bot:features:shutdown:impl",
+
+	":bot:features:all-impl",
 	// endregion
 
 	// region commands
@@ -61,9 +61,9 @@ include(
 	":bot:commands:impl",
 	// endregion
 
-	":snowflake",
-	":logging",
-	":utils",
+	":bot",
+
+	":main",
 )
 
 // stupid hacky workaround because gradle has problems if multiple modules have the same name
