@@ -20,9 +20,15 @@ include(
 
 	":bot",
 
+	// region features
+	":bot:features:shutdown:public",
+	":bot:features:shutdown:impl",
+
 	":bot:features:polls:public",
 	":bot:features:polls:impl",
+
 	":bot:features:all-impl",
+	// endregion
 
 	":bot:commands:models:name",
 	":bot:commands:models:prefix",

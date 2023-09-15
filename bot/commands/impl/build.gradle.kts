@@ -7,6 +7,7 @@ plugins {
 dependencies {
 	implementation(project(":bot:commands:models:bot-commands-models-name"))
 	implementation(project(":bot:commands:models:bot-commands-models-prefix"))
+	implementation(project(":bot:features:shutdown:bot-features-shutdown-public"))
 	implementation(project(":bot:features:polls:bot-features-polls-public"))
 	implementation(project(":bot:config:bot-config-models"))
 	implementation(project(":bot:config:supplier:bot-config-supplier-public"))

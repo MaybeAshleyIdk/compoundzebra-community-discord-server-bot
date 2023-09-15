@@ -2,6 +2,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.ShutdownRequester
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.entities.Message
@@ -9,14 +10,9 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import javax.annotation.CheckReturnValue
 import javax.inject.Inject
 
-public interface ShutdownAction {
-
-	public fun requestShutdown()
-}
-
 internal class ShutdownCommand @Suppress("ktlint:standard:annotation") @Inject constructor(
 	private val configSupplier: ConfigSupplier,
-	private val shutdownAction: ShutdownAction,
+	private val shutdownRequester: ShutdownRequester,
 ) : Command(name = CommandName.ofString("shutdown")) {
 
 	override fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
@@ -36,7 +32,7 @@ internal class ShutdownCommand @Suppress("ktlint:standard:annotation") @Inject c
 		// we can't actually do the shutdown procedure here, since we're still in the event listener.
 		// if we were to call JDA.shutdown(), then it wouldn't do anything and JDA.awaitShutdown() would never return.
 		// it needs to be deferred until we're out of the event listener
-		this.shutdownAction.requestShutdown()
+		this.shutdownRequester.requestShutdown()
 	}
 }
 

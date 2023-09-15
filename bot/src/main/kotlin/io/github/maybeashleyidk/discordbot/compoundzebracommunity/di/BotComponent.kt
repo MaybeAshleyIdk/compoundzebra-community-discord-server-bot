@@ -4,9 +4,9 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.Lazy
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.BotToken
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.ShutdownManager
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.FeaturesModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.ShutdownManager
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.di.LoggingModule
 import net.dv8tion.jda.api.entities.Activity

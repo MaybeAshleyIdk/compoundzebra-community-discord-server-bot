@@ -1,13 +1,10 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.di
 
 import com.squareup.moshi.Moshi
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import dagger.multibindings.Multibinds
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.ShutdownManager
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.ShutdownAction
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.hooks.EventListener
 import net.dv8tion.jda.api.requests.GatewayIntent
@@ -27,9 +24,6 @@ internal object BotModule {
 
 		@Multibinds
 		fun multibindEventListeners(): Set<@JvmSuppressWildcards EventListener>
-
-		@Binds
-		fun bindShutdownAction(shutdownManager: ShutdownManager): ShutdownAction
 	}
 
 	@Provides
