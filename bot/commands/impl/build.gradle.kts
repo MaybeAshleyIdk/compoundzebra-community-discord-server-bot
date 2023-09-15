@@ -5,8 +5,10 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:commands:bot-commands-public"))
-	implementation(project(":bot:features:polls:bot-features-polls-public"))
+	implementation(project(":bot:commands:models:bot-commands-models-name"))
+	implementation(project(":bot:commands:models:bot-commands-models-prefix"))
+	api(project(":bot:commands:impl:bot-commands-impl-base"))
+	api(project(":bot:commands:impl:bot-commands-impl-builtins"))
 	implementation(project(":bot:config:bot-config-models"))
 	implementation(project(":bot:config:supplier:bot-config-supplier-public"))
 	implementation(project(":logging"))

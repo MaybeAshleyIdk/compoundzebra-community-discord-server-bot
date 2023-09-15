@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:features:polls:bot-features-polls-impl"))
+	implementation(project(":bot:features:bot-features-all-impl"))
 	implementation(project(":bot:commands:bot-commands-impl"))
 	implementation(project(":bot:config:supplier:bot-config-supplier-impl-cache"))
 	implementation(project(":bot:config:cache:bot-config-cache-impl-memory"))

@@ -24,7 +24,7 @@ internal class ConfigModelAdapter @Suppress("ktlint:standard:annotation") @Injec
 	@CheckReturnValue
 	fun transformConfig(config: Config): ConfigJson {
 		return ConfigJson(
-			strings = LanguageStringsJson(
+			strings = @Suppress("ktlint:standard:no-blank-line-in-list") LanguageStringsJson(
 				genericInvalidCommandName = config.strings.generic.invalidCommandNameFormat,
 				genericUnknownCommand = config.strings.generic.unknownCommandFormat,
 

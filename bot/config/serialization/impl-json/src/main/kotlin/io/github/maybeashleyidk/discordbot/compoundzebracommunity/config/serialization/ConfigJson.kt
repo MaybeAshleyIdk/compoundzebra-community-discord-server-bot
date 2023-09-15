@@ -12,7 +12,9 @@ internal data class ConfigJson(
 )
 
 @JsonClass(generateAdapter = true)
-internal data class LanguageStringsJson(
+internal data class LanguageStringsJson
+@Suppress("ktlint:standard:no-blank-line-in-list")
+constructor(
 	@Json(name = "generic.invalidCommandName") val genericInvalidCommandName: String,
 	@Json(name = "generic.unknownCommand") val genericUnknownCommand: String,
 

@@ -6,9 +6,5 @@ import javax.annotation.CheckReturnValue
 internal abstract class LogFormatter {
 
 	@CheckReturnValue
-	abstract fun format(
-		instant: Instant,
-		level: LogLevel,
-		unformattedMsg: String,
-	): String
+	abstract fun format(instant: Instant, level: LogLevel, unformattedMsg: String): String
 }

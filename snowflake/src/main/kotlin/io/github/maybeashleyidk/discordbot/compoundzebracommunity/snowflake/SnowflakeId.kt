@@ -20,11 +20,7 @@ public value class SnowflakeId private constructor(private val value: ULong) : C
 		}
 
 		@CheckReturnValue
-		public fun fromParts(
-			timestamp: Long,
-			workerId: UShort,
-			sequenceNr: UShort,
-		): SnowflakeId {
+		public fun fromParts(timestamp: Long, workerId: UShort, sequenceNr: UShort): SnowflakeId {
 			val timestampPart: ULong = (timestamp and this.TIMESTAMP_MASK).toULong() shl this.TIMESTAMP_SHIFT
 			val workedIdPart: ULong = (workerId and this.WORKER_ID_MASK).toULong() shl this.WORKER_ID_SHIFT
 			val sequenceNrPart: ULong = (sequenceNr and this.SEQUENCE_NR_MASK).toULong()

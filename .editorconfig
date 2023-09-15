@@ -11,11 +11,19 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 max_line_length = 120
 
-[*.{kt,kts}]
 # noinspection EditorConfigKeyCorrectness
-ktlint_code_style = ktlint_official
+[*.{kt,kts}]
+ktlint_code_style = intellij_idea
+
 ij_kotlin_allow_trailing_comma = true
 ij_kotlin_allow_trailing_comma_on_call_site = true
+
+ktlint_standard_blank-line-before-declaration = enabled
+ktlint_standard_if-else-bracing = enabled
+ktlint_standard_no-blank-line-in-list = enabled
+ktlint_standard_no-consecutive-comments = enabled
+ktlint_standard_try-catch-finally-spacing = enabled
+ktlint_standard_if-else-wrapping = enabled
 
 [*.{diff,patch}]
 trim_trailing_whitespace = false
