@@ -22,6 +22,7 @@ include(
 
 	":bot:features:polls:public",
 	":bot:features:polls:impl",
+	":bot:features:all-impl",
 
 	":bot:commands:models:name",
 	":bot:commands:models:prefix",
