@@ -1,4 +1,4 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.polls
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.builtins.polls
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.Command
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandName

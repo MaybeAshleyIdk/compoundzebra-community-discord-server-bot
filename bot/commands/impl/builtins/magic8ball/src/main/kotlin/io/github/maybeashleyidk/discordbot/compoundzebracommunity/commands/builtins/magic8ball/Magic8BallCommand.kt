@@ -1,5 +1,7 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.builtins.magic8ball
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.Command
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandName
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger

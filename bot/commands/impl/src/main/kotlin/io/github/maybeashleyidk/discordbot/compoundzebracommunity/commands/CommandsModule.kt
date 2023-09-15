@@ -6,7 +6,7 @@ import dagger.Provides
 import dagger.multibindings.ElementsIntoSet
 import dagger.multibindings.IntoSet
 import dagger.multibindings.Multibinds
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.polls.di.PollCommandsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.builtins.BuiltinCommandsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Action
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.CommandDefinition
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
@@ -17,7 +17,7 @@ import javax.annotation.CheckReturnValue
 @Module(
 	includes = [
 		CommandsModule.Bindings::class,
-		PollCommandsModule::class,
+		BuiltinCommandsModule::class,
 	],
 )
 public object CommandsModule {
@@ -31,18 +31,6 @@ public object CommandsModule {
 
 		@Multibinds
 		fun multibindCommands(): Set<@JvmSuppressWildcards Command>
-
-		@Binds
-		@IntoSet
-		fun bindMagic8BallCommand(magic8BallCommand: Magic8BallCommand): Command
-
-		@Binds
-		@IntoSet
-		fun bindGetConfigCommand(getConfigCommand: GetConfigCommand): Command
-
-		@Binds
-		@IntoSet
-		fun bindShutdownCommand(shutdownCommand: ShutdownCommand): Command
 	}
 
 	// TODO: find a way to do this dynamic

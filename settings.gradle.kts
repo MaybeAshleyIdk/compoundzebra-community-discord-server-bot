@@ -30,10 +30,6 @@ include(
 	":bot:features:all-impl",
 	// endregion
 
-	":bot:commands:models:name",
-	":bot:commands:models:prefix",
-	":bot:commands:impl",
-
 	// region config
 	":bot:config:models",
 
@@ -48,6 +44,21 @@ include(
 
 	":bot:config:cache:public",
 	":bot:config:cache:impl-memory",
+	// endregion
+
+	// region commands
+	":bot:commands:models:name",
+	":bot:commands:models:prefix",
+
+	":bot:commands:impl:base",
+
+	":bot:commands:impl:builtins:config",
+	":bot:commands:impl:builtins:magic8ball",
+	":bot:commands:impl:builtins:polls",
+	":bot:commands:impl:builtins:shutdown",
+	":bot:commands:impl:builtins",
+
+	":bot:commands:impl",
 	// endregion
 
 	":snowflake",
