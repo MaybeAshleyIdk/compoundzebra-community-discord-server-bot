@@ -11,10 +11,10 @@ import net.dv8tion.jda.api.hooks.EventListener
 
 @Module(
 	includes = [
-		PollsModule.Bindings::class,
+		PollsFeatureModule.Bindings::class,
 	],
 )
-public object PollsModule {
+public object PollsFeatureModule {
 
 	@Module
 	internal interface Bindings {
