@@ -68,7 +68,7 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 	private fun tryFindAndExecuteCommand(commandLine: CommandLine, catalystMessage: Message, textChannel: TextChannel) {
 		val foundCommand: Command? = this.commands
 			.firstOrNull { command: Command ->
-				command.name == commandLine.commandName
+				command.name.isEquivalentTo(commandLine.commandName)
 			}
 
 		if (foundCommand == null) {
