@@ -9,11 +9,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollManager
 import net.dv8tion.jda.api.hooks.EventListener
 
-@Module(
-	includes = [
-		PollsFeatureModule.Bindings::class,
-	],
-)
+@Module(includes = [PollsFeatureModule.Bindings::class])
 public object PollsFeatureModule {
 
 	@Module
@@ -21,7 +17,7 @@ public object PollsFeatureModule {
 
 		@Binds
 		@IntoSet
-		fun bindPollEventsListener(pollEventsListener: PollEventsListener): EventListener
+		fun bindEventListener(pollEventsListener: PollEventsListener): EventListener
 
 		@Binds
 		fun bindPollCreator(pollManager: PollManager): PollCreator
