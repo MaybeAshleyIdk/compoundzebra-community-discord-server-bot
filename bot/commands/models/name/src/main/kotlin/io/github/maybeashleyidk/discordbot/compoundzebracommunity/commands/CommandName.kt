@@ -45,6 +45,11 @@ public value class CommandName private constructor(public val string: String) {
 	}
 
 	@CheckReturnValue
+	public fun isEquivalentTo(other: CommandName): Boolean {
+		return this.string.equals(other.string, ignoreCase = true)
+	}
+
+	@CheckReturnValue
 	override fun toString(): String {
 		return this.string
 	}
