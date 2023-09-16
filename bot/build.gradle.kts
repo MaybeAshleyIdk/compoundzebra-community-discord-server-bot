@@ -12,7 +12,7 @@ dependencies {
 	implementation(project(":bot:config:source:bot-config-source-impl-file"))
 	implementation(project(":bot:config:serialization:bot-config-serialization-impl-json"))
 	implementation(project(":snowflake"))
-	implementation(project(":bot:bot-logging"))
+	implementation(project(":bot:logging:bot-logging-wiring"))
 	implementation(project(":utils"))
 
 	implementation("com.google.code.findbugs:jsr305:3.0.2")

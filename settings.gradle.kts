@@ -19,7 +19,9 @@ include(
 	":utils",
 	":snowflake",
 
-	":bot:logging",
+	":bot:logging:public",
+	":bot:logging:impl-stderr",
+	":bot:logging:wiring",
 
 	// region config
 	":bot:config:models",
