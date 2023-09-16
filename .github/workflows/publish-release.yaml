@@ -1,0 +1,23 @@
+name: Publish Release
+
+on:
+  push:
+    tags: [ v*.*.* ]
+
+jobs:
+  publish-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: 17
+
+      - uses: actions/checkout@v3
+
+      - run: .github/workflows/package
+
+      - uses: softprops/action-gh-release@v1
+        with:
+          files: packages/*
