@@ -68,7 +68,7 @@ public class EmojiStatsManagerImpl @Inject constructor(
 					out,
 					user,
 					guildNewsChannel,
-					includeArchivedPrivateThreads = true,
+					includeArchivedPrivateThreads = false,
 				)
 			}
 

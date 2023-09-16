@@ -7,26 +7,37 @@ public class Logger internal constructor(
 	private val logWriter: LogWriter,
 ) {
 
-	public fun logError(msg: String) {
-		this.log(LogLevel.ERROR, msg)
+	public fun logError(e: Throwable, msg: String) {
+		this.log(LogLevel.ERROR, msg, throwable = e)
 	}
 
 	public fun logWarning(msg: String) {
-		this.log(LogLevel.WARNING, msg)
+		this.log(LogLevel.WARNING, msg, throwable = null)
 	}
 
 	public fun logInfo(msg: String) {
-		this.log(LogLevel.INFO, msg)
+		this.log(LogLevel.INFO, msg, throwable = null)
 	}
 
 	public fun logDebug(msg: String) {
-		this.log(LogLevel.DEBUG, msg)
+		this.log(LogLevel.DEBUG, msg, throwable = null)
 	}
 
 	@Synchronized
-	private fun log(level: LogLevel, unformattedMsg: String) {
+	private fun log(level: LogLevel, unformattedMsg: String, throwable: Throwable?) {
 		val instant: Instant = Instant.now()
-		val formattedMsg: String = this.logFormatter.format(instant, level, unformattedMsg)
+
+		val sb = StringBuilder(unformattedMsg)
+
+		val stackTrace: String = throwable?.stackTraceToString()
+			.orEmpty()
+
+		if (sb.isNotEmpty() && stackTrace.isNotEmpty()) {
+			sb.append(": ")
+			sb.append(stackTrace)
+		}
+
+		val formattedMsg: String = this.logFormatter.format(instant, level, sb.toString())
 		this.logWriter.write(formattedMsg)
 	}
 }

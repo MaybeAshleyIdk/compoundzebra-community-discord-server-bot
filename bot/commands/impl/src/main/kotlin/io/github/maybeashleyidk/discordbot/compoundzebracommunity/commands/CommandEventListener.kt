@@ -96,7 +96,7 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 		try {
 			command.execute(arguments, catalystMessage, textChannel)
 		} catch (e: Exception) {
-			this.logger.logError("Command ${command.name.toQuotedString()} threw an exception: $e")
+			this.logger.logError(e, "Command ${command.name.toQuotedString()} threw an exception")
 		}
 	}
 }
