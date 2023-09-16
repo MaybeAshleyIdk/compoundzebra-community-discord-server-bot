@@ -2,7 +2,7 @@ plugins {
 	kotlin("jvm")
 	application
 
-	id("io.github.mfederczuk.ktlint")
+	alias(libs.plugins.ktlint)
 }
 
 group = "io.github.maybeashleyidk"
@@ -15,12 +15,12 @@ application {
 }
 
 ktlint {
-	version = "1.0.0"
+	version = libs.versions.ktlint
 	installGitPreCommitHookBeforeBuild = true
 }
 
 dependencies {
 	implementation(project(":bot"))
 
-	implementation("com.google.code.findbugs:jsr305:3.0.2")
+	implementation(libs.jsr305)
 }

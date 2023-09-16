@@ -1,11 +1,10 @@
 import org.jetbrains.kotlin.gradle.dsl.KotlinTopLevelExtension
 
 plugins {
-	// TODO: bump this to Kotlin 1.9.0 once Moshi supports it
-	kotlin("jvm") version "1.8.22" apply false
-	kotlin("kapt") version "1.8.22" apply false
+	kotlin("jvm") version libs.versions.kotlin apply false
+	kotlin("kapt") version libs.versions.kotlin apply false
 
-	id("io.github.mfederczuk.ktlint") version "0.1.0-indev06" apply false
+	alias(libs.plugins.ktlint) apply false
 }
 
 val javaCompatibilityVersion: JavaVersion = JavaVersion.VERSION_17

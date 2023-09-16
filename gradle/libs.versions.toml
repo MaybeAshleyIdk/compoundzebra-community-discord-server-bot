@@ -1,0 +1,18 @@
+[versions]
+kotlin = "1.8.22" # TODO: bump this to Kotlin 1.9.0 once Moshi supports it
+dagger = "2.47"
+moshi = "1.14.0"
+ktlint = "1.0.0"
+
+[libraries]
+jsr305 = "com.google.code.findbugs:jsr305:3.0.2"
+javax-inject = "javax.inject:javax.inject:1"
+dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
+dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
+jda = "net.dv8tion:JDA:5.0.0-beta.13"
+okio = "com.squareup.okio:okio:3.5.0"
+moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
+moshi-kotlin-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
+
+[plugins]
+ktlint = "io.github.mfederczuk.ktlint:0.1.0-indev06"

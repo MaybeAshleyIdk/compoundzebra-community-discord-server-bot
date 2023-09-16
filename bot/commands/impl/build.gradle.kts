@@ -14,12 +14,12 @@ dependencies {
 	implementation(project(":bot:logging:bot-logging-public"))
 	implementation(project(":utils"))
 
-	implementation("com.google.code.findbugs:jsr305:3.0.2")
+	implementation(libs.jsr305)
 
-	implementation("net.dv8tion:JDA:5.0.0-beta.13") {
+	implementation(libs.jda) {
 		exclude(module = "opus-java")
 	}
 
-	implementation("com.google.dagger:dagger:2.47")
-	kapt("com.google.dagger:dagger-compiler:2.47")
+	implementation(libs.dagger)
+	kapt(libs.dagger.compiler)
 }

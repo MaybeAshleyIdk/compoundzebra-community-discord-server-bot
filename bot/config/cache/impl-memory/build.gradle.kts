@@ -10,8 +10,8 @@ dependencies {
 	implementation(project(":bot:config:source:bot-config-source-public"))
 	implementation(project(":bot:logging:bot-logging-public"))
 
-	implementation("com.google.code.findbugs:jsr305:3.0.2")
+	implementation(libs.jsr305)
 
-	implementation("com.google.dagger:dagger:2.47")
-	kapt("com.google.dagger:dagger-compiler:2.47")
+	implementation(libs.dagger)
+	kapt(libs.dagger.compiler)
 }
