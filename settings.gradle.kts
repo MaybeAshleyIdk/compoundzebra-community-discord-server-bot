@@ -37,6 +37,9 @@ include(
 	// endregion
 
 	// region features
+	":bot:features:emojistats:public",
+	":bot:features:emojistats:impl",
+
 	":bot:features:polls:public",
 	":bot:features:polls:impl",
 
