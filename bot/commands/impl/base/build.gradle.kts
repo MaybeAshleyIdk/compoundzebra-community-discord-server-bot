@@ -12,5 +12,3 @@ dependencies {
 		exclude(module = "opus-java")
 	}
 }
-
-println(project)
