@@ -52,6 +52,13 @@ internal val FALLBACK_CONFIG: Config =
 						"Very doubtful",
 					),
 				),
+				emojiStats = LanguageStrings.Command.EmojiStats(
+					loading = "Crunching the numbers\u2026 this may take a while\u2026", // U+2026 = horizontal ellipsis
+					errorOccurred = "An error occurred",
+					empty = "You have not used any server emojis yet",
+					headingFormat = "Emoji statistics of %s:",
+					statLineFormat = "%s \u2014 %s", // U+2014 = em dash
+				),
 				getConfig = LanguageStrings.Command.GetConfig(
 					insufficientPermissions = "You are not allowed to use this command",
 				),

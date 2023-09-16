@@ -33,6 +33,12 @@ constructor(
 	@Json(name = "command.8ball.missingQuestion") val command8ballMissingQuestion: String,
 	@Json(name = "command.8ball.responses") val command8ballResponses: List<String>,
 
+	@Json(name = "command.emotestats.loading") val commandEmotestatsLoading: String,
+	@Json(name = "command.emotestats.errorOccurred") val commandEmotestatsErrorOccurred: String,
+	@Json(name = "command.emotestats.empty") val commandEmotestatsEmpty: String,
+	@Json(name = "command.emotestats.heading") val commandEmotestatsHeading: String,
+	@Json(name = "command.emotestats.statLine") val commandEmotestatsStatLine: String,
+
 	@Json(name = "command.getconfig.insufficientPermissions") val commandGetconfigInsufficientPermissions: String,
 
 	@Json(name = "command.shutdown.response") val commandShutdownResponse: String,

@@ -56,6 +56,7 @@ include(
 	":bot:commands:impl:base",
 
 	":bot:commands:impl:builtins:config",
+	":bot:commands:impl:builtins:emojistats",
 	":bot:commands:impl:builtins:magic8ball",
 	":bot:commands:impl:builtins:polls",
 	":bot:commands:impl:builtins:shutdown",

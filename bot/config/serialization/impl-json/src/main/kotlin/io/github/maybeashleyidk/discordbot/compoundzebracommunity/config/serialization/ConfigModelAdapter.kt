@@ -43,6 +43,12 @@ internal class ConfigModelAdapter @Suppress("ktlint:standard:annotation") @Injec
 				command8ballMissingQuestion = config.strings.command.magic8Ball.missingQuestion,
 				command8ballResponses = config.strings.command.magic8Ball.responses,
 
+				commandEmotestatsLoading = config.strings.command.emojiStats.loading,
+				commandEmotestatsErrorOccurred = config.strings.command.emojiStats.errorOccurred,
+				commandEmotestatsEmpty = config.strings.command.emojiStats.empty,
+				commandEmotestatsHeading = config.strings.command.emojiStats.headingFormat,
+				commandEmotestatsStatLine = config.strings.command.emojiStats.statLineFormat,
+
 				commandGetconfigInsufficientPermissions = config.strings.command.getConfig.insufficientPermissions,
 
 				commandShutdownResponse = config.strings.command.shutdown.response,
@@ -96,6 +102,13 @@ private fun LanguageStringsJson.toLanguageStrings(): LanguageStrings {
 			magic8Ball = LanguageStrings.Command.Magic8Ball(
 				missingQuestion = this.command8ballMissingQuestion,
 				responses = this.command8ballResponses,
+			),
+			emojiStats = LanguageStrings.Command.EmojiStats(
+				loading = this.commandEmotestatsLoading,
+				errorOccurred = this.commandEmotestatsErrorOccurred,
+				empty = this.commandEmotestatsEmpty,
+				headingFormat = this.commandEmotestatsHeading,
+				statLineFormat = this.commandEmotestatsStatLine,
 			),
 			getConfig = LanguageStrings.Command.GetConfig(
 				insufficientPermissions = this.commandGetconfigInsufficientPermissions,

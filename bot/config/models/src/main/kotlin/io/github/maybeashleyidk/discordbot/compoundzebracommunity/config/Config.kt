@@ -67,6 +67,7 @@ public data class LanguageStrings(
 		val poll: Poll,
 		val queryPoll: QueryPoll,
 		val magic8Ball: Magic8Ball,
+		val emojiStats: EmojiStats,
 		val getConfig: GetConfig,
 		val shutdown: Shutdown,
 	) {
@@ -86,6 +87,25 @@ public data class LanguageStrings(
 			val missingQuestion: String,
 			val responses: List<String>,
 		)
+
+		public data class EmojiStats(
+			val loading: String,
+			val errorOccurred: String,
+			val empty: String,
+			val headingFormat: String,
+			val statLineFormat: String,
+		) {
+
+			@CheckReturnValue
+			public fun heading(userMention: String): String {
+				return this.headingFormat.format(userMention)
+			}
+
+			@CheckReturnValue
+			public fun statLine(emojiFormatted: String, countFormatted: String): String {
+				return this.statLineFormat.format(emojiFormatted, countFormatted)
+			}
+		}
 
 		public data class GetConfig(
 			val insufficientPermissions: String,
