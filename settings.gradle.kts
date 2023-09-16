@@ -17,8 +17,9 @@ dependencyResolutionManagement {
 @Suppress("ktlint:standard:no-blank-line-in-list")
 include(
 	":utils",
-	":logging",
 	":snowflake",
+
+	":bot:logging",
 
 	// region config
 	":bot:config:models",

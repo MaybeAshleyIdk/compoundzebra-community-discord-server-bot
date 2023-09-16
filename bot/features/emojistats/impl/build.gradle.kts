@@ -6,7 +6,7 @@ plugins {
 
 dependencies {
 	api(project(":bot:features:emojistats:bot-features-emojistats-public"))
-	api(project(":logging"))
+	api(project(":bot:bot-logging"))
 
 	implementation("com.google.code.findbugs:jsr305:3.0.2")
 
