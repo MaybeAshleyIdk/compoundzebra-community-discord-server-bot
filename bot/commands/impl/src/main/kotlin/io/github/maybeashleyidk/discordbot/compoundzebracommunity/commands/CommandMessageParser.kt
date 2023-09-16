@@ -29,8 +29,7 @@ internal data class CommandLine(
 }
 
 internal sealed class CommandMessageParseResult {
-	// TODO: change to data object once we're using Kotlin 1.9.0
-	object NotACommandMessage : CommandMessageParseResult()
+	data object NotACommandMessage : CommandMessageParseResult()
 
 	data class InvalidCommandName(val invalidCommandNameStr: String) : CommandMessageParseResult()
 

@@ -3,10 +3,9 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 import javax.annotation.CheckReturnValue
 
 sealed class EnvironmentBotToken {
-	// TODO: change these into `data object`s once Moshi supports Kotlin 1.9.0
-	object UnsetOrEmpty : EnvironmentBotToken()
+	data object UnsetOrEmpty : EnvironmentBotToken()
 
-	object InvalidLength : EnvironmentBotToken()
+	data object InvalidLength : EnvironmentBotToken()
 
 	data class Valid(val token: BotToken) : EnvironmentBotToken()
 }
