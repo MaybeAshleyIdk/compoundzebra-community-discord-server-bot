@@ -11,7 +11,7 @@ dependencies {
 	api(project(":bot:commands:impl:bot-commands-impl-builtins"))
 	implementation(project(":bot:config:bot-config-models"))
 	implementation(project(":bot:config:supplier:bot-config-supplier-public"))
-	implementation(project(":logging"))
+	implementation(project(":bot:logging:bot-logging-public"))
 	implementation(project(":utils"))
 
 	implementation("com.google.code.findbugs:jsr305:3.0.2")

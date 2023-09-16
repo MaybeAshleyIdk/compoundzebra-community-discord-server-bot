@@ -8,7 +8,7 @@ dependencies {
 	api(project(":bot:config:cache:bot-config-cache-public"))
 	implementation(project(":bot:config:bot-config-models"))
 	implementation(project(":bot:config:source:bot-config-source-public"))
-	implementation(project(":logging"))
+	implementation(project(":bot:logging:bot-logging-public"))
 
 	implementation("com.google.code.findbugs:jsr305:3.0.2")
 
