@@ -6,9 +6,9 @@ plugins {
 dependencies {
 	implementation(project(":bot:commands:models:bot-commands-models-name"))
 
-	implementation("com.google.code.findbugs:jsr305:3.0.2")
+	implementation(libs.jsr305)
 
-	implementation("net.dv8tion:JDA:5.0.0-beta.13") {
+	implementation(libs.jda) {
 		exclude(module = "opus-java")
 	}
 }

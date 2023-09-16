@@ -9,10 +9,10 @@ dependencies {
 	implementation(project(":bot:config:bot-config-models"))
 	implementation(project(":bot:config:serialization:bot-config-serialization-public"))
 
-	implementation("com.google.code.findbugs:jsr305:3.0.2")
+	implementation(libs.jsr305)
 
-	implementation("com.google.dagger:dagger:2.47")
-	kapt("com.google.dagger:dagger-compiler:2.47")
+	implementation(libs.dagger)
+	kapt(libs.dagger.compiler)
 
-	implementation("com.squareup.okio:okio:3.5.0")
+	implementation(libs.okio)
 }

@@ -6,7 +6,7 @@ plugins {
 dependencies {
 	implementation(project(":bot:config:bot-config-models"))
 
-	implementation("com.google.code.findbugs:jsr305:3.0.2")
+	implementation(libs.jsr305)
 
-	implementation("com.squareup.okio:okio:3.5.0")
+	implementation(libs.okio)
 }

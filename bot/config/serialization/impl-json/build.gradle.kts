@@ -10,13 +10,13 @@ dependencies {
 	implementation(project(":bot:commands:models:bot-commands-models-name"))
 	implementation(project(":bot:commands:models:bot-commands-models-prefix"))
 
-	implementation("com.google.code.findbugs:jsr305:3.0.2")
+	implementation(libs.jsr305)
 
-	implementation("com.google.dagger:dagger:2.47")
-	kapt("com.google.dagger:dagger-compiler:2.47")
+	implementation(libs.dagger)
+	kapt(libs.dagger.compiler)
 
-	implementation("com.squareup.okio:okio:3.5.0")
+	implementation(libs.okio)
 
-	implementation("com.squareup.moshi:moshi:1.14.0")
-	kapt("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
+	implementation(libs.moshi)
+	kapt(libs.moshi.kotlin.codegen)
 }
