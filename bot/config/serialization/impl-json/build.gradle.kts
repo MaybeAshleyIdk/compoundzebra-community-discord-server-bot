@@ -1,7 +1,7 @@
 plugins {
+	`java-library`
 	kotlin("jvm")
 	kotlin("kapt")
-	`java-library`
 }
 
 dependencies {
@@ -10,11 +10,11 @@ dependencies {
 	implementation(project(":bot:commands:models:bot-commands-models-name"))
 	implementation(project(":bot:commands:models:bot-commands-models-prefix"))
 
-	implementation(libs.dagger)
-	kapt(libs.dagger.compiler)
-
 	implementation(libs.okio)
 
 	implementation(libs.moshi)
 	kapt(libs.moshi.kotlin.codegen)
+
+	implementation(libs.dagger)
+	kapt(libs.dagger.compiler)
 }

@@ -1,7 +1,7 @@
 plugins {
+	`java-library`
 	kotlin("jvm")
 	kotlin("kapt")
-	`java-library`
 }
 
 dependencies {
@@ -19,8 +19,8 @@ dependencies {
 		exclude(module = "opus-java")
 	}
 
+	implementation(libs.moshi)
+
 	implementation(libs.dagger)
 	kapt(libs.dagger.compiler)
-
-	implementation(libs.moshi)
 }

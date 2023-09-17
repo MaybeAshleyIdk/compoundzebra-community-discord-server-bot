@@ -1,7 +1,7 @@
 plugins {
+	`java-library`
 	kotlin("jvm")
 	kotlin("kapt")
-	`java-library`
 }
 
 dependencies {
@@ -9,8 +9,8 @@ dependencies {
 	implementation(project(":bot:config:bot-config-models"))
 	implementation(project(":bot:config:serialization:bot-config-serialization-public"))
 
+	implementation(libs.okio)
+
 	implementation(libs.dagger)
 	kapt(libs.dagger.compiler)
-
-	implementation(libs.okio)
 }
