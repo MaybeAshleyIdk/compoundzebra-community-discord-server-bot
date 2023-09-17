@@ -1,17 +1,20 @@
 [versions]
 kotlin = "1.9.10"
-dagger = "2.48"
-moshi = "1.15.0"
 ktlint = "1.0.0"
+moshi = "1.15.0"
+dagger = "2.48"
 
 [libraries]
+jda = "net.dv8tion:JDA:5.0.0-beta.13"
+
+okio = "com.squareup.okio:okio:3.5.0"
+
+moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
+moshi-kotlin-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
+
 javax-inject = "javax.inject:javax.inject:1"
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
 dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
-jda = "net.dv8tion:JDA:5.0.0-beta.13"
-okio = "com.squareup.okio:okio:3.5.0"
-moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
-moshi-kotlin-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
 
 [plugins]
 ktlint = "io.github.mfederczuk.ktlint:0.1.0-indev06"
