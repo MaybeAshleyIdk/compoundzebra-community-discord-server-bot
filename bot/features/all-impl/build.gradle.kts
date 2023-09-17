@@ -1,7 +1,7 @@
 plugins {
 	`java-library`
 	kotlin("jvm")
-	kotlin("kapt")
+	alias(libs.plugins.ksp)
 }
 
 dependencies {
@@ -10,5 +10,5 @@ dependencies {
 	api(project(":bot:features:polls:bot-features-polls-impl"))
 
 	implementation(libs.dagger)
-	kapt(libs.dagger.compiler)
+	ksp(libs.dagger.compiler)
 }

@@ -1,12 +1,12 @@
 plugins {
 	`java-library`
 	kotlin("jvm")
-	kotlin("kapt")
+	alias(libs.plugins.ksp)
 }
 
 dependencies {
 	api(project(":bot:logging:bot-logging-impl-stderr"))
 
 	implementation(libs.dagger)
-	kapt(libs.dagger.compiler)
+	ksp(libs.dagger.compiler)
 }

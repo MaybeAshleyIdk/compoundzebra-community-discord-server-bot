@@ -1,5 +1,6 @@
 [versions]
 kotlin = "1.9.10"
+ksp = "1.9.10-1.0.13"
 ktlint = "1.0.0"
 moshi = "1.15.0"
 dagger = "2.48"
@@ -17,4 +18,5 @@ dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" 
 dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
 
 [plugins]
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ktlint = "io.github.mfederczuk.ktlint:0.1.0-indev06"

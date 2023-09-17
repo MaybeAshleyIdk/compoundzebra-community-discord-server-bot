@@ -1,7 +1,7 @@
 plugins {
 	`java-library`
 	kotlin("jvm")
-	kotlin("kapt")
+	alias(libs.plugins.ksp)
 }
 
 dependencies {
@@ -22,5 +22,5 @@ dependencies {
 	implementation(libs.moshi)
 
 	implementation(libs.dagger)
-	kapt(libs.dagger.compiler)
+	ksp(libs.dagger.compiler)
 }
