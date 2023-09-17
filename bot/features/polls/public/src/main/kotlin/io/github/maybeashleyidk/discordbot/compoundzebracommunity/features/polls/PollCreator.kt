@@ -1,7 +1,5 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls
 
-import javax.annotation.CheckReturnValue
-
 public interface PollCreator {
 
 	public interface PollBuilder {
@@ -14,6 +12,5 @@ public interface PollCreator {
 		public fun open()
 	}
 
-	@CheckReturnValue
 	public fun create(authorId: Long, description: String): PollBuilder
 }

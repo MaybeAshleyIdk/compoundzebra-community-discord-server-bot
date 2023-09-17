@@ -2,7 +2,6 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandName
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandPrefix
-import javax.annotation.CheckReturnValue
 
 public data class Config(
 	val strings: LanguageStrings,
@@ -22,12 +21,10 @@ public data class LanguageStrings(
 		val unknownCommandFormat: String,
 	) {
 
-		@CheckReturnValue
 		public fun invalidCommandName(commandNameStr: String): String {
 			return this.invalidCommandNameFormat.format(commandNameStr)
 		}
 
-		@CheckReturnValue
 		public fun unknownCommand(commandName: CommandName): String {
 			return this.unknownCommandFormat.format(commandName.string)
 		}
@@ -44,7 +41,6 @@ public data class LanguageStrings(
 			public val close: String,
 		)
 
-		@CheckReturnValue
 		public fun title(authorId: String): String {
 			return this.titleFormat.format("<@$authorId>")
 		}
@@ -52,12 +48,10 @@ public data class LanguageStrings(
 		// TODO: if we want to support guilds of different languages, then we need the language here to use
 		//       java.text.NumberFormat.
 		//       or we do the formatting before and pass it in
-		@CheckReturnValue
 		public fun option(optionLabel: String, votes: Int): String {
 			return this.optionFormat.format(optionLabel, votes.toString())
 		}
 
-		@CheckReturnValue
 		public fun closedMessage(userId: String): String {
 			return this.closedMessageFormat.format("<@$userId>")
 		}
@@ -96,12 +90,10 @@ public data class LanguageStrings(
 			val statLineFormat: String,
 		) {
 
-			@CheckReturnValue
 			public fun heading(userMention: String): String {
 				return this.headingFormat.format(userMention)
 			}
 
-			@CheckReturnValue
 			public fun statLine(emojiFormatted: String, countFormatted: String): String {
 				return this.statLineFormat.format(emojiFormatted, countFormatted)
 			}

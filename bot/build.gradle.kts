@@ -1,7 +1,7 @@
 plugins {
-	kotlin("jvm")
-	kotlin("kapt")
 	`java-library`
+	kotlin("jvm")
+	alias(libs.plugins.ksp)
 }
 
 dependencies {
@@ -15,14 +15,12 @@ dependencies {
 	implementation(project(":bot:logging:bot-logging-wiring"))
 	implementation(project(":utils"))
 
-	implementation(libs.jsr305)
-
 	implementation(libs.jda) {
 		exclude(module = "opus-java")
 	}
 
-	implementation(libs.dagger)
-	kapt(libs.dagger.compiler)
-
 	implementation(libs.moshi)
+
+	implementation(libs.dagger)
+	ksp(libs.dagger.compiler)
 }

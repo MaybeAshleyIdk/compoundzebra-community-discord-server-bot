@@ -1,10 +1,8 @@
 plugins {
-	kotlin("jvm")
 	`java-library`
+	kotlin("jvm")
 }
 
 dependencies {
 	implementation(project(":utils"))
-
-	implementation(libs.jsr305)
 }

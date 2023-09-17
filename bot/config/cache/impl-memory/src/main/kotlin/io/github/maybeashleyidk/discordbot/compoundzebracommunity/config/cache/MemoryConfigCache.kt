@@ -6,7 +6,6 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import java.time.Instant
 import java.util.concurrent.locks.ReadWriteLock
 import java.util.concurrent.locks.ReentrantReadWriteLock
-import javax.annotation.CheckReturnValue
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.concurrent.withLock
@@ -25,7 +24,6 @@ public class MemoryConfigCache @Suppress("ktlint:standard:annotation") @Inject i
 	private val cachedConfigReadWriteLock: ReadWriteLock = ReentrantReadWriteLock(true)
 	private var cachedConfig: CachedConfig? = null
 
-	@CheckReturnValue
 	override fun getValue(): Config {
 		val validCachedConfig1: Config? = this.cachedConfigReadWriteLock.readLock()
 			.withLock(this::getValidCachedConfigUnsynchronized)
@@ -53,7 +51,6 @@ public class MemoryConfigCache @Suppress("ktlint:standard:annotation") @Inject i
 			}
 	}
 
-	@CheckReturnValue
 	private fun getValidCachedConfigUnsynchronized(): Config? {
 		val cachedConfigLocal: CachedConfig = this.cachedConfig
 			?: return null

@@ -3,7 +3,6 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.snowflake
 import java.time.LocalDate
 import java.time.Month
 import java.time.ZoneOffset
-import javax.annotation.CheckReturnValue
 
 public class SnowflakeIdGenerator {
 
@@ -18,7 +17,6 @@ public class SnowflakeIdGenerator {
 
 	private var currentSequenceNr: UShort = 0u
 
-	@CheckReturnValue
 	public fun generateNext(): SnowflakeId {
 		val now: Long = System.currentTimeMillis()
 

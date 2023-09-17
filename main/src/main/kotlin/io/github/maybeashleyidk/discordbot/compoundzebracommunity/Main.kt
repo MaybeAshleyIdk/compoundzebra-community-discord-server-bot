@@ -3,7 +3,6 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
 import java.nio.file.Path
-import javax.annotation.CheckReturnValue
 import kotlin.system.exitProcess
 
 private val CONFIG_FILE_PATH: Path = Path.of("bot_config.json")
@@ -16,7 +15,6 @@ fun main() {
 	)
 }
 
-@CheckReturnValue
 private fun getBotTokenFromEnvironmentOrExit(): BotToken {
 	return when (val environmentBotToken: EnvironmentBotToken = Environment.extractBotToken()) {
 		is EnvironmentBotToken.UnsetOrEmpty -> {

@@ -1,7 +1,6 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging
 
 import java.time.Instant
-import javax.annotation.CheckReturnValue
 import javax.inject.Inject
 
 public class StderrLogger @Inject constructor() : Logger {
@@ -29,7 +28,6 @@ public class StderrLogger @Inject constructor() : Logger {
 		this.writeMessage(formattedMsg)
 	}
 
-	@CheckReturnValue
 	private fun formatMessage(instant: Instant, level: LogLevel, unformattedMsg: String, throwable: Throwable?): String {
 		val stackTraceString: String = throwable?.stackTraceToString()
 			.orEmpty()
@@ -58,7 +56,6 @@ public class StderrLogger @Inject constructor() : Logger {
 	}
 }
 
-@CheckReturnValue
 private fun LogLevel.toChar(): Char {
 	return when (this) {
 		LogLevel.ERROR -> 'E'

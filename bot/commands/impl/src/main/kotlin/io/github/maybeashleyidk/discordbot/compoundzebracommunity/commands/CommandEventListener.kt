@@ -9,7 +9,6 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.events.GenericEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.EventListener
-import javax.annotation.CheckReturnValue
 import javax.inject.Inject
 
 internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inject constructor(
@@ -38,7 +37,6 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 		this.tryFindAndExecuteCommand(commandLine, catalystMessage = message, textChannel)
 	}
 
-	@CheckReturnValue
 	private fun tryParseMessageContentToCommandLine(messageContent: String, textChannel: TextChannel): CommandLine? {
 		val commandMessageParseResult: CommandMessageParseResult =
 			this.commandMessageParser.parseMessageContent(messageContent)
@@ -101,7 +99,6 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 	}
 }
 
-@CheckReturnValue
 private fun shouldBotIgnoreMessage(message: Message): Boolean {
 	return (message.channel.type != ChannelType.TEXT) || message.author.isBot || message.author.isSystem
 }

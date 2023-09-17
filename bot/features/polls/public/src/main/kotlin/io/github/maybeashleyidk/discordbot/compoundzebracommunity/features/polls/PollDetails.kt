@@ -2,7 +2,6 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.poll
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.LanguageStrings
 import net.dv8tion.jda.api.entities.ISnowflake
-import javax.annotation.CheckReturnValue
 
 public data class PollOption(
 	val value: String,
@@ -22,7 +21,6 @@ public data class PollDetails(
 		require(this.voters.values.all(this::containsOptionWithValue))
 	}
 
-	@CheckReturnValue
 	public fun createMessageContent(pollStrings: LanguageStrings.Poll): String {
 		return buildString {
 			this@buildString.append(pollStrings.title(this@PollDetails.authorId.snowflakeToString()))
@@ -42,7 +40,6 @@ public data class PollDetails(
 		}
 	}
 
-	@CheckReturnValue
 	public fun countVotesOfOptions(optionValue: String): Int {
 		return this@PollDetails.voters
 			.count { (_: Long, value: String) ->
@@ -50,19 +47,16 @@ public data class PollDetails(
 			}
 	}
 
-	@CheckReturnValue
 	public fun withVoter(voterId: Long, optionValue: String): PollDetails {
 		require(this.containsOptionWithValue(optionValue))
 
 		return this.copy(voters = this.voters.plus(voterId to optionValue))
 	}
 
-	@CheckReturnValue
 	public fun closedBy(userId: Long): PollDetails {
 		return this.copy(closedByUserId = userId)
 	}
 
-	@CheckReturnValue
 	private fun containsOptionWithValue(optionValue: String): Boolean {
 		return this.options
 			.any { option: PollOption ->
@@ -71,7 +65,6 @@ public data class PollDetails(
 	}
 }
 
-@CheckReturnValue
 private fun Long.snowflakeToString(): String {
 	return ISnowflake { this@snowflakeToString }.id // hacky way to do that lmao
 }

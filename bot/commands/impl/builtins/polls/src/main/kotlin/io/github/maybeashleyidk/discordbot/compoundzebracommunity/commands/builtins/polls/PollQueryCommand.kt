@@ -11,7 +11,6 @@ import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
-import javax.annotation.CheckReturnValue
 import javax.inject.Inject
 
 internal class PollQueryCommand @Suppress("ktlint:standard:annotation") @Inject constructor(
@@ -59,13 +58,11 @@ internal class PollQueryCommand @Suppress("ktlint:standard:annotation") @Inject 
 	}
 }
 
-@CheckReturnValue
 private fun Message.getAuthorAsGuildMember(): Member {
 	return this.guild.retrieveMemberById(this.author.idLong)
 		.complete()
 }
 
-@CheckReturnValue
 private fun Member.isAllowedToQueryPoll(botAdminUserIds: Set<String>): Boolean {
 	return (this.isOwner || this.hasPermission(Permission.ADMINISTRATOR) || (this.id in botAdminUserIds))
 }

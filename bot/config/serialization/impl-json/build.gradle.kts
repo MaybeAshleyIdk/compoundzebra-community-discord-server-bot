@@ -1,7 +1,7 @@
 plugins {
-	kotlin("jvm")
-	kotlin("kapt")
 	`java-library`
+	kotlin("jvm")
+	alias(libs.plugins.ksp)
 }
 
 dependencies {
@@ -10,13 +10,11 @@ dependencies {
 	implementation(project(":bot:commands:models:bot-commands-models-name"))
 	implementation(project(":bot:commands:models:bot-commands-models-prefix"))
 
-	implementation(libs.jsr305)
-
-	implementation(libs.dagger)
-	kapt(libs.dagger.compiler)
-
 	implementation(libs.okio)
 
 	implementation(libs.moshi)
-	kapt(libs.moshi.kotlin.codegen)
+	ksp(libs.moshi.kotlin.codegen)
+
+	implementation(libs.dagger)
+	ksp(libs.dagger.compiler)
 }

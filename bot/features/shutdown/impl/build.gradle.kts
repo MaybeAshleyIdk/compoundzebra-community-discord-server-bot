@@ -1,12 +1,12 @@
 plugins {
-	kotlin("jvm")
-	kotlin("kapt")
 	`java-library`
+	kotlin("jvm")
+	alias(libs.plugins.ksp)
 }
 
 dependencies {
 	api(project(":bot:features:shutdown:bot-features-shutdown-public"))
 
 	implementation(libs.dagger)
-	kapt(libs.dagger.compiler)
+	ksp(libs.dagger.compiler)
 }

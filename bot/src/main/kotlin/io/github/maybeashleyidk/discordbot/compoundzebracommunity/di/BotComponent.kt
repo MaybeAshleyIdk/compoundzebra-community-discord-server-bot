@@ -11,7 +11,6 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.LoggingModule
 import net.dv8tion.jda.api.entities.Activity
 import java.nio.file.Path
-import javax.annotation.CheckReturnValue
 import javax.inject.Singleton
 import net.dv8tion.jda.api.JDA as Jda
 
@@ -40,7 +39,6 @@ internal interface BotComponent {
 	@FunctionalInterface
 	fun interface Factory {
 
-		@CheckReturnValue
 		fun build(
 			@BindsInstance @BotTokenString token: String, // Kapt+Dagger does not support value classes
 			@BindsInstance initialActivity: Activity,
@@ -54,7 +52,6 @@ internal val BotComponent.token: BotToken
 		return BotToken.ofString(this.tokenString)
 	}
 
-@CheckReturnValue
 internal fun BotComponent.Factory.build(
 	token: BotToken,
 	initialActivity: Activity,

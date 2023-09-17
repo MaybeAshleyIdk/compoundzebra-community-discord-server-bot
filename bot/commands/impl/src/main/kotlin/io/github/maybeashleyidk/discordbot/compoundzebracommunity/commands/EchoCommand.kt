@@ -6,7 +6,6 @@ import dagger.assisted.AssistedInject
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.requests.restaction.MessageCreateAction
-import javax.annotation.CheckReturnValue
 
 internal class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInject constructor(
 	@Assisted("name") nameString: String,
@@ -16,7 +15,6 @@ internal class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInje
 	@AssistedFactory
 	fun interface Factory {
 
-		@CheckReturnValue
 		fun build(@Assisted("name") nameString: String, @Assisted("responseMessage") responseMessage: String): EchoCommand
 	}
 
@@ -26,7 +24,6 @@ internal class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInje
 	}
 }
 
-@CheckReturnValue
 internal fun EchoCommand.Factory.build(name: CommandName, responseMessage: String): EchoCommand {
 	return this.build(
 		nameString = name.string,

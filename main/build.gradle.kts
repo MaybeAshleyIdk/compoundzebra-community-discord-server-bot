@@ -1,6 +1,6 @@
 plugins {
-	kotlin("jvm")
 	application
+	kotlin("jvm")
 
 	alias(libs.plugins.ktlint)
 }
@@ -21,6 +21,4 @@ ktlint {
 
 dependencies {
 	implementation(project(":bot"))
-
-	implementation(libs.jsr305)
 }
