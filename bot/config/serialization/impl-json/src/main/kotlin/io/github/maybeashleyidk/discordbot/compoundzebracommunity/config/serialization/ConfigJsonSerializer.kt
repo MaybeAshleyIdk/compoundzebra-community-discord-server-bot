@@ -6,7 +6,6 @@ import com.squareup.moshi.adapter
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import okio.BufferedSink
 import okio.BufferedSource
-import javax.annotation.CheckReturnValue
 import javax.inject.Inject
 
 public class ConfigJsonSerializer @Suppress("ktlint:standard:annotation") @Inject internal constructor(
@@ -25,7 +24,6 @@ public class ConfigJsonSerializer @Suppress("ktlint:standard:annotation") @Injec
 		this.configJsonAdapter.toJson(sink, initConfigJson)
 	}
 
-	@CheckReturnValue
 	override fun deserialize(source: BufferedSource): Config {
 		val configJson: ConfigJson? = this.configJsonAdapter.fromJson(source)
 		checkNotNull(configJson)

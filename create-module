@@ -89,7 +89,6 @@ for module_path in "$@"; do
 }
 
 dependencies {
-	implementation("com.google.code.findbugs:jsr305:3.0.2")
 }
 ' > "$root_dir_pathname/$module_dir_pathname/build.gradle.kts"
 

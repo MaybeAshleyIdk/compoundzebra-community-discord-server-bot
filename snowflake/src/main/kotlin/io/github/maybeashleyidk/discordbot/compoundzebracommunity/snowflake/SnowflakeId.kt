@@ -1,7 +1,5 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.snowflake
 
-import javax.annotation.CheckReturnValue
-
 @JvmInline
 public value class SnowflakeId private constructor(private val value: ULong) : Comparable<SnowflakeId> {
 
@@ -14,12 +12,10 @@ public value class SnowflakeId private constructor(private val value: ULong) : C
 		private const val TIMESTAMP_SHIFT = 22
 		private const val WORKER_ID_SHIFT = 12
 
-		@CheckReturnValue
 		public fun ofULong(uLong: ULong): SnowflakeId {
 			return SnowflakeId(uLong)
 		}
 
-		@CheckReturnValue
 		public fun fromParts(timestamp: Long, workerId: UShort, sequenceNr: UShort): SnowflakeId {
 			val timestampPart: ULong = (timestamp and this.TIMESTAMP_MASK).toULong() shl this.TIMESTAMP_SHIFT
 			val workedIdPart: ULong = (workerId and this.WORKER_ID_MASK).toULong() shl this.WORKER_ID_SHIFT
@@ -30,12 +26,10 @@ public value class SnowflakeId private constructor(private val value: ULong) : C
 		}
 	}
 
-	@CheckReturnValue
 	override fun compareTo(other: SnowflakeId): Int {
 		return this.value.compareTo(other.value)
 	}
 
-	@CheckReturnValue
 	override fun toString(): String {
 		return this.value.toString()
 	}

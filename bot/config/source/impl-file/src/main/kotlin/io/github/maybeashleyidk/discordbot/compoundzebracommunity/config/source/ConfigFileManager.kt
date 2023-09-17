@@ -9,7 +9,6 @@ import okio.FileMetadata
 import okio.FileSystem
 import okio.Path.Companion.toOkioPath
 import java.time.Instant
-import javax.annotation.CheckReturnValue
 import javax.inject.Inject
 import okio.Path as OkioPath
 import java.nio.file.Path as NioPath
@@ -24,7 +23,6 @@ internal class ConfigFileManager @Suppress("ktlint:standard:annotation") @Inject
 
 	private val configFilePath: OkioPath = configFileNioPath.toOkioPath()
 
-	@CheckReturnValue
 	override fun getLastModificationInstant(): Instant {
 		val metadata: FileMetadata? = FileSystem.SYSTEM.metadataOrNull(this.configFilePath)
 		return Instant.ofEpochMilli(metadata?.lastModifiedAtMillis ?: Long.MAX_VALUE)

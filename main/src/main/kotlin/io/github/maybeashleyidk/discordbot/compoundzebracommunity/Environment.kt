@@ -1,7 +1,5 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
-import javax.annotation.CheckReturnValue
-
 sealed class EnvironmentBotToken {
 	data object UnsetOrEmpty : EnvironmentBotToken()
 
@@ -14,7 +12,6 @@ object Environment {
 
 	const val BOT_TOKEN_VARIABLE_NAME: String = "DISCORD_BOT_TOKEN"
 
-	@CheckReturnValue
 	fun extractBotToken(): EnvironmentBotToken {
 		val str: String = System.getenv(this.BOT_TOKEN_VARIABLE_NAME).orEmpty()
 

@@ -3,7 +3,6 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.indexOfFirst
-import javax.annotation.CheckReturnValue
 import javax.inject.Inject
 
 internal data class CommandLine(
@@ -40,7 +39,6 @@ internal class CommandMessageParser @Suppress("ktlint:standard:annotation") @Inj
 	private val configSupplier: ConfigSupplier,
 ) {
 
-	@CheckReturnValue
 	fun parseMessageContent(content: String): CommandMessageParseResult {
 		val config: Config = this.configSupplier.get()
 
@@ -64,7 +62,6 @@ private sealed class CommandNameParseResult {
 	data class Success(val commandName: CommandName) : CommandNameParseResult()
 }
 
-@CheckReturnValue
 private fun parseCommandLineString(string: String): CommandMessageParseResult {
 	// region command name
 
@@ -108,7 +105,6 @@ private fun parseCommandLineString(string: String): CommandMessageParseResult {
 	return CommandMessageParseResult.Success(commandLine)
 }
 
-@CheckReturnValue
 private fun parseBeginningCommandName(string: String): CommandNameParseResult {
 	val whitespaceCharIndex: Int = string.indexOfFirst(Char::isWhitespace)
 
@@ -132,7 +128,6 @@ private fun parseBeginningCommandName(string: String): CommandNameParseResult {
 /**
  * Returns the parsed argument and the new index.
  */
-@CheckReturnValue
 private fun parseNextArgument(string: String, startIndex: Int): Pair<String, Int>? {
 	var i: Int = startIndex
 

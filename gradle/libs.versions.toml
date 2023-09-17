@@ -5,7 +5,6 @@ moshi = "1.15.0"
 ktlint = "1.0.0"
 
 [libraries]
-jsr305 = "com.google.code.findbugs:jsr305:3.0.2"
 javax-inject = "javax.inject:javax.inject:1"
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
 dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }

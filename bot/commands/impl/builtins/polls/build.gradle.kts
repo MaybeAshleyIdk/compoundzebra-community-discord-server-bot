@@ -12,8 +12,6 @@ dependencies {
 	implementation(project(":bot:config:supplier:bot-config-supplier-public"))
 	implementation(project(":utils"))
 
-	implementation(libs.jsr305)
-
 	implementation(libs.jda) {
 		exclude(module = "opus-java")
 	}

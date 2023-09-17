@@ -21,6 +21,4 @@ ktlint {
 
 dependencies {
 	implementation(project(":bot"))
-
-	implementation(libs.jsr305)
 }

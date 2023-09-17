@@ -9,8 +9,6 @@ dependencies {
 	implementation(project(":bot:config:bot-config-models"))
 	implementation(project(":bot:config:cache:bot-config-cache-public"))
 
-	implementation(libs.jsr305)
-
 	implementation(libs.dagger)
 	kapt(libs.dagger.compiler)
 }

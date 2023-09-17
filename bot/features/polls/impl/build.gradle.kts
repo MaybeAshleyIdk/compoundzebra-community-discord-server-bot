@@ -11,8 +11,6 @@ dependencies {
 	implementation(project(":snowflake"))
 	implementation(project(":bot:logging:bot-logging-public"))
 
-	implementation(libs.jsr305)
-
 	implementation(libs.jda) {
 		exclude(module = "opus-java")
 	}

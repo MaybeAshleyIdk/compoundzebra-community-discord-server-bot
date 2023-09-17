@@ -11,7 +11,6 @@ import net.dv8tion.jda.api.entities.emoji.CustomEmoji
 import net.dv8tion.jda.api.interactions.DiscordLocale
 import java.text.NumberFormat
 import java.util.Locale
-import javax.annotation.CheckReturnValue
 import javax.inject.Inject
 
 internal class EmojiStatsCommand @Inject constructor(
@@ -71,7 +70,6 @@ internal class EmojiStatsCommand @Inject constructor(
 	}
 }
 
-@CheckReturnValue
 private fun DiscordLocale.toJvmLocale(): Locale {
 	return (Locale.forLanguageTag(this.locale) ?: Locale.ROOT)
 }

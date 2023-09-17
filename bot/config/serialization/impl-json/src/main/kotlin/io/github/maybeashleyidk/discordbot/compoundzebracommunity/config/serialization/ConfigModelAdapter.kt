@@ -6,12 +6,10 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Action
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.CommandDefinition
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.LanguageStrings
-import javax.annotation.CheckReturnValue
 import javax.inject.Inject
 
 internal class ConfigModelAdapter @Suppress("ktlint:standard:annotation") @Inject constructor() {
 
-	@CheckReturnValue
 	fun transformConfig(configJson: ConfigJson): Config {
 		return Config(
 			strings = configJson.strings.toLanguageStrings(),
@@ -21,7 +19,6 @@ internal class ConfigModelAdapter @Suppress("ktlint:standard:annotation") @Injec
 		)
 	}
 
-	@CheckReturnValue
 	fun transformConfig(config: Config): ConfigJson {
 		return ConfigJson(
 			strings = @Suppress("ktlint:standard:no-blank-line-in-list") LanguageStringsJson(
@@ -65,7 +62,6 @@ internal class ConfigModelAdapter @Suppress("ktlint:standard:annotation") @Injec
 	}
 }
 
-@CheckReturnValue
 private fun CommandDefinition.toCommandDetailsJson(): CommandDetailsJson {
 	return CommandDetailsJson(
 		action = when (val action: Action = this.action) {
@@ -74,7 +70,6 @@ private fun CommandDefinition.toCommandDetailsJson(): CommandDetailsJson {
 	)
 }
 
-@CheckReturnValue
 private fun LanguageStringsJson.toLanguageStrings(): LanguageStrings {
 	return LanguageStrings(
 		generic = LanguageStrings.Generic(
@@ -121,7 +116,6 @@ private fun LanguageStringsJson.toLanguageStrings(): LanguageStrings {
 	)
 }
 
-@CheckReturnValue
 private fun Map<String, CommandDetailsJson>.mapToCommandDefinitions(): Set<CommandDefinition> {
 	return this
 		.mapTo(LinkedHashSet(this.size)) { (commandNameStr: String, details: CommandDetailsJson) ->
@@ -132,7 +126,6 @@ private fun Map<String, CommandDetailsJson>.mapToCommandDefinitions(): Set<Comma
 		}
 }
 
-@CheckReturnValue
 private fun ActionJson.mapToAction(): Action {
 	return Action.Response(
 		message = this.responseMessage,

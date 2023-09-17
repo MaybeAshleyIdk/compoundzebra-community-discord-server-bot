@@ -11,8 +11,6 @@ dependencies {
 	implementation(project(":bot:features:shutdown:bot-features-shutdown-public"))
 	implementation(project(":bot:config:supplier:bot-config-supplier-public"))
 
-	implementation(libs.jsr305)
-
 	implementation(libs.jda) {
 		exclude(module = "opus-java")
 	}

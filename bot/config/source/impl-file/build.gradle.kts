@@ -9,8 +9,6 @@ dependencies {
 	implementation(project(":bot:config:bot-config-models"))
 	implementation(project(":bot:config:serialization:bot-config-serialization-public"))
 
-	implementation(libs.jsr305)
-
 	implementation(libs.dagger)
 	kapt(libs.dagger.compiler)
 

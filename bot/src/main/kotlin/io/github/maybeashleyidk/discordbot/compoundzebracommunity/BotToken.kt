@@ -1,7 +1,5 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
-import javax.annotation.CheckReturnValue
-
 @JvmInline
 public value class BotToken private constructor(public val string: String) {
 
@@ -9,7 +7,6 @@ public value class BotToken private constructor(public val string: String) {
 
 		public const val TOKEN_STRING_LENGTH: Int = 72
 
-		@CheckReturnValue
 		public fun ofString(tokenString: String): BotToken {
 			require(tokenString.length == this.TOKEN_STRING_LENGTH) {
 				"Bot token string must be exactly ${this.TOKEN_STRING_LENGTH} characters long"
@@ -26,7 +23,6 @@ public value class BotToken private constructor(public val string: String) {
 		}
 	}
 
-	@CheckReturnValue
 	override fun toString(): String {
 		return buildString(this.string.length) {
 			this@buildString.append("*".repeat(this@BotToken.string.length - 8))

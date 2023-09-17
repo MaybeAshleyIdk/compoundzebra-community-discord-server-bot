@@ -15,8 +15,6 @@ dependencies {
 	implementation(project(":bot:logging:bot-logging-wiring"))
 	implementation(project(":utils"))
 
-	implementation(libs.jsr305)
-
 	implementation(libs.jda) {
 		exclude(module = "opus-java")
 	}

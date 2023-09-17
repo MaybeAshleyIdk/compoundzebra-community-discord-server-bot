@@ -7,8 +7,6 @@ dependencies {
 	implementation(project(":bot:config:bot-config-models"))
 	implementation(project(":snowflake"))
 
-	implementation(libs.jsr305)
-
 	implementation(libs.jda) {
 		exclude(module = "opus-java")
 	}

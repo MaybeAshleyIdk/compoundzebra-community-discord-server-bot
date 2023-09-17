@@ -11,8 +11,6 @@ dependencies {
 	api(project(":bot:commands:impl:builtins:bot-commands-impl-builtins-polls"))
 	api(project(":bot:commands:impl:builtins:bot-commands-impl-builtins-shutdown"))
 
-	implementation(libs.jsr305)
-
 	implementation(libs.dagger)
 	kapt(libs.dagger.compiler)
 }

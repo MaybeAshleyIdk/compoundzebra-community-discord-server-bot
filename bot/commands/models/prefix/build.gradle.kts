@@ -5,6 +5,4 @@ plugins {
 
 dependencies {
 	implementation(project(":utils"))
-
-	implementation(libs.jsr305)
 }

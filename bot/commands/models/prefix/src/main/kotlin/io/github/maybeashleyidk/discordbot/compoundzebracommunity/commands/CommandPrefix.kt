@@ -1,7 +1,6 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.quoted
-import javax.annotation.CheckReturnValue
 
 @JvmInline
 public value class CommandPrefix private constructor(public val string: String) {
@@ -10,7 +9,6 @@ public value class CommandPrefix private constructor(public val string: String) 
 
 		private const val VALID_PREFIX_CHARS: String = "!#%&()+,-.:;=>?[]^{|}~"
 
-		@CheckReturnValue
 		private fun isValidCommandPrefixChar(ch: Char): Boolean {
 			return this.VALID_PREFIX_CHARS
 				.any { validPrefixChar: Char ->
@@ -18,12 +16,10 @@ public value class CommandPrefix private constructor(public val string: String) 
 				}
 		}
 
-		@CheckReturnValue
 		public fun isValidCommandPrefix(prefixString: String): Boolean {
 			return prefixString.isNotEmpty() && prefixString.all(this::isValidCommandPrefixChar)
 		}
 
-		@CheckReturnValue
 		public fun ofString(prefixString: String): CommandPrefix {
 			require(this.isValidCommandPrefix(prefixString)) {
 				"Invalid prefix string ${prefixString.quoted()}"
@@ -39,7 +35,6 @@ public value class CommandPrefix private constructor(public val string: String) 
 		}
 	}
 
-	@CheckReturnValue
 	override fun toString(): String {
 		return this.string
 	}

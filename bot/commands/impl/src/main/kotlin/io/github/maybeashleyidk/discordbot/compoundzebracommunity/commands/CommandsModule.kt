@@ -12,7 +12,6 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Command
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
 import net.dv8tion.jda.api.hooks.EventListener
-import javax.annotation.CheckReturnValue
 
 @Module(
 	includes = [
@@ -46,7 +45,6 @@ public object CommandsModule {
 	}
 }
 
-@CheckReturnValue
 private fun EchoCommand.Factory.buildFromCommandDefinition(commandDefinition: CommandDefinition): EchoCommand {
 	return this
 		.build(

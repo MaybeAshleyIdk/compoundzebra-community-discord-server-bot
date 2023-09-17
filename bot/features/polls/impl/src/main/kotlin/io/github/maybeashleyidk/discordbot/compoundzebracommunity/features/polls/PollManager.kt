@@ -3,7 +3,6 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.poll
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Member
-import javax.annotation.CheckReturnValue
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -67,7 +66,6 @@ public class PollManager @Suppress("ktlint:standard:annotation") @Inject interna
 		return newDetails
 	}
 
-	@CheckReturnValue
 	override fun getPollById(pollId: PollId): PollDetails? {
 		return this.activePolls[pollId]
 	}
@@ -101,7 +99,6 @@ public class PollManager @Suppress("ktlint:standard:annotation") @Inject interna
 	}
 }
 
-@CheckReturnValue
 private fun PollDetails.isAllowedToBeClosedBy(member: Member): Boolean {
 	return (member.idLong == this.authorId) || member.isOwner || member.hasPermission(Permission.ADMINISTRATOR)
 }
