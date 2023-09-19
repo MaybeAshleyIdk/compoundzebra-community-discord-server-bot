@@ -30,6 +30,9 @@ internal class ConfigModelAdapter @Suppress("ktlint:standard:annotation") @Injec
 				pollClosedMessage = config.strings.poll.closedMessageFormat,
 				pollActionClose = config.strings.poll.action.close,
 
+				commandCoinHeads = config.strings.command.coinFlip.heads,
+				commandCoinTails = config.strings.command.coinFlip.tails,
+
 				commandPollMissingDescription = config.strings.command.poll.missingDescription,
 				commandPollLessThan2Options = config.strings.command.poll.lessThan2Options,
 
@@ -85,6 +88,10 @@ private fun LanguageStringsJson.toLanguageStrings(): LanguageStrings {
 			),
 		),
 		command = LanguageStrings.Command(
+			coinFlip = LanguageStrings.Command.CoinFlip(
+				heads = this.commandCoinHeads,
+				tails = this.commandCoinTails,
+			),
 			poll = LanguageStrings.Command.Poll(
 				missingDescription = this.commandPollMissingDescription,
 				lessThan2Options = this.commandPollLessThan2Options,

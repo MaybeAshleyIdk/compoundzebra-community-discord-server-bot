@@ -18,6 +18,10 @@ internal val FALLBACK_CONFIG: Config =
 				),
 			),
 			command = LanguageStrings.Command(
+				coinFlip = LanguageStrings.Command.CoinFlip(
+					heads = "heads",
+					tails = "tails",
+				),
 				poll = LanguageStrings.Command.Poll(
 					missingDescription = "You must provide a description",
 					lessThan2Options = "You must provide at least 2 options",

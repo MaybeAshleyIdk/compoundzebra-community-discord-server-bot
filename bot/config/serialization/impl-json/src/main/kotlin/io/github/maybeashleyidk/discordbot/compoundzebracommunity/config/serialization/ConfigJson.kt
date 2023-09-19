@@ -23,6 +23,9 @@ constructor(
 	@Json(name = "poll.closedMessage") val pollClosedMessage: String,
 	@Json(name = "poll.action.close") val pollActionClose: String,
 
+	@Json(name = "command.coin.heads") val commandCoinHeads: String,
+	@Json(name = "command.coin.tails") val commandCoinTails: String,
+
 	@Json(name = "command.poll.missingDescription") val commandPollMissingDescription: String,
 	@Json(name = "command.poll.lessThan2Options") val commandPollLessThan2Options: String,
 

@@ -58,6 +58,7 @@ public data class LanguageStrings(
 	}
 
 	public data class Command(
+		val coinFlip: CoinFlip,
 		val poll: Poll,
 		val queryPoll: QueryPoll,
 		val magic8Ball: Magic8Ball,
@@ -65,6 +66,11 @@ public data class LanguageStrings(
 		val getConfig: GetConfig,
 		val shutdown: Shutdown,
 	) {
+
+		public data class CoinFlip(
+			val heads: String,
+			val tails: String,
+		)
 
 		public data class Poll(
 			val missingDescription: String,

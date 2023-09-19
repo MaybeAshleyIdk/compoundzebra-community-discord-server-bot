@@ -5,6 +5,7 @@ plugins {
 }
 
 dependencies {
+	api(project(":bot:commands:impl:builtins:bot-commands-impl-builtins-coinflip"))
 	api(project(":bot:commands:impl:builtins:bot-commands-impl-builtins-config"))
 	api(project(":bot:commands:impl:builtins:bot-commands-impl-builtins-emojistats"))
 	api(project(":bot:commands:impl:builtins:bot-commands-impl-builtins-magic8ball"))
