@@ -11,7 +11,7 @@ dependencies {
 	implementation(project(":bot:config:cache:bot-config-cache-impl-memory"))
 	implementation(project(":bot:config:source:bot-config-source-impl-file"))
 	implementation(project(":bot:config:serialization:bot-config-serialization-impl-json"))
-	implementation(project(":snowflake"))
+	implementation(project(":bot:bot-snowflake"))
 	implementation(project(":bot:logging:bot-logging-wiring"))
 	implementation(project(":utils"))
 
