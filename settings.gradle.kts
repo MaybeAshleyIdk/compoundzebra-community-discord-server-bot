@@ -29,15 +29,21 @@ include(
 
 	":bot:config:serialization:public",
 	":bot:config:serialization:impl-json",
+	":bot:config:serialization:wiring",
 
 	":bot:config:source:public",
 	":bot:config:source:impl-file",
+	":bot:config:source:wiring",
 
 	":bot:config:cache:public",
 	":bot:config:cache:impl-memory",
+	":bot:config:cache:wiring",
 
 	":bot:config:supplier:public",
 	":bot:config:supplier:impl-cache",
+	":bot:config:supplier:wiring",
+
+	":bot:config:wiring",
 	// endregion
 
 	// region features

@@ -1,7 +1,6 @@
 plugins {
 	`java-library`
 	kotlin("jvm")
-	alias(libs.plugins.ksp)
 }
 
 dependencies {
@@ -10,6 +9,5 @@ dependencies {
 	implementation(project(":bot:config:source:bot-config-source-public"))
 	implementation(project(":bot:logging:bot-logging-public"))
 
-	implementation(libs.dagger)
-	ksp(libs.dagger.compiler)
+	implementation(libs.javax.inject)
 }

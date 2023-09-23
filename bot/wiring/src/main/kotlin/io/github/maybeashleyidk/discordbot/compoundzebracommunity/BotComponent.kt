@@ -4,6 +4,7 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.Lazy
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.FeaturesModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.ShutdownManager
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger

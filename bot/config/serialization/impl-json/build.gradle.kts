@@ -15,6 +15,5 @@ dependencies {
 	implementation(libs.moshi)
 	ksp(libs.moshi.kotlin.codegen)
 
-	implementation(libs.dagger)
-	ksp(libs.dagger.compiler)
+	implementation(libs.javax.inject)
 }
