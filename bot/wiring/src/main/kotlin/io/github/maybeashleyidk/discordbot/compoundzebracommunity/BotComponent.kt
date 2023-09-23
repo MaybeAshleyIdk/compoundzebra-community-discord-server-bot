@@ -39,7 +39,7 @@ public interface BotComponent {
 	public fun interface Factory {
 
 		public fun build(
-			@BindsInstance @BotTokenString token: String, // Kapt+Dagger does not support value classes
+			@BindsInstance @BotTokenString token: String, // KSP+Dagger does not support value classes
 			@BindsInstance initialActivity: Activity,
 			@BindsInstance configFilePath: Path,
 		): BotComponent
