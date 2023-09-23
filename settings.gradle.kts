@@ -71,6 +71,10 @@ include(
 	":bot:commands:impl",
 	// endregion
 
+	":bot:scheduledmessages:public",
+	":bot:scheduledmessages:impl",
+	":bot:scheduledmessages:wiring",
+
 	":bot",
 
 	":main",

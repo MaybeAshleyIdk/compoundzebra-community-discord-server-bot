@@ -9,6 +9,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.Featu
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.ShutdownManager
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.LoggingModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.scheduledmessages.ScheduledMessagesManager
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.scheduledmessages.ScheduledMessagesModule
 import net.dv8tion.jda.api.entities.Activity
 import java.nio.file.Path
 import javax.inject.Singleton
@@ -21,6 +23,7 @@ import net.dv8tion.jda.api.JDA as Jda
 		ConfigModule::class,
 		FeaturesModule::class,
 		CommandsModule::class,
+		ScheduledMessagesModule::class,
 	],
 )
 @Singleton
@@ -34,6 +37,8 @@ internal interface BotComponent {
 	val logger: Logger
 
 	val shutdownManager: ShutdownManager
+
+	val scheduledMessagesManager: ScheduledMessagesManager
 
 	@Component.Factory
 	@FunctionalInterface

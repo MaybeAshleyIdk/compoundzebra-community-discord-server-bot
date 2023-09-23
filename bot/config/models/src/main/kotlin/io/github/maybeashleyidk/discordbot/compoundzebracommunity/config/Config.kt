@@ -2,12 +2,14 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandName
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandPrefix
+import java.time.LocalTime
 
 public data class Config(
 	val strings: LanguageStrings,
 	val botAdminUserIds: Set<String>,
 	val commandPrefix: CommandPrefix,
 	val commandDefinitions: Set<CommandDefinition>,
+	val scheduledMessages: Map<String, Set<ScheduledMessage>>,
 )
 
 public data class LanguageStrings(
@@ -144,6 +146,12 @@ public data class LanguageStrings(
 public data class CommandDefinition(
 	val commandName: CommandName,
 	val action: Action,
+)
+
+public data class ScheduledMessage(
+	val utcTime: LocalTime,
+	val channelSnowflakeId: String,
+	val messageContent: String,
 )
 
 public sealed class Action {

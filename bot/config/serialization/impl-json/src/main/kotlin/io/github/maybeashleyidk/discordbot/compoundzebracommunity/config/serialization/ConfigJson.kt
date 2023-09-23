@@ -9,6 +9,7 @@ internal data class ConfigJson(
 	@Json(name = "botAdminUserIds") val botAdminUserIds: Set<String>?,
 	@Json(name = "commandPrefix") val commandPrefix: String,
 	@Json(name = "commands") val commands: Map<String, CommandDetailsJson>?,
+	@Json(name = "scheduledMessages") val scheduledMessages: Map<String, List<ScheduledMessage>>?,
 )
 
 @JsonClass(generateAdapter = true)
@@ -73,4 +74,11 @@ internal data class CommandDetailsJson(
 @JsonClass(generateAdapter = true)
 internal data class ActionJson(
 	@Json(name = "response") val responseMessage: String,
+)
+
+@JsonClass(generateAdapter = true)
+internal data class ScheduledMessage(
+	@Json(name = "time") val utcTime: String,
+	@Json(name = "channelId") val channelSnowflakeId: String,
+	@Json(name = "message") val messageContent: String,
 )

@@ -13,6 +13,7 @@ dependencies {
 	implementation(project(":bot:config:serialization:bot-config-serialization-impl-json"))
 	implementation(project(":bot:bot-snowflake"))
 	implementation(project(":bot:logging:bot-logging-wiring"))
+	implementation(project(":bot:scheduledmessages:bot-scheduledmessages-wiring"))
 	implementation(project(":utils"))
 
 	implementation(libs.jda) {

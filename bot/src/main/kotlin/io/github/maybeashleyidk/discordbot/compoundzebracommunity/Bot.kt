@@ -5,6 +5,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.di.DaggerBotCo
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.di.build
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.di.token
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.scheduledmessages.ScheduledMessagesManager
 import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.entities.Activity
 import java.nio.file.Path
@@ -26,15 +27,26 @@ public object Bot {
 		botComponent.logToken()
 
 		botComponent.logger.logInfo("Waiting until the bot is connected...")
-		botComponent.lazyJda.get().awaitReady()
+		val jda: Jda = botComponent.lazyJda.get()
+		jda.awaitReady()
 		botComponent.logger.logInfo("Bot connected!")
 
+		botComponent.scheduledMessagesManager.start(jda)
+
 		botComponent.shutdownManager.waitForShutdownRequest()
-		this.shutdownGracefully(botComponent.lazyJda.get(), botComponent.logger)
+		this
+			.shutdownGracefully(
+				botComponent.scheduledMessagesManager,
+				jda,
+				botComponent.logger,
+			)
 	}
 
-	private fun shutdownGracefully(jda: Jda, logger: Logger) {
+	private fun shutdownGracefully(scheduledMessagesManager: ScheduledMessagesManager, jda: Jda, logger: Logger) {
 		logger.logInfo("Shutting down...")
+
+		scheduledMessagesManager.stop()
+
 		jda.presence.setPresence(OnlineStatus.OFFLINE, null, false)
 		jda.shutdown()
 

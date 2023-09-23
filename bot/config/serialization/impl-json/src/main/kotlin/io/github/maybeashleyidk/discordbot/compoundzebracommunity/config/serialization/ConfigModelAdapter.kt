@@ -6,7 +6,9 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Action
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.CommandDefinition
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.LanguageStrings
+import java.time.LocalTime
 import javax.inject.Inject
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ScheduledMessage as LocalScheduledMessage
 
 internal class ConfigModelAdapter @Suppress("ktlint:standard:annotation") @Inject constructor() {
 
@@ -16,6 +18,7 @@ internal class ConfigModelAdapter @Suppress("ktlint:standard:annotation") @Injec
 			botAdminUserIds = configJson.botAdminUserIds.orEmpty(),
 			commandPrefix = CommandPrefix.ofString(configJson.commandPrefix),
 			commandDefinitions = configJson.commands.orEmpty().mapToCommandDefinitions(),
+			scheduledMessages = configJson.scheduledMessages.orEmpty().mapToLocalScheduledMessages(),
 		)
 	}
 
@@ -76,6 +79,15 @@ internal class ConfigModelAdapter @Suppress("ktlint:standard:annotation") @Injec
 			commands = config.commandDefinitions
 				.associate { commandDefinition: CommandDefinition ->
 					commandDefinition.commandName.string to commandDefinition.toCommandDetailsJson()
+				}
+				.ifEmpty { null },
+			scheduledMessages = config.scheduledMessages
+				.mapValues { (_: String, localScheduledMessages: Set<LocalScheduledMessage>) ->
+					localScheduledMessages
+						.mapTo(
+							ArrayList(localScheduledMessages.size),
+							LocalScheduledMessage::toScheduledMessage,
+						)
 				}
 				.ifEmpty { null },
 		)
@@ -166,6 +178,33 @@ private fun Map<String, CommandDetailsJson>.mapToCommandDefinitions(): Set<Comma
 				action = details.action.mapToAction(),
 			)
 		}
+}
+
+private fun Map<String, List<ScheduledMessage>>.mapToLocalScheduledMessages(): Map<String, Set<LocalScheduledMessage>> {
+	return this
+		.mapValues { (_: String, scheduledMessages: List<ScheduledMessage>) ->
+			scheduledMessages
+				.mapTo(
+					LinkedHashSet(scheduledMessages.size),
+					ScheduledMessage::toLocalScheduledMessage,
+				)
+		}
+}
+
+private fun ScheduledMessage.toLocalScheduledMessage(): LocalScheduledMessage {
+	return LocalScheduledMessage(
+		utcTime = LocalTime.parse(this.utcTime),
+		channelSnowflakeId = this.channelSnowflakeId,
+		messageContent = this.messageContent,
+	)
+}
+
+private fun LocalScheduledMessage.toScheduledMessage(): ScheduledMessage {
+	return ScheduledMessage(
+		utcTime = this.utcTime.toString(),
+		channelSnowflakeId = this.channelSnowflakeId,
+		messageContent = this.messageContent,
+	)
 }
 
 private fun ActionJson.mapToAction(): Action {
