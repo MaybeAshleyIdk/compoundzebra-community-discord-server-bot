@@ -73,6 +73,7 @@ include(
 
 	":bot:models",
 	":bot:wiring",
+	":bot:main",
 	":bot",
 
 	":main",
