@@ -93,4 +93,5 @@ internal val FALLBACK_CONFIG: Config =
 		botAdminUserIds = emptySet(),
 		commandPrefix = CommandPrefix.ofString("!"),
 		commandDefinitions = emptySet(),
+		conditionalMessages = emptySet(),
 	)

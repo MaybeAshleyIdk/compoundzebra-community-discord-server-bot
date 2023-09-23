@@ -8,6 +8,7 @@ public data class Config(
 	val botAdminUserIds: Set<String>,
 	val commandPrefix: CommandPrefix,
 	val commandDefinitions: Set<CommandDefinition>,
+	val conditionalMessages: Set<ConditionalMessage>,
 )
 
 public data class LanguageStrings(
@@ -145,6 +146,15 @@ public data class CommandDefinition(
 	val commandName: CommandName,
 	val action: Action,
 )
+
+public data class ConditionalMessage(
+	val condition: Condition,
+	val messageContent: String,
+) {
+	public data class Condition(
+		val regex: Regex,
+	)
+}
 
 public sealed class Action {
 	public data class Response(val message: String) : Action()

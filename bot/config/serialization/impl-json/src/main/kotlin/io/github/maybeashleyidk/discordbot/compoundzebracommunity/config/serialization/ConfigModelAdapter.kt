@@ -4,6 +4,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.Comma
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandPrefix
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Action
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.CommandDefinition
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConditionalMessage
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.LanguageStrings
 import javax.inject.Inject
@@ -16,6 +17,7 @@ internal class ConfigModelAdapter @Suppress("ktlint:standard:annotation") @Injec
 			botAdminUserIds = configJson.botAdminUserIds.orEmpty(),
 			commandPrefix = CommandPrefix.ofString(configJson.commandPrefix),
 			commandDefinitions = configJson.commands.orEmpty().mapToCommandDefinitions(),
+			conditionalMessages = configJson.conditionalMessages.orEmpty().mapToConditionalMessages(),
 		)
 	}
 
@@ -78,6 +80,7 @@ internal class ConfigModelAdapter @Suppress("ktlint:standard:annotation") @Injec
 					commandDefinition.commandName.string to commandDefinition.toCommandDetailsJson()
 				}
 				.ifEmpty { null },
+			conditionalMessages = config.conditionalMessages.mapToConditionalMessagesJson().ifEmpty { null },
 		)
 	}
 }
@@ -164,6 +167,28 @@ private fun Map<String, CommandDetailsJson>.mapToCommandDefinitions(): Set<Comma
 			CommandDefinition(
 				commandName = CommandName.ofString(commandNameStr),
 				action = details.action.mapToAction(),
+			)
+		}
+}
+
+private fun Set<ConditionalMessageJson>.mapToConditionalMessages(): Set<ConditionalMessage> {
+	return this
+		.mapTo(LinkedHashSet(this.size)) { conditionalMessageJson: ConditionalMessageJson ->
+			ConditionalMessage(
+				condition = ConditionalMessage.Condition(
+					regex = Regex(conditionalMessageJson.regexPattern),
+				),
+				messageContent = conditionalMessageJson.messageContent,
+			)
+		}
+}
+
+private fun Set<ConditionalMessage>.mapToConditionalMessagesJson(): Set<ConditionalMessageJson> {
+	return this
+		.mapTo(LinkedHashSet(this.size)) { conditionalMessage: ConditionalMessage ->
+			ConditionalMessageJson(
+				regexPattern = conditionalMessage.condition.regex.pattern,
+				messageContent = conditionalMessage.messageContent,
 			)
 		}
 }

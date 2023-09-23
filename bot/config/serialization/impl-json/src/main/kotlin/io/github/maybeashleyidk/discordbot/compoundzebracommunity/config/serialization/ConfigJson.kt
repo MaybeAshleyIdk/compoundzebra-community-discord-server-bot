@@ -9,6 +9,7 @@ internal data class ConfigJson(
 	@Json(name = "botAdminUserIds") val botAdminUserIds: Set<String>?,
 	@Json(name = "commandPrefix") val commandPrefix: String,
 	@Json(name = "commands") val commands: Map<String, CommandDetailsJson>?,
+	@Json(name = "conditionalMessages") val conditionalMessages: Set<ConditionalMessageJson>?,
 )
 
 @JsonClass(generateAdapter = true)
@@ -68,6 +69,12 @@ constructor(
 @JsonClass(generateAdapter = true)
 internal data class CommandDetailsJson(
 	@Json(name = "action") val action: ActionJson,
+)
+
+@JsonClass(generateAdapter = true)
+internal data class ConditionalMessageJson(
+	@Json(name = "regex") val regexPattern: String,
+	@Json(name = "message") val messageContent: String,
 )
 
 @JsonClass(generateAdapter = true)
