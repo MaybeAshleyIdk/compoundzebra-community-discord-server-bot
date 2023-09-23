@@ -4,6 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoSet
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.Command
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.builtins.rng.DieRollingCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.builtins.rng.RngCommand
 
 @Module(includes = [RngCommandsModule.Bindings::class])
@@ -15,5 +16,9 @@ public class RngCommandsModule {
 		@Binds
 		@IntoSet
 		fun bindRngCommand(rngCommand: RngCommand): Command
+
+		@Binds
+		@IntoSet
+		fun bindDieRollingCommand(dieRollingCommand: DieRollingCommand): Command
 	}
 }
