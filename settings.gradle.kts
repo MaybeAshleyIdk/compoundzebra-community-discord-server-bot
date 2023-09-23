@@ -71,6 +71,9 @@ include(
 	":bot:commands:impl",
 	// endregion
 
+	":bot:models",
+	":bot:wiring",
+	":bot:main",
 	":bot",
 
 	":main",

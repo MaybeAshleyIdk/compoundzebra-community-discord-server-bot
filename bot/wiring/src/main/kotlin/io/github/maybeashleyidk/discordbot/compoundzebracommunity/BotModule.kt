@@ -1,4 +1,4 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.di
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -12,11 +12,7 @@ import javax.inject.Singleton
 import net.dv8tion.jda.api.JDA as Jda
 import net.dv8tion.jda.api.JDABuilder as JdaBuilder
 
-@Module(
-	includes = [
-		BotModule.Bindings::class,
-	],
-)
+@Module(includes = [BotModule.Bindings::class])
 internal object BotModule {
 
 	@Module

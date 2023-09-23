@@ -12,7 +12,7 @@ The token must be supplied in the environment variable `DISCORD_BOT_TOKEN`.
 Module IDs formatted in **bold** are "real" modules, while non-bold ones are *just* groups/folders for other submodules
 and don't actually contain any source code themselves.
 
-* **`:bot`**
+* `:bot`
   * `:bot:config`
     * **`:bot:config:models`**
     * `:bot:config:serialization`
@@ -27,5 +27,9 @@ and don't actually contain any source code themselves.
     * `:bot:config:supplier`
       * **`:bot:config:supplier:public`**
       * **`:bot:config:supplier:impl-cache`**
+  * **`:bot:models`**
+  * **`:bot:wiring`**
+  * **`:bot:main`**
+* **`:main`**
 
 TODO: unfinished

@@ -1,9 +1,8 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.di
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Lazy
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.BotToken
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.FeaturesModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.ShutdownManager
@@ -24,22 +23,22 @@ import net.dv8tion.jda.api.JDA as Jda
 	],
 )
 @Singleton
-internal interface BotComponent {
+public interface BotComponent {
 
 	@get:BotTokenString
-	val tokenString: String
+	public val tokenString: String
 
-	val lazyJda: Lazy<Jda>
+	public val lazyJda: Lazy<Jda>
 
-	val logger: Logger
+	public val logger: Logger
 
-	val shutdownManager: ShutdownManager
+	public val shutdownManager: ShutdownManager
 
 	@Component.Factory
 	@FunctionalInterface
-	fun interface Factory {
+	public fun interface Factory {
 
-		fun build(
+		public fun build(
 			@BindsInstance @BotTokenString token: String, // Kapt+Dagger does not support value classes
 			@BindsInstance initialActivity: Activity,
 			@BindsInstance configFilePath: Path,
@@ -47,16 +46,12 @@ internal interface BotComponent {
 	}
 }
 
-internal val BotComponent.token: BotToken
+public val BotComponent.token: BotToken
 	get() {
 		return BotToken.ofString(this.tokenString)
 	}
 
-internal fun BotComponent.Factory.build(
-	token: BotToken,
-	initialActivity: Activity,
-	configFilePath: Path,
-): BotComponent {
+public fun BotComponent.Factory.build(token: BotToken, initialActivity: Activity, configFilePath: Path): BotComponent {
 	return this.build(
 		token = token.string,
 		initialActivity = initialActivity,

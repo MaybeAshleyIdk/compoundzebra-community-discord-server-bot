@@ -1,9 +1,5 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.di.BotComponent
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.di.DaggerBotComponent
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.di.build
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.di.token
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.entities.Activity
