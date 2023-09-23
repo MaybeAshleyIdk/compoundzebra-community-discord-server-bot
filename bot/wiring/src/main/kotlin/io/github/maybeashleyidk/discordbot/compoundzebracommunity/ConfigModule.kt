@@ -1,4 +1,4 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.di
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
 import dagger.Module
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.cache.di.ConfigCacheModule
@@ -14,4 +14,4 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplie
 		ConfigSerializationModule::class,
 	],
 )
-public object ConfigModule
+internal object ConfigModule

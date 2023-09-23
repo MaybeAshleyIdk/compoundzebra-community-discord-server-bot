@@ -72,6 +72,7 @@ include(
 	// endregion
 
 	":bot:models",
+	":bot:wiring",
 	":bot",
 
 	":main",
