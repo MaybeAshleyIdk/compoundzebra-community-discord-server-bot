@@ -6,6 +6,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.built
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.builtins.emojistats.di.EmojiStatsCommandsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.builtins.magic8ball.di.Magic8BallCommandsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.builtins.polls.di.PollCommandsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.builtins.rng.di.RngCommandsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.builtins.shutdown.di.ShutdownCommandsModule
 
 @Module(
@@ -15,6 +16,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.built
 		EmojiStatsCommandsModule::class,
 		Magic8BallCommandsModule::class,
 		PollCommandsModule::class,
+		RngCommandsModule::class,
 		ShutdownCommandsModule::class,
 	],
 )

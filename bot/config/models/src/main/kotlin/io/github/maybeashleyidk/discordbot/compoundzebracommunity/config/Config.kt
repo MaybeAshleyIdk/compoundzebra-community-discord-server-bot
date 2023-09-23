@@ -64,6 +64,7 @@ public data class LanguageStrings(
 		val magic8Ball: Magic8Ball,
 		val emojiStats: EmojiStats,
 		val getConfig: GetConfig,
+		val rng: Rng,
 		val shutdown: Shutdown,
 	) {
 
@@ -108,6 +109,30 @@ public data class LanguageStrings(
 		public data class GetConfig(
 			val insufficientPermissions: String,
 		)
+
+		public data class Rng(
+			val missingMinAndMaxArguments: String,
+			val missingMaxArgument: String,
+			val excessArguments: String,
+			val minStringTooLong: String,
+			val minInvalidNumber: String,
+			val minTooSmall: String,
+			val minTooBig: String,
+			val minIsDecimal: String,
+			val maxStringTooLong: String,
+			val maxInvalidNumber: String,
+			val maxTooSmall: String,
+			val maxTooBig: String,
+			val maxIsDecimal: String,
+			val minAndMaxAreEqual: String,
+			val minGreaterThanMax: String,
+			val responseFormat: String,
+		) {
+
+			public fun response(numberFormatted: String): String {
+				return this.responseFormat.format(numberFormatted)
+			}
+		}
 
 		public data class Shutdown(
 			val response: String,

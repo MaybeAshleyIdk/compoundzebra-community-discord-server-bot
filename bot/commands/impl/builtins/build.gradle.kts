@@ -10,6 +10,7 @@ dependencies {
 	api(project(":bot:commands:impl:builtins:bot-commands-impl-builtins-emojistats"))
 	api(project(":bot:commands:impl:builtins:bot-commands-impl-builtins-magic8ball"))
 	api(project(":bot:commands:impl:builtins:bot-commands-impl-builtins-polls"))
+	api(project(":bot:commands:impl:builtins:bot-commands-impl-builtins-rng"))
 	api(project(":bot:commands:impl:builtins:bot-commands-impl-builtins-shutdown"))
 
 	implementation(libs.dagger)

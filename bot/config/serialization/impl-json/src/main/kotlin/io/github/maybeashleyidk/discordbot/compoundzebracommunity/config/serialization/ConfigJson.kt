@@ -44,6 +44,23 @@ constructor(
 
 	@Json(name = "command.getconfig.insufficientPermissions") val commandGetconfigInsufficientPermissions: String,
 
+	@Json(name = "command.rng.missingMinAndMaxArguments") val commandRngMissingMinAndMaxArguments: String,
+	@Json(name = "command.rng.missingMaxArgument") val commandRngMissingMaxArgument: String,
+	@Json(name = "command.rng.excessArguments") val commandRngExcessArguments: String,
+	@Json(name = "command.rng.minStringTooLong") val commandRngMinStringTooLong: String,
+	@Json(name = "command.rng.minInvalidNumber") val commandRngMinInvalidNumber: String,
+	@Json(name = "command.rng.minTooSmall") val commandRngMinTooSmall: String,
+	@Json(name = "command.rng.minTooBig") val commandRngMinTooBig: String,
+	@Json(name = "command.rng.minIsDecimal") val commandRngMinIsDecimal: String,
+	@Json(name = "command.rng.maxStringTooLong") val commandRngMaxStringTooLong: String,
+	@Json(name = "command.rng.maxInvalidNumber") val commandRngMaxInvalidNumber: String,
+	@Json(name = "command.rng.maxTooSmall") val commandRngMaxTooSmall: String,
+	@Json(name = "command.rng.maxTooBig") val commandRngMaxTooBig: String,
+	@Json(name = "command.rng.maxIsDecimal") val commandRngMaxIsDecimal: String,
+	@Json(name = "command.rng.minAndMaxAreEqual") val commandRngMinAndMaxAreEqual: String,
+	@Json(name = "command.rng.minGreaterThanMax") val commandRngMinGreaterThanMax: String,
+	@Json(name = "command.rng.response") val commandRngResponse: String,
+
 	@Json(name = "command.shutdown.response") val commandShutdownResponse: String,
 	@Json(name = "command.shutdown.insufficientPermissions") val commandShutdownInsufficientPermissions: String,
 )
