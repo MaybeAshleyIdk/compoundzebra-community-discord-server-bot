@@ -16,7 +16,7 @@ import java.nio.file.Path as NioPath
 /**
  * The functions of this class are not inherently thread-safe.
  */
-internal class ConfigFileManager @Suppress("ktlint:standard:annotation") @Inject constructor(
+public class ConfigFileManager @Suppress("ktlint:standard:annotation") @Inject internal constructor(
 	private val configSerializer: ConfigSerializer,
 	configFileNioPath: NioPath, // FIXME: this should have a qualifier, put in which module should be put it?
 ) : ConfigSource {

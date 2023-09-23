@@ -12,7 +12,7 @@ dependencies {
 	implementation(project(":bot:config:bot-config-models"))
 	implementation(project(":bot:config:supplier:bot-config-supplier-public"))
 	implementation(project(":bot:logging:bot-logging-public"))
-	implementation(project(":utils"))
+	implementation(project(":bot:bot-utils"))
 
 	implementation(libs.jda) {
 		exclude(module = "opus-java")

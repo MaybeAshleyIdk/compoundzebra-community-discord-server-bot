@@ -7,10 +7,8 @@ import java.time.Instant
 import java.util.concurrent.locks.ReadWriteLock
 import java.util.concurrent.locks.ReentrantReadWriteLock
 import javax.inject.Inject
-import javax.inject.Singleton
 import kotlin.concurrent.withLock
 
-@Singleton
 public class MemoryConfigCache @Suppress("ktlint:standard:annotation") @Inject internal constructor(
 	private val configSource: ConfigSource,
 	private val logger: Logger,

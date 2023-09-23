@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":utils"))
+	implementation(project(":bot:bot-utils"))
 }

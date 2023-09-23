@@ -4,6 +4,7 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.Lazy
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.FeaturesModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.ShutdownManager
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
@@ -39,7 +40,7 @@ public interface BotComponent {
 	public fun interface Factory {
 
 		public fun build(
-			@BindsInstance @BotTokenString token: String, // Kapt+Dagger does not support value classes
+			@BindsInstance @BotTokenString token: String, // KSP+Dagger does not support value classes
 			@BindsInstance initialActivity: Activity,
 			@BindsInstance configFilePath: Path,
 		): BotComponent
