@@ -77,6 +77,8 @@ include(
 	":bot:commands:impl",
 	// endregion
 
+	":bot:conditionalmessages",
+
 	":bot:models",
 	":bot:wiring",
 	":bot:main",
