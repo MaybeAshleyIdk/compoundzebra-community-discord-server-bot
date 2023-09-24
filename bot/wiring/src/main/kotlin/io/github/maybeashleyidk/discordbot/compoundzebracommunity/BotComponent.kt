@@ -42,6 +42,7 @@ public interface BotComponent {
 	public fun interface Factory {
 
 		public fun build(
+			@BindsInstance environmentType: BotEnvironmentType,
 			@BindsInstance @BotTokenString token: String, // KSP+Dagger does not support value classes
 			@BindsInstance initialActivity: Activity,
 			@BindsInstance configFilePath: Path,
@@ -54,8 +55,14 @@ public val BotComponent.token: BotToken
 		return BotToken.ofString(this.tokenString)
 	}
 
-public fun BotComponent.Factory.build(token: BotToken, initialActivity: Activity, configFilePath: Path): BotComponent {
+public fun BotComponent.Factory.build(
+	environmentType: BotEnvironmentType,
+	token: BotToken,
+	initialActivity: Activity,
+	configFilePath: Path,
+): BotComponent {
 	return this.build(
+		environmentType = environmentType,
 		token = token.string,
 		initialActivity = initialActivity,
 		configFilePath = configFilePath,

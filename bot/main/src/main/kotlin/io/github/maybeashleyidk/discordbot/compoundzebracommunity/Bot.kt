@@ -11,9 +11,10 @@ public object Bot {
 
 	private val GRACEFUL_SHUTDOWN_TIMEOUT_DURATION: Duration = Duration.ofSeconds(10)
 
-	public fun run(token: BotToken, configFilePath: Path) {
+	public fun run(environmentType: BotEnvironmentType, token: BotToken, configFilePath: Path) {
 		val botComponent: BotComponent = DaggerBotComponent.factory()
 			.build(
+				environmentType,
 				token,
 				initialActivity = Activity.playing("you like a damn fiddle"),
 				configFilePath,

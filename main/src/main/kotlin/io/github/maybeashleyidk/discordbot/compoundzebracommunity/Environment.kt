@@ -1,5 +1,13 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
+sealed class EnvironmentBotEnvironmentType {
+	data object UnsetOrEmpty : EnvironmentBotEnvironmentType()
+
+	data object Invalid : EnvironmentBotEnvironmentType()
+
+	data class Valid(val environmentType: BotEnvironmentType) : EnvironmentBotEnvironmentType()
+}
+
 sealed class EnvironmentBotToken {
 	data object UnsetOrEmpty : EnvironmentBotToken()
 
@@ -10,10 +18,30 @@ sealed class EnvironmentBotToken {
 
 object Environment {
 
-	const val BOT_TOKEN_VARIABLE_NAME: String = "DISCORD_BOT_TOKEN"
+	const val VARIABLE_NAME_BOT_ENVIRONMENT_TYPE: String = "CZD_BOT_ENVIRONMENT"
+	const val VARIABLE_NAME_BOT_TOKEN: String = "DISCORD_BOT_TOKEN"
+
+	fun extractBotEnvironmentType(): EnvironmentBotEnvironmentType {
+		val str: String = System.getenv(this.VARIABLE_NAME_BOT_ENVIRONMENT_TYPE).orEmpty()
+
+		if (str.isEmpty()) {
+			return EnvironmentBotEnvironmentType.UnsetOrEmpty
+		}
+
+		val environmentType: BotEnvironmentType =
+			when (str) {
+				"dev" -> BotEnvironmentType.DEVELOPMENT
+				"prod" -> BotEnvironmentType.PRODUCTION
+				else -> {
+					return EnvironmentBotEnvironmentType.Invalid
+				}
+			}
+
+		return EnvironmentBotEnvironmentType.Valid(environmentType)
+	}
 
 	fun extractBotToken(): EnvironmentBotToken {
-		val str: String = System.getenv(this.BOT_TOKEN_VARIABLE_NAME).orEmpty()
+		val str: String = System.getenv(this.VARIABLE_NAME_BOT_TOKEN).orEmpty()
 
 		if (str.isEmpty()) {
 			return EnvironmentBotToken.UnsetOrEmpty

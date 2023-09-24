@@ -5,7 +5,8 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:bot-models"))
+	implementation(project(":bot:models:bot-models-env"))
+	implementation(project(":bot:models:bot-models-token"))
 
 	// eventually, the rest of these impl modules should be replaced with wiring ones
 	implementation(project(":bot:logging:bot-logging-wiring"))
