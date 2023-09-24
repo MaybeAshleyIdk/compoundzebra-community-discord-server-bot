@@ -7,11 +7,13 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.built
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.builtins.polls.di.PollCommandsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.builtins.rng.di.RngCommandsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.builtins.shutdown.di.ShutdownCommandsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.builtins.test.DevCommandsModule
 
 @Module(
 	includes = [
 		CoinFlipCommandsModule::class,
 		ConfigCommandsModule::class,
+		DevCommandsModule::class,
 		Magic8BallCommandsModule::class,
 		PollCommandsModule::class,
 		RngCommandsModule::class,

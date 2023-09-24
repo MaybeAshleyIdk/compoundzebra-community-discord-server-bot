@@ -82,6 +82,7 @@ include(
 
 	":bot:commands:impl:builtins:coinflip",
 	":bot:commands:impl:builtins:config",
+	":bot:commands:impl:builtins:dev",
 	":bot:commands:impl:builtins:emojistats",
 	":bot:commands:impl:builtins:magic8ball",
 	":bot:commands:impl:builtins:polls",
