@@ -1,12 +1,8 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.di
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls
 
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoSet
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollCreator
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollEventsListener
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollHolder
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollManager
 import net.dv8tion.jda.api.hooks.EventListener
 
 @Module(includes = [PollsFeatureModule.Bindings::class])

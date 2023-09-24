@@ -49,14 +49,17 @@ include(
 	// region features
 	":bot:features:emojistats:public",
 	":bot:features:emojistats:impl",
+	":bot:features:emojistats:wiring",
 
 	":bot:features:polls:public",
 	":bot:features:polls:impl",
+	":bot:features:polls:wiring",
 
 	":bot:features:shutdown:public",
 	":bot:features:shutdown:impl",
+	":bot:features:shutdown:wiring",
 
-	":bot:features:all-impl",
+	":bot:features:all-wiring",
 	// endregion
 
 	// region commands

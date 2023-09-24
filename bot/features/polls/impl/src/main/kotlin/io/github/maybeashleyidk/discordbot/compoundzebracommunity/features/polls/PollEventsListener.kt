@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionE
 import net.dv8tion.jda.api.hooks.EventListener
 import javax.inject.Inject
 
-internal class PollEventsListener @Suppress("ktlint:standard:annotation") @Inject constructor(
+public class PollEventsListener @Suppress("ktlint:standard:annotation") @Inject internal constructor(
 	private val pollManager: PollManager,
 	private val configSupplier: ConfigSupplier,
 ) : EventListener {

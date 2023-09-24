@@ -1,10 +1,7 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.di
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown
 
 import dagger.Binds
 import dagger.Module
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.SemaphoreShutdownManager
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.ShutdownManager
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.ShutdownRequester
 
 @Module(includes = [ShutdownFeatureModule.Bindings::class])
 public object ShutdownFeatureModule {
