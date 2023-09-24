@@ -2,6 +2,7 @@
 
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.source
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Configs
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.serialization.ConfigSerializer
@@ -18,6 +19,7 @@ import java.nio.file.Path as NioPath
  */
 public class ConfigFileManager @Suppress("ktlint:standard:annotation") @Inject internal constructor(
 	private val configSerializer: ConfigSerializer,
+	private val botEnvironmentType: BotEnvironmentType,
 	configFileNioPath: NioPath, // FIXME: this should have a qualifier, put in which module should be put it?
 ) : ConfigSource {
 
@@ -47,7 +49,8 @@ public class ConfigFileManager @Suppress("ktlint:standard:annotation") @Inject i
 		}
 
 		FileSystem.SYSTEM.write(this.configFilePath) {
-			this@ConfigFileManager.configSerializer.serialize(Configs.INITIAL, sink = this@write)
+			val initialConfig: Config = Configs.createInitial(this@ConfigFileManager.botEnvironmentType)
+			this@ConfigFileManager.configSerializer.serialize(initialConfig, sink = this@write)
 		}
 	}
 }

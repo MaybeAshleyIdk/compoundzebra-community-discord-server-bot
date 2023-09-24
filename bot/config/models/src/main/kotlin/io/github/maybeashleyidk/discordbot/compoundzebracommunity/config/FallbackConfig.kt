@@ -1,9 +1,16 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandPrefix
 
-internal val FALLBACK_CONFIG: Config =
-	Config(
+internal fun createFallbackConfig(botEnvironmentType: BotEnvironmentType): Config {
+	val commandPrefix: CommandPrefix =
+		when (botEnvironmentType) {
+			BotEnvironmentType.DEVELOPMENT -> CommandPrefix.ofString("!!")
+			BotEnvironmentType.PRODUCTION -> CommandPrefix.ofString("!")
+		}
+
+	return Config(
 		strings = LanguageStrings(
 			generic = LanguageStrings.Generic(
 				invalidCommandNameFormat = "Unknown command \"%s\"",
@@ -91,7 +98,8 @@ internal val FALLBACK_CONFIG: Config =
 			),
 		),
 		botAdminUserIds = emptySet(),
-		commandPrefix = CommandPrefix.ofString("!"),
+		commandPrefix = commandPrefix,
 		commandDefinitions = emptySet(),
 		conditionalMessages = emptySet(),
 	)
+}

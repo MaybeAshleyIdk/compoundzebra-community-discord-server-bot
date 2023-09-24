@@ -1,8 +1,14 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.BotEnvironmentType
+
 public object Configs {
 
-	public val FALLBACK: Config = FALLBACK_CONFIG
+	public fun createFallback(botEnvironmentType: BotEnvironmentType): Config {
+		return createFallbackConfig(botEnvironmentType)
+	}
 
-	public val INITIAL: Config = INITIAL_CONFIG
+	public fun createInitial(botEnvironmentType: BotEnvironmentType): Config {
+		return createInitialConfig(botEnvironmentType)
+	}
 }
