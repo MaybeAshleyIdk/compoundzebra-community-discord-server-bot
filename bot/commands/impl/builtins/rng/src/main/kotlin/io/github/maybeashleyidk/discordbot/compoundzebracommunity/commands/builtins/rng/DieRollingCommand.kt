@@ -2,6 +2,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.buil
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.Command
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandName
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.jda.await
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.interactions.DiscordLocale
@@ -12,13 +13,12 @@ import kotlin.random.Random
 
 public class DieRollingCommand @Inject constructor() : Command(name = CommandName.ofString("rtd")) {
 
-	override fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
+	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val roll: Int = Random.nextInt(from = 1, until = 7)
 
 		val outputFormat: NumberFormat = NumberFormat.getIntegerInstance(catalystMessage.guild.locale.toJvmLocale())
 
-		catalystMessage.reply(outputFormat.format(roll))
-			.complete()
+		catalystMessage.reply(outputFormat.format(roll)).await()
 	}
 }
 

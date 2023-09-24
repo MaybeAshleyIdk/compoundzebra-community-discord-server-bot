@@ -3,6 +3,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
+import kotlinx.coroutines.runBlocking
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.ChannelType
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
@@ -92,7 +93,10 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 		this.logger.logInfo(logMsg)
 
 		try {
-			command.execute(arguments, catalystMessage, textChannel)
+			// for now still using runBlocking(), but this will be changed in the future
+			runBlocking {
+				command.execute(arguments, catalystMessage, textChannel)
+			}
 		} catch (e: Exception) {
 			this.logger.logError(e, "Command ${command.name.toQuotedString()} threw an exception")
 		}

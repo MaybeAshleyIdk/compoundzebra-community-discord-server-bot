@@ -3,9 +3,9 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.jda.await
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
-import net.dv8tion.jda.api.requests.restaction.MessageCreateAction
 
 internal class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInject constructor(
 	@Assisted("name") nameString: String,
@@ -18,9 +18,8 @@ internal class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInje
 		fun build(@Assisted("name") nameString: String, @Assisted("responseMessage") responseMessage: String): EchoCommand
 	}
 
-	override fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
-		val action: MessageCreateAction = textChannel.sendMessage(this.responseMessage)
-		action.complete()
+	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
+		textChannel.sendMessage(this.responseMessage).await()
 	}
 }
 

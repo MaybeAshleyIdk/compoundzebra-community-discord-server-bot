@@ -4,6 +4,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.Comma
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandName
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.jda.await
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.interactions.DiscordLocale
@@ -38,20 +39,18 @@ public class RngCommand @Inject constructor(
 		data class Success(val number: Long) : BoundNumberParsingResult()
 	}
 
-	override fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
+	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val (minStr: String, maxStr: String) =
 			when (arguments.size) {
 				0 -> {
 					val config: Config = this.configSupplier.get()
-					catalystMessage.reply(config.strings.command.rng.missingMinAndMaxArguments)
-						.complete()
+					catalystMessage.reply(config.strings.command.rng.missingMinAndMaxArguments).await()
 					return
 				}
 
 				1 -> {
 					val config: Config = this.configSupplier.get()
-					catalystMessage.reply(config.strings.command.rng.missingMaxArgument)
-						.complete()
+					catalystMessage.reply(config.strings.command.rng.missingMaxArgument).await()
 					return
 				}
 
@@ -61,8 +60,7 @@ public class RngCommand @Inject constructor(
 
 				else -> {
 					val config: Config = this.configSupplier.get()
-					catalystMessage.reply(config.strings.command.rng.excessArguments)
-						.complete()
+					catalystMessage.reply(config.strings.command.rng.excessArguments).await()
 					return
 				}
 			}
@@ -78,36 +76,31 @@ public class RngCommand @Inject constructor(
 			when (val result: BoundNumberParsingResult = this.parseBoundNumber(inputFormat, minStr)) {
 				is BoundNumberParsingResult.TooLongString -> {
 					val config: Config = this.configSupplier.get()
-					catalystMessage.reply(config.strings.command.rng.minStringTooLong)
-						.complete()
+					catalystMessage.reply(config.strings.command.rng.minStringTooLong).await()
 					return
 				}
 
 				is BoundNumberParsingResult.InvalidNumber -> {
 					val config: Config = this.configSupplier.get()
-					catalystMessage.reply(config.strings.command.rng.minInvalidNumber)
-						.complete()
+					catalystMessage.reply(config.strings.command.rng.minInvalidNumber).await()
 					return
 				}
 
 				is BoundNumberParsingResult.TooSmallNumber -> {
 					val config: Config = this.configSupplier.get()
-					catalystMessage.reply(config.strings.command.rng.minTooSmall)
-						.complete()
+					catalystMessage.reply(config.strings.command.rng.minTooSmall).await()
 					return
 				}
 
 				is BoundNumberParsingResult.TooBigNumber -> {
 					val config: Config = this.configSupplier.get()
-					catalystMessage.reply(config.strings.command.rng.minTooBig)
-						.complete()
+					catalystMessage.reply(config.strings.command.rng.minTooBig).await()
 					return
 				}
 
 				is BoundNumberParsingResult.DecimalNumber -> {
 					val config: Config = this.configSupplier.get()
-					catalystMessage.reply(config.strings.command.rng.minIsDecimal)
-						.complete()
+					catalystMessage.reply(config.strings.command.rng.minIsDecimal).await()
 					return
 				}
 
@@ -118,36 +111,31 @@ public class RngCommand @Inject constructor(
 			when (val result: BoundNumberParsingResult = this.parseBoundNumber(inputFormat, maxStr)) {
 				is BoundNumberParsingResult.TooLongString -> {
 					val config: Config = this.configSupplier.get()
-					catalystMessage.reply(config.strings.command.rng.maxStringTooLong)
-						.complete()
+					catalystMessage.reply(config.strings.command.rng.maxStringTooLong).await()
 					return
 				}
 
 				is BoundNumberParsingResult.InvalidNumber -> {
 					val config: Config = this.configSupplier.get()
-					catalystMessage.reply(config.strings.command.rng.maxInvalidNumber)
-						.complete()
+					catalystMessage.reply(config.strings.command.rng.maxInvalidNumber).await()
 					return
 				}
 
 				is BoundNumberParsingResult.TooSmallNumber -> {
 					val config: Config = this.configSupplier.get()
-					catalystMessage.reply(config.strings.command.rng.maxTooSmall)
-						.complete()
+					catalystMessage.reply(config.strings.command.rng.maxTooSmall).await()
 					return
 				}
 
 				is BoundNumberParsingResult.TooBigNumber -> {
 					val config: Config = this.configSupplier.get()
-					catalystMessage.reply(config.strings.command.rng.maxTooBig)
-						.complete()
+					catalystMessage.reply(config.strings.command.rng.maxTooBig).await()
 					return
 				}
 
 				is BoundNumberParsingResult.DecimalNumber -> {
 					val config: Config = this.configSupplier.get()
-					catalystMessage.reply(config.strings.command.rng.maxIsDecimal)
-						.complete()
+					catalystMessage.reply(config.strings.command.rng.maxIsDecimal).await()
 					return
 				}
 
@@ -156,15 +144,13 @@ public class RngCommand @Inject constructor(
 
 		if (min == max) {
 			val config: Config = this.configSupplier.get()
-			catalystMessage.reply(config.strings.command.rng.minAndMaxAreEqual)
-				.complete()
+			catalystMessage.reply(config.strings.command.rng.minAndMaxAreEqual).await()
 			return
 		}
 
 		if (min > max) {
 			val config: Config = this.configSupplier.get()
-			catalystMessage.reply(config.strings.command.rng.minGreaterThanMax)
-				.complete()
+			catalystMessage.reply(config.strings.command.rng.minGreaterThanMax).await()
 			return
 		}
 
@@ -172,8 +158,7 @@ public class RngCommand @Inject constructor(
 		val outputFormat: NumberFormat = NumberFormat.getIntegerInstance(serverLocale)
 		val config: Config = this.configSupplier.get()
 
-		catalystMessage.reply(config.strings.command.rng.response(outputFormat.format(random)))
-			.complete()
+		catalystMessage.reply(config.strings.command.rng.response(outputFormat.format(random))).await()
 	}
 
 	private fun parseBoundNumber(inputFormat: NumberFormat, source: String): BoundNumberParsingResult {

@@ -5,9 +5,9 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.Comma
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.jda.await
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
-import net.dv8tion.jda.api.requests.restaction.MessageCreateAction
 import javax.inject.Inject
 
 internal class Magic8BallCommand @Suppress("ktlint:standard:annotation") @Inject constructor(
@@ -15,7 +15,7 @@ internal class Magic8BallCommand @Suppress("ktlint:standard:annotation") @Inject
 	private val logger: Logger,
 ) : Command(name = CommandName.ofString("8ball")) {
 
-	override fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
+	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val config: Config = this.configSupplier.get()
 
 		if (config.strings.command.magic8Ball.responses.isEmpty()) {
@@ -30,7 +30,6 @@ internal class Magic8BallCommand @Suppress("ktlint:standard:annotation") @Inject
 				config.strings.command.magic8Ball.missingQuestion
 			}
 
-		val action: MessageCreateAction = catalystMessage.reply(response)
-		action.complete()
+		catalystMessage.reply(response).await()
 	}
 }

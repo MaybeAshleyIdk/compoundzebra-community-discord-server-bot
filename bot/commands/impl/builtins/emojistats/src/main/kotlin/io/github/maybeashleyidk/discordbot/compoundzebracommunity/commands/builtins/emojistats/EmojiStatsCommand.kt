@@ -5,6 +5,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.Comma
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.emojistats.EmojiStatsManager
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.jda.await
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.entities.emoji.CustomEmoji
@@ -18,10 +19,10 @@ internal class EmojiStatsCommand @Inject constructor(
 	private val emojiStatsManager: EmojiStatsManager,
 ) : Command(name = CommandName.ofString("emote" + "stats")) {
 
-	override fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
+	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val loadingMessage: Message = catalystMessage
 			.reply(this.configSupplier.get().strings.command.emojiStats.loading)
-			.complete()
+			.await()
 
 		val emojiStats: List<Map.Entry<CustomEmoji, Long>> =
 			try {
@@ -38,7 +39,7 @@ internal class EmojiStatsCommand @Inject constructor(
 				val config: Config = this.configSupplier.get()
 				loadingMessage
 					.editMessage(config.strings.command.emojiStats.errorOccurred)
-					.complete()
+					.await()
 
 				throw e
 			}
@@ -47,7 +48,7 @@ internal class EmojiStatsCommand @Inject constructor(
 			val config: Config = this.configSupplier.get()
 			loadingMessage
 				.editMessage(config.strings.command.emojiStats.empty)
-				.complete()
+				.await()
 
 			return
 		}
@@ -66,7 +67,7 @@ internal class EmojiStatsCommand @Inject constructor(
 
 		loadingMessage
 			.editMessage(sb.toString())
-			.complete()
+			.await()
 	}
 }
 
