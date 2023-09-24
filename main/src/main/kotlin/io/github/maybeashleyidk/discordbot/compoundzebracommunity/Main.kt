@@ -10,6 +10,7 @@ private val CONFIG_FILE_PATH: Path = Path.of("bot_config.json")
 fun main() {
 	val token: BotToken = getBotTokenFromEnvironmentOrExit()
 	Bot.run(
+		environmentType = BotEnvironmentType.PRODUCTION,
 		token = token,
 		configFilePath = CONFIG_FILE_PATH, // TODO: add option parsing and allow to change it via option -c, --config
 	)

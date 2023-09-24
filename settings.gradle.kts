@@ -95,7 +95,8 @@ include(
 	":bot:conditionalmessages:impl",
 	":bot:conditionalmessages:wiring",
 
-	":bot:models",
+	":bot:models:env",
+	":bot:models:token",
 	":bot:wiring",
 	":bot:main",
 	":bot",
