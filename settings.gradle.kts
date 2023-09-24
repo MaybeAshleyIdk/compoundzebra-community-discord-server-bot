@@ -87,7 +87,7 @@ include(
 	":bot:commands:impl:builtins:polls",
 	":bot:commands:impl:builtins:rng",
 	":bot:commands:impl:builtins:shutdown",
-	":bot:commands:impl:builtins",
+	":bot:commands:impl:builtins:all-wiring",
 
 	":bot:commands:impl",
 	// endregion
