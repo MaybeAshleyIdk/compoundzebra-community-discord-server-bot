@@ -1,7 +1,6 @@
 plugins {
 	`java-library`
 	kotlin("jvm")
-	alias(libs.plugins.ksp)
 }
 
 dependencies {
@@ -12,6 +11,5 @@ dependencies {
 		exclude(module = "opus-java")
 	}
 
-	implementation(libs.dagger)
-	ksp(libs.dagger.compiler)
+	implementation(libs.javax.inject)
 }
