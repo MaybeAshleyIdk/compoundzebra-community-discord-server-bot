@@ -7,7 +7,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.Comma
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalmessages.ConditionalMessagesModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.FeaturesModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.ShutdownManager
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownAwaiter
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.LoggingModule
 import net.dv8tion.jda.api.entities.Activity
@@ -35,7 +35,7 @@ public interface BotComponent {
 
 	public val logger: Logger
 
-	public val shutdownManager: ShutdownManager
+	public val shutdownAwaiter: ShutdownAwaiter
 
 	@Component.Factory
 	@FunctionalInterface

@@ -25,7 +25,7 @@ public object Bot {
 		botComponent.lazyJda.get().awaitReady()
 		botComponent.logger.logInfo("Bot connected!")
 
-		botComponent.shutdownManager.waitForShutdownRequest()
+		botComponent.shutdownAwaiter.awaitShutdownRequest()
 		this.shutdownGracefully(botComponent.lazyJda.get(), botComponent.logger)
 	}
 

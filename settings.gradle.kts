@@ -49,14 +49,29 @@ include(
 	// region features
 	":bot:features:emojistats:public",
 	":bot:features:emojistats:impl",
+	":bot:features:emojistats:wiring",
 
 	":bot:features:polls:public",
 	":bot:features:polls:impl",
+	":bot:features:polls:wiring",
 
-	":bot:features:shutdown:public",
-	":bot:features:shutdown:impl",
+	// region shutdown
+	":bot:features:shutdown:manager:public",
+	":bot:features:shutdown:manager:impl-semaphore",
+	":bot:features:shutdown:manager:wiring",
 
-	":bot:features:all-impl",
+	":bot:features:shutdown:request:public",
+	":bot:features:shutdown:request:impl-manager",
+	":bot:features:shutdown:request:wiring",
+
+	":bot:features:shutdown:wait:public",
+	":bot:features:shutdown:wait:impl-manager",
+	":bot:features:shutdown:wait:wiring",
+
+	":bot:features:shutdown:wiring",
+	// endregion
+
+	":bot:features:all-wiring",
 	// endregion
 
 	// region commands
@@ -72,12 +87,13 @@ include(
 	":bot:commands:impl:builtins:polls",
 	":bot:commands:impl:builtins:rng",
 	":bot:commands:impl:builtins:shutdown",
-	":bot:commands:impl:builtins",
+	":bot:commands:impl:builtins:all-wiring",
 
 	":bot:commands:impl",
 	// endregion
 
-	":bot:conditionalmessages",
+	":bot:conditionalmessages:impl",
+	":bot:conditionalmessages:wiring",
 
 	":bot:models",
 	":bot:wiring",
