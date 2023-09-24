@@ -1,18 +1,15 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown
 
-import dagger.Binds
 import dagger.Module
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.manager.ShutdownManagerFeatureModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.request.ShutdownRequestFeatureModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownWaitFeatureModule
 
-@Module(includes = [ShutdownFeatureModule.Bindings::class])
-public object ShutdownFeatureModule {
-
-	@Module
-	internal interface Bindings {
-
-		@Binds
-		fun bindShutdownManager(semaphoreShutdownManager: SemaphoreShutdownManager): ShutdownManager
-
-		@Binds
-		fun bindShutdownRequester(semaphoreShutdownManager: SemaphoreShutdownManager): ShutdownRequester
-	}
-}
+@Module(
+	includes = [
+		ShutdownManagerFeatureModule::class,
+		ShutdownRequestFeatureModule::class,
+		ShutdownWaitFeatureModule::class,
+	],
+)
+public object ShutdownFeatureModule

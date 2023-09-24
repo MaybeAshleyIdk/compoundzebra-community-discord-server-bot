@@ -55,9 +55,21 @@ include(
 	":bot:features:polls:impl",
 	":bot:features:polls:wiring",
 
-	":bot:features:shutdown:public",
-	":bot:features:shutdown:impl",
+	// region shutdown
+	":bot:features:shutdown:manager:public",
+	":bot:features:shutdown:manager:impl-semaphore",
+	":bot:features:shutdown:manager:wiring",
+
+	":bot:features:shutdown:request:public",
+	":bot:features:shutdown:request:impl-manager",
+	":bot:features:shutdown:request:wiring",
+
+	":bot:features:shutdown:wait:public",
+	":bot:features:shutdown:wait:impl-manager",
+	":bot:features:shutdown:wait:wiring",
+
 	":bot:features:shutdown:wiring",
+	// endregion
 
 	":bot:features:all-wiring",
 	// endregion
