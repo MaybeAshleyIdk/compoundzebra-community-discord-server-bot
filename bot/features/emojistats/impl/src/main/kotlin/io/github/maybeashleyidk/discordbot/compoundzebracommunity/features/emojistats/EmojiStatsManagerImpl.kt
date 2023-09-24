@@ -1,6 +1,11 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.emojistats
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.jda.await
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.entities.Message
@@ -20,6 +25,7 @@ import net.dv8tion.jda.api.entities.emoji.CustomEmoji
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.entities.emoji.EmojiUnion
 import net.dv8tion.jda.api.entities.emoji.RichCustomEmoji
+import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 
 private val CUSTOM_EMOJI_REGEX_PATTERN: Regex = Regex("(?<!\\\\)<:[^:]+:(?<id>0|[1-9][0-9]*)>")
@@ -28,109 +34,144 @@ public class EmojiStatsManagerImpl @Inject internal constructor(
 	private val logger: Logger,
 ) : EmojiStatsManager {
 
-	override fun countUsedEmojisOfUserInGuild(user: User, guild: Guild): Map<CustomEmoji, Long> {
-		val emojiIdCounter: MutableMap<EmojiSnowflakeId, Long> = hashMapOf()
+	override suspend fun countUsedEmojisOfUserInGuild(user: User, guild: Guild): Map<CustomEmoji, Long> {
+		return coroutineScope {
+			val emojiIdCounter: MutableMap<EmojiSnowflakeId, Long> = ConcurrentHashMap()
 
-		for (guildChannel: GuildChannel in guild.channels) {
-			this.countUsedEmojisOfUserInGuildChannel(emojiIdCounter, user, guildChannel)
+			guild.channels
+				.map { guildChannel: GuildChannel ->
+					this@coroutineScope.async {
+						this@EmojiStatsManagerImpl
+							.countUsedEmojisOfUserInGuildChannel(emojiIdCounter, user, guildChannel)
+					}
+				}
+				.awaitAll()
+
+			return@coroutineScope this@EmojiStatsManagerImpl.mapEmojiIdCounterToEmojiCounter(guild, emojiIdCounter)
 		}
-
-		return this.mapEmojiIdCounterToEmojiCounter(guild, emojiIdCounter)
 	}
 
-	private fun countUsedEmojisOfUserInGuildChannel(
+	private suspend fun countUsedEmojisOfUserInGuildChannel(
 		out: MutableMap<EmojiSnowflakeId, Long>,
 		user: User,
 		guildChannel: GuildChannel,
 	) {
-		if (!(guildChannel.guild.selfMember.hasPermission(guildChannel, Permission.VIEW_CHANNEL))) {
-			return
-		}
-
-		when (guildChannel.type) {
-			ChannelType.TEXT -> {
-				val guildTextChannel: TextChannel = (guildChannel as TextChannel)
-
-				countUsedEmojisOfUserInGuildMessageChannel(out, user, guildTextChannel)
-				countUsedEmojisOfUserInThreadContainer(
-					out,
-					user,
-					guildTextChannel,
-					includeArchivedPrivateThreads = true,
-				)
+		coroutineScope {
+			if (!(guildChannel.guild.selfMember.hasPermission(guildChannel, Permission.VIEW_CHANNEL))) {
+				return@coroutineScope
 			}
 
-			ChannelType.NEWS -> {
-				val guildNewsChannel: NewsChannel = (guildChannel as NewsChannel)
+			when (guildChannel.type) {
+				ChannelType.TEXT -> {
+					val guildTextChannel: TextChannel = (guildChannel as TextChannel)
 
-				countUsedEmojisOfUserInGuildMessageChannel(out, user, guildNewsChannel)
-				countUsedEmojisOfUserInThreadContainer(
-					out,
-					user,
-					guildNewsChannel,
-					includeArchivedPrivateThreads = false,
-				)
-			}
+					this@coroutineScope.launch {
+						countUsedEmojisOfUserInGuildMessageChannel(out, user, guildTextChannel)
+					}
+					this@coroutineScope.launch {
+						countUsedEmojisOfUserInThreadContainer(
+							out,
+							user,
+							guildTextChannel,
+							includeArchivedPrivateThreads = true,
+						)
+					}
+				}
 
-			ChannelType.VOICE -> countUsedEmojisOfUserInGuildMessageChannel(out, user, (guildChannel as VoiceChannel))
+				ChannelType.NEWS -> {
+					val guildNewsChannel: NewsChannel = (guildChannel as NewsChannel)
 
-			ChannelType.STAGE -> countUsedEmojisOfUserInGuildMessageChannel(out, user, (guildChannel as StageChannel))
+					this@coroutineScope.launch {
+						countUsedEmojisOfUserInGuildMessageChannel(out, user, guildNewsChannel)
+					}
+					this@coroutineScope.launch {
+						countUsedEmojisOfUserInThreadContainer(
+							out,
+							user,
+							guildNewsChannel,
+							includeArchivedPrivateThreads = false,
+						)
+					}
+				}
 
-			ChannelType.FORUM -> {
-				countUsedEmojisOfUserInThreadContainer(
-					out,
-					user,
-					(guildChannel as ForumChannel),
-					includeArchivedPrivateThreads = false,
-				)
-			}
+				ChannelType.VOICE -> {
+					this@coroutineScope.launch {
+						countUsedEmojisOfUserInGuildMessageChannel(
+							out,
+							user,
+							(guildChannel as VoiceChannel),
+						)
+					}
+				}
 
-			ChannelType.PRIVATE -> Unit
+				ChannelType.STAGE -> {
+					this@coroutineScope.launch {
+						countUsedEmojisOfUserInGuildMessageChannel(
+							out,
+							user,
+							(guildChannel as StageChannel),
+						)
+					}
+				}
 
-			ChannelType.CATEGORY -> Unit
+				ChannelType.FORUM -> {
+					this@coroutineScope.launch {
+						countUsedEmojisOfUserInThreadContainer(
+							out,
+							user,
+							(guildChannel as ForumChannel),
+							includeArchivedPrivateThreads = false,
+						)
+					}
+				}
 
-			ChannelType.GROUP -> {
-				val msg: String =
-					"${EmojiStatsManagerImpl::class.java.simpleName}: Group channel type." +
-						" Channel ID ${guildChannel.id}"
-				this.logger.logWarning(msg)
-			}
+				ChannelType.PRIVATE -> Unit
 
-			ChannelType.GUILD_NEWS_THREAD -> {
-				val msg: String =
-					"${EmojiStatsManagerImpl::class.java.simpleName}: Guild news thread channel type." +
-						" Channel ID ${guildChannel.id}"
-				this.logger.logWarning(msg)
-			}
+				ChannelType.CATEGORY -> Unit
 
-			ChannelType.GUILD_PUBLIC_THREAD -> {
-				val msg: String =
-					"${EmojiStatsManagerImpl::class.java.simpleName}: Guild public thread channel type." +
-						" Channel ID ${guildChannel.id}"
-				this.logger.logWarning(msg)
-			}
+				ChannelType.GROUP -> {
+					val msg: String =
+						"${EmojiStatsManagerImpl::class.java.simpleName}: Group channel type." +
+							" Channel ID ${guildChannel.id}"
+					this@EmojiStatsManagerImpl.logger.logWarning(msg)
+				}
 
-			ChannelType.GUILD_PRIVATE_THREAD -> {
-				val msg: String =
-					"${EmojiStatsManagerImpl::class.java.simpleName}: Guild private thread channel type." +
-						" Channel ID ${guildChannel.id}"
-				this.logger.logWarning(msg)
-			}
+				ChannelType.GUILD_NEWS_THREAD -> {
+					val msg: String =
+						"${EmojiStatsManagerImpl::class.java.simpleName}: Guild news thread channel type." +
+							" Channel ID ${guildChannel.id}"
+					this@EmojiStatsManagerImpl.logger.logWarning(msg)
+				}
 
-			ChannelType.UNKNOWN -> {
-				val msg: String =
-					"${EmojiStatsManagerImpl::class.java.simpleName}: Unknown channel type." +
-						" Channel ID ${guildChannel.id}"
-				this.logger.logWarning(msg)
+				ChannelType.GUILD_PUBLIC_THREAD -> {
+					val msg: String =
+						"${EmojiStatsManagerImpl::class.java.simpleName}: Guild public thread channel type." +
+							" Channel ID ${guildChannel.id}"
+					this@EmojiStatsManagerImpl.logger.logWarning(msg)
+				}
+
+				ChannelType.GUILD_PRIVATE_THREAD -> {
+					val msg: String =
+						"${EmojiStatsManagerImpl::class.java.simpleName}: Guild private thread channel type." +
+							" Channel ID ${guildChannel.id}"
+					this@EmojiStatsManagerImpl.logger.logWarning(msg)
+				}
+
+				ChannelType.UNKNOWN -> {
+					val msg: String =
+						"${EmojiStatsManagerImpl::class.java.simpleName}: Unknown channel type." +
+							" Channel ID ${guildChannel.id}"
+					this@EmojiStatsManagerImpl.logger.logWarning(msg)
+				}
 			}
 		}
 	}
 
-	private fun mapEmojiIdCounterToEmojiCounter(
+	private suspend fun mapEmojiIdCounterToEmojiCounter(
 		guild: Guild,
-		emojiIdCounter: MutableMap<EmojiSnowflakeId, Long>,
+		emojiIdCounter: Map<EmojiSnowflakeId, Long>,
 	): Map<CustomEmoji, Long> {
-		val guildEmojis: Map<EmojiSnowflakeId, CustomEmoji> = guild.retrieveEmojis().complete()
+		val guildEmojis: Map<EmojiSnowflakeId, CustomEmoji> = guild.retrieveEmojis().await()
 			.let { guildEmojiList: List<RichCustomEmoji> ->
 				guildEmojiList
 					.associateByTo(HashMap(guildEmojiList.size)) { emoji: RichCustomEmoji ->
@@ -151,55 +192,77 @@ public class EmojiStatsManagerImpl @Inject internal constructor(
 	}
 }
 
-private fun countUsedEmojisOfUserInGuildMessageChannel(
+private suspend fun countUsedEmojisOfUserInGuildMessageChannel(
 	out: MutableMap<EmojiSnowflakeId, Long>,
 	user: User,
 	guildMessageChannel: GuildMessageChannel,
 ) {
-	for (message: Message in guildMessageChannel.iterableHistory) {
-		countUsedEmojisOfUserInMessage(out, user, message)
+	coroutineScope {
+		for (message: Message in guildMessageChannel.iterableHistory) {
+			this@coroutineScope.launch {
+				countUsedEmojisOfUserInMessage(out, user, message)
+			}
+		}
 	}
 }
 
-private fun countUsedEmojisOfUserInThreadContainer(
+private suspend fun countUsedEmojisOfUserInThreadContainer(
 	out: MutableMap<EmojiSnowflakeId, Long>,
 	user: User,
 	threadContainer: IThreadContainer,
 	includeArchivedPrivateThreads: Boolean,
 ) {
-	val archivedPrivateThreads: Iterable<ThreadChannel> =
-		when {
-			!includeArchivedPrivateThreads -> {
-				emptyList()
+	coroutineScope {
+		val archivedPrivateThreads: Iterable<ThreadChannel> =
+			when {
+				!includeArchivedPrivateThreads -> {
+					emptyList()
+				}
+
+				threadContainer.guild.selfMember.hasPermission(threadContainer, Permission.MANAGE_THREADS) -> {
+					threadContainer.retrieveArchivedPrivateThreadChannels()
+				}
+
+				else -> {
+					threadContainer.retrieveArchivedPrivateJoinedThreadChannels()
+				}
 			}
 
-			threadContainer.guild.selfMember.hasPermission(threadContainer, Permission.MANAGE_THREADS) -> {
-				threadContainer.retrieveArchivedPrivateThreadChannels()
+		sequenceOf<Iterable<ThreadChannel>>(
+			threadContainer.threadChannels,
+			threadContainer.retrieveArchivedPublicThreadChannels(),
+			archivedPrivateThreads,
+		).flatten()
+			.flatMap(ThreadChannel::getIterableHistory)
+			.forEach { threadMessage: Message ->
+				this@coroutineScope.launch {
+					countUsedEmojisOfUserInMessage(out, user, threadMessage)
+				}
 			}
-
-			else -> {
-				threadContainer.retrieveArchivedPrivateJoinedThreadChannels()
-			}
-		}
-
-	sequenceOf<Iterable<ThreadChannel>>(
-		threadContainer.threadChannels,
-		threadContainer.retrieveArchivedPublicThreadChannels(),
-		archivedPrivateThreads,
-	).flatten()
-		.flatMap(ThreadChannel::getIterableHistory)
-		.forEach { threadMessage: Message ->
-			countUsedEmojisOfUserInMessage(out, user, threadMessage)
-		}
+	}
 }
 
-private fun countUsedEmojisOfUserInMessage(out: MutableMap<EmojiSnowflakeId, Long>, user: User, message: Message) {
-	if (user.idLong == message.author.idLong) {
-		countCustomEmojisInMessageContent(out, message.contentRaw)
-	}
+private suspend fun countUsedEmojisOfUserInMessage(
+	out: MutableMap<EmojiSnowflakeId, Long>,
+	user: User,
+	message: Message,
+) {
+	coroutineScope {
+		this@coroutineScope.launch {
+			if (user.idLong != message.author.idLong) {
+				return@launch
+			}
 
-	for (reaction: MessageReaction in message.reactions) {
-		countUsedEmojisOfUserInMessageReaction(out, user, reaction)
+			countCustomEmojisInMessageContent(out, message.contentRaw)
+		}
+
+		this@coroutineScope.launch {
+			for (reaction: MessageReaction in message.reactions) {
+				this@launch.launch {
+					countUsedEmojisOfUserInMessageReaction(out, user, reaction)
+				}
+			}
+		}
 	}
 }
 
@@ -216,7 +279,7 @@ private fun countCustomEmojisInMessageContent(out: MutableMap<EmojiSnowflakeId, 
 	}
 }
 
-private fun countUsedEmojisOfUserInMessageReaction(
+private suspend fun countUsedEmojisOfUserInMessageReaction(
 	out: MutableMap<EmojiSnowflakeId, Long>,
 	user: User,
 	messageReaction: MessageReaction,
@@ -228,7 +291,7 @@ private fun countUsedEmojisOfUserInMessageReaction(
 			Emoji.Type.CUSTOM -> emojiUnion.asCustom()
 		}
 
-	val userReacted: Boolean = messageReaction.retrieveUsers().complete()
+	val userReacted: Boolean = messageReaction.retrieveUsers().await()
 		.any { reactedUser: User ->
 			reactedUser.idLong == user.idLong
 		}
