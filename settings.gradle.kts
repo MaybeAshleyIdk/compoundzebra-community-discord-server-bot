@@ -17,6 +17,7 @@ dependencyResolutionManagement {
 @Suppress("ktlint:standard:no-blank-line-in-list")
 include(
 	":bot:utils",
+	":bot:utils:coroutines:jda",
 
 	":bot:logging:public",
 	":bot:logging:impl-stderr",

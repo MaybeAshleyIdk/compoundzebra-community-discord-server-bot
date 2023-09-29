@@ -7,6 +7,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplie
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollDetails
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollHolder
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollId
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.jda.await
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.entities.Message
@@ -18,14 +19,12 @@ internal class PollQueryCommand @Suppress("ktlint:standard:annotation") @Inject 
 	private val pollHolder: PollHolder,
 ) : Command(name = CommandName.ofString("querypoll")) {
 
-	override fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
+	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val authorAsGuildMember: Member = catalystMessage.getAuthorAsGuildMember()
 		val config: Config = this.configSupplier.get()
 
 		if (!(authorAsGuildMember.isAllowedToQueryPoll(config.botAdminUserIds))) {
-			textChannel.sendMessage(config.strings.command.queryPoll.insufficientPermissions)
-				.complete()
-
+			textChannel.sendMessage(config.strings.command.queryPoll.insufficientPermissions).await()
 			return
 		}
 
@@ -34,9 +33,7 @@ internal class PollQueryCommand @Suppress("ktlint:standard:annotation") @Inject 
 			.trim() // no need to squeeze whitespace here, if *any* whitespace is in-between it's invalid
 
 		if (pollIdArg.isEmpty()) {
-			textChannel.sendMessage(config.strings.command.queryPoll.missingId)
-				.complete()
-
+			textChannel.sendMessage(config.strings.command.queryPoll.missingId).await()
 			return
 		}
 
@@ -47,20 +44,16 @@ internal class PollQueryCommand @Suppress("ktlint:standard:annotation") @Inject 
 			}
 
 		if (pollDetails == null) {
-			textChannel.sendMessage(config.strings.command.queryPoll.noSuchPollWithId)
-				.complete()
-
+			textChannel.sendMessage(config.strings.command.queryPoll.noSuchPollWithId).await()
 			return
 		}
 
-		catalystMessage.reply(pollDetails.createMessageContent(config.strings.poll))
-			.complete()
+		catalystMessage.reply(pollDetails.createMessageContent(config.strings.poll)).await()
 	}
 }
 
-private fun Message.getAuthorAsGuildMember(): Member {
-	return this.guild.retrieveMemberById(this.author.idLong)
-		.complete()
+private suspend fun Message.getAuthorAsGuildMember(): Member {
+	return this.guild.retrieveMemberById(this.author.idLong).await()
 }
 
 private fun Member.isAllowedToQueryPoll(botAdminUserIds: Set<String>): Boolean {

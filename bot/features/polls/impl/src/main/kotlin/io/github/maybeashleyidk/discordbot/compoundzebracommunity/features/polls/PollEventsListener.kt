@@ -2,6 +2,8 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.poll
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.jda.await
+import kotlinx.coroutines.runBlocking
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.events.GenericEvent
@@ -16,13 +18,16 @@ public class PollEventsListener @Suppress("ktlint:standard:annotation") @Inject 
 ) : EventListener {
 
 	override fun onEvent(event: GenericEvent) {
-		when (event) {
-			is StringSelectInteractionEvent -> this.onStringSelectInteractionEvent(event)
-			is ButtonInteractionEvent -> this.onButtonInteractionEvent(event)
+		// TODO: change this from runBlocking
+		runBlocking {
+			when (event) {
+				is StringSelectInteractionEvent -> this@PollEventsListener.onStringSelectInteractionEvent(event)
+				is ButtonInteractionEvent -> this@PollEventsListener.onButtonInteractionEvent(event)
+			}
 		}
 	}
 
-	private fun onStringSelectInteractionEvent(event: StringSelectInteractionEvent) {
+	private suspend fun onStringSelectInteractionEvent(event: StringSelectInteractionEvent) {
 		val member: Member = event.member
 			?: return
 
@@ -31,20 +36,20 @@ public class PollEventsListener @Suppress("ktlint:standard:annotation") @Inject 
 
 		// acknowledge.
 		// if a lot of votes are coming in at once, then voteOption() may block for an extended period of time
-		event.deferEdit().complete()
+		event.deferEdit().await()
 
 		val newDetails: PollDetails = this.pollManager.voteOption(member, event.componentId, optionValue)
 			?: return
 
 		val config: Config = this.configSupplier.get()
 		event.hook.editOriginal(newDetails.createMessageContent(config.strings.poll))
-			.complete()
+			.await()
 	}
 
-	private fun onButtonInteractionEvent(event: ButtonInteractionEvent) {
+	private suspend fun onButtonInteractionEvent(event: ButtonInteractionEvent) {
 		// acknowledge.
 		// if a lot of votes are coming in at once, then close() may block for an extended period of time
-		event.deferEdit().complete()
+		event.deferEdit().await()
 
 		val closeResult: PollManager.CloseResult = this.pollManager.close(event.member ?: return, event.componentId)
 		when (closeResult) {
@@ -61,7 +66,7 @@ public class PollEventsListener @Suppress("ktlint:standard:annotation") @Inject 
 						.flatMap { _: Message ->
 							event.hook.editOriginalComponents() // this removes all components
 						}
-						.complete()
+						.await()
 				}
 			}
 		}

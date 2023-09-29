@@ -9,5 +9,5 @@ public interface EmojiStatsManager {
 	/**
 	 * Returns a mapping of custom guild emoji to the count of how many times the [user] has sent that emoji.
 	 */
-	public fun countUsedEmojisOfUserInGuild(user: User, guild: Guild): Map<CustomEmoji, Long>
+	public suspend fun countUsedEmojisOfUserInGuild(user: User, guild: Guild): Map<CustomEmoji, Long>
 }

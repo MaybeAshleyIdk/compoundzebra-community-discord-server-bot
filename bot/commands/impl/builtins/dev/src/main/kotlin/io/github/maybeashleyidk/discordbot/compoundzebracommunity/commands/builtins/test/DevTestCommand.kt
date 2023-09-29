@@ -9,6 +9,6 @@ import javax.inject.Inject
 public class DevTestCommand @Inject constructor(
 ) : Command(name = CommandName.ofString("devtest")) {
 
-	override fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
+	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 	}
 }

@@ -3,6 +3,8 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.jda.await
+import kotlinx.coroutines.runBlocking
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.ChannelType
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
@@ -31,13 +33,23 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 
 		val textChannel: TextChannel = message.channel.asTextChannel()
 
-		val commandLine: CommandLine = this.tryParseMessageContentToCommandLine(message.contentStripped, textChannel)
-			?: return
+		// TODO: change this from runBlocking
+		runBlocking {
+			val commandLine: CommandLine = this@CommandEventListener
+				.tryParseMessageContentToCommandLine(
+					message.contentStripped,
+					textChannel,
+				)
+				?: return@runBlocking
 
-		this.tryFindAndExecuteCommand(commandLine, catalystMessage = message, textChannel)
+			this@CommandEventListener.tryFindAndExecuteCommand(commandLine, catalystMessage = message, textChannel)
+		}
 	}
 
-	private fun tryParseMessageContentToCommandLine(messageContent: String, textChannel: TextChannel): CommandLine? {
+	private suspend fun tryParseMessageContentToCommandLine(
+		messageContent: String,
+		textChannel: TextChannel,
+	): CommandLine? {
 		val commandMessageParseResult: CommandMessageParseResult =
 			this.commandMessageParser.parseMessageContent(messageContent)
 
@@ -52,7 +64,7 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 				val msg: String =
 					config.strings.generic.invalidCommandName(commandMessageParseResult.invalidCommandNameStr)
 
-				textChannel.sendMessage(msg).complete()
+				textChannel.sendMessage(msg).await()
 
 				null
 			}
@@ -63,7 +75,11 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 		}
 	}
 
-	private fun tryFindAndExecuteCommand(commandLine: CommandLine, catalystMessage: Message, textChannel: TextChannel) {
+	private suspend fun tryFindAndExecuteCommand(
+		commandLine: CommandLine,
+		catalystMessage: Message,
+		textChannel: TextChannel,
+	) {
 		val foundCommand: Command? = this.commands
 			.firstOrNull { command: Command ->
 				command.name.isEquivalentTo(commandLine.commandName)
@@ -73,7 +89,7 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 			val config: Config = this.configSupplier.get()
 
 			textChannel.sendMessage(config.strings.generic.unknownCommand(commandLine.commandName))
-				.complete()
+				.await()
 
 			return
 		}
@@ -81,7 +97,7 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 		this.executeCommand(foundCommand, commandLine.arguments, catalystMessage, textChannel)
 	}
 
-	private fun executeCommand(
+	private suspend fun executeCommand(
 		command: Command,
 		arguments: List<String>,
 		catalystMessage: Message,

@@ -7,6 +7,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplie
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollCreator
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollDetails
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollOption
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.jda.await
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.trimAndSqueezeWhitespace
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
@@ -20,15 +21,14 @@ internal class PollCreationCommand @Suppress("ktlint:standard:annotation") @Inje
 	private val pollCreator: PollCreator,
 ) : Command(name = CommandName.ofString("poll")) {
 
-	override fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
+	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val description: String = arguments.firstOrNull()
 			.orEmpty()
 			.trimAndSqueezeWhitespace()
 
 		if (description.isEmpty()) {
 			val config: Config = this.configSupplier.get()
-			textChannel.sendMessage(config.strings.command.poll.missingDescription)
-				.complete()
+			textChannel.sendMessage(config.strings.command.poll.missingDescription).await()
 
 			return
 		}
@@ -52,8 +52,7 @@ internal class PollCreationCommand @Suppress("ktlint:standard:annotation") @Inje
 
 		if (selectOptions.size < 2) {
 			val config: Config = this.configSupplier.get()
-			textChannel.sendMessage(config.strings.command.poll.lessThan2Options)
-				.complete()
+			textChannel.sendMessage(config.strings.command.poll.lessThan2Options).await()
 
 			return
 		}
@@ -85,6 +84,6 @@ internal class PollCreationCommand @Suppress("ktlint:standard:annotation") @Inje
 		textChannel.sendMessage(messageContent)
 			.addActionRow(optionsMenu)
 			.addActionRow(Button.primary(pollBuilder.closeButtonCustomId, config.strings.poll.action.close))
-			.complete()
+			.await()
 	}
 }

@@ -3,6 +3,8 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalme
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConditionalMessage
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.jda.await
+import kotlinx.coroutines.runBlocking
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.ChannelType
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
@@ -30,18 +32,20 @@ public class ConditionalMessageEventListener @Inject constructor(
 		val textChannel: TextChannel = message.channel.asTextChannel()
 
 		val config: Config = this.configSupplier.get()
-		config.conditionalMessages
-			.asSequence()
-			.filter { conditionalMessage: ConditionalMessage ->
-				conditionalMessage.condition.matches(message)
-			}
-			.map { conditionalMessage: ConditionalMessage ->
-				textChannel.sendMessage(conditionalMessage.messageContent)
-			}
-			.toList()
-			.ifEmpty { null }
-			?.allOf()
-			?.complete()
+		runBlocking {
+			config.conditionalMessages
+				.asSequence()
+				.filter { conditionalMessage: ConditionalMessage ->
+					conditionalMessage.condition.matches(message)
+				}
+				.map { conditionalMessage: ConditionalMessage ->
+					textChannel.sendMessage(conditionalMessage.messageContent)
+				}
+				.toList()
+				.ifEmpty { null }
+				?.allOf()
+				?.await()
+		}
 	}
 }
 
