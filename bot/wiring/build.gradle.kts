@@ -13,7 +13,7 @@ dependencies {
 	implementation(project(":bot:config:bot-config-wiring"))
 	implementation(project(":bot:features:bot-features-all-wiring"))
 	implementation(project(":bot:commands:bot-commands-impl"))
-	implementation(project(":bot:conditionalmessages:bot-conditionalmessages-wiring"))
+	implementation(project(":bot:eventlistenermediator:bot-eventlistenermediator-wiring"))
 
 	implementation(libs.jda) {
 		exclude(module = "opus-java")
