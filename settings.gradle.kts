@@ -94,8 +94,10 @@ include(
 	":bot:commands:impl",
 	// endregion
 
-	":bot:conditionalmessages:impl",
-	":bot:conditionalmessages:wiring",
+	":bot:conditionalmessages",
+
+	":bot:eventlistenermediator:impl",
+	":bot:eventlistenermediator:wiring",
 
 	":bot:models:env",
 	":bot:models:token",

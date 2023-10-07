@@ -4,58 +4,42 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.jda.await
-import kotlinx.coroutines.runBlocking
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.ChannelType
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.events.GenericEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
-import net.dv8tion.jda.api.hooks.EventListener
 import javax.inject.Inject
 
-internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inject constructor(
+public class CommandEventHandler @Inject internal constructor(
 	private val commandMessageParser: CommandMessageParser,
 	private val configSupplier: ConfigSupplier,
 	private val commands: Set<@JvmSuppressWildcards Command>,
 	private val logger: Logger,
-) : EventListener {
+) {
 
-	override fun onEvent(event: GenericEvent) {
+	/**
+	 * Returns a boolean that indicates whether the event was consumed or not.
+	 */
+	public suspend fun handleEvent(event: GenericEvent): Boolean {
 		if (event !is MessageReceivedEvent) {
-			return
+			return false
 		}
 
 		val message: Message = event.message
 
 		if (shouldBotIgnoreMessage(message)) {
-			return
+			return false
 		}
 
 		val textChannel: TextChannel = message.channel.asTextChannel()
 
-		// TODO: change this from runBlocking
-		runBlocking {
-			val commandLine: CommandLine = this@CommandEventListener
-				.tryParseMessageContentToCommandLine(
-					message.contentStripped,
-					textChannel,
-				)
-				?: return@runBlocking
-
-			this@CommandEventListener.tryFindAndExecuteCommand(commandLine, catalystMessage = message, textChannel)
-		}
-	}
-
-	private suspend fun tryParseMessageContentToCommandLine(
-		messageContent: String,
-		textChannel: TextChannel,
-	): CommandLine? {
 		val commandMessageParseResult: CommandMessageParseResult =
-			this.commandMessageParser.parseMessageContent(messageContent)
+			this.commandMessageParser.parseMessageContent(message.contentStripped)
 
 		return when (commandMessageParseResult) {
 			is CommandMessageParseResult.NotACommandMessage -> {
-				null
+				false
 			}
 
 			is CommandMessageParseResult.InvalidCommandName -> {
@@ -66,11 +50,18 @@ internal class CommandEventListener @Suppress("ktlint:standard:annotation") @Inj
 
 				textChannel.sendMessage(msg).await()
 
-				null
+				true
 			}
 
 			is CommandMessageParseResult.Success -> {
-				commandMessageParseResult.commandLine
+				this@CommandEventHandler
+					.tryFindAndExecuteCommand(
+						commandLine = commandMessageParseResult.commandLine,
+						catalystMessage = message,
+						textChannel,
+					)
+
+				true
 			}
 		}
 	}
