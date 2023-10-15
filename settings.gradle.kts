@@ -14,10 +14,16 @@ dependencyResolutionManagement {
 	}
 }
 
-@Suppress("ktlint:standard:no-blank-line-in-list")
+@Suppress("ktlint:standard:no-blank-line-in-list", "ktlint:standard:no-consecutive-blank-lines")
 include(
 	":bot:utils",
 	":bot:utils-coroutines-jda",
+
+
+	":bot:env",
+
+	":bot:token",
+
 
 	":bot:logging:public",
 	":bot:logging:impl-stderr",
@@ -99,8 +105,6 @@ include(
 	":bot:eventlistenermediator:impl",
 	":bot:eventlistenermediator:wiring",
 
-	":bot:models:env",
-	":bot:models:token",
 	":bot:wiring",
 	":bot:main",
 	":bot",
