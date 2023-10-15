@@ -8,7 +8,7 @@ dependencies {
 	implementation(project(":bot:bot-token"))
 	implementation(project(":bot:bot-wiring"))
 
-	implementation(project(":bot:logging:bot-logging-public"))
+	implementation(project(":bot:bot-logging"))
 	implementation(project(":bot:features:shutdown:wait:bot-features-shutdown-wait-public"))
 
 	implementation(libs.jda) {

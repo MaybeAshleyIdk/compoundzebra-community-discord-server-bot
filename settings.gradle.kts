@@ -25,9 +25,11 @@ include(
 	":bot:token",
 
 
-	":bot:logging:public",
+	":bot:logging:api",
 	":bot:logging:impl-stderr",
 	":bot:logging:wiring",
+	":bot:logging",
+
 
 	":bot:snowflake",
 

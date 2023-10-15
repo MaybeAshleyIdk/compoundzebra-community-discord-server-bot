@@ -5,7 +5,7 @@ plugins {
 
 dependencies {
 	api(project(":bot:features:emojistats:bot-features-emojistats-public"))
-	implementation(project(":bot:logging:bot-logging-public"))
+	implementation(project(":bot:bot-logging"))
 	implementation(project(":bot:bot-utils-coroutines-jda"))
 
 	implementation(libs.kotlinx.coroutines.core)
