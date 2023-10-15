@@ -11,7 +11,7 @@ dependencies {
 	implementation(project(":bot:config:bot-config-models"))
 	implementation(project(":bot:config:supplier:bot-config-supplier-public"))
 	implementation(project(":bot:bot-utils"))
-	implementation(project(":bot:utils:coroutines:bot-utils-coroutines-jda"))
+	implementation(project(":bot:bot-utils-coroutines-jda"))
 
 	implementation(libs.kotlinx.coroutines.core)
 
