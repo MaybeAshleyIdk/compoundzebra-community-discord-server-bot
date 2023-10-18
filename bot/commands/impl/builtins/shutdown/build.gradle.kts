@@ -9,7 +9,7 @@ dependencies {
 	implementation(project(":bot:commands:impl:bot-commands-impl-base"))
 	implementation(project(":bot:config:bot-config-models"))
 	implementation(project(":bot:features:shutdown:request:bot-features-shutdown-request-public"))
-	implementation(project(":bot:config:supplier:bot-config-supplier-public"))
+	implementation(project(":bot:bot-config-supplier"))
 	implementation(project(":bot:bot-utils-coroutines-jda"))
 
 	implementation(libs.kotlinx.coroutines.core)
