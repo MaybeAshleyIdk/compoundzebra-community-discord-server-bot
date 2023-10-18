@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:commands:models:bot-commands-models-name"))
+	implementation(project(":bot:bot-command-name"))
 	implementation(project(":bot:commands:impl:bot-commands-impl-base"))
 	implementation(project(":bot:bot-env"))
 	implementation(project(":bot:bot-utils-coroutines-jda"))

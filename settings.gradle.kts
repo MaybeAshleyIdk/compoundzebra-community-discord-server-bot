@@ -83,10 +83,13 @@ include(
 	":bot:features:all-wiring",
 	// endregion
 
-	// region commands
-	":bot:commands:models:name",
-	":bot:commands:models:prefix",
 
+	":bot:command-name",
+
+	":bot:command-prefix",
+
+
+	// region commands
 	":bot:commands:impl:base",
 
 	":bot:commands:impl:builtins:coinflip",

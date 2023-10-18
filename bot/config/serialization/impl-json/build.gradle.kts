@@ -7,8 +7,8 @@ plugins {
 dependencies {
 	api(project(":bot:config:serialization:bot-config-serialization-public"))
 	implementation(project(":bot:config:bot-config-models"))
-	implementation(project(":bot:commands:models:bot-commands-models-name"))
-	implementation(project(":bot:commands:models:bot-commands-models-prefix"))
+	implementation(project(":bot:bot-command-name"))
+	implementation(project(":bot:bot-command-prefix"))
 
 	implementation(libs.okio)
 
