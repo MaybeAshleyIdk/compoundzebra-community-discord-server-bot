@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:config:cache:bot-config-cache-public"))
+	api(project(":bot:config-cache:bot-config-cache-api"))
 	implementation(project(":bot:config:bot-config-models"))
 	implementation(project(":bot:config:source:bot-config-source-public"))
 	implementation(project(":bot:bot-logging"))

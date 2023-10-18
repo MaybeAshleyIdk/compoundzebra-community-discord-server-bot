@@ -39,6 +39,11 @@ include(
 	":bot:config-supplier:wiring",
 	":bot:config-supplier",
 
+	":bot:config-cache:api",
+	":bot:config-cache:impl-memory",
+	":bot:config-cache:wiring",
+	":bot:config-cache",
+
 
 	// region config
 	":bot:config:models",
@@ -51,9 +56,6 @@ include(
 	":bot:config:source:impl-file",
 	":bot:config:source:wiring",
 
-	":bot:config:cache:public",
-	":bot:config:cache:impl-memory",
-	":bot:config:cache:wiring",
 
 	":bot:config:wiring",
 	// endregion

@@ -11,6 +11,7 @@ dependencies {
 	// eventually, the rest of these impl modules should be replaced with wiring ones
 	implementation(project(":bot:logging:bot-logging-wiring"))
 	implementation(project(":bot:config-supplier:bot-config-supplier-wiring"))
+	implementation(project(":bot:config-cache:bot-config-cache-wiring"))
 	implementation(project(":bot:config:bot-config-wiring"))
 	implementation(project(":bot:features:bot-features-all-wiring"))
 	implementation(project(":bot:commands:bot-commands-impl"))
