@@ -36,25 +36,25 @@ include(
 
 	":bot:config",
 
-	":bot:config-supplier:api",
-	":bot:config-supplier:impl-cache",
-	":bot:config-supplier:wiring",
-	":bot:config-supplier",
-
-	":bot:config-cache:api",
-	":bot:config-cache:impl-memory",
-	":bot:config-cache:wiring",
-	":bot:config-cache",
+	":bot:config-serialization:api",
+	":bot:config-serialization:impl-json",
+	":bot:config-serialization:wiring",
+	":bot:config-serialization",
 
 	":bot:config-source:api",
 	":bot:config-source:impl-file",
 	":bot:config-source:wiring",
 	":bot:config-source",
 
-	":bot:config-serialization:api",
-	":bot:config-serialization:impl-json",
-	":bot:config-serialization:wiring",
-	":bot:config-serialization",
+	":bot:config-cache:api",
+	":bot:config-cache:impl-memory",
+	":bot:config-cache:wiring",
+	":bot:config-cache",
+
+	":bot:config-supplier:api",
+	":bot:config-supplier:impl-cache",
+	":bot:config-supplier:wiring",
+	":bot:config-supplier",
 
 
 	// region features
