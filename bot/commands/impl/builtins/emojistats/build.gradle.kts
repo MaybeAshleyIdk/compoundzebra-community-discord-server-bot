@@ -8,7 +8,7 @@ dependencies {
 	implementation(project(":bot:bot-command-name"))
 	implementation(project(":bot:commands:impl:bot-commands-impl-base"))
 	implementation(project(":bot:features:emojistats:bot-features-emojistats-public"))
-	implementation(project(":bot:config:bot-config-models"))
+	implementation(project(":bot:bot-config"))
 	implementation(project(":bot:bot-config-supplier"))
 	implementation(project(":bot:bot-utils-coroutines-jda"))
 

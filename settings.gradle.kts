@@ -34,6 +34,8 @@ include(
 	":bot:snowflake",
 
 
+	":bot:config",
+
 	":bot:config-supplier:api",
 	":bot:config-supplier:impl-cache",
 	":bot:config-supplier:wiring",
@@ -54,10 +56,6 @@ include(
 	":bot:config-serialization:wiring",
 	":bot:config-serialization",
 
-
-	// region config
-	":bot:config:models",
-	// endregion
 
 	// region features
 	":bot:features:emojistats:public",

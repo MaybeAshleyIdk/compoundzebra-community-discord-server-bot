@@ -5,7 +5,7 @@ plugins {
 
 dependencies {
 	api(project(":bot:features:polls:bot-features-polls-public"))
-	implementation(project(":bot:config:bot-config-models"))
+	implementation(project(":bot:bot-config"))
 	implementation(project(":bot:bot-config-supplier"))
 	implementation(project(":bot:bot-snowflake"))
 	implementation(project(":bot:bot-logging"))

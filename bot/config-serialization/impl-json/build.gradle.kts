@@ -6,7 +6,7 @@ plugins {
 
 dependencies {
 	api(project(":bot:config-serialization:bot-config-serialization-api"))
-	implementation(project(":bot:config:bot-config-models"))
+	implementation(project(":bot:bot-config"))
 	implementation(project(":bot:bot-command-name"))
 	implementation(project(":bot:bot-command-prefix"))
 
