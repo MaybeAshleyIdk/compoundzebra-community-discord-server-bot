@@ -9,9 +9,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutin
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.entities.emoji.CustomEmoji
-import net.dv8tion.jda.api.interactions.DiscordLocale
 import java.text.NumberFormat
-import java.util.Locale
 import javax.inject.Inject
 
 internal class EmojiStatsCommand @Inject constructor(
@@ -57,7 +55,7 @@ internal class EmojiStatsCommand @Inject constructor(
 
 		val sb = StringBuilder()
 
-		val numberFormat: NumberFormat = NumberFormat.getIntegerInstance(catalystMessage.guild.locale.toJvmLocale())
+		val numberFormat: NumberFormat = NumberFormat.getIntegerInstance(catalystMessage.guild.locale.toLocale())
 
 		sb.append(config.strings.command.emojiStats.heading(catalystMessage.author.asMention))
 		for ((emoji: CustomEmoji, count: Long) in emojiStats) {
@@ -69,8 +67,4 @@ internal class EmojiStatsCommand @Inject constructor(
 			.editMessage(sb.toString())
 			.await()
 	}
-}
-
-private fun DiscordLocale.toJvmLocale(): Locale {
-	return (Locale.forLanguageTag(this.locale) ?: Locale.ROOT)
 }

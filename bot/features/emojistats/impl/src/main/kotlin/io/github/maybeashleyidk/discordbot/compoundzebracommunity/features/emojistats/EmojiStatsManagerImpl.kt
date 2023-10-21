@@ -125,6 +125,10 @@ public class EmojiStatsManagerImpl @Inject internal constructor(
 					}
 				}
 
+				ChannelType.MEDIA -> {
+					TODO("Media channels are not yet supported")
+				}
+
 				ChannelType.PRIVATE -> Unit
 
 				ChannelType.CATEGORY -> Unit
