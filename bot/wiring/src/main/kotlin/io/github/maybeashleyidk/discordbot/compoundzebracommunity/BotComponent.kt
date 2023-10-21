@@ -6,6 +6,7 @@ import dagger.Lazy
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.cache.ConfigCacheModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.source.ConfigSourceModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplierModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistenermediator.EventListenerMediatorModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.FeaturesModule
@@ -23,6 +24,7 @@ import net.dv8tion.jda.api.JDA as Jda
 		LoggingModule::class,
 		ConfigSupplierModule::class,
 		ConfigCacheModule::class,
+		ConfigSourceModule::class,
 		ConfigModule::class,
 		FeaturesModule::class,
 		CommandsModule::class,

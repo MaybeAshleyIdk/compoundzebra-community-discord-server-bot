@@ -44,6 +44,11 @@ include(
 	":bot:config-cache:wiring",
 	":bot:config-cache",
 
+	":bot:config-source:api",
+	":bot:config-source:impl-file",
+	":bot:config-source:wiring",
+	":bot:config-source",
+
 
 	// region config
 	":bot:config:models",
@@ -51,10 +56,6 @@ include(
 	":bot:config:serialization:public",
 	":bot:config:serialization:impl-json",
 	":bot:config:serialization:wiring",
-
-	":bot:config:source:public",
-	":bot:config:source:impl-file",
-	":bot:config:source:wiring",
 
 
 	":bot:config:wiring",
