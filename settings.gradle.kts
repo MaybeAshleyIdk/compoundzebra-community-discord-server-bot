@@ -49,16 +49,14 @@ include(
 	":bot:config-source:wiring",
 	":bot:config-source",
 
+	":bot:config-serialization:api",
+	":bot:config-serialization:impl-json",
+	":bot:config-serialization:wiring",
+	":bot:config-serialization",
+
 
 	// region config
 	":bot:config:models",
-
-	":bot:config:serialization:public",
-	":bot:config:serialization:impl-json",
-	":bot:config:serialization:wiring",
-
-
-	":bot:config:wiring",
 	// endregion
 
 	// region features
