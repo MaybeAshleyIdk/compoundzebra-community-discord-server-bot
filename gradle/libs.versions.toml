@@ -8,7 +8,7 @@ dagger = "2.48"
 [libraries]
 kotlinx-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
 
-jda = "net.dv8tion:JDA:5.0.0-beta.13"
+jda = "net.dv8tion:JDA:5.0.0-beta.15"
 
 okio = "com.squareup.okio:okio:3.5.0"
 

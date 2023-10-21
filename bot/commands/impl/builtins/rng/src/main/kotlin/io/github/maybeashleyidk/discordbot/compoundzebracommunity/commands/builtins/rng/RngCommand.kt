@@ -7,7 +7,6 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplie
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.jda.await
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
-import net.dv8tion.jda.api.interactions.DiscordLocale
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.text.DecimalFormat
@@ -65,7 +64,7 @@ public class RngCommand @Inject constructor(
 				}
 			}
 
-		val serverLocale: Locale = catalystMessage.guild.locale.toJvmLocale()
+		val serverLocale: Locale = catalystMessage.guild.locale.toLocale()
 
 		val inputFormat: NumberFormat = NumberFormat.getNumberInstance(serverLocale)
 		if (inputFormat is DecimalFormat) {
@@ -192,10 +191,6 @@ public class RngCommand @Inject constructor(
 
 private fun String.removeChar(ch: Char): String {
 	return this.replace(ch.toString(), "")
-}
-
-private fun DiscordLocale.toJvmLocale(): Locale {
-	return (Locale.forLanguageTag(this.locale) ?: Locale.ROOT)
 }
 
 private fun NumberFormat.parseEntire(source: String): BigDecimal? {
