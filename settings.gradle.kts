@@ -57,10 +57,12 @@ include(
 	":bot:config-supplier",
 
 
+	":bot:emojistats:api",
+	":bot:emojistats:impl",
+	":bot:emojistats:wiring",
+	":bot:emojistats",
+
 	// region features
-	":bot:features:emojistats:public",
-	":bot:features:emojistats:impl",
-	":bot:features:emojistats:wiring",
 
 	":bot:features:polls:public",
 	":bot:features:polls:impl",

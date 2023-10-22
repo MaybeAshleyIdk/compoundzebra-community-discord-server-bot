@@ -5,7 +5,6 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:features:emojistats:bot-features-emojistats-wiring"))
 	api(project(":bot:features:polls:bot-features-polls-wiring"))
 	api(project(":bot:features:shutdown:bot-features-shutdown-wiring"))
 

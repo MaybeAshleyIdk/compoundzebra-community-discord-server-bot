@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:features:emojistats:bot-features-emojistats-public"))
+	api(project(":bot:emojistats:bot-emojistats-api"))
 	implementation(project(":bot:bot-logging"))
 	implementation(project(":bot:bot-utils-coroutines-jda"))
 

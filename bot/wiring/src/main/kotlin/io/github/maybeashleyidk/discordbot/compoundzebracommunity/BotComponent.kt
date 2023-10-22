@@ -10,6 +10,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.source.
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplierModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistenermediator.EventListenerMediatorModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.FeaturesModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.emojistats.EmojiStatsFeatureModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownAwaiter
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.LoggingModule
@@ -26,6 +27,7 @@ import net.dv8tion.jda.api.JDA as Jda
 		ConfigCacheModule::class,
 		ConfigSourceModule::class,
 		ConfigSerializationModule::class,
+		EmojiStatsFeatureModule::class,
 		FeaturesModule::class,
 		CommandsModule::class,
 		EventListenerMediatorModule::class,
