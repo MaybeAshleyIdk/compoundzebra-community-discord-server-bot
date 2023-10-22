@@ -14,93 +14,108 @@ dependencyResolutionManagement {
 	}
 }
 
-@Suppress("ktlint:standard:no-blank-line-in-list")
+@Suppress("ktlint:standard:no-blank-line-in-list", "ktlint:standard:no-consecutive-blank-lines")
 include(
 	":bot:utils",
-	":bot:utils:coroutines:jda",
+	":bot:utils-coroutines-jda",
 
-	":bot:logging:public",
+
+	":bot:env",
+
+	":bot:token",
+
+
+	":bot:logging:api",
 	":bot:logging:impl-stderr",
 	":bot:logging:wiring",
+	":bot:logging",
+
 
 	":bot:snowflake",
 
-	// region config
-	":bot:config:models",
 
-	":bot:config:serialization:public",
-	":bot:config:serialization:impl-json",
-	":bot:config:serialization:wiring",
+	":bot:config",
 
-	":bot:config:source:public",
-	":bot:config:source:impl-file",
-	":bot:config:source:wiring",
+	":bot:config-serialization:api",
+	":bot:config-serialization:impl-json",
+	":bot:config-serialization:wiring",
+	":bot:config-serialization",
 
-	":bot:config:cache:public",
-	":bot:config:cache:impl-memory",
-	":bot:config:cache:wiring",
+	":bot:config-source:api",
+	":bot:config-source:impl-file",
+	":bot:config-source:wiring",
+	":bot:config-source",
 
-	":bot:config:supplier:public",
-	":bot:config:supplier:impl-cache",
-	":bot:config:supplier:wiring",
+	":bot:config-cache:api",
+	":bot:config-cache:impl-memory",
+	":bot:config-cache:wiring",
+	":bot:config-cache",
 
-	":bot:config:wiring",
-	// endregion
+	":bot:config-supplier:api",
+	":bot:config-supplier:impl-cache",
+	":bot:config-supplier:wiring",
+	":bot:config-supplier",
 
-	// region features
-	":bot:features:emojistats:public",
-	":bot:features:emojistats:impl",
-	":bot:features:emojistats:wiring",
 
-	":bot:features:polls:public",
-	":bot:features:polls:impl",
-	":bot:features:polls:wiring",
+	":bot:emojistats:api",
+	":bot:emojistats:impl",
+	":bot:emojistats:wiring",
+	":bot:emojistats",
 
-	// region shutdown
-	":bot:features:shutdown:manager:public",
-	":bot:features:shutdown:manager:impl-semaphore",
-	":bot:features:shutdown:manager:wiring",
 
-	":bot:features:shutdown:request:public",
-	":bot:features:shutdown:request:impl-manager",
-	":bot:features:shutdown:request:wiring",
+	":bot:polls:api",
+	":bot:polls:impl",
+	":bot:polls:wiring",
+	":bot:polls",
 
-	":bot:features:shutdown:wait:public",
-	":bot:features:shutdown:wait:impl-manager",
-	":bot:features:shutdown:wait:wiring",
 
-	":bot:features:shutdown:wiring",
-	// endregion
+	":bot:shutdown-manager:api",
+	":bot:shutdown-manager:impl-semaphore",
+	":bot:shutdown-manager:wiring",
+	":bot:shutdown-manager",
 
-	":bot:features:all-wiring",
-	// endregion
+	":bot:shutdown-wait:api",
+	":bot:shutdown-wait:impl-manager",
+	":bot:shutdown-wait:wiring",
+	":bot:shutdown-wait",
+
+	":bot:shutdown-request:api",
+	":bot:shutdown-request:impl-manager",
+	":bot:shutdown-request:wiring",
+	":bot:shutdown-request",
+
+
+	":bot:command-name",
+
+	":bot:command-prefix",
+
 
 	// region commands
-	":bot:commands:models:name",
-	":bot:commands:models:prefix",
+	":bot:commands:base",
 
-	":bot:commands:impl:base",
+	":bot:commands:builtins:coinflip",
+	":bot:commands:builtins:config",
+	":bot:commands:builtins:dev",
+	":bot:commands:builtins:emojistats",
+	":bot:commands:builtins:magic8ball",
+	":bot:commands:builtins:polls",
+	":bot:commands:builtins:rng",
+	":bot:commands:builtins:shutdown",
+	":bot:commands:builtins:all-wiring",
 
-	":bot:commands:impl:builtins:coinflip",
-	":bot:commands:impl:builtins:config",
-	":bot:commands:impl:builtins:dev",
-	":bot:commands:impl:builtins:emojistats",
-	":bot:commands:impl:builtins:magic8ball",
-	":bot:commands:impl:builtins:polls",
-	":bot:commands:impl:builtins:rng",
-	":bot:commands:impl:builtins:shutdown",
-	":bot:commands:impl:builtins:all-wiring",
-
-	":bot:commands:impl",
+	":bot:commands:echo-command",
+	":bot:commands:event-handler",
+	":bot:commands:wiring",
 	// endregion
 
-	":bot:conditionalmessages",
 
-	":bot:eventlistenermediator:impl",
-	":bot:eventlistenermediator:wiring",
+	":bot:conditional-messages",
 
-	":bot:models:env",
-	":bot:models:token",
+
+	":bot:message-event-handler-mediator:impl",
+	":bot:message-event-handler-mediator:wiring",
+
+
 	":bot:wiring",
 	":bot:main",
 	":bot",

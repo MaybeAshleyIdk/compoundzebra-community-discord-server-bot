@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:models:bot-models-env"))
-	api(project(":bot:models:bot-models-token"))
+	api(project(":bot:bot-env"))
+	api(project(":bot:bot-token"))
 	api(project(":bot:bot-main"))
 }

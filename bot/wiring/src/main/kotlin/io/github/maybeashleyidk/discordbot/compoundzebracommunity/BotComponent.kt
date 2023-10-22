@@ -4,10 +4,17 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.Lazy
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandsModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConfigModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.cache.ConfigCacheModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.serialization.ConfigSerializationModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.source.ConfigSourceModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplierModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistenermediator.EventListenerMediatorModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.FeaturesModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.emojistats.EmojiStatsFeatureModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollsFeatureModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.manager.ShutdownManagerFeatureModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.request.ShutdownRequestFeatureModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownAwaiter
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownWaitFeatureModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.LoggingModule
 import net.dv8tion.jda.api.entities.Activity
@@ -19,8 +26,15 @@ import net.dv8tion.jda.api.JDA as Jda
 	modules = [
 		BotModule::class,
 		LoggingModule::class,
-		ConfigModule::class,
-		FeaturesModule::class,
+		ConfigSupplierModule::class,
+		ConfigCacheModule::class,
+		ConfigSourceModule::class,
+		ConfigSerializationModule::class,
+		EmojiStatsFeatureModule::class,
+		PollsFeatureModule::class,
+		ShutdownManagerFeatureModule::class,
+		ShutdownWaitFeatureModule::class,
+		ShutdownRequestFeatureModule::class,
 		CommandsModule::class,
 		EventListenerMediatorModule::class,
 	],
