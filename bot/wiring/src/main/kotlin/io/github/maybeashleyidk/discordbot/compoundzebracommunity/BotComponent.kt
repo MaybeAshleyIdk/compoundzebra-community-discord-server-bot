@@ -9,9 +9,9 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.seriali
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.source.ConfigSourceModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplierModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistenermediator.EventListenerMediatorModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.FeaturesModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.emojistats.EmojiStatsFeatureModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollsFeatureModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.manager.ShutdownManagerFeatureModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.request.ShutdownRequestFeatureModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownAwaiter
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownWaitFeatureModule
@@ -32,9 +32,9 @@ import net.dv8tion.jda.api.JDA as Jda
 		ConfigSerializationModule::class,
 		EmojiStatsFeatureModule::class,
 		PollsFeatureModule::class,
+		ShutdownManagerFeatureModule::class,
 		ShutdownWaitFeatureModule::class,
 		ShutdownRequestFeatureModule::class,
-		FeaturesModule::class,
 		CommandsModule::class,
 		EventListenerMediatorModule::class,
 	],

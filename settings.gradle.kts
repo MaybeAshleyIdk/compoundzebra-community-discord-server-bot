@@ -69,6 +69,11 @@ include(
 	":bot:polls",
 
 
+	":bot:shutdown-manager:api",
+	":bot:shutdown-manager:impl-semaphore",
+	":bot:shutdown-manager:wiring",
+	":bot:shutdown-manager",
+
 	":bot:shutdown-wait:api",
 	":bot:shutdown-wait:impl-manager",
 	":bot:shutdown-wait:wiring",
@@ -78,18 +83,6 @@ include(
 	":bot:shutdown-request:impl-manager",
 	":bot:shutdown-request:wiring",
 	":bot:shutdown-request",
-
-	// region features
-	// region shutdown
-	":bot:features:shutdown:manager:public",
-	":bot:features:shutdown:manager:impl-semaphore",
-	":bot:features:shutdown:manager:wiring",
-
-	":bot:features:shutdown:wiring",
-	// endregion
-
-	":bot:features:all-wiring",
-	// endregion
 
 
 	":bot:command-name",
