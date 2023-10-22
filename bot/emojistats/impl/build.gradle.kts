@@ -4,9 +4,9 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:emojistats:bot-emojistats-api"))
-	implementation(project(":bot:bot-logging"))
-	implementation(project(":bot:bot-utils-coroutines-jda"))
+	api(project(":bot:emojistats:api"))
+	implementation(project(":bot:logging"))
+	implementation(project(":bot:utils-coroutines-jda"))
 
 	implementation(libs.kotlinx.coroutines.core)
 

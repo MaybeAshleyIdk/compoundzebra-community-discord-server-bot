@@ -118,3 +118,34 @@ tasks.clean {
 }
 
 // endregion
+
+// region broken tasks
+
+// Gradle has issues because we have multiple modules with the same name ('api', 'impl' and 'wiring')
+// the fix for that is to use shadow JAR
+
+tasks.distTar {
+	doFirst {
+		val msg: String = "This task is broken because of duplicate module names." +
+			" Use the ${tasks.shadowDistTar.get()} instead"
+		error(msg)
+	}
+}
+
+tasks.distZip {
+	doFirst {
+		val msg: String = "This task is broken because of duplicate module names." +
+			" Use the ${tasks.shadowDistZip.get()} instead"
+		error(msg)
+	}
+}
+
+tasks.installDist {
+	doFirst {
+		val msg: String = "This task is broken because of duplicate module names." +
+			" Use the ${tasks.installShadowDist.get()} instead"
+		error(msg)
+	}
+}
+
+// endregion

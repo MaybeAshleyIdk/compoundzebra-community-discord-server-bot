@@ -4,12 +4,12 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:polls:bot-polls-api"))
-	implementation(project(":bot:bot-config"))
-	implementation(project(":bot:bot-config-supplier"))
-	implementation(project(":bot:bot-snowflake-generator"))
-	implementation(project(":bot:bot-logging"))
-	implementation(project(":bot:bot-utils-coroutines-jda"))
+	api(project(":bot:polls:api"))
+	implementation(project(":bot:config"))
+	implementation(project(":bot:config-supplier"))
+	implementation(project(":bot:snowflake-generator"))
+	implementation(project(":bot:logging"))
+	implementation(project(":bot:utils-coroutines-jda"))
 
 	implementation(libs.kotlinx.coroutines.core)
 

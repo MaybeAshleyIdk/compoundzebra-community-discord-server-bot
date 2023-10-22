@@ -3,5 +3,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:logging:bot-logging-api"))
+	api(project(":bot:logging:api"))
 }

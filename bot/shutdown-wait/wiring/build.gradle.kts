@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:shutdown-wait:bot-shutdown-wait-impl-manager"))
+	api(project(":bot:shutdown-wait:impl-manager"))
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)

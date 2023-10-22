@@ -5,12 +5,12 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:bot-command-name"))
-	api(project(":bot:commands:bot-commands-base"))
-	api(project(":bot:commands:bot-commands-echo-command"))
-	api(project(":bot:commands:builtins:bot-commands-builtins-all-wiring"))
-	implementation(project(":bot:bot-config"))
-	implementation(project(":bot:bot-config-supplier"))
+	implementation(project(":bot:command-name"))
+	api(project(":bot:commands:base"))
+	api(project(":bot:commands:echo-command"))
+	api(project(":bot:commands:builtins:all-wiring"))
+	implementation(project(":bot:config"))
+	implementation(project(":bot:config-supplier"))
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)

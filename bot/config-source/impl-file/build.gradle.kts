@@ -4,10 +4,10 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:config-source:bot-config-source-api"))
-	implementation(project(":bot:bot-config"))
-	implementation(project(":bot:bot-config-serialization"))
-	implementation(project(":bot:bot-env"))
+	api(project(":bot:config-source:api"))
+	implementation(project(":bot:config"))
+	implementation(project(":bot:config-serialization"))
+	implementation(project(":bot:env"))
 
 	implementation(libs.okio)
 

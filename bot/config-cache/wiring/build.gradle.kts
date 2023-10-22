@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:config-cache:bot-config-cache-impl-memory"))
+	api(project(":bot:config-cache:impl-memory"))
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)

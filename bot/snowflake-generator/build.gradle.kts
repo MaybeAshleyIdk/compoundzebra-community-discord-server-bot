@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:bot-snowflake"))
+	api(project(":bot:snowflake"))
 }

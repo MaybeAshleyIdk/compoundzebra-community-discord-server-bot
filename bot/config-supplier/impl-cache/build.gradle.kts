@@ -4,9 +4,9 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:config-supplier:bot-config-supplier-api"))
-	implementation(project(":bot:bot-config"))
-	implementation(project(":bot:bot-config-cache"))
+	api(project(":bot:config-supplier:api"))
+	implementation(project(":bot:config"))
+	implementation(project(":bot:config-cache"))
 
 	implementation(libs.javax.inject)
 }

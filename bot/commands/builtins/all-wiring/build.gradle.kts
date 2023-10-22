@@ -5,13 +5,13 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:commands:builtins:bot-commands-builtins-coinflip"))
-	api(project(":bot:commands:builtins:bot-commands-builtins-config"))
-	api(project(":bot:commands:builtins:bot-commands-builtins-dev"))
-	api(project(":bot:commands:builtins:bot-commands-builtins-magic8ball"))
-	api(project(":bot:commands:builtins:bot-commands-builtins-polls"))
-	api(project(":bot:commands:builtins:bot-commands-builtins-rng"))
-	api(project(":bot:commands:builtins:bot-commands-builtins-shutdown"))
+	api(project(":bot:commands:builtins:coinflip"))
+	api(project(":bot:commands:builtins:config"))
+	api(project(":bot:commands:builtins:dev"))
+	api(project(":bot:commands:builtins:magic8ball"))
+	api(project(":bot:commands:builtins:polls"))
+	api(project(":bot:commands:builtins:rng"))
+	api(project(":bot:commands:builtins:shutdown"))
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)
