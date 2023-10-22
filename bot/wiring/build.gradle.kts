@@ -18,7 +18,7 @@ dependencies {
 	implementation(project(":bot:shutdown-manager:bot-shutdown-manager-wiring"))
 	implementation(project(":bot:shutdown-wait:bot-shutdown-wait-wiring"))
 	implementation(project(":bot:shutdown-request:bot-shutdown-request-wiring"))
-	implementation(project(":bot:commands:impl:bot-commands-impl-wiring"))
+	implementation(project(":bot:commands:bot-commands-wiring"))
 	implementation(project(":bot:message-event-handler-mediator:bot-message-event-handler-mediator-wiring"))
 
 	implementation(libs.jda) {

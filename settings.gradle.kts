@@ -91,21 +91,21 @@ include(
 
 
 	// region commands
-	":bot:commands:impl:base",
+	":bot:commands:base",
 
-	":bot:commands:impl:builtins:coinflip",
-	":bot:commands:impl:builtins:config",
-	":bot:commands:impl:builtins:dev",
-	":bot:commands:impl:builtins:emojistats",
-	":bot:commands:impl:builtins:magic8ball",
-	":bot:commands:impl:builtins:polls",
-	":bot:commands:impl:builtins:rng",
-	":bot:commands:impl:builtins:shutdown",
-	":bot:commands:impl:builtins:all-wiring",
+	":bot:commands:builtins:coinflip",
+	":bot:commands:builtins:config",
+	":bot:commands:builtins:dev",
+	":bot:commands:builtins:emojistats",
+	":bot:commands:builtins:magic8ball",
+	":bot:commands:builtins:polls",
+	":bot:commands:builtins:rng",
+	":bot:commands:builtins:shutdown",
+	":bot:commands:builtins:all-wiring",
 
-	":bot:commands:impl:echo-command",
-	":bot:commands:impl:event-handler",
-	":bot:commands:impl:wiring",
+	":bot:commands:echo-command",
+	":bot:commands:event-handler",
+	":bot:commands:wiring",
 	// endregion
 
 

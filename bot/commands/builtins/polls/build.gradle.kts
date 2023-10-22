@@ -6,8 +6,11 @@ plugins {
 
 dependencies {
 	implementation(project(":bot:bot-command-name"))
-	implementation(project(":bot:bot-command-prefix"))
-	implementation(project(":bot:commands:impl:bot-commands-impl-base"))
+	implementation(project(":bot:commands:bot-commands-base"))
+	implementation(project(":bot:bot-polls"))
+	implementation(project(":bot:bot-config"))
+	implementation(project(":bot:bot-config-supplier"))
+	implementation(project(":bot:bot-utils"))
 	implementation(project(":bot:bot-utils-coroutines-jda"))
 
 	implementation(libs.kotlinx.coroutines.core)

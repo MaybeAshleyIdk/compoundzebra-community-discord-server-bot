@@ -6,11 +6,16 @@ plugins {
 
 dependencies {
 	implementation(project(":bot:bot-command-name"))
-	api(project(":bot:commands:impl:bot-commands-impl-base"))
-	api(project(":bot:commands:impl:bot-commands-impl-echo-command"))
-	api(project(":bot:commands:impl:builtins:bot-commands-impl-builtins-all-wiring"))
+	implementation(project(":bot:commands:bot-commands-base"))
 	implementation(project(":bot:bot-config"))
 	implementation(project(":bot:bot-config-supplier"))
+	implementation(project(":bot:bot-utils-coroutines-jda"))
+
+	implementation(libs.kotlinx.coroutines.core)
+
+	implementation(libs.jda) {
+		exclude(module = "opus-java")
+	}
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)
