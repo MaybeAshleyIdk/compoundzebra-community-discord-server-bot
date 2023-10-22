@@ -106,7 +106,8 @@ include(
 	":bot:commands:impl",
 	// endregion
 
-	":bot:conditionalmessages",
+
+	":bot:conditional-messages",
 
 
 	":bot:message-event-handler-mediator:impl",

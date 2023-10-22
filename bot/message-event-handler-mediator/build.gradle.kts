@@ -5,7 +5,7 @@ plugins {
 
 dependencies {
 	implementation(project(":bot:commands:bot-commands-impl"))
-	implementation(project(":bot:bot-conditionalmessages"))
+	implementation(project(":bot:bot-conditional-messages"))
 
 	implementation(libs.kotlinx.coroutines.core)
 
