@@ -108,8 +108,10 @@ include(
 
 	":bot:conditionalmessages",
 
-	":bot:eventlistenermediator:impl",
-	":bot:eventlistenermediator:wiring",
+
+	":bot:message-event-handler-mediator:impl",
+	":bot:message-event-handler-mediator:wiring",
+
 
 	":bot:wiring",
 	":bot:main",

@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:eventlistenermediator:bot-eventlistenermediator-impl"))
+	api(project(":bot:message-event-handler-mediator:bot-message-event-handler-mediator-impl"))
 
 	implementation(libs.jda) {
 		exclude(module = "opus-java")

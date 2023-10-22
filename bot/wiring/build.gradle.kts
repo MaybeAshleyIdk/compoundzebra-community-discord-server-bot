@@ -20,7 +20,7 @@ dependencies {
 	implementation(project(":bot:shutdown-wait:bot-shutdown-wait-wiring"))
 	implementation(project(":bot:shutdown-request:bot-shutdown-request-wiring"))
 	implementation(project(":bot:commands:bot-commands-impl"))
-	implementation(project(":bot:eventlistenermediator:bot-eventlistenermediator-wiring"))
+	implementation(project(":bot:message-event-handler-mediator:bot-message-event-handler-mediator-wiring"))
 
 	implementation(libs.jda) {
 		exclude(module = "opus-java")
