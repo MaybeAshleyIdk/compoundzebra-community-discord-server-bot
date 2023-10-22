@@ -8,7 +8,6 @@ dependencies {
 	implementation(project(":bot:bot-env"))
 	implementation(project(":bot:bot-token"))
 
-	// eventually, the rest of these impl modules should be replaced with wiring ones
 	implementation(project(":bot:logging:bot-logging-wiring"))
 	implementation(project(":bot:config-supplier:bot-config-supplier-wiring"))
 	implementation(project(":bot:config-cache:bot-config-cache-wiring"))
@@ -19,7 +18,7 @@ dependencies {
 	implementation(project(":bot:shutdown-manager:bot-shutdown-manager-wiring"))
 	implementation(project(":bot:shutdown-wait:bot-shutdown-wait-wiring"))
 	implementation(project(":bot:shutdown-request:bot-shutdown-request-wiring"))
-	implementation(project(":bot:commands:bot-commands-impl"))
+	implementation(project(":bot:commands:impl:bot-commands-impl-wiring"))
 	implementation(project(":bot:message-event-handler-mediator:bot-message-event-handler-mediator-wiring"))
 
 	implementation(libs.jda) {

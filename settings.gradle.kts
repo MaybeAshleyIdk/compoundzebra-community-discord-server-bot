@@ -105,7 +105,7 @@ include(
 
 	":bot:commands:impl:echo-command",
 	":bot:commands:impl:event-handler",
-	":bot:commands:impl",
+	":bot:commands:impl:wiring",
 	// endregion
 
 
