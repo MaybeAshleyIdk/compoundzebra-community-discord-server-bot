@@ -103,6 +103,7 @@ include(
 	":bot:commands:impl:builtins:shutdown",
 	":bot:commands:impl:builtins:all-wiring",
 
+	":bot:commands:impl:echo-command",
 	":bot:commands:impl",
 	// endregion
 

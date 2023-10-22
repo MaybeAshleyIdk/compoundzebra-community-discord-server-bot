@@ -7,15 +7,15 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutin
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 
-internal class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInject constructor(
+public class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInject constructor(
 	@Assisted("name") nameString: String,
 	@Assisted("responseMessage") private val responseMessage: String,
 ) : Command(CommandName.ofString(nameString)) {
 
 	@AssistedFactory
-	fun interface Factory {
+	public fun interface Factory {
 
-		fun build(@Assisted("name") nameString: String, @Assisted("responseMessage") responseMessage: String): EchoCommand
+		public fun build(@Assisted("name") nameString: String, @Assisted("responseMessage") responseMessage: String): EchoCommand
 	}
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
@@ -23,7 +23,7 @@ internal class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInje
 	}
 }
 
-internal fun EchoCommand.Factory.build(name: CommandName, responseMessage: String): EchoCommand {
+public fun EchoCommand.Factory.build(name: CommandName, responseMessage: String): EchoCommand {
 	return this.build(
 		nameString = name.string,
 		responseMessage = responseMessage,
