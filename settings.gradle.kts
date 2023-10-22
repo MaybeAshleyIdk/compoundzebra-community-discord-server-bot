@@ -104,6 +104,7 @@ include(
 	":bot:commands:impl:builtins:all-wiring",
 
 	":bot:commands:impl:echo-command",
+	":bot:commands:impl:event-handler",
 	":bot:commands:impl",
 	// endregion
 
