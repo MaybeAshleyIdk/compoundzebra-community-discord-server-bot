@@ -7,6 +7,7 @@ plugins {
 	alias(libs.plugins.ksp) apply false
 
 	alias(libs.plugins.ktlint) apply false
+	alias(libs.plugins.shadow) apply false
 }
 
 val javaCompatibilityVersion: JavaVersion = JavaVersion.VERSION_17
