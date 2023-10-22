@@ -32,6 +32,7 @@ include(
 
 
 	":bot:snowflake",
+	":bot:snowflake-generator",
 
 
 	":bot:config",
