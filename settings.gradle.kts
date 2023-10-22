@@ -68,6 +68,12 @@ include(
 	":bot:polls:wiring",
 	":bot:polls",
 
+
+	":bot:shutdown-wait:api",
+	":bot:shutdown-wait:impl-manager",
+	":bot:shutdown-wait:wiring",
+	":bot:shutdown-wait",
+
 	// region features
 	// region shutdown
 	":bot:features:shutdown:manager:public",
@@ -77,10 +83,6 @@ include(
 	":bot:features:shutdown:request:public",
 	":bot:features:shutdown:request:impl-manager",
 	":bot:features:shutdown:request:wiring",
-
-	":bot:features:shutdown:wait:public",
-	":bot:features:shutdown:wait:impl-manager",
-	":bot:features:shutdown:wait:wiring",
 
 	":bot:features:shutdown:wiring",
 	// endregion

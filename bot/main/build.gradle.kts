@@ -9,7 +9,7 @@ dependencies {
 	implementation(project(":bot:bot-wiring"))
 
 	implementation(project(":bot:bot-logging"))
-	implementation(project(":bot:features:shutdown:wait:bot-features-shutdown-wait-public"))
+	implementation(project(":bot:bot-shutdown-wait"))
 
 	implementation(libs.jda) {
 		exclude(module = "opus-java")

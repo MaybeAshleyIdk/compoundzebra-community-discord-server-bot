@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:features:shutdown:wait:bot-features-shutdown-wait-public"))
+	api(project(":bot:shutdown-wait:bot-shutdown-wait-api"))
 
 	implementation(project(":bot:features:shutdown:manager:bot-features-shutdown-manager-public"))
 
