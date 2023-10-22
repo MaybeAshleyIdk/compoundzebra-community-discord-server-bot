@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:features:shutdown:request:bot-features-shutdown-request-public"))
+	api(project(":bot:shutdown-request:bot-shutdown-request-api"))
 
 	implementation(project(":bot:features:shutdown:manager:bot-features-shutdown-manager-public"))
 

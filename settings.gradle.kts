@@ -74,15 +74,16 @@ include(
 	":bot:shutdown-wait:wiring",
 	":bot:shutdown-wait",
 
+	":bot:shutdown-request:api",
+	":bot:shutdown-request:impl-manager",
+	":bot:shutdown-request:wiring",
+	":bot:shutdown-request",
+
 	// region features
 	// region shutdown
 	":bot:features:shutdown:manager:public",
 	":bot:features:shutdown:manager:impl-semaphore",
 	":bot:features:shutdown:manager:wiring",
-
-	":bot:features:shutdown:request:public",
-	":bot:features:shutdown:request:impl-manager",
-	":bot:features:shutdown:request:wiring",
 
 	":bot:features:shutdown:wiring",
 	// endregion

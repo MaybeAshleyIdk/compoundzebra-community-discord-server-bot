@@ -12,6 +12,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistenerm
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.FeaturesModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.emojistats.EmojiStatsFeatureModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollsFeatureModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.request.ShutdownRequestFeatureModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownAwaiter
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownWaitFeatureModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
@@ -32,6 +33,7 @@ import net.dv8tion.jda.api.JDA as Jda
 		EmojiStatsFeatureModule::class,
 		PollsFeatureModule::class,
 		ShutdownWaitFeatureModule::class,
+		ShutdownRequestFeatureModule::class,
 		FeaturesModule::class,
 		CommandsModule::class,
 		EventListenerMediatorModule::class,

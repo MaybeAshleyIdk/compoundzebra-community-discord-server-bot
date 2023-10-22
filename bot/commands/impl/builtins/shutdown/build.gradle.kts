@@ -8,7 +8,7 @@ dependencies {
 	implementation(project(":bot:bot-command-name"))
 	implementation(project(":bot:commands:impl:bot-commands-impl-base"))
 	implementation(project(":bot:bot-config"))
-	implementation(project(":bot:features:shutdown:request:bot-features-shutdown-request-public"))
+	implementation(project(":bot:bot-shutdown-request"))
 	implementation(project(":bot:bot-config-supplier"))
 	implementation(project(":bot:bot-utils-coroutines-jda"))
 
