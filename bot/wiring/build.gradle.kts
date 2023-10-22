@@ -15,6 +15,7 @@ dependencies {
 	implementation(project(":bot:config-source:bot-config-source-wiring"))
 	implementation(project(":bot:config-serialization:bot-config-serialization-wiring"))
 	implementation(project(":bot:emojistats:bot-emojistats-wiring"))
+	implementation(project(":bot:polls:bot-polls-wiring"))
 	implementation(project(":bot:features:bot-features-all-wiring"))
 	implementation(project(":bot:commands:bot-commands-impl"))
 	implementation(project(":bot:eventlistenermediator:bot-eventlistenermediator-wiring"))

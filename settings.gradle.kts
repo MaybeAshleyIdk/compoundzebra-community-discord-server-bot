@@ -62,12 +62,13 @@ include(
 	":bot:emojistats:wiring",
 	":bot:emojistats",
 
+
+	":bot:polls:api",
+	":bot:polls:impl",
+	":bot:polls:wiring",
+	":bot:polls",
+
 	// region features
-
-	":bot:features:polls:public",
-	":bot:features:polls:impl",
-	":bot:features:polls:wiring",
-
 	// region shutdown
 	":bot:features:shutdown:manager:public",
 	":bot:features:shutdown:manager:impl-semaphore",
