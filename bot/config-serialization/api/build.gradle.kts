@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:bot-config"))
+	implementation(project(":bot:config"))
 
 	implementation(libs.okio)
 }

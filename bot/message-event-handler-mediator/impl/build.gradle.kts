@@ -4,8 +4,8 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:commands:bot-commands-event-handler"))
-	api(project(":bot:bot-conditional-messages"))
+	api(project(":bot:commands:event-handler"))
+	api(project(":bot:conditional-messages"))
 
 	implementation(libs.kotlinx.coroutines.core)
 

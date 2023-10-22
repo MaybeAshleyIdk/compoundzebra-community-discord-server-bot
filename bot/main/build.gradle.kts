@@ -4,12 +4,12 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:bot-env"))
-	implementation(project(":bot:bot-token"))
-	implementation(project(":bot:bot-wiring"))
+	implementation(project(":bot:env"))
+	implementation(project(":bot:token"))
+	implementation(project(":bot:wiring"))
 
-	implementation(project(":bot:bot-logging"))
-	implementation(project(":bot:bot-shutdown-wait"))
+	implementation(project(":bot:logging"))
+	implementation(project(":bot:shutdown-wait"))
 
 	implementation(libs.jda) {
 		exclude(module = "opus-java")

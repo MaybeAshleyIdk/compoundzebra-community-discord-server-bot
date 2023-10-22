@@ -4,9 +4,9 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:bot-config"))
-	implementation(project(":bot:bot-config-supplier"))
-	implementation(project(":bot:bot-utils-coroutines-jda"))
+	implementation(project(":bot:config"))
+	implementation(project(":bot:config-supplier"))
+	implementation(project(":bot:utils-coroutines-jda"))
 
 	implementation(libs.kotlinx.coroutines.core)
 

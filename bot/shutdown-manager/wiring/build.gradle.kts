@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:shutdown-manager:bot-shutdown-manager-impl-semaphore"))
+	api(project(":bot:shutdown-manager:impl-semaphore"))
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)

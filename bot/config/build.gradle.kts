@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:bot-command-name"))
-	implementation(project(":bot:bot-command-prefix"))
-	implementation(project(":bot:bot-env"))
+	implementation(project(":bot:command-name"))
+	implementation(project(":bot:command-prefix"))
+	implementation(project(":bot:env"))
 }

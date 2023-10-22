@@ -20,5 +20,6 @@ dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" 
 dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
 
 [plugins]
+shadow = "com.github.johnrengelman.shadow:8.1.1"
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ktlint = "io.github.mfederczuk.ktlint:0.1.0-indev06"

@@ -123,18 +123,3 @@ include(
 
 	":main",
 )
-
-// stupid hacky workaround because gradle has problems if multiple modules have the same name
-fun ensureProjectNamesAreUniqueRecursively(project: ProjectDescriptor) {
-	project.children
-		.forEach(::ensureProjectNamesAreUniqueRecursively)
-
-	if (project.buildFile.exists()) {
-		project.name = project.path
-			.removePrefix(":")
-			.replace(':', '-')
-	}
-}
-
-rootProject.children
-	.forEach(::ensureProjectNamesAreUniqueRecursively)

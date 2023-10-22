@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:logging:bot-logging-impl-stderr"))
+	api(project(":bot:logging:impl-stderr"))
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)
