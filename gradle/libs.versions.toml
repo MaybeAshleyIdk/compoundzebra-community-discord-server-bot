@@ -8,7 +8,7 @@ dagger = "2.48.1"
 [libraries]
 kotlinx-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
 
-jda = "net.dv8tion:JDA:5.0.0-beta.15"
+jda = "net.dv8tion:JDA:5.0.0-beta.16"
 
 okio = "com.squareup.okio:okio:3.6.0"
 
@@ -22,4 +22,4 @@ dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", versi
 [plugins]
 shadow = "com.github.johnrengelman.shadow:8.1.1"
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-ktlint = "io.github.mfederczuk.ktlint:0.1.0-indev06"
+ktlint = "io.github.mfederczuk.ktlint:0.1.0-indev08"
