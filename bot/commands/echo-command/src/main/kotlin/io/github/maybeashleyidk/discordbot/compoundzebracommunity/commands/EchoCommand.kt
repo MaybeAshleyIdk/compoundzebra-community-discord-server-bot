@@ -15,7 +15,10 @@ public class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInject
 	@AssistedFactory
 	public fun interface Factory {
 
-		public fun build(@Assisted("name") nameString: String, @Assisted("responseMessage") responseMessage: String): EchoCommand
+		public fun build(
+			@Assisted("name") nameString: String,
+			@Assisted("responseMessage") responseMessage: String,
+		): EchoCommand
 	}
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
