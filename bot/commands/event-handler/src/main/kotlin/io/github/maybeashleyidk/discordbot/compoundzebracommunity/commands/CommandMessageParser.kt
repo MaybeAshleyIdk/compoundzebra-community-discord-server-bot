@@ -2,7 +2,6 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.indexOfFirst
 import javax.inject.Inject
 
 internal data class CommandLine(
@@ -163,4 +162,17 @@ private fun parseNextArgument(string: String, startIndex: Int): Pair<String, Int
 
 		string.substring(i + 1, argumentEndIndex) to (argumentEndIndex + 1)
 	}
+}
+
+private inline fun String.indexOfFirst(startIndex: Int, predicate: (Char) -> Boolean): Int {
+	var i: Int = startIndex
+	while (i < this.length) {
+		if (predicate(this[i])) {
+			return i
+		}
+
+		++i
+	}
+
+	return -1
 }

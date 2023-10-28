@@ -10,7 +10,6 @@ dependencies {
 	implementation(project(":bot:config"))
 	implementation(project(":bot:config-supplier"))
 	implementation(project(":bot:logging"))
-	implementation(project(":bot:utils"))
 	implementation(project(":bot:utils-coroutines-jda"))
 
 	implementation(libs.kotlinx.coroutines.core)
