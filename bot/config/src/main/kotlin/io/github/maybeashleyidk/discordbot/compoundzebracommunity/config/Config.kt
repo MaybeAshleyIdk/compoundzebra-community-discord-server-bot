@@ -27,7 +27,7 @@ public data class LanguageStrings(
 		}
 
 		public fun unknownCommand(commandName: CommandName): String {
-			return this.unknownCommandFormat.format(commandName.string)
+			return this.unknownCommandFormat.format(commandName.toString())
 		}
 	}
 

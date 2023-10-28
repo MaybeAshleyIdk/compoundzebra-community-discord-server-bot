@@ -12,7 +12,7 @@ internal data class CommandLine(
 
 	override fun toString(): String {
 		return buildString {
-			this@buildString.append(this@CommandLine.commandName.string)
+			this@buildString.append(this@CommandLine.commandName.toString())
 
 			this@CommandLine.arguments.forEach { argument: String ->
 				this@buildString.append(' ')
@@ -44,12 +44,12 @@ internal class CommandMessageParser @Suppress("ktlint:standard:annotation") @Inj
 
 		val preparedContent: String = content.trimStart()
 
-		if (!(preparedContent.startsWith(config.commandPrefix.string))) {
+		if (!(preparedContent.startsWith(config.commandPrefix.toString()))) {
 			return CommandMessageParseResult.NotACommandMessage
 		}
 
 		val commandLineStr: String = preparedContent
-			.removePrefix(config.commandPrefix.string)
+			.removePrefix(config.commandPrefix.toString())
 			.trim()
 
 		return parseCommandLineString(commandLineStr)
@@ -76,7 +76,7 @@ private fun parseCommandLineString(string: String): CommandMessageParseResult {
 			}
 		}
 
-	var i: Int = commandName.string.length
+	var i: Int = commandName.toString().length
 
 	// skipping (possible) whitespace between command name and arguments
 	while ((i < string.length) && string[i].isWhitespace()) {
@@ -117,7 +117,7 @@ private fun parseBeginningCommandName(string: String): CommandNameParseResult {
 
 	val commandNameStr: String = string.take(commandNameEndIndex)
 
-	if (!(CommandName.isValidCommandName(commandNameStr))) {
+	if (!(CommandName.isValid(commandNameStr))) {
 		return CommandNameParseResult.InvalidName(commandNameStr)
 	}
 

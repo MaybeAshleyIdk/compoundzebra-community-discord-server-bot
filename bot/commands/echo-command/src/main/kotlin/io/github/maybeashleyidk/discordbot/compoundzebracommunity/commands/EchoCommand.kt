@@ -28,7 +28,7 @@ public class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInject
 
 public fun EchoCommand.Factory.build(name: CommandName, responseMessage: String): EchoCommand {
 	return this.build(
-		nameString = name.string,
+		nameString = name.toString(),
 		responseMessage = responseMessage,
 	)
 }
