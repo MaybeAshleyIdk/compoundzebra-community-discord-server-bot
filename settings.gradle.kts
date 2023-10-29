@@ -111,6 +111,9 @@ include(
 	// endregion
 
 
+	":bot:conditional-messages:api",
+	":bot:conditional-messages:impl",
+	":bot:conditional-messages:wiring",
 	":bot:conditional-messages",
 
 

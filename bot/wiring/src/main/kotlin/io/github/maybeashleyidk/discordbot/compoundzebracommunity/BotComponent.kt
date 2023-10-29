@@ -4,6 +4,7 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.Lazy
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalmessages.ConditionalMessagesModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.cache.ConfigCacheModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.serialization.ConfigSerializationModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.source.ConfigSourceModule
@@ -36,6 +37,7 @@ import net.dv8tion.jda.api.JDA as Jda
 		ShutdownWaitFeatureModule::class,
 		ShutdownRequestFeatureModule::class,
 		CommandsModule::class,
+		ConditionalMessagesModule::class,
 		MessageEventHandlerMediatorModule::class,
 	],
 )

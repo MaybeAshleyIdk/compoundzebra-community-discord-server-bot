@@ -12,11 +12,11 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.requests.RestAction
 import javax.inject.Inject
 
-public class ConditionalMessageEventHandler @Inject constructor(
+public class ConditionalMessageEventHandlerImpl @Inject constructor(
 	private val configSupplier: ConfigSupplier,
-) {
+) : ConditionalMessageEventHandler {
 
-	public suspend fun handleEvent(event: GenericEvent) {
+	public override suspend fun handleEvent(event: GenericEvent) {
 		if (event !is MessageReceivedEvent) {
 			return
 		}
