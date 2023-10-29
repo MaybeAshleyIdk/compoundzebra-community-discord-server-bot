@@ -74,10 +74,10 @@ internal class ConfigModelAdapter @Suppress("ktlint:standard:annotation") @Injec
 				commandShutdownInsufficientPermissions = config.strings.command.shutdown.insufficientPermissions,
 			),
 			botAdminUserIds = config.botAdminUserIds.ifEmpty { null },
-			commandPrefix = config.commandPrefix.string,
+			commandPrefix = config.commandPrefix.toString(),
 			commands = config.commandDefinitions
 				.associate { commandDefinition: CommandDefinition ->
-					commandDefinition.commandName.string to commandDefinition.toCommandDetailsJson()
+					commandDefinition.commandName.toString() to commandDefinition.toCommandDetailsJson()
 				}
 				.ifEmpty { null },
 			conditionalMessages = config.conditionalMessages.mapToConditionalMessagesJson().ifEmpty { null },

@@ -2,7 +2,6 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.indexOfFirst
 import javax.inject.Inject
 
 internal data class CommandLine(
@@ -12,7 +11,7 @@ internal data class CommandLine(
 
 	override fun toString(): String {
 		return buildString {
-			this@buildString.append(this@CommandLine.commandName.string)
+			this@buildString.append(this@CommandLine.commandName.toString())
 
 			this@CommandLine.arguments.forEach { argument: String ->
 				this@buildString.append(' ')
@@ -44,12 +43,12 @@ internal class CommandMessageParser @Suppress("ktlint:standard:annotation") @Inj
 
 		val preparedContent: String = content.trimStart()
 
-		if (!(preparedContent.startsWith(config.commandPrefix.string))) {
+		if (!(preparedContent.startsWith(config.commandPrefix.toString()))) {
 			return CommandMessageParseResult.NotACommandMessage
 		}
 
 		val commandLineStr: String = preparedContent
-			.removePrefix(config.commandPrefix.string)
+			.removePrefix(config.commandPrefix.toString())
 			.trim()
 
 		return parseCommandLineString(commandLineStr)
@@ -76,7 +75,7 @@ private fun parseCommandLineString(string: String): CommandMessageParseResult {
 			}
 		}
 
-	var i: Int = commandName.string.length
+	var i: Int = commandName.toString().length
 
 	// skipping (possible) whitespace between command name and arguments
 	while ((i < string.length) && string[i].isWhitespace()) {
@@ -117,7 +116,7 @@ private fun parseBeginningCommandName(string: String): CommandNameParseResult {
 
 	val commandNameStr: String = string.take(commandNameEndIndex)
 
-	if (!(CommandName.isValidCommandName(commandNameStr))) {
+	if (!(CommandName.isValid(commandNameStr))) {
 		return CommandNameParseResult.InvalidName(commandNameStr)
 	}
 
@@ -163,4 +162,17 @@ private fun parseNextArgument(string: String, startIndex: Int): Pair<String, Int
 
 		string.substring(i + 1, argumentEndIndex) to (argumentEndIndex + 1)
 	}
+}
+
+private inline fun String.indexOfFirst(startIndex: Int, predicate: (Char) -> Boolean): Int {
+	var i: Int = startIndex
+	while (i < this.length) {
+		if (predicate(this[i])) {
+			return i
+		}
+
+		++i
+	}
+
+	return -1
 }

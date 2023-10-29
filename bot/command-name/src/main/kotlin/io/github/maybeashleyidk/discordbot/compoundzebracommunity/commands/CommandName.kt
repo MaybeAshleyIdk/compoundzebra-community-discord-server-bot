@@ -3,20 +3,18 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.quoted
 
 @JvmInline
-public value class CommandName private constructor(public val string: String) {
+public value class CommandName private constructor(private val string: String) {
 
 	public companion object {
 
-		private fun isValidCommandNameChar(ch: Char): Boolean {
-			return (ch in 'a'..'z') || (ch in 'A'..'Z') || (ch in '0'..'9')
-		}
+		private val NAME_PATTERN: Regex = Regex(pattern = "^[a-zA-Z0-9][a-zA-Z0-9+_-]*$")
 
-		public fun isValidCommandName(nameString: String): Boolean {
-			return nameString.isNotEmpty() && nameString.all(this::isValidCommandNameChar)
+		public fun isValid(nameString: String): Boolean {
+			return this.NAME_PATTERN.matches(nameString)
 		}
 
 		public fun ofString(nameString: String): CommandName {
-			require(this.isValidCommandName(nameString)) {
+			require(this.isValid(nameString)) {
 				"Invalid command name ${nameString.quoted()}"
 			}
 
@@ -26,7 +24,7 @@ public value class CommandName private constructor(public val string: String) {
 
 	init {
 		@Suppress("RemoveRedundantQualifierName")
-		require(CommandName.isValidCommandName(this.string)) {
+		require(CommandName.isValid(this.string)) {
 			"Invalid command name ${this.string.quoted()}"
 		}
 	}

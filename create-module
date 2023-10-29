@@ -78,8 +78,8 @@ root_dir_pathname="$(dirname -- "$0" && printf x)"
 root_dir_pathname="${root_dir_pathname%"$(printf '\nx')"}"
 readonly root_dir_pathname
 
-gradle_build_file_template_regular_pathname="$root_dir_pathname/create-module-templates/regular-gradle.build.kts"
-gradle_build_file_template_wiring_pathname="$root_dir_pathname/create-module-templates/wiring-gradle.build.kts"
+gradle_build_file_template_regular_pathname="$root_dir_pathname/module-templates/regular-gradle.build.kts"
+gradle_build_file_template_wiring_pathname="$root_dir_pathname/module-templates/wiring-gradle.build.kts"
 readonly gradle_build_file_template_regular_pathname \
          gradle_build_file_template_wiring_pathname
 
