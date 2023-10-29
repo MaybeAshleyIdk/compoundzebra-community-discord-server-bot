@@ -14,7 +14,7 @@ dependencies {
 	implementation(project(":bot:config-cache:wiring"))
 	implementation(project(":bot:config-source:wiring"))
 	implementation(project(":bot:config-serialization:wiring"))
-	implementation(project(":bot:emojistats:wiring"))
+	implementation(project(":bot:emoji-stats:wiring"))
 	implementation(project(":bot:polls:wiring"))
 	implementation(project(":bot:shutdown-manager:wiring"))
 	implementation(project(":bot:shutdown-wait:wiring"))

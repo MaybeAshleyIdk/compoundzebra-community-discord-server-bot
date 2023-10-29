@@ -58,10 +58,10 @@ include(
 	":bot:config-supplier",
 
 
-	":bot:emojistats:api",
-	":bot:emojistats:impl",
-	":bot:emojistats:wiring",
-	":bot:emojistats",
+	":bot:emoji-stats:api",
+	":bot:emoji-stats:impl",
+	":bot:emoji-stats:wiring",
+	":bot:emoji-stats",
 
 
 	":bot:polls:api",

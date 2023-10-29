@@ -7,7 +7,7 @@ plugins {
 dependencies {
 	implementation(project(":bot:command-name"))
 	implementation(project(":bot:commands:base"))
-	implementation(project(":bot:emojistats"))
+	implementation(project(":bot:emoji-stats"))
 	implementation(project(":bot:config"))
 	implementation(project(":bot:config-supplier"))
 	implementation(project(":bot:utils-coroutines-jda"))

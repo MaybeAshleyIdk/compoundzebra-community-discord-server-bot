@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:emojistats:impl"))
+	api(project(":bot:emoji-stats:impl"))
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)
