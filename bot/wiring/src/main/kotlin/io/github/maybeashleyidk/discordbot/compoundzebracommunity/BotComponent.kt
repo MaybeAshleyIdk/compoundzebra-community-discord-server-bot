@@ -8,7 +8,6 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.cache.C
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.serialization.ConfigSerializationModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.source.ConfigSourceModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplierModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistenermediator.EventListenerMediatorModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.emojistats.EmojiStatsFeatureModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollsFeatureModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.manager.ShutdownManagerFeatureModule
@@ -17,6 +16,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutd
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownWaitFeatureModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.LoggingModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventhandlermediator.MessageEventHandlerMediatorModule
 import net.dv8tion.jda.api.entities.Activity
 import java.nio.file.Path
 import javax.inject.Singleton
@@ -36,7 +36,7 @@ import net.dv8tion.jda.api.JDA as Jda
 		ShutdownWaitFeatureModule::class,
 		ShutdownRequestFeatureModule::class,
 		CommandsModule::class,
-		EventListenerMediatorModule::class,
+		MessageEventHandlerMediatorModule::class,
 	],
 )
 @Singleton

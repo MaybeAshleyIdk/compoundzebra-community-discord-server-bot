@@ -113,6 +113,7 @@ include(
 	":bot:conditional-messages",
 
 
+	":bot:message-event-handler-mediator:api",
 	":bot:message-event-handler-mediator:impl",
 	":bot:message-event-handler-mediator:wiring",
 
