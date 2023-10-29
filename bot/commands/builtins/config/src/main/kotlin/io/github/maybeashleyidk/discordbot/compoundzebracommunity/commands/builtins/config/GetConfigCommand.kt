@@ -13,7 +13,7 @@ import net.dv8tion.jda.api.utils.FileUpload
 import java.nio.file.Path
 import javax.inject.Inject
 
-internal class GetConfigCommand @Suppress("ktlint:standard:annotation") @Inject constructor(
+internal class GetConfigCommand @Inject constructor(
 	private val configSupplier: ConfigSupplier,
 	private val configFilePath: Path, // FIXME: qualifier
 ) : Command(name = CommandName.ofString("getconfig")) {

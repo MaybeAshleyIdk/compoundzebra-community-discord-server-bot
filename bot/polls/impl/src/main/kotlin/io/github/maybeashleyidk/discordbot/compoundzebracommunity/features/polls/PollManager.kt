@@ -7,7 +7,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-public class PollManager @Suppress("ktlint:standard:annotation") @Inject internal constructor(
+public class PollManager @Inject internal constructor(
 	private val pollIdGenerator: PollIdGenerator,
 	private val logger: Logger,
 ) : PollCreator, PollHolder {

@@ -6,7 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-internal class PollIdGenerator @Suppress("ktlint:standard:annotation") @Inject constructor() {
+internal class PollIdGenerator @Inject constructor() {
 
 	private val snowflakeIdGenerator: SnowflakeIdGenerator = SnowflakeIdGenerator()
 

@@ -16,7 +16,7 @@ import net.dv8tion.jda.api.interactions.components.selections.SelectOption
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu
 import javax.inject.Inject
 
-internal class PollCreationCommand @Suppress("ktlint:standard:annotation") @Inject constructor(
+internal class PollCreationCommand @Inject constructor(
 	private val configSupplier: ConfigSupplier,
 	private val pollCreator: PollCreator,
 ) : Command(name = CommandName.ofString("poll")) {

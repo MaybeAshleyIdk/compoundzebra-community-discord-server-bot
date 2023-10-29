@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import javax.inject.Inject
 
-internal class Magic8BallCommand @Suppress("ktlint:standard:annotation") @Inject constructor(
+internal class Magic8BallCommand @Inject constructor(
 	private val configSupplier: ConfigSupplier,
 	private val logger: Logger,
 ) : Command(name = CommandName.ofString("8ball")) {

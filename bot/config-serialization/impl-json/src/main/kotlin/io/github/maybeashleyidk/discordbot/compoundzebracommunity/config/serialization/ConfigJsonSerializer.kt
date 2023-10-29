@@ -8,7 +8,7 @@ import okio.BufferedSink
 import okio.BufferedSource
 import javax.inject.Inject
 
-public class ConfigJsonSerializer @Suppress("ktlint:standard:annotation") @Inject internal constructor(
+public class ConfigJsonSerializer @Inject internal constructor(
 	private val configModelAdapter: ConfigModelAdapter,
 	moshi: Moshi,
 ) : ConfigSerializer {

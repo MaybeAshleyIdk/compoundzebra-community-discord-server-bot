@@ -9,7 +9,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.LanguageStrings
 import javax.inject.Inject
 
-internal class ConfigModelAdapter @Suppress("ktlint:standard:annotation") @Inject constructor() {
+internal class ConfigModelAdapter @Inject constructor() {
 
 	fun transformConfig(configJson: ConfigJson): Config {
 		return Config(

@@ -7,7 +7,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutin
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 
-public class EchoCommand @Suppress("ktlint:standard:annotation") @AssistedInject constructor(
+public class EchoCommand @AssistedInject constructor(
 	@Assisted("name") nameString: String,
 	@Assisted("responseMessage") private val responseMessage: String,
 ) : Command(CommandName.ofString(nameString)) {

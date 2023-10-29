@@ -14,7 +14,7 @@ import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import javax.inject.Inject
 
-internal class PollQueryCommand @Suppress("ktlint:standard:annotation") @Inject constructor(
+internal class PollQueryCommand @Inject constructor(
 	private val configSupplier: ConfigSupplier,
 	private val pollHolder: PollHolder,
 ) : Command(name = CommandName.ofString("querypoll")) {
