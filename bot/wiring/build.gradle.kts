@@ -7,6 +7,7 @@ plugins {
 dependencies {
 	implementation(project(":bot:env"))
 	implementation(project(":bot:token"))
+	implementation(project(":bot:jda-factory"))
 
 	implementation(project(":bot:logging:wiring"))
 	implementation(project(":bot:config-supplier:wiring"))

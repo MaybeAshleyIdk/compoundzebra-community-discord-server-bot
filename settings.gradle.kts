@@ -119,6 +119,7 @@ include(
 	":bot:message-event-handler-mediator:wiring",
 
 
+	":bot:jda-factory",
 	":bot:wiring",
 	":bot:main",
 	":bot",
