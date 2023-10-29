@@ -4,7 +4,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
 import javax.inject.Inject
 
-public class CommandMessageParser @Inject internal constructor(
+public class CommandMessageParser @Inject constructor(
 	private val configSupplier: ConfigSupplier,
 ) {
 

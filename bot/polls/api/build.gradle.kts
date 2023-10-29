@@ -4,7 +4,8 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:config"))
+	api(project(":bot:config"))
+
 	implementation(project(":bot:snowflake"))
 
 	implementation(libs.jda) {

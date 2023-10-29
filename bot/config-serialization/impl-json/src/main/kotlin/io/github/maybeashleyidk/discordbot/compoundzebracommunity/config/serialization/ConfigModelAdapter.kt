@@ -9,9 +9,9 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.LanguageStrings
 import javax.inject.Inject
 
-internal class ConfigModelAdapter @Inject constructor() {
+public class ConfigModelAdapter @Inject constructor() {
 
-	fun transformConfig(configJson: ConfigJson): Config {
+	internal fun transformConfig(configJson: ConfigJson): Config {
 		return Config(
 			strings = configJson.strings.toLanguageStrings(),
 			botAdminUserIds = configJson.botAdminUserIds.orEmpty(),
@@ -21,7 +21,7 @@ internal class ConfigModelAdapter @Inject constructor() {
 		)
 	}
 
-	fun transformConfig(config: Config): ConfigJson {
+	internal fun transformConfig(config: Config): ConfigJson {
 		return ConfigJson(
 			strings = @Suppress("ktlint:standard:no-blank-line-in-list") LanguageStringsJson(
 				genericInvalidCommandName = config.strings.generic.invalidCommandNameFormat,

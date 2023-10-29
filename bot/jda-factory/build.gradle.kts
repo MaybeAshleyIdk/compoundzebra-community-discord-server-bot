@@ -4,12 +4,10 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:token"))
-	implementation(project(":bot:message-event-handler-mediator"))
-
-	implementation(libs.jda) {
+	api(libs.jda) {
 		exclude(module = "opus-java")
 	}
+	api(project(":bot:message-event-handler-mediator"))
 
 	implementation(libs.javax.inject)
 }

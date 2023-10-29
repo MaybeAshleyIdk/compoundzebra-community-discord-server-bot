@@ -4,16 +4,8 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:environment-type"))
-	implementation(project(":bot:token"))
+	api(project(":bot:environment-type"))
+	api(project(":bot:token"))
+
 	implementation(project(":bot:wiring"))
-
-	implementation(project(":bot:logging"))
-	implementation(project(":bot:shutdown-wait"))
-
-	implementation(libs.jda) {
-		exclude(module = "opus-java")
-	}
-
-	implementation(libs.dagger)
 }

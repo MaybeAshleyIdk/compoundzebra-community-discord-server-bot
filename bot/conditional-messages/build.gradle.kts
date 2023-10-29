@@ -4,15 +4,14 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:config"))
-	implementation(project(":bot:config-supplier"))
+	api(project(":bot:config-supplier"))
+	api(libs.jda) {
+		exclude(module = "opus-java")
+	}
+
 	implementation(project(":bot:utils-coroutines-jda"))
 
 	implementation(libs.kotlinx.coroutines.core)
-
-	implementation(libs.jda) {
-		exclude(module = "opus-java")
-	}
 
 	implementation(libs.javax.inject)
 }

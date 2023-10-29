@@ -4,10 +4,7 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:command-name"))
-	implementation(project(":bot:command-prefix"))
-	implementation(project(":bot:config"))
-	implementation(project(":bot:config-supplier"))
+	api(project(":bot:config-supplier"))
 
 	implementation(libs.javax.inject)
 }

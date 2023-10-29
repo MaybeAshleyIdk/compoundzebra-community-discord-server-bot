@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 import javax.inject.Inject
 import kotlin.concurrent.withLock
 
-public class MemoryConfigCache @Inject internal constructor(
+public class MemoryConfigCache @Inject constructor(
 	private val configSource: ConfigSource,
 	private val logger: Logger,
 ) : ConfigCache {

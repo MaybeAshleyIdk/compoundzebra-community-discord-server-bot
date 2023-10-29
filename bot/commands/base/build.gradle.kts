@@ -4,9 +4,8 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:command-name"))
-
-	implementation(libs.jda) {
+	api(project(":bot:command-name"))
+	api(libs.jda) {
 		exclude(module = "opus-java")
 	}
 }

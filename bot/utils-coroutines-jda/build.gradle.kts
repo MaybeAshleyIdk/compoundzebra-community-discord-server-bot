@@ -4,9 +4,9 @@ plugins {
 }
 
 dependencies {
-	implementation(libs.kotlinx.coroutines.core)
-
-	implementation(libs.jda) {
+	api(libs.jda) {
 		exclude(module = "opus-java")
 	}
+
+	implementation(libs.kotlinx.coroutines.core)
 }

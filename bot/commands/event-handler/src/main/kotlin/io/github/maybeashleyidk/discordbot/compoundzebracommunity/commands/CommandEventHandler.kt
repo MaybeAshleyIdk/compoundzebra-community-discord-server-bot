@@ -11,7 +11,7 @@ import net.dv8tion.jda.api.events.GenericEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import javax.inject.Inject
 
-public class CommandEventHandler @Inject internal constructor(
+public class CommandEventHandler @Inject constructor(
 	private val commandMessageParser: CommandMessageParser,
 	private val configSupplier: ConfigSupplier,
 	private val commands: Set<@JvmSuppressWildcards Command>,

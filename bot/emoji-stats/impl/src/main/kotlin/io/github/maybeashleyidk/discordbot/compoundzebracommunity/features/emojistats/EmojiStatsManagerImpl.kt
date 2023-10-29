@@ -30,7 +30,7 @@ import javax.inject.Inject
 
 private val CUSTOM_EMOJI_REGEX_PATTERN: Regex = Regex("(?<!\\\\)<:[^:]+:(?<id>0|[1-9][0-9]*)>")
 
-public class EmojiStatsManagerImpl @Inject internal constructor(
+public class EmojiStatsManagerImpl @Inject constructor(
 	private val logger: Logger,
 ) : EmojiStatsManager {
 

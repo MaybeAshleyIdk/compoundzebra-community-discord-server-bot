@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent
 import javax.inject.Inject
 import net.dv8tion.jda.api.JDA as Jda
 
-public class JdaFactory @Inject internal constructor(
+public class JdaFactory @Inject constructor(
 	@BotTokenString private val botToken: String,
 	private val initialActivity: Activity,
 	private val messageEventHandlerMediator: MessageEventHandlerMediator,

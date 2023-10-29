@@ -7,7 +7,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-public class PollManager @Inject internal constructor(
+public class PollManager @Inject constructor(
 	private val pollIdGenerator: PollIdGenerator,
 	private val logger: Logger,
 ) : PollCreator, PollHolder {
@@ -18,12 +18,12 @@ public class PollManager @Inject internal constructor(
 		val CLOSE_BUTTON_COMPONENT_ID_REGEX_PATTERN = Regex("^poll\\[(?<id>[0-9]+)]\\.closeButton$")
 	}
 
-	public sealed class CloseResult {
-		public data object WrongComponentId : CloseResult()
+	internal sealed class CloseResult {
+		data object WrongComponentId : CloseResult()
 
-		public data object InsufficientPermissions : CloseResult()
+		data object InsufficientPermissions : CloseResult()
 
-		public data class Closed(val pollDetails: PollDetails?) : CloseResult()
+		data class Closed(val pollDetails: PollDetails?) : CloseResult()
 	}
 
 	private val activePolls: MutableMap<PollId, PollDetails> = HashMap()
@@ -44,7 +44,7 @@ public class PollManager @Inject internal constructor(
 		this.logger.logInfo("Poll with ID $pollId opened")
 	}
 
-	public fun voteOption(member: Member, optionsSelectMenuComponentId: String, optionValue: String): PollDetails? {
+	internal fun voteOption(member: Member, optionsSelectMenuComponentId: String, optionValue: String): PollDetails? {
 		@Suppress("RemoveRedundantQualifierName")
 		val matchResult: MatchResult = PollManager.OPTIONS_SELECT_MENU_COMPONENT_ID_REGEX_PATTERN
 			.matchEntire(optionsSelectMenuComponentId)
@@ -70,7 +70,7 @@ public class PollManager @Inject internal constructor(
 		return this.activePolls[pollId]
 	}
 
-	public fun close(member: Member, closeButtonComponentId: String): CloseResult {
+	internal fun close(member: Member, closeButtonComponentId: String): CloseResult {
 		@Suppress("RemoveRedundantQualifierName")
 		val matchResult: MatchResult = PollManager.CLOSE_BUTTON_COMPONENT_ID_REGEX_PATTERN
 			.matchEntire(closeButtonComponentId)

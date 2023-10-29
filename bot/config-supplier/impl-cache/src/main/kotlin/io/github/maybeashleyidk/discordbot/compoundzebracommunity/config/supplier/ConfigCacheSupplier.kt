@@ -4,7 +4,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.cache.ConfigCache
 import javax.inject.Inject
 
-public class ConfigCacheSupplier @Inject internal constructor(
+public class ConfigCacheSupplier @Inject constructor(
 	private val configCache: ConfigCache,
 ) : ConfigSupplier {
 

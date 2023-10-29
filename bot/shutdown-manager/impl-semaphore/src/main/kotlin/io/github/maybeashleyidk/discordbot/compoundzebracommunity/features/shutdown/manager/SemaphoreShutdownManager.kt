@@ -5,7 +5,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-public class SemaphoreShutdownManager @Inject internal constructor() : ShutdownManager {
+public class SemaphoreShutdownManager @Inject constructor() : ShutdownManager {
 
 	private val semaphore: Semaphore = Semaphore(1)
 

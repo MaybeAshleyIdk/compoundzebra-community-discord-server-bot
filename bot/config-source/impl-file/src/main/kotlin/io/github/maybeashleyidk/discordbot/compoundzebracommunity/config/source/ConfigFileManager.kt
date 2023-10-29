@@ -17,7 +17,7 @@ import java.nio.file.Path as NioPath
 /**
  * The functions of this class are not inherently thread-safe.
  */
-public class ConfigFileManager @Inject internal constructor(
+public class ConfigFileManager @Inject constructor(
 	private val configSerializer: ConfigSerializer,
 	private val botEnvironmentType: BotEnvironmentType,
 	configFileNioPath: NioPath, // FIXME: this should have a qualifier, put in which module should be put it?

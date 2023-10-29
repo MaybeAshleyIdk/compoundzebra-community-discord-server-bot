@@ -12,7 +12,7 @@ import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionE
 import net.dv8tion.jda.api.hooks.EventListener
 import javax.inject.Inject
 
-public class PollEventsListener @Inject internal constructor(
+public class PollEventsListener @Inject constructor(
 	private val pollManager: PollManager,
 	private val configSupplier: ConfigSupplier,
 ) : EventListener {

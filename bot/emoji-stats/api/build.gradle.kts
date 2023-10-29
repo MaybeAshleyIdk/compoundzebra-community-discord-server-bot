@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-	implementation(libs.jda) {
+	api(libs.jda) {
 		exclude(module = "opus-java")
 	}
 }

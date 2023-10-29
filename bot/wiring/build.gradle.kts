@@ -5,8 +5,14 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:environment-type"))
-	implementation(project(":bot:token"))
+	api(libs.jda) {
+		exclude(module = "opus-java")
+	}
+	api(project(":bot:environment-type"))
+	api(project(":bot:token"))
+	api(project(":bot:logging"))
+	api(project(":bot:shutdown-wait"))
+
 	implementation(project(":bot:jda-factory"))
 
 	implementation(project(":bot:logging:wiring"))
@@ -22,12 +28,8 @@ dependencies {
 	implementation(project(":bot:commands:wiring"))
 	implementation(project(":bot:message-event-handler-mediator:wiring"))
 
-	implementation(libs.jda) {
-		exclude(module = "opus-java")
-	}
-
 	implementation(libs.moshi)
 
-	implementation(libs.dagger)
+	api(libs.dagger)
 	ksp(libs.dagger.compiler)
 }
