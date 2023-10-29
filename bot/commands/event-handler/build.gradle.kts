@@ -7,6 +7,7 @@ dependencies {
 	implementation(project(":bot:command-name"))
 	implementation(project(":bot:command-prefix"))
 	implementation(project(":bot:commands:base"))
+	implementation(project(":bot:commands:message-parser"))
 	implementation(project(":bot:config"))
 	implementation(project(":bot:config-supplier"))
 	implementation(project(":bot:logging"))

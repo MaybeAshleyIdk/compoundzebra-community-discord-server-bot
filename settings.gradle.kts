@@ -105,6 +105,7 @@ include(
 	":bot:commands:builtins:all-wiring",
 
 	":bot:commands:echo-command",
+	":bot:commands:message-parser",
 	":bot:commands:event-handler",
 	":bot:commands:wiring",
 	// endregion

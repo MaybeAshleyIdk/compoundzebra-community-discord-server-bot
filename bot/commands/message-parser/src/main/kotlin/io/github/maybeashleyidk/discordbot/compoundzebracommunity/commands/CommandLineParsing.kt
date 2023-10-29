@@ -1,67 +1,12 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplier
-import javax.inject.Inject
-
-internal data class CommandLine(
-	val commandName: CommandName,
-	val arguments: List<String>,
-) {
-
-	override fun toString(): String {
-		return buildString {
-			this@buildString.append(this@CommandLine.commandName.toString())
-
-			this@CommandLine.arguments.forEach { argument: String ->
-				this@buildString.append(' ')
-
-				val quoted: Boolean = argument.isEmpty() || argument.any(Char::isWhitespace)
-
-				if (quoted) this@buildString.append('"')
-				this@buildString.append(argument)
-				if (quoted) this@buildString.append('"')
-			}
-		}
-	}
-}
-
-internal sealed class CommandMessageParseResult {
-	data object NotACommandMessage : CommandMessageParseResult()
-
-	data class InvalidCommandName(val invalidCommandNameStr: String) : CommandMessageParseResult()
-
-	data class Success(val commandLine: CommandLine) : CommandMessageParseResult()
-}
-
-internal class CommandMessageParser @Suppress("ktlint:standard:annotation") @Inject constructor(
-	private val configSupplier: ConfigSupplier,
-) {
-
-	fun parseMessageContent(content: String): CommandMessageParseResult {
-		val config: Config = this.configSupplier.get()
-
-		val preparedContent: String = content.trimStart()
-
-		if (!(preparedContent.startsWith(config.commandPrefix.toString()))) {
-			return CommandMessageParseResult.NotACommandMessage
-		}
-
-		val commandLineStr: String = preparedContent
-			.removePrefix(config.commandPrefix.toString())
-			.trim()
-
-		return parseCommandLineString(commandLineStr)
-	}
-}
-
 private sealed class CommandNameParseResult {
 	data class InvalidName(val invalidNameStr: String) : CommandNameParseResult()
 
 	data class Success(val commandName: CommandName) : CommandNameParseResult()
 }
 
-private fun parseCommandLineString(string: String): CommandMessageParseResult {
+internal fun parseCommandLineString(string: String): CommandMessageParseResult {
 	// region command name
 
 	val commandName: CommandName =
