@@ -1,4 +1,5 @@
 plugins {
+	StandaloneProject
 	`java-library`
 	kotlin("jvm")
 	alias(libs.plugins.ksp)

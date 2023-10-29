@@ -4,6 +4,8 @@ import java.io.OutputStream
 import java.util.zip.GZIPOutputStream
 
 plugins {
+	StandaloneProject
+
 	application
 	kotlin("jvm")
 
