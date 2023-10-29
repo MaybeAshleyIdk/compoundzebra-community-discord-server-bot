@@ -97,7 +97,7 @@ include(
 	":bot:commands:builtins:coinflip",
 	":bot:commands:builtins:config",
 	":bot:commands:builtins:dev",
-	":bot:commands:builtins:emojistats",
+	":bot:commands:builtins:emoji-stats",
 	":bot:commands:builtins:magic8ball",
 	":bot:commands:builtins:polls",
 	":bot:commands:builtins:rng",
