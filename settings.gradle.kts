@@ -20,7 +20,7 @@ include(
 	":bot:utils-coroutines-jda",
 
 
-	":bot:env",
+	":bot:environment-type",
 
 	":bot:token",
 

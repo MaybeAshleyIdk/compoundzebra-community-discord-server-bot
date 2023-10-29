@@ -7,7 +7,7 @@ plugins {
 dependencies {
 	implementation(project(":bot:command-name"))
 	implementation(project(":bot:commands:base"))
-	implementation(project(":bot:env"))
+	implementation(project(":bot:environment-type"))
 	implementation(project(":bot:utils-coroutines-jda"))
 
 	implementation(libs.kotlinx.coroutines.core)

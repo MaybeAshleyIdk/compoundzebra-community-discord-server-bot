@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-	implementation(project(":bot:env"))
+	implementation(project(":bot:environment-type"))
 	implementation(project(":bot:token"))
 	implementation(project(":bot:wiring"))
 

@@ -6,5 +6,5 @@ plugins {
 dependencies {
 	implementation(project(":bot:command-name"))
 	implementation(project(":bot:command-prefix"))
-	implementation(project(":bot:env"))
+	implementation(project(":bot:environment-type"))
 }
