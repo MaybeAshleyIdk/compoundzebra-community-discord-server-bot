@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import dagger.multibindings.Multibinds
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventhandlermediator.MessageEventHandlerMediator
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.hooks.EventListener
 import net.dv8tion.jda.api.requests.GatewayIntent
@@ -34,12 +35,13 @@ internal object BotModule {
 	fun provideJda(
 		@BotTokenString token: String,
 		initialActivity: Activity,
+		messageEventHandlerMediator: MessageEventHandlerMediator,
 		eventListeners: Set<@JvmSuppressWildcards EventListener>,
 	): Jda {
 		return JdaBuilder.createDefault(token)
 			.setActivity(initialActivity)
 			.enableIntents(GatewayIntent.MESSAGE_CONTENT)
-			.addEventListeners(*(eventListeners.toTypedArray()))
+			.addEventListeners(messageEventHandlerMediator, *(eventListeners.toTypedArray()))
 			.build()
 	}
 }

@@ -1,17 +1,7 @@
 plugins {
 	`java-library`
-	kotlin("jvm")
 }
 
 dependencies {
-	implementation(project(":bot:commands:event-handler"))
-	implementation(project(":bot:conditional-messages"))
-
-	implementation(libs.kotlinx.coroutines.core)
-
-	implementation(libs.jda) {
-		exclude(module = "opus-java")
-	}
-
-	implementation(libs.javax.inject)
+	api(project(":bot:message-event-handler-mediator:api"))
 }
