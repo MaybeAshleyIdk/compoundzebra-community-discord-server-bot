@@ -59,6 +59,10 @@ public class GroupProjectPlugin : Plugin<Project> {
 		project.plugins.withType<WiringProjectPlugin> {
 			error("The group $project has the wiring project plugin applied to it, but it must not")
 		}
+
+		project.plugins.withType<WiringAssimilationProjectPlugin> {
+			error("The group $project has the wiring-assimilation project plugin applied to it, but it must not")
+		}
 	}
 
 	private fun checkChildProjects(project: Project) {

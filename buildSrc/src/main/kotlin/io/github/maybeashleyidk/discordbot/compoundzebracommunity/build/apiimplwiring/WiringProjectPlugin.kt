@@ -2,6 +2,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.apiimpl
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.GroupProjectPlugin
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.StandaloneProjectPlugin
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.WiringAssimilationProjectPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.PluginContainer
@@ -62,6 +63,10 @@ public class WiringProjectPlugin : Plugin<Project> {
 
 		project.plugins.withType<GroupProjectPlugin> {
 			error("The wiring $project has the group project plugin applied to it, but it must not")
+		}
+
+		project.plugins.withType<WiringAssimilationProjectPlugin> {
+			error("The wiring $project has the wiring-assimilation project plugin applied to it, but it must not")
 		}
 	}
 

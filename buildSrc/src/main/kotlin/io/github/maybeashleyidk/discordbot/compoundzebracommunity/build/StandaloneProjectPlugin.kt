@@ -53,6 +53,10 @@ public class StandaloneProjectPlugin : Plugin<Project> {
 		project.plugins.withType<GroupProjectPlugin> {
 			error("The standalone $project has the group project plugin applied to it, but it must not")
 		}
+
+		project.plugins.withType<WiringAssimilationProjectPlugin> {
+			error("The standalone $project has the wiring-assimilation project plugin applied to it, but it must not")
+		}
 	}
 
 	private fun checkChildProjects(project: Project) {
