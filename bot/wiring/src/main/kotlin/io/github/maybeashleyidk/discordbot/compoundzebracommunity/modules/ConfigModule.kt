@@ -1,10 +1,10 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules
 
 import dagger.Module
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.cache.ConfigCacheModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.serialization.ConfigSerializationModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.source.ConfigSourceModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplierModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configcache.ConfigCacheModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configserialization.ConfigSerializationModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsource.ConfigSourceModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplierModule
 
 @Module(
 	includes = [

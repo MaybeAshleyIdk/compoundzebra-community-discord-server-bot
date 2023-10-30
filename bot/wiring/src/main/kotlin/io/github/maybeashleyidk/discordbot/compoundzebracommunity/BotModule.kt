@@ -5,13 +5,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import dagger.multibindings.Multibinds
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.emojistats.EmojiStatsModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.emojistats.EmojiStatsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.jdafactory.JdaFactory
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.LoggingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.ConfigModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.MessageEventHandlingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.ShutdownModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollsModule
 import net.dv8tion.jda.api.hooks.EventListener
 import javax.inject.Singleton
 import net.dv8tion.jda.api.JDA as Jda

@@ -3,8 +3,10 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Lazy
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownAwaiter
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdownwait.ShutdownAwaiter
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.token.BotToken
 import net.dv8tion.jda.api.entities.Activity
 import java.nio.file.Path
 import javax.inject.Singleton

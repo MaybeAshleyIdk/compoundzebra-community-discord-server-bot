@@ -1,6 +1,6 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandPrefix
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandprefix.CommandPrefix
 
 public data class Config(
 	val strings: LanguageStrings,

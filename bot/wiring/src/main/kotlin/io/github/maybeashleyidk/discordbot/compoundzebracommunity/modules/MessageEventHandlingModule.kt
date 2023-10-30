@@ -1,9 +1,9 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules
 
 import dagger.Module
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandler.CommandMessageEventHandlingModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalmessages.ConditionalMessageEventHandlingModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventhandlermediator.MessageEventHandlerMediationModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandling.CommandMessageEventHandlingModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalmessageeventhandling.ConditionalMessageEventHandlingModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventhandlermediation.MessageEventHandlerMediationModule
 
 @Module(
 	includes = [

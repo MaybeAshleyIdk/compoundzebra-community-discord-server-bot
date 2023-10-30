@@ -1,8 +1,8 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.factories.createFallbackConfig
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.factories.createInitialConfig
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 
 public object Configs {
 
