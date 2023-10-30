@@ -3,6 +3,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessag
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.quoted
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutinesjda.await
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.ChannelType
@@ -92,7 +93,7 @@ public class CommandMessageEventHandlerImpl @Inject constructor(
 		textChannel: TextChannel,
 	) {
 		val logMsg: String = "Executing command ${command.name.toQuotedString()}." +
-			" Triggered by \"${catalystMessage.author.name}\" (${catalystMessage.author.idLong})"
+			" Triggered by user ${catalystMessage.author.name.quoted()} (${catalystMessage.author.id})"
 		this.logger.logInfo(logMsg)
 
 		try {
