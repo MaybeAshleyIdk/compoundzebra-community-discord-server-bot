@@ -12,6 +12,6 @@ public class PollIdGenerator @Inject constructor() {
 
 	internal fun generate(): PollId {
 		val snowflakeId: SnowflakeId = this.snowflakeIdGenerator.generateNext()
-		return PollId(snowflakeId)
+		return PollId.ofSnowflakeId(snowflakeId)
 	}
 }

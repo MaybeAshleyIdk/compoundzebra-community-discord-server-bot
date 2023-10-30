@@ -13,6 +13,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessage
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandler.builtincommands.dev.DevTestCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandler.builtincommands.magic8ball.Magic8BallCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandler.builtincommands.polls.PollCreationCommand
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandler.builtincommands.polls.PollQueryCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandler.builtincommands.rng.DieRollingCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandler.builtincommands.rng.RngCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandler.builtincommands.shutdown.ShutdownCommand
@@ -56,10 +57,9 @@ public object BuiltInCommandsModule {
 		@IntoSet
 		fun bindPollCreationCommand(pollCreationCommand: PollCreationCommand): Command
 
-		// disabled for now. see the class `PollId` as to why
-		// @Binds
-		// @IntoSet
-		// fun bindPollQueryCommand(pollQueryCommand: PollQueryCommand): Command
+		@Binds
+		@IntoSet
+		fun bindPollQueryCommand(pollQueryCommand: PollQueryCommand): Command
 
 		@Binds
 		@IntoSet
