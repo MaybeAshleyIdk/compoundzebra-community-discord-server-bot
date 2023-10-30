@@ -14,26 +14,24 @@ dependencyResolutionManagement {
 	}
 }
 
-@Suppress("ktlint:standard:no-blank-line-in-list", "ktlint:standard:no-consecutive-blank-lines")
+@Suppress("ktlint:standard:no-blank-line-in-list")
 include(
 	":bot:utils",
 	":bot:utils-coroutines-jda",
 
-
 	":bot:environment-type",
 
 	":bot:token",
-
 
 	":bot:logging:api",
 	":bot:logging:impl-stderr",
 	":bot:logging:wiring",
 	":bot:logging",
 
-
 	":bot:snowflake",
 	":bot:snowflake-generator",
 
+	// region config
 
 	":bot:config",
 
@@ -57,18 +55,19 @@ include(
 	":bot:config-supplier:wiring",
 	":bot:config-supplier",
 
+	// endregion
 
 	":bot:emoji-stats:api",
 	":bot:emoji-stats:impl",
 	":bot:emoji-stats:wiring",
 	":bot:emoji-stats",
 
-
 	":bot:polls:api",
 	":bot:polls:impl",
 	":bot:polls:wiring",
 	":bot:polls",
 
+	// region shutdown
 
 	":bot:shutdown-manager:api",
 	":bot:shutdown-manager:impl-semaphore",
@@ -85,11 +84,11 @@ include(
 	":bot:shutdown-request:wiring",
 	":bot:shutdown-request",
 
+	// endregion
 
 	":bot:command-name",
 
 	":bot:command-prefix",
-
 
 	// region commands
 	":bot:commands:base",
@@ -110,17 +109,14 @@ include(
 	":bot:commands:wiring",
 	// endregion
 
-
 	":bot:conditional-messages:api",
 	":bot:conditional-messages:impl",
 	":bot:conditional-messages:wiring",
 	":bot:conditional-messages",
 
-
 	":bot:message-event-handler-mediator:api",
 	":bot:message-event-handler-mediator:impl",
 	":bot:message-event-handler-mediator:wiring",
-
 
 	":bot:jda-factory",
 	":bot:wiring",
