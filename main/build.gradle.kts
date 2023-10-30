@@ -38,8 +38,7 @@ val createExecutable: TaskProvider<Task> by tasks.registering {
 
 	dependsOn(tasks.shadowJar)
 
-	val jarExecScriptFile: RegularFile = project.rootProject
-		.layout.projectDirectory.file("jar-exec-script.sh")
+	val jarExecScriptFile: RegularFile = project.layout.projectDirectory.file("jar-exec-script.sh")
 
 	val shadowJarFileProvider: Provider<File> = tasks.shadowJar
 		.map { shadowJarTask: ShadowJar ->

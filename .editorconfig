@@ -23,7 +23,8 @@ ktlint_standard_if-else-bracing = enabled
 ktlint_standard_no-blank-line-in-list = enabled
 ktlint_standard_no-consecutive-comments = enabled
 ktlint_standard_try-catch-finally-spacing = enabled
-ktlint_standard_if-else-wrapping = enabled
+
+ktlint_standard_discouraged-comment-location = disabled
 
 [*.{diff,patch}]
 trim_trailing_whitespace = false

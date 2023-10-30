@@ -14,26 +14,24 @@ dependencyResolutionManagement {
 	}
 }
 
-@Suppress("ktlint:standard:no-blank-line-in-list", "ktlint:standard:no-consecutive-blank-lines")
+@Suppress("ktlint:standard:no-blank-line-in-list")
 include(
 	":bot:utils",
 	":bot:utils-coroutines-jda",
 
-
-	":bot:env",
+	":bot:environment-type",
 
 	":bot:token",
-
 
 	":bot:logging:api",
 	":bot:logging:impl-stderr",
 	":bot:logging:wiring",
 	":bot:logging",
 
-
 	":bot:snowflake",
 	":bot:snowflake-generator",
 
+	// region config
 
 	":bot:config",
 
@@ -57,18 +55,50 @@ include(
 	":bot:config-supplier:wiring",
 	":bot:config-supplier",
 
+	// endregion
 
-	":bot:emojistats:api",
-	":bot:emojistats:impl",
-	":bot:emojistats:wiring",
-	":bot:emojistats",
+	":bot:emoji-stats:api",
+	":bot:emoji-stats:impl",
+	":bot:emoji-stats:wiring",
+	":bot:emoji-stats",
 
+	// region polls
 
-	":bot:polls:api",
-	":bot:polls:impl",
-	":bot:polls:wiring",
-	":bot:polls",
+	":bot:poll-id",
+	":bot:poll-description",
+	":bot:poll-option",
+	":bot:poll-details",
 
+	":bot:poll-management:api",
+	":bot:poll-management:impl",
+	":bot:poll-management:wiring",
+	":bot:poll-management",
+
+	":bot:poll-creation:api",
+	":bot:poll-creation:impl-manager",
+	":bot:poll-creation:wiring",
+	":bot:poll-creation",
+
+	":bot:poll-holding:api",
+	":bot:poll-holding:impl-manager",
+	":bot:poll-holding:wiring",
+	":bot:poll-holding",
+
+	":bot:poll-modification:api",
+	":bot:poll-modification:impl-manager",
+	":bot:poll-modification:wiring",
+	":bot:poll-modification",
+
+	":bot:poll-component-protocol",
+
+	":bot:poll-event-listening:api",
+	":bot:poll-event-listening:impl",
+	":bot:poll-event-listening:wiring",
+	":bot:poll-event-listening",
+
+	// endregion
+
+	// region shutdown
 
 	":bot:shutdown-manager:api",
 	":bot:shutdown-manager:impl-semaphore",
@@ -85,39 +115,54 @@ include(
 	":bot:shutdown-request:wiring",
 	":bot:shutdown-request",
 
+	// endregion
 
 	":bot:command-name",
 
 	":bot:command-prefix",
 
+	// region command message event handling
 
-	// region commands
-	":bot:commands:base",
+	":bot:command-message-event-handling:api",
 
-	":bot:commands:builtins:coinflip",
-	":bot:commands:builtins:config",
-	":bot:commands:builtins:dev",
-	":bot:commands:builtins:emojistats",
-	":bot:commands:builtins:magic8ball",
-	":bot:commands:builtins:polls",
-	":bot:commands:builtins:rng",
-	":bot:commands:builtins:shutdown",
-	":bot:commands:builtins:all-wiring",
+	// region implementation
 
-	":bot:commands:echo-command",
-	":bot:commands:event-handler",
-	":bot:commands:wiring",
+	":bot:command-message-event-handling:impl:message-parser",
+	":bot:command-message-event-handling:impl:command",
+
+	":bot:command-message-event-handling:impl:built-in-commands:coin-flip",
+	":bot:command-message-event-handling:impl:built-in-commands:config",
+	":bot:command-message-event-handling:impl:built-in-commands:dev",
+	":bot:command-message-event-handling:impl:built-in-commands:emoji-stats",
+	":bot:command-message-event-handling:impl:built-in-commands:magic8ball",
+	":bot:command-message-event-handling:impl:built-in-commands:polls",
+	":bot:command-message-event-handling:impl:built-in-commands:rng",
+	":bot:command-message-event-handling:impl:built-in-commands:shutdown",
+	":bot:command-message-event-handling:impl:built-in-commands",
+
+	":bot:command-message-event-handling:impl:predefined-response-command",
+	":bot:command-message-event-handling:impl:core",
+	":bot:command-message-event-handling:impl:wiring",
+	":bot:command-message-event-handling:impl",
+
 	// endregion
 
+	":bot:command-message-event-handling:wiring",
 
-	":bot:conditional-messages",
+	":bot:command-message-event-handling",
 
+	// endregion
 
-	":bot:message-event-handler-mediator:api",
-	":bot:message-event-handler-mediator:impl",
-	":bot:message-event-handler-mediator:wiring",
+	":bot:conditional-message-event-handling:api",
+	":bot:conditional-message-event-handling:impl",
+	":bot:conditional-message-event-handling:wiring",
+	":bot:conditional-message-event-handling",
 
+	":bot:message-event-handler-mediation:api",
+	":bot:message-event-handler-mediation:impl",
+	":bot:message-event-handler-mediation:wiring",
 
+	":bot:jda-factory",
 	":bot:wiring",
 	":bot:main",
 	":bot",

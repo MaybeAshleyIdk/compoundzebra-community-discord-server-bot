@@ -1,5 +1,8 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.token.BotToken
+
 sealed class EnvironmentBotEnvironmentType {
 	data object UnsetOrEmpty : EnvironmentBotEnvironmentType()
 

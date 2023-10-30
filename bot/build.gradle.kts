@@ -3,7 +3,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:env"))
-	api(project(":bot:token"))
 	api(project(":bot:main"))
 }

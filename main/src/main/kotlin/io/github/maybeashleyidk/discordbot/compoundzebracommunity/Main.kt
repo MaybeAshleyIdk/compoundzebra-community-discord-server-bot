@@ -2,6 +2,8 @@
 
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.token.BotToken
 import java.nio.file.Path
 import kotlin.system.exitProcess
 

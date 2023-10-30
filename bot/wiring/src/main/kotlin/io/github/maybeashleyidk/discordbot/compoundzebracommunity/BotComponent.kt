@@ -3,42 +3,16 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Lazy
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.CommandsModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.cache.ConfigCacheModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.serialization.ConfigSerializationModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.source.ConfigSourceModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplierModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.emojistats.EmojiStatsFeatureModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollsFeatureModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.manager.ShutdownManagerFeatureModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.request.ShutdownRequestFeatureModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownAwaiter
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownWaitFeatureModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.LoggingModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventhandlermediator.MessageEventHandlerMediatorModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdownwait.ShutdownAwaiter
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.token.BotToken
 import net.dv8tion.jda.api.entities.Activity
 import java.nio.file.Path
 import javax.inject.Singleton
 import net.dv8tion.jda.api.JDA as Jda
 
-@Component(
-	modules = [
-		BotModule::class,
-		LoggingModule::class,
-		ConfigSupplierModule::class,
-		ConfigCacheModule::class,
-		ConfigSourceModule::class,
-		ConfigSerializationModule::class,
-		EmojiStatsFeatureModule::class,
-		PollsFeatureModule::class,
-		ShutdownManagerFeatureModule::class,
-		ShutdownWaitFeatureModule::class,
-		ShutdownRequestFeatureModule::class,
-		CommandsModule::class,
-		MessageEventHandlerMediatorModule::class,
-	],
-)
+@Component(modules = [BotModule::class])
 @Singleton
 public interface BotComponent {
 
@@ -77,7 +51,7 @@ public fun BotComponent.Factory.build(
 ): BotComponent {
 	return this.build(
 		environmentType = environmentType,
-		token = token.string,
+		token = token.toRawString(),
 		initialActivity = initialActivity,
 		configFilePath = configFilePath,
 	)

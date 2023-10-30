@@ -4,24 +4,27 @@ import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
-import dagger.multibindings.Multibinds
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventhandlermediator.MessageEventHandlerMediator
-import net.dv8tion.jda.api.entities.Activity
-import net.dv8tion.jda.api.hooks.EventListener
-import net.dv8tion.jda.api.requests.GatewayIntent
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.emojistats.EmojiStatsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.jdafactory.JdaFactory
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.LoggingModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.ConfigModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.MessageEventHandlingModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.PollsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.ShutdownModule
 import javax.inject.Singleton
 import net.dv8tion.jda.api.JDA as Jda
-import net.dv8tion.jda.api.JDABuilder as JdaBuilder
 
-@Module(includes = [BotModule.Bindings::class])
+@Module(
+	includes = [
+		LoggingModule::class,
+		ConfigModule::class,
+		EmojiStatsModule::class,
+		PollsModule::class,
+		ShutdownModule::class,
+		MessageEventHandlingModule::class,
+	],
+)
 internal object BotModule {
-
-	@Module
-	interface Bindings {
-
-		@Multibinds
-		fun multibindEventListeners(): Set<@JvmSuppressWildcards EventListener>
-	}
 
 	@Provides
 	@Reusable
@@ -32,16 +35,7 @@ internal object BotModule {
 
 	@Provides
 	@Singleton
-	fun provideJda(
-		@BotTokenString token: String,
-		initialActivity: Activity,
-		messageEventHandlerMediator: MessageEventHandlerMediator,
-		eventListeners: Set<@JvmSuppressWildcards EventListener>,
-	): Jda {
-		return JdaBuilder.createDefault(token)
-			.setActivity(initialActivity)
-			.enableIntents(GatewayIntent.MESSAGE_CONTENT)
-			.addEventListeners(messageEventHandlerMediator, *(eventListeners.toTypedArray()))
-			.build()
+	fun provideJda(jdaFactory: JdaFactory): Jda {
+		return jdaFactory.create()
 	}
 }
