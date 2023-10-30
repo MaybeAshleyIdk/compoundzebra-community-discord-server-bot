@@ -1,4 +1,5 @@
 plugins {
+	PartitionedProject
 	`java-library`
 }
 

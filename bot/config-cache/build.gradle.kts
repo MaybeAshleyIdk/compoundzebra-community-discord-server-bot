@@ -1,4 +1,5 @@
 plugins {
+	ApiImplWiringProject
 	`java-library`
 }
 
