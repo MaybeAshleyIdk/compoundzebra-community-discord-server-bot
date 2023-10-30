@@ -10,6 +10,6 @@ public object EmojiStatsModule {
 	internal interface Bindings {
 
 		@Binds
-		fun bindEmojiStatsManager(emojiStatsManagerImpl: EmojiStatsManagerImpl): EmojiStatsManager
+		fun bindEmojiStatsManager(impl: EmojiStatsManagerImpl): EmojiStatsManager
 	}
 }

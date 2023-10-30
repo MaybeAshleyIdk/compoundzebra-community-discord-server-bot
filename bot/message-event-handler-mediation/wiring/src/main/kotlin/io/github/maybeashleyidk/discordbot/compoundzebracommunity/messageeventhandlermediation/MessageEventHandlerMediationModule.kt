@@ -10,8 +10,6 @@ public object MessageEventHandlerMediationModule {
 	internal interface Bindings {
 
 		@Binds
-		fun bindMessageEventHandlerMediator(
-			messageEventHandlerMediatorImpl: MessageEventHandlerMediatorImpl,
-		): MessageEventHandlerMediator
+		fun bindMessageEventHandlerMediator(impl: MessageEventHandlerMediatorImpl): MessageEventHandlerMediator
 	}
 }
