@@ -54,6 +54,10 @@ public class WiringAssimilationProjectPlugin : Plugin<Project> {
 			error("The wiring-assimilation $project has the standalone project plugin applied to it, but it must not")
 		}
 
+		project.plugins.withType<PartitionedProjectPlugin> {
+			error("The wiring-assimilation $project has the partitioned project plugin applied to it, but it must not")
+		}
+
 		project.plugins.withType<ApiImplWiringProjectPlugin> {
 			val msg: String =
 				"The wiring-assimilation $project has the API-implementation-wiring project plugin applied to it" +

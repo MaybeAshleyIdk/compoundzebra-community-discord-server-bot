@@ -44,6 +44,10 @@ public class GroupProjectPlugin : Plugin<Project> {
 			error("The group $project has the standalone project plugin applied to it, but it must not")
 		}
 
+		project.plugins.withType<PartitionedProjectPlugin> {
+			error("The group $project has the partitioned project plugin applied to it, but it must not")
+		}
+
 		project.plugins.withType<ApiImplWiringProjectPlugin> {
 			error("The group $project has the API-implementation-wiring project plugin applied to it, but it must not")
 		}

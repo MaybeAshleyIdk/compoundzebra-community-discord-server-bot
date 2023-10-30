@@ -1,6 +1,7 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.apiimplwiring
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.GroupProjectPlugin
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.PartitionedProjectPlugin
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.StandaloneProjectPlugin
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.WiringAssimilationProjectPlugin
 import org.gradle.api.Plugin
@@ -51,6 +52,13 @@ public class ApiImplWiringProjectPlugin : Plugin<Project> {
 		project.plugins.withType<StandaloneProjectPlugin> {
 			val msg: String = "The API-implementation-wiring $project has the standalone project plugin applied to it" +
 				", but it must not"
+			error(msg)
+		}
+
+		project.plugins.withType<PartitionedProjectPlugin> {
+			val msg: String =
+				"The API-implementation-wiring $project has the partitioned project plugin applied to it" +
+					", but it must not"
 			error(msg)
 		}
 

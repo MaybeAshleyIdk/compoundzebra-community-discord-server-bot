@@ -32,6 +32,10 @@ public class StandaloneProjectPlugin : Plugin<Project> {
 	}
 
 	private fun checkPlugins(project: Project) {
+		project.plugins.withType<PartitionedProjectPlugin> {
+			error("The standalone $project has partitioned project plugin applied to it, but it must not")
+		}
+
 		project.plugins.withType<ApiImplWiringProjectPlugin> {
 			val msg: String = "The standalone $project has the API-implementation-wiring project plugin applied to it" +
 				", but it must not"
