@@ -3,44 +3,14 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Lazy
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandler.CommandMessageEventHandlerModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalmessages.ConditionalMessagesModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.cache.ConfigCacheModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.serialization.ConfigSerializationModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.source.ConfigSourceModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.supplier.ConfigSupplierModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.emojistats.EmojiStatsFeatureModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.polls.PollsFeatureModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.manager.ShutdownManagerFeatureModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.request.ShutdownRequestFeatureModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownAwaiter
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownWaitFeatureModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.LoggingModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventhandlermediator.MessageEventHandlerMediatorModule
 import net.dv8tion.jda.api.entities.Activity
 import java.nio.file.Path
 import javax.inject.Singleton
 import net.dv8tion.jda.api.JDA as Jda
 
-@Component(
-	modules = [
-		BotModule::class,
-		LoggingModule::class,
-		ConfigSupplierModule::class,
-		ConfigCacheModule::class,
-		ConfigSourceModule::class,
-		ConfigSerializationModule::class,
-		EmojiStatsFeatureModule::class,
-		PollsFeatureModule::class,
-		ShutdownManagerFeatureModule::class,
-		ShutdownWaitFeatureModule::class,
-		ShutdownRequestFeatureModule::class,
-		CommandMessageEventHandlerModule::class,
-		ConditionalMessagesModule::class,
-		MessageEventHandlerMediatorModule::class,
-	],
-)
+@Component(modules = [BotModule::class])
 @Singleton
 public interface BotComponent {
 
