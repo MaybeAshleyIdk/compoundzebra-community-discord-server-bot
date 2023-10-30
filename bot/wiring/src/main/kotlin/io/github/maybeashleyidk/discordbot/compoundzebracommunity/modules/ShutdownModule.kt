@@ -1,15 +1,15 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules
 
 import dagger.Module
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.manager.ShutdownManagerFeatureModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.request.ShutdownRequestFeatureModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownWaitFeatureModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.manager.ShutdownManagerModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.request.ShutdownRequestModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shutdown.wait.ShutdownWaitModule
 
 @Module(
 	includes = [
-		ShutdownManagerFeatureModule::class,
-		ShutdownWaitFeatureModule::class,
-		ShutdownRequestFeatureModule::class,
+		ShutdownManagerModule::class,
+		ShutdownWaitModule::class,
+		ShutdownRequestModule::class,
 	],
 )
 internal object ShutdownModule

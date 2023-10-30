@@ -3,8 +3,8 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.emoj
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [EmojiStatsFeatureModule.Bindings::class])
-public object EmojiStatsFeatureModule {
+@Module(includes = [EmojiStatsModule.Bindings::class])
+public object EmojiStatsModule {
 
 	@Module
 	internal interface Bindings {

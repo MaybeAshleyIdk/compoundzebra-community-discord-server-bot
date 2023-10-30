@@ -5,8 +5,8 @@ import dagger.Module
 import dagger.multibindings.IntoSet
 import net.dv8tion.jda.api.hooks.EventListener
 
-@Module(includes = [PollsFeatureModule.Bindings::class])
-public object PollsFeatureModule {
+@Module(includes = [PollsModule.Bindings::class])
+public object PollsModule {
 
 	@Module
 	internal interface Bindings {

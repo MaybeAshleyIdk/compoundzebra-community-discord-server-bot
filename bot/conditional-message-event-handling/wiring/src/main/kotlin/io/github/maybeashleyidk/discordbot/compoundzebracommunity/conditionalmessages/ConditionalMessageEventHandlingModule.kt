@@ -3,8 +3,8 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalme
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [ConditionalMessagesModule.Bindings::class])
-public object ConditionalMessagesModule {
+@Module(includes = [ConditionalMessageEventHandlingModule.Bindings::class])
+public object ConditionalMessageEventHandlingModule {
 
 	@Module
 	internal interface Bindings {

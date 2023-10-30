@@ -3,8 +3,8 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventh
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [MessageEventHandlerMediatorModule.Bindings::class])
-public object MessageEventHandlerMediatorModule {
+@Module(includes = [MessageEventHandlerMediationModule.Bindings::class])
+public object MessageEventHandlerMediationModule {
 
 	@Module
 	internal interface Bindings {

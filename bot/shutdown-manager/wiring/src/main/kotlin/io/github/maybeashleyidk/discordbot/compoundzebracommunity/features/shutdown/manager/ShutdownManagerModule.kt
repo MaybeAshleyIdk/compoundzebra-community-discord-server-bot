@@ -3,8 +3,8 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.features.shut
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [ShutdownManagerFeatureModule.Bindings::class])
-public object ShutdownManagerFeatureModule {
+@Module(includes = [ShutdownManagerModule.Bindings::class])
+public object ShutdownManagerModule {
 
 	@Module
 	internal interface Bindings {
