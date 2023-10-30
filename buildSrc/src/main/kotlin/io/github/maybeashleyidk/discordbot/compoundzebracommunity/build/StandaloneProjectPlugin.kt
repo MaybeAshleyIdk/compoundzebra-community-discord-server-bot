@@ -2,6 +2,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.withType
 
 /**
  * Plugin that marks the project it is applied to as a "standalone" project.
@@ -16,12 +17,19 @@ public class StandaloneProjectPlugin : Plugin<Project> {
 
 	private fun checkProject(project: Project) {
 		this.checkName(project)
+		this.checkPlugins(project)
 		this.checkChildProjects(project)
 	}
 
 	private fun checkName(project: Project) {
 		check(project.name.isLegalProjectName()) {
 			"The name of the standalone $project is illegal"
+		}
+	}
+
+	private fun checkPlugins(project: Project) {
+		project.plugins.withType<GroupProjectPlugin> {
+			error("The standalone $project has the group project plugin applied to it, but it must not")
 		}
 	}
 
