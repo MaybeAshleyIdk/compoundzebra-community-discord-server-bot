@@ -109,7 +109,7 @@ include(
 	":bot:command-message-event-handler:impl:built-in-commands:shutdown",
 	":bot:command-message-event-handler:impl:built-in-commands",
 
-	":bot:command-message-event-handler:impl:echo-command",
+	":bot:command-message-event-handler:impl:predefined-response-command",
 	":bot:command-message-event-handler:impl:core",
 	":bot:command-message-event-handler:impl:wiring",
 	":bot:command-message-event-handler:impl",

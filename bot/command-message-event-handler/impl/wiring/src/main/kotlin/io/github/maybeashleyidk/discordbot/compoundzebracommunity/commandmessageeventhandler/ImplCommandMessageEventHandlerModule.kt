@@ -28,17 +28,22 @@ public object ImplCommandMessageEventHandlerModule {
 	// TODO: find a way to do this dynamic
 	@Provides
 	@ElementsIntoSet
-	internal fun provideConfiguredEchoCommands(
-		echoCommandFactory: EchoCommand.Factory,
+	internal fun provideConfiguredPredefinedResponseCommands(
+		predefinedResponseCommandFactory: PredefinedResponseCommand.Factory,
 		configSupplier: ConfigSupplier,
 	): Set<Command> {
 		val config: Config = configSupplier.get()
 		return config.commandDefinitions
-			.mapTo(LinkedHashSet(config.commandDefinitions.size), echoCommandFactory::buildFromCommandDefinition)
+			.mapTo(
+				LinkedHashSet(config.commandDefinitions.size),
+				predefinedResponseCommandFactory::buildFromCommandDefinition,
+			)
 	}
 }
 
-private fun EchoCommand.Factory.buildFromCommandDefinition(commandDefinition: CommandDefinition): EchoCommand {
+private fun PredefinedResponseCommand.Factory.buildFromCommandDefinition(
+	commandDefinition: CommandDefinition,
+): PredefinedResponseCommand {
 	return this
 		.build(
 			commandDefinition.commandName,

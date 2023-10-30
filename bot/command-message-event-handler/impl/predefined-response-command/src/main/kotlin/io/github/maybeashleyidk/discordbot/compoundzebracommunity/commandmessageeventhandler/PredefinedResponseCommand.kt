@@ -8,7 +8,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutin
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 
-public class EchoCommand @AssistedInject constructor(
+public class PredefinedResponseCommand @AssistedInject constructor(
 	@Assisted("name") nameString: String,
 	@Assisted("responseMessage") private val responseMessage: String,
 ) : Command(CommandName.ofString(nameString)) {
@@ -19,7 +19,7 @@ public class EchoCommand @AssistedInject constructor(
 		public fun build(
 			@Assisted("name") nameString: String,
 			@Assisted("responseMessage") responseMessage: String,
-		): EchoCommand
+		): PredefinedResponseCommand
 	}
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
@@ -27,7 +27,10 @@ public class EchoCommand @AssistedInject constructor(
 	}
 }
 
-public fun EchoCommand.Factory.build(name: CommandName, responseMessage: String): EchoCommand {
+public fun PredefinedResponseCommand.Factory.build(
+	name: CommandName,
+	responseMessage: String,
+): PredefinedResponseCommand {
 	return this.build(
 		nameString = name.toString(),
 		responseMessage = responseMessage,
