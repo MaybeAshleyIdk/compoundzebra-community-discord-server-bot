@@ -90,46 +90,46 @@ include(
 
 	":bot:command-prefix",
 
-	// region command message event handler
+	// region command message event handling
 
-	":bot:command-message-event-handler:api",
+	":bot:command-message-event-handling:api",
 
 	// region implementation
 
-	":bot:command-message-event-handler:impl:message-parser",
-	":bot:command-message-event-handler:impl:command",
+	":bot:command-message-event-handling:impl:message-parser",
+	":bot:command-message-event-handling:impl:command",
 
-	":bot:command-message-event-handler:impl:built-in-commands:coin-flip",
-	":bot:command-message-event-handler:impl:built-in-commands:config",
-	":bot:command-message-event-handler:impl:built-in-commands:dev",
-	":bot:command-message-event-handler:impl:built-in-commands:emoji-stats",
-	":bot:command-message-event-handler:impl:built-in-commands:magic8ball",
-	":bot:command-message-event-handler:impl:built-in-commands:polls",
-	":bot:command-message-event-handler:impl:built-in-commands:rng",
-	":bot:command-message-event-handler:impl:built-in-commands:shutdown",
-	":bot:command-message-event-handler:impl:built-in-commands",
+	":bot:command-message-event-handling:impl:built-in-commands:coin-flip",
+	":bot:command-message-event-handling:impl:built-in-commands:config",
+	":bot:command-message-event-handling:impl:built-in-commands:dev",
+	":bot:command-message-event-handling:impl:built-in-commands:emoji-stats",
+	":bot:command-message-event-handling:impl:built-in-commands:magic8ball",
+	":bot:command-message-event-handling:impl:built-in-commands:polls",
+	":bot:command-message-event-handling:impl:built-in-commands:rng",
+	":bot:command-message-event-handling:impl:built-in-commands:shutdown",
+	":bot:command-message-event-handling:impl:built-in-commands",
 
-	":bot:command-message-event-handler:impl:predefined-response-command",
-	":bot:command-message-event-handler:impl:core",
-	":bot:command-message-event-handler:impl:wiring",
-	":bot:command-message-event-handler:impl",
-
-	// endregion
-
-	":bot:command-message-event-handler:wiring",
-
-	":bot:command-message-event-handler",
+	":bot:command-message-event-handling:impl:predefined-response-command",
+	":bot:command-message-event-handling:impl:core",
+	":bot:command-message-event-handling:impl:wiring",
+	":bot:command-message-event-handling:impl",
 
 	// endregion
 
-	":bot:conditional-messages:api",
-	":bot:conditional-messages:impl",
-	":bot:conditional-messages:wiring",
-	":bot:conditional-messages",
+	":bot:command-message-event-handling:wiring",
 
-	":bot:message-event-handler-mediator:api",
-	":bot:message-event-handler-mediator:impl",
-	":bot:message-event-handler-mediator:wiring",
+	":bot:command-message-event-handling",
+
+	// endregion
+
+	":bot:conditional-message-event-handling:api",
+	":bot:conditional-message-event-handling:impl",
+	":bot:conditional-message-event-handling:wiring",
+	":bot:conditional-message-event-handling",
+
+	":bot:message-event-handler-mediation:api",
+	":bot:message-event-handler-mediation:impl",
+	":bot:message-event-handler-mediation:wiring",
 
 	":bot:jda-factory",
 	":bot:wiring",
