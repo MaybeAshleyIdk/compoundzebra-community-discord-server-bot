@@ -25,7 +25,7 @@ dependencies {
 	implementation(project(":bot:shutdown-manager:wiring"))
 	implementation(project(":bot:shutdown-wait:wiring"))
 	implementation(project(":bot:shutdown-request:wiring"))
-	implementation(project(":bot:commands:wiring"))
+	implementation(project(":bot:command-message-event-handler:wiring"))
 	implementation(project(":bot:conditional-messages:wiring"))
 	implementation(project(":bot:message-event-handler-mediator:wiring"))
 

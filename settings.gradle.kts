@@ -90,23 +90,36 @@ include(
 
 	":bot:command-prefix",
 
-	// region commands
-	":bot:commands:base",
+	// region command message event handler
 
-	":bot:commands:builtins:coinflip",
-	":bot:commands:builtins:config",
-	":bot:commands:builtins:dev",
-	":bot:commands:builtins:emoji-stats",
-	":bot:commands:builtins:magic8ball",
-	":bot:commands:builtins:polls",
-	":bot:commands:builtins:rng",
-	":bot:commands:builtins:shutdown",
-	":bot:commands:builtins:all-wiring",
+	":bot:command-message-event-handler:api",
 
-	":bot:commands:echo-command",
-	":bot:commands:message-parser",
-	":bot:commands:event-handler",
-	":bot:commands:wiring",
+	// region implementation
+
+	":bot:command-message-event-handler:impl:message-parser",
+	":bot:command-message-event-handler:impl:command",
+
+	":bot:command-message-event-handler:impl:built-in-commands:coin-flip",
+	":bot:command-message-event-handler:impl:built-in-commands:config",
+	":bot:command-message-event-handler:impl:built-in-commands:dev",
+	":bot:command-message-event-handler:impl:built-in-commands:emoji-stats",
+	":bot:command-message-event-handler:impl:built-in-commands:magic8ball",
+	":bot:command-message-event-handler:impl:built-in-commands:polls",
+	":bot:command-message-event-handler:impl:built-in-commands:rng",
+	":bot:command-message-event-handler:impl:built-in-commands:shutdown",
+	":bot:command-message-event-handler:impl:built-in-commands",
+
+	":bot:command-message-event-handler:impl:echo-command",
+	":bot:command-message-event-handler:impl:core",
+	":bot:command-message-event-handler:impl:wiring",
+	":bot:command-message-event-handler:impl",
+
+	// endregion
+
+	":bot:command-message-event-handler:wiring",
+
+	":bot:command-message-event-handler",
+
 	// endregion
 
 	":bot:conditional-messages:api",
