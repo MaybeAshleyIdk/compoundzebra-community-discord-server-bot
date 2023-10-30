@@ -1,6 +1,7 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandname.CommandName
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polloption.PollOptionLabel
 
 public data class LanguageStrings(
 	val generic: Generic,
@@ -40,8 +41,8 @@ public data class LanguageStrings(
 		// TODO: if we want to support guilds of different languages, then we need the language here to use
 		//       java.text.NumberFormat.
 		//       or we do the formatting before and pass it in
-		public fun option(optionLabel: String, votes: Int): String {
-			return this.optionFormat.format(optionLabel, votes.toString())
+		public fun option(optionLabel: PollOptionLabel, votes: Int): String {
+			return this.optionFormat.format(optionLabel.toString(), votes.toString())
 		}
 
 		public fun closedMessage(userId: String): String {

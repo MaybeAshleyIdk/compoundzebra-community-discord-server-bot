@@ -1,0 +1,18 @@
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.pollmanagement
+
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.pollid.PollId
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.snowflake.SnowflakeId
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.snowflakegenerator.SnowflakeIdGenerator
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+public class PollIdGenerator @Inject constructor() {
+
+	private val snowflakeIdGenerator: SnowflakeIdGenerator = SnowflakeIdGenerator()
+
+	internal fun generate(): PollId {
+		val snowflakeId: SnowflakeId = this.snowflakeIdGenerator.generateNext()
+		return PollId.ofSnowflakeId(snowflakeId)
+	}
+}

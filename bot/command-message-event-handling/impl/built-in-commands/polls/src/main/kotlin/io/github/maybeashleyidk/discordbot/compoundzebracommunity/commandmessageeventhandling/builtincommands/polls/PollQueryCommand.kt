@@ -4,9 +4,9 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessage
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandname.CommandName
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollDetails
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollHolder
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollId
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.poll.PollDetails
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.pollholding.PollHolder
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.pollid.PollId
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutinesjda.await
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Member
@@ -40,7 +40,7 @@ public class PollQueryCommand @Inject constructor(
 		val pollDetails: PollDetails? = pollIdArg.toULongOrNull()
 			?.let { pollIdULong: ULong ->
 				val pollId: PollId = PollId.ofULong(pollIdULong)
-				this.pollHolder.getPollById(pollId)
+				this.pollHolder.getPollDetailsByIdOrNull(pollId)
 			}
 
 		if (pollDetails == null) {

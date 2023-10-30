@@ -62,10 +62,41 @@ include(
 	":bot:emoji-stats:wiring",
 	":bot:emoji-stats",
 
-	":bot:polls:api",
-	":bot:polls:impl",
-	":bot:polls:wiring",
-	":bot:polls",
+	// region polls
+
+	":bot:poll-id",
+	":bot:poll-description",
+	":bot:poll-option",
+	":bot:poll-details",
+
+	":bot:poll-management:api",
+	":bot:poll-management:impl",
+	":bot:poll-management:wiring",
+	":bot:poll-management",
+
+	":bot:poll-creation:api",
+	":bot:poll-creation:impl-manager",
+	":bot:poll-creation:wiring",
+	":bot:poll-creation",
+
+	":bot:poll-holding:api",
+	":bot:poll-holding:impl-manager",
+	":bot:poll-holding:wiring",
+	":bot:poll-holding",
+
+	":bot:poll-modification:api",
+	":bot:poll-modification:impl-manager",
+	":bot:poll-modification:wiring",
+	":bot:poll-modification",
+
+	":bot:poll-component-protocol",
+
+	":bot:poll-event-listening:api",
+	":bot:poll-event-listening:impl",
+	":bot:poll-event-listening:wiring",
+	":bot:poll-event-listening",
+
+	// endregion
 
 	// region shutdown
 
