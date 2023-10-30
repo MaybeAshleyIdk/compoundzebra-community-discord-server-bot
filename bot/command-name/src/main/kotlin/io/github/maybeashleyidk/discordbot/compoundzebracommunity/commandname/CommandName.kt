@@ -30,11 +30,7 @@ public value class CommandName private constructor(private val string: String) {
 	}
 
 	public fun toQuotedString(): String {
-		return buildString(1 + this.string.length + 1) {
-			this@buildString.append('\'')
-			this@buildString.append(this@CommandName.string)
-			this@buildString.append('\'')
-		}
+		return this.string.quoted()
 	}
 
 	public fun isEquivalentTo(other: CommandName): Boolean {
