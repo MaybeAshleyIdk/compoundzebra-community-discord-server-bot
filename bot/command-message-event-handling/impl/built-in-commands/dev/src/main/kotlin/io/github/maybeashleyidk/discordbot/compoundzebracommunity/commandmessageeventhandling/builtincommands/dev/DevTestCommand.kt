@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:parameter-list-spacing", "ktlint:standard:paren-spacing")
+
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandling.builtincommands.dev
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandling.Command
