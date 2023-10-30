@@ -1,5 +1,9 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.apiimplwiring.ApiImplWiringProjectPlugin
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.apiimplwiring.ApiProjectPlugin
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.apiimplwiring.ImplProjectPlugin
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.apiimplwiring.WiringProjectPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.withType
@@ -28,6 +32,24 @@ public class StandaloneProjectPlugin : Plugin<Project> {
 	}
 
 	private fun checkPlugins(project: Project) {
+		project.plugins.withType<ApiImplWiringProjectPlugin> {
+			val msg: String = "The standalone $project has the API-implementation-wiring project plugin applied to it" +
+				", but it must not"
+			error(msg)
+		}
+
+		project.plugins.withType<ApiProjectPlugin> {
+			error("The standalone $project has the API project plugin applied to it, but it must not")
+		}
+
+		project.plugins.withType<ImplProjectPlugin> {
+			error("The standalone $project has the implementation project plugin applied to it, but it must not")
+		}
+
+		project.plugins.withType<WiringProjectPlugin> {
+			error("The standalone $project has the wiring project plugin applied to it, but it must not")
+		}
+
 		project.plugins.withType<GroupProjectPlugin> {
 			error("The standalone $project has the group project plugin applied to it, but it must not")
 		}
