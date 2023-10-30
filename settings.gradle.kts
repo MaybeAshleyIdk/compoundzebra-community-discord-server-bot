@@ -138,6 +138,7 @@ include(
 	":bot:command-message-event-handling:impl:built-in-commands:polls",
 	":bot:command-message-event-handling:impl:built-in-commands:rng",
 	":bot:command-message-event-handling:impl:built-in-commands:shutdown",
+	":bot:command-message-event-handling:impl:built-in-commands:source-code",
 	":bot:command-message-event-handling:impl:built-in-commands",
 
 	":bot:command-message-event-handling:impl:predefined-response-command",

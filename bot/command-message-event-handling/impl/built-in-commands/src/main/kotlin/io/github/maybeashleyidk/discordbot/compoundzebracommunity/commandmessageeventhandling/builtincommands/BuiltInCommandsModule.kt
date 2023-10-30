@@ -16,6 +16,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessage
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandling.builtincommands.rng.DieRollingCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandling.builtincommands.rng.RngCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandling.builtincommands.shutdown.ShutdownCommand
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandling.builtincommands.sourcecode.SourceCodeCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 
 @Module(includes = [BuiltInCommandsModule.Bindings::class])
@@ -72,6 +73,10 @@ public object BuiltInCommandsModule {
 		@Binds
 		@IntoSet
 		fun bindShutdownCommand(shutdownCommand: ShutdownCommand): Command
+
+		@Binds
+		@IntoSet
+		fun bindSourceCodeCommand(sourceCodeCommand: SourceCodeCommand): Command
 	}
 
 	@Provides
