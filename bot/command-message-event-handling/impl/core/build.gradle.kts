@@ -10,6 +10,7 @@ dependencies {
 	api(project(":bot:command-message-event-handling:impl:command"))
 	api(project(":bot:logging"))
 
+	implementation(project(":bot:utils"))
 	implementation(project(":bot:utils-coroutines-jda"))
 
 	implementation(libs.kotlinx.coroutines.core)
