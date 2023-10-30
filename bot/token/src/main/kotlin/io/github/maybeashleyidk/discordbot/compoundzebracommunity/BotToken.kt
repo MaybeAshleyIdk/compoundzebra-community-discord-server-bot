@@ -1,7 +1,7 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
 @JvmInline
-public value class BotToken private constructor(public val string: String) {
+public value class BotToken private constructor(private val string: String) {
 
 	public companion object {
 
@@ -21,6 +21,10 @@ public value class BotToken private constructor(public val string: String) {
 		require(this.string.length == BotToken.TOKEN_STRING_LENGTH) {
 			"Bot token string must be exactly ${BotToken.TOKEN_STRING_LENGTH} characters long"
 		}
+	}
+
+	public fun toRawString(): String {
+		return this.string
 	}
 
 	override fun toString(): String {

@@ -79,7 +79,7 @@ public fun BotComponent.Factory.build(
 ): BotComponent {
 	return this.build(
 		environmentType = environmentType,
-		token = token.string,
+		token = token.toRawString(),
 		initialActivity = initialActivity,
 		configFilePath = configFilePath,
 	)
