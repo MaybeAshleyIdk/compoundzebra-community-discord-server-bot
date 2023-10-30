@@ -4,7 +4,7 @@ import dagger.Binds
 import dagger.Module
 
 @Module(includes = [MessageEventHandlerMediatorModule.Bindings::class])
-public class MessageEventHandlerMediatorModule {
+public object MessageEventHandlerMediatorModule {
 
 	@Module
 	internal interface Bindings {
