@@ -18,6 +18,7 @@ public class SnowflakeIdGenerator {
 
 	private var currentSequenceNr: UShort = 0u
 
+	@Synchronized
 	public fun generateNext(): SnowflakeId {
 		val now: Long = System.currentTimeMillis()
 
