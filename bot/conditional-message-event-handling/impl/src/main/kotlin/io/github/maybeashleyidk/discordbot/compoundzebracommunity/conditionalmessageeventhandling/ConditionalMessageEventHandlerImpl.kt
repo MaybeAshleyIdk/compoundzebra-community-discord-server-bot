@@ -3,6 +3,8 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalme
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConditionalMessage
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.quoted
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutinesjda.await
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.ChannelType
@@ -14,6 +16,7 @@ import javax.inject.Inject
 
 public class ConditionalMessageEventHandlerImpl @Inject constructor(
 	private val configSupplier: ConfigSupplier,
+	private val logger: Logger,
 ) : ConditionalMessageEventHandler {
 
 	public override suspend fun handleEvent(event: GenericEvent) {
@@ -37,6 +40,21 @@ public class ConditionalMessageEventHandlerImpl @Inject constructor(
 			}
 			.map { conditionalMessage: ConditionalMessage ->
 				textChannel.sendMessage(conditionalMessage.messageContent)
+					.onSuccess { sentMessage: Message ->
+						val sb = StringBuilder()
+						sb.append("Conditional message (content: ")
+						sb.append(conditionalMessage.messageContent.quoted())
+						sb.append(", ID: ")
+						sb.append(sentMessage.id)
+						sb.append(") triggered by message with ID ")
+						sb.append(message.id)
+						sb.append(", sent by ")
+						sb.append(event.author.name.quoted())
+						sb.append(" (")
+						sb.append(event.author.id)
+						sb.append(')')
+						this.logger.logInfo(sb.toString())
+					}
 			}
 			.toList()
 			.ifEmpty { null }
