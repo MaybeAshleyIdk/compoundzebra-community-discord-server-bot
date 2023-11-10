@@ -11,6 +11,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.MessageEventHandlingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.PollsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.ShutdownModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.privatemessageeventhandling.PrivateMessageEventHandlingModule
 import javax.inject.Singleton
 import net.dv8tion.jda.api.JDA as Jda
 
@@ -22,6 +23,7 @@ import net.dv8tion.jda.api.JDA as Jda
 		PollsModule::class,
 		ShutdownModule::class,
 		MessageEventHandlingModule::class,
+		PrivateMessageEventHandlingModule::class,
 	],
 )
 internal object BotModule {
