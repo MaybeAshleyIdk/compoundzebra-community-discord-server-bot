@@ -26,5 +26,10 @@ ktlint_standard_try-catch-finally-spacing = enabled
 
 ktlint_standard_discouraged-comment-location = disabled
 
+[*.md]
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = false
+
 [*.{diff,patch}]
 trim_trailing_whitespace = false
