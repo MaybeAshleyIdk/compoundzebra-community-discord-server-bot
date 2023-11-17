@@ -3,6 +3,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.jdafactory
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.BotTokenString
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventhandlermediation.MessageEventHandlerMediator
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polleventlistening.PollEventListener
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.privatemessageeventhandling.PrivateMessageEventHandler
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.requests.GatewayIntent
@@ -14,6 +15,7 @@ public class JdaFactory @Inject constructor(
 	private val initialActivity: Activity,
 	private val messageEventHandlerMediator: MessageEventHandlerMediator,
 	private val pollEventListener: PollEventListener,
+	private val privateMessageEventHandler: PrivateMessageEventHandler,
 ) {
 
 	public fun create(): Jda {
@@ -23,6 +25,7 @@ public class JdaFactory @Inject constructor(
 			.addEventListeners(
 				this.messageEventHandlerMediator,
 				this.pollEventListener,
+				this.privateMessageEventHandler,
 			)
 			.build()
 	}

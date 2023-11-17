@@ -162,6 +162,12 @@ include(
 	":bot:message-event-handler-mediation:api",
 	":bot:message-event-handler-mediation:impl",
 	":bot:message-event-handler-mediation:wiring",
+	":bot:message-event-handler-mediation",
+
+	":bot:private-message-event-handling:api",
+	":bot:private-message-event-handling:impl",
+	":bot:private-message-event-handling:wiring",
+	":bot:private-message-event-handling",
 
 	":bot:jda-factory",
 	":bot:wiring",
