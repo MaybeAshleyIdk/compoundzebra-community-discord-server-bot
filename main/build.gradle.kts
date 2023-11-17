@@ -79,6 +79,9 @@ val createExecutable: TaskProvider<Task> by tasks.registering {
 		executableFile.setExecutable(true)
 	}
 }
+tasks.assemble {
+	dependsOn(createExecutable)
+}
 
 val createGzippedExecutable: TaskProvider<Task> by tasks.registering {
 	group = "distribution"
