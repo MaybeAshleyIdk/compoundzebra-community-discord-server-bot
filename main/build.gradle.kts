@@ -1,5 +1,6 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import java.io.FileInputStream
+import java.io.FileNotFoundException
 import java.io.OutputStream
 import java.util.zip.GZIPOutputStream
 
@@ -119,6 +120,45 @@ tasks.clean {
 }
 
 // endregion
+
+tasks.run.configure {
+	doFirst {
+		workingDir = project.rootProject
+			.layout.projectDirectory
+			.dir("run").asFile
+			.also(File::mkdirs)
+	}
+
+	doFirst {
+		val environmentStr: String = System.getenv("CZD_BOT_ENVIRONMENT")
+			.orEmpty()
+			.ifEmpty { "dev" }
+
+		environment("CZD_BOT_ENVIRONMENT", environmentStr)
+	}
+
+	doFirst {
+		val botTokenFile: RegularFile = project
+			.layout.projectDirectory
+			.file("bot_token.txt")
+
+		val tokenStr: String? = System.getenv("DISCORD_BOT_TOKEN")
+			?.ifEmpty { null }
+			?: try {
+				botTokenFile.asFile.readText().trim()
+			} catch (_: FileNotFoundException) {
+				null
+			}
+
+		checkNotNull(tokenStr) {
+			"To run the bot, the token must be supplied either via " +
+				"the environment variable 'DISCORD_BOT_TOKEN' or " +
+				"via the file '$botTokenFile' (environment variable has higher priority)"
+		}
+
+		environment("DISCORD_BOT_TOKEN", tokenStr)
+	}
+}
 
 // these tasks are broken because we have multiple modules with the same name. (e.g.: "api", "impl" and "wiring")
 // we don't need them anyway, so it's not a problem. simply disable them so that the task "build" doesn't fail
