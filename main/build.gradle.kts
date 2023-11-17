@@ -111,11 +111,8 @@ val createGzippedExecutable: TaskProvider<Task> by tasks.registering {
 			}
 	}
 }
-
 tasks.clean {
-	doLast {
-		delete(createGzippedExecutable.get().outputs.files.singleFile)
-	}
+	delete(createGzippedExecutable.map(Task::getOutputs))
 }
 
 // endregion
