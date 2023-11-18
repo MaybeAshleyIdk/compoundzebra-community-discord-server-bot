@@ -22,20 +22,14 @@ fun main() {
 private fun getBotEnvironmentTypeFromEnvironmentOrExit(): BotEnvironmentType {
 	val environmentBotEnvironmentType: EnvironmentBotEnvironmentType = Environment.extractBotEnvironmentType()
 	return when (environmentBotEnvironmentType) {
-		is EnvironmentBotEnvironmentType.UnsetOrEmpty -> {
-			val msg: String = "environment variable ${Environment.VARIABLE_NAME_BOT_ENVIRONMENT_TYPE}" +
-				" must not be unset or empty"
-			System.err.println(msg)
-
-			exitProcess(48)
-		}
+		is EnvironmentBotEnvironmentType.UnsetOrEmpty -> BotEnvironmentType.PRODUCTION
 
 		is EnvironmentBotEnvironmentType.Invalid -> {
 			val msg: String = "value of environment variable ${Environment.VARIABLE_NAME_BOT_ENVIRONMENT_TYPE}" +
 				" must be either \"dev\" or \"prod\""
 			System.err.println(msg)
 
-			exitProcess(49)
+			exitProcess(ExitStatus.INVALID_ENVIRONMENT_TYPE)
 		}
 
 		is EnvironmentBotEnvironmentType.Valid -> environmentBotEnvironmentType.environmentType
@@ -46,7 +40,7 @@ private fun getBotTokenFromEnvironmentOrExit(): BotToken {
 	return when (val environmentBotToken: EnvironmentBotToken = Environment.extractBotToken()) {
 		is EnvironmentBotToken.UnsetOrEmpty -> {
 			System.err.println("environment variable ${Environment.VARIABLE_NAME_BOT_TOKEN} must not be unset or empty")
-			exitProcess(50)
+			exitProcess(ExitStatus.UNSET_OR_EMPTY_BOT_TOKEN_ENVIRONMENT_VARIABLE)
 		}
 
 		is EnvironmentBotToken.InvalidLength -> {
@@ -54,7 +48,7 @@ private fun getBotTokenFromEnvironmentOrExit(): BotToken {
 				" must be exactly ${BotToken.TOKEN_STRING_LENGTH} characters long"
 			System.err.println(msg)
 
-			exitProcess(51)
+			exitProcess(ExitStatus.INVALID_BOT_TOKEN_LENGTH)
 		}
 
 		is EnvironmentBotToken.Valid -> environmentBotToken.token
