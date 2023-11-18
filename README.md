@@ -1,8 +1,12 @@
 # CompoundZebra Community Discord Server Bot #
 
-This is a custom [Discord] bot for the community server of the Twitch streamer [CompoundZebra].
+## About ##
 
-The token must be supplied in the environment variable `DISCORD_BOT_TOKEN`.
+This is a custom [Discord] bot for the community server of the Twitch streamer [CompoundZebra].
 
 [Discord]: <https://discord.com/> "Discord | Your Place to Talk and Hang Out"
 [CompoundZebra]: <https://www.twitch.tv/compoundzebra> "CompoundZebra - Twitch"
+
+## Usage ##
+
+The token must be supplied in the environment variable `DISCORD_BOT_TOKEN`.
