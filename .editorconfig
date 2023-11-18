@@ -26,6 +26,10 @@ ktlint_standard_try-catch-finally-spacing = enabled
 
 ktlint_standard_discouraged-comment-location = disabled
 
+[*.{yaml,yml}]
+indent_style = space
+indent_size = 2
+
 [*.md]
 indent_style = space
 indent_size = 2
