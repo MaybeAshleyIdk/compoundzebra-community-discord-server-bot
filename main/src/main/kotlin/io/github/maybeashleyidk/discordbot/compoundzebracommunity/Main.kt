@@ -22,13 +22,7 @@ fun main() {
 private fun getBotEnvironmentTypeFromEnvironmentOrExit(): BotEnvironmentType {
 	val environmentBotEnvironmentType: EnvironmentBotEnvironmentType = Environment.extractBotEnvironmentType()
 	return when (environmentBotEnvironmentType) {
-		is EnvironmentBotEnvironmentType.UnsetOrEmpty -> {
-			val msg: String = "environment variable ${Environment.VARIABLE_NAME_BOT_ENVIRONMENT_TYPE}" +
-				" must not be unset or empty"
-			System.err.println(msg)
-
-			exitProcess(ExitStatus.UNSET_OR_EMPTY_BOT_ENVIRONMENT_TYPE_ENVIRONMENT_VARIABLE)
-		}
+		is EnvironmentBotEnvironmentType.UnsetOrEmpty -> BotEnvironmentType.PRODUCTION
 
 		is EnvironmentBotEnvironmentType.Invalid -> {
 			val msg: String = "value of environment variable ${Environment.VARIABLE_NAME_BOT_ENVIRONMENT_TYPE}" +
