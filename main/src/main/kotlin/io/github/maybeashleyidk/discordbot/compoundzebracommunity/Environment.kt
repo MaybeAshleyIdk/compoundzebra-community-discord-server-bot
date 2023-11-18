@@ -3,7 +3,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.token.BotToken
 
-sealed class EnvironmentBotEnvironmentType {
+internal sealed class EnvironmentBotEnvironmentType {
 	data object UnsetOrEmpty : EnvironmentBotEnvironmentType()
 
 	data object Invalid : EnvironmentBotEnvironmentType()
@@ -11,7 +11,7 @@ sealed class EnvironmentBotEnvironmentType {
 	data class Valid(val environmentType: BotEnvironmentType) : EnvironmentBotEnvironmentType()
 }
 
-sealed class EnvironmentBotToken {
+internal sealed class EnvironmentBotToken {
 	data object UnsetOrEmpty : EnvironmentBotToken()
 
 	data object InvalidLength : EnvironmentBotToken()
@@ -19,7 +19,7 @@ sealed class EnvironmentBotToken {
 	data class Valid(val token: BotToken) : EnvironmentBotToken()
 }
 
-object Environment {
+internal object Environment {
 
 	const val VARIABLE_NAME_BOT_ENVIRONMENT_TYPE: String = "CZD_BOT_ENVIRONMENT"
 	const val VARIABLE_NAME_BOT_TOKEN: String = "DISCORD_BOT_TOKEN"
