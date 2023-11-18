@@ -7,6 +7,10 @@ This is a custom [Discord] bot for the community server of the Twitch streamer [
 [Discord]: <https://discord.com/> "Discord | Your Place to Talk and Hang Out"
 [CompoundZebra]: <https://www.twitch.tv/compoundzebra> "CompoundZebra - Twitch"
 
+## Features ##
+
+├─── WIP ───┤
+
 ## Download ##
 
 The fully built executable JAR file (that is compressed using `gzip`) can be downloaded from the [GitHub release page].
