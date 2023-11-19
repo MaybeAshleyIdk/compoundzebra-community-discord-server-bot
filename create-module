@@ -79,15 +79,23 @@ root_dir_pathname="${root_dir_pathname%"$(printf '\nx')"}"
 readonly root_dir_pathname
 
 gradle_build_file_template_regular_pathname="$root_dir_pathname/module-templates/regular-gradle.build.kts"
+gradle_build_file_template_api_pathname="$root_dir_pathname/module-templates/api-gradle.build.kts"
+gradle_build_file_template_impl_pathname="$root_dir_pathname/module-templates/impl-gradle.build.kts"
 gradle_build_file_template_wiring_pathname="$root_dir_pathname/module-templates/wiring-gradle.build.kts"
 readonly gradle_build_file_template_regular_pathname \
+         gradle_build_file_template_api_pathname \
+         gradle_build_file_template_impl_pathname \
          gradle_build_file_template_wiring_pathname
 
 for module_path in "$@"; do
 	module_dir_pathname="$(printf '%s' "${module_path#:}" | sed -e s/:/'\/'/g)"
 
 	gradle_build_file_template_pathname="$gradle_build_file_template_regular_pathname"
-	if printf '%s' "$module_path" | grep -Eq ':wiring$'; then
+	if printf '%s' "$module_path" | grep -Eq ':api$'; then
+		gradle_build_file_template_pathname="$gradle_build_file_template_api_pathname"
+	elif printf '%s' "$module_path" | grep -Eq ':impl(-[^:]*)?$'; then
+		gradle_build_file_template_pathname="$gradle_build_file_template_impl_pathname"
+	elif printf '%s' "$module_path" | grep -Eq ':wiring$'; then
 		gradle_build_file_template_pathname="$gradle_build_file_template_wiring_pathname"
 	fi
 
