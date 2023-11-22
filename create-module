@@ -87,6 +87,7 @@ readonly gradle_build_file_template_regular_pathname \
          gradle_build_file_template_impl_pathname \
          gradle_build_file_template_wiring_pathname
 
+printf 'include(\n'
 for module_path in "$@"; do
 	module_dir_pathname="$(printf '%s' "${module_path#:}" | sed -e s/:/'\/'/g)"
 
@@ -104,6 +105,9 @@ for module_path in "$@"; do
 	printf '/build/\n' > "$root_dir_pathname/$module_dir_pathname/.gitignore"
 	cp -- "$gradle_build_file_template_pathname" "$root_dir_pathname/$module_dir_pathname/build.gradle.kts"
 
+	printf '\t"%s",\n' "$module_path"
+
 	unset -v gradle_build_file_template_pathname \
 	         module_dir_pathname
 done; unset -v module_path
+printf ')\n'
