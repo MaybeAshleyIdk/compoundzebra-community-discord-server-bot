@@ -107,6 +107,8 @@ include(
 
 	// region shutdown
 
+	":bot:shutdown-callbacks",
+
 	":bot:shutdown-manager:api",
 	":bot:shutdown-manager:impl-semaphore",
 	":bot:shutdown-manager:wiring",
