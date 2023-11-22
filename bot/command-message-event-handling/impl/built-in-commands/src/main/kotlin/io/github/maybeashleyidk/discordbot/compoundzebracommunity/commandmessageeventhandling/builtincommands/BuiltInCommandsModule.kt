@@ -18,6 +18,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessage
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandling.builtincommands.shutdown.ShutdownCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandling.builtincommands.sourcecode.SourceCodeCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutCommand
 
 @Module(includes = [BuiltInCommandsModule.Bindings::class])
 public object BuiltInCommandsModule {
@@ -69,6 +70,10 @@ public object BuiltInCommandsModule {
 		@Binds
 		@IntoSet
 		fun bindRngCommand(rngCommand: RngCommand): Command
+
+		@Binds
+		@IntoSet
+		fun bindSelfTimeoutCommand(selfTimeoutCommand: SelfTimeoutCommand): Command
 
 		@Binds
 		@IntoSet
