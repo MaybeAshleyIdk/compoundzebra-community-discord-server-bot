@@ -98,6 +98,11 @@ include(
 
 	// endregion
 
+	":bot:self-timeout:api",
+	":bot:self-timeout:impl",
+	":bot:self-timeout:wiring",
+	":bot:self-timeout",
+
 	// region shutdown
 
 	":bot:shutdown-manager:api",
