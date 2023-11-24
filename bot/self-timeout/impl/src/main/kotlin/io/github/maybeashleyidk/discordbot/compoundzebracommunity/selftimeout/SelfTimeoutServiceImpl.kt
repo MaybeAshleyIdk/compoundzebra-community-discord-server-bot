@@ -2,9 +2,9 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.quoted
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutines.MutableMutexValue
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutinesjda.await
 import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.entities.Member
@@ -36,8 +36,8 @@ public class SelfTimeoutServiceImpl @Inject constructor(
 		var currentDuration: Duration = SelfTimeoutServiceImpl.INITIAL_TIMEOUT_DURATION
 	}
 
-	private val mainMutex: Mutex = Mutex()
-	private val infoMap: MutableMap<GuildMemberKey, SelfTimeoutMemberInfo> = HashMap()
+	private val infoMap: MutableMutexValue<MutableMap<GuildMemberKey, SelfTimeoutMemberInfo>> =
+		MutableMutexValue(HashMap())
 
 	override suspend fun timeOutMember(member: Member) {
 		val guild: Guild = member.guild
@@ -57,9 +57,9 @@ public class SelfTimeoutServiceImpl @Inject constructor(
 
 		val memberKey: GuildMemberKey = GuildMemberKey.ofMember(member)
 
-		val memberInfo: SelfTimeoutMemberInfo = this.mainMutex
-			.withLock {
-				this.infoMap.computeIfAbsent(memberKey) { SelfTimeoutMemberInfo() }
+		val memberInfo: SelfTimeoutMemberInfo = this.infoMap
+			.visit { infoMap: MutableMap<GuildMemberKey, SelfTimeoutMemberInfo> ->
+				infoMap.computeIfAbsent(memberKey) { SelfTimeoutMemberInfo() }
 			}
 
 		if (!(memberInfo.mutex.tryLock())) {
