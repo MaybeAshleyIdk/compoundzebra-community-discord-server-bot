@@ -1,7 +1,6 @@
 plugins {
 	ApiImplWiringProject
 	`java-library`
-	kotlin("jvm")
 }
 
 dependencies {
