@@ -8,7 +8,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.pollid.PollId
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.pollmodification.PollModifier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polloption.PollOptionValue
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutinesjda.await
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.coroutineScope
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.events.GenericEvent
@@ -22,9 +22,8 @@ public class PollEventListenerImpl @Inject constructor(
 	private val configSupplier: ConfigSupplier,
 ) : PollEventListener {
 
-	override fun handleEvent(event: GenericEvent) {
-		// TODO: change this from runBlocking
-		runBlocking {
+	override suspend fun handleEvent(event: GenericEvent) {
+		coroutineScope {
 			when (event) {
 				is StringSelectInteractionEvent -> this@PollEventListenerImpl.onStringSelectInteractionEvent(event)
 				is ButtonInteractionEvent -> this@PollEventListenerImpl.onButtonInteractionEvent(event)
