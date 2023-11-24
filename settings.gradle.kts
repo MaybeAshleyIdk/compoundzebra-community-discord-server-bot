@@ -57,6 +57,8 @@ include(
 
 	// endregion
 
+	":bot:event-handler",
+
 	":bot:emoji-stats:api",
 	":bot:emoji-stats:impl",
 	":bot:emoji-stats:wiring",
