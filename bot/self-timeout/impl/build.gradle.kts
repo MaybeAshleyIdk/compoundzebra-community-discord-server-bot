@@ -9,6 +9,7 @@ dependencies {
 	api(project(":bot:logging"))
 
 	implementation(project(":bot:utils"))
+	implementation(project(":bot:utils-coroutines"))
 	implementation(project(":bot:utils-coroutines-jda"))
 
 	implementation(libs.kotlinx.coroutines.core)

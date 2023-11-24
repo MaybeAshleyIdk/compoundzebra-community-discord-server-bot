@@ -19,7 +19,7 @@ public interface ShutdownManager {
 
 	public fun unregisterShutdownCallback(callback: OnBeforeShutdownCallback)
 
-	public fun handleShutdownEvent(event: GenericEvent): EventHandlingResultStatus
+	public suspend fun handleShutdownEvent(event: GenericEvent): EventHandlingResultStatus
 
-	public fun requestShutdown()
+	public suspend fun requestShutdown()
 }

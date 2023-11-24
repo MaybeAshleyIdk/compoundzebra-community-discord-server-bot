@@ -17,6 +17,7 @@ dependencyResolutionManagement {
 @Suppress("ktlint:standard:no-blank-line-in-list")
 include(
 	":bot:utils",
+	":bot:utils-coroutines",
 	":bot:utils-coroutines-jda",
 
 	":bot:environment-type",

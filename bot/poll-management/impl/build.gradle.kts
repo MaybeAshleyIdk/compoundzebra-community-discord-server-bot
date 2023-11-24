@@ -10,6 +10,9 @@ dependencies {
 
 	implementation(project(":bot:snowflake-generator"))
 	implementation(project(":bot:utils"))
+	implementation(project(":bot:utils-coroutines"))
+
+	implementation(libs.kotlinx.coroutines.core)
 
 	implementation(libs.javax.inject)
 }

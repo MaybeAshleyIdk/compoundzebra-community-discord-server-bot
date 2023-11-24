@@ -19,20 +19,20 @@ public interface PollManager {
 		public data class Closed(val pollDetails: PollDetails?) : CloseResult()
 	}
 
-	public fun openNewPoll(
+	public suspend fun openNewPoll(
 		author: Member,
 		description: PollDescription,
 		optionLabels: List<PollOptionLabel>,
 	): NewPollDetails
 
-	public fun getPollDetailsByIdOrNull(pollId: PollId): PollDetails?
+	public suspend fun getPollDetailsByIdOrNull(pollId: PollId): PollDetails?
 
 	/**
 	 * Returns `null` if the poll with the ID [pollId] doesn't exist.
 	 */
-	public fun voteOption(pollId: PollId, voterMember: Member, optionValue: PollOptionValue): PollDetails?
+	public suspend fun voteOption(pollId: PollId, voterMember: Member, optionValue: PollOptionValue): PollDetails?
 
-	public fun closePollUnrestricted(pollId: PollId, closerMember: Member)
+	public suspend fun closePollUnrestricted(pollId: PollId, closerMember: Member)
 
-	public fun closePollIfAllowed(pollId: PollId, closerMember: Member): CloseResult
+	public suspend fun closePollIfAllowed(pollId: PollId, closerMember: Member): CloseResult
 }

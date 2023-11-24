@@ -7,11 +7,11 @@ import net.dv8tion.jda.api.entities.Member
 
 public interface PollCreator {
 
-	public fun openNewPoll(
+	public suspend fun openNewPoll(
 		author: Member,
 		description: PollDescription,
 		optionLabels: List<PollOptionLabel>,
 	): NewPollDetails
 
-	public fun closePoll(pollId: PollId, closerMember: Member)
+	public suspend fun closePoll(pollId: PollId, closerMember: Member)
 }

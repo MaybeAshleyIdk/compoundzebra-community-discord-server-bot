@@ -7,7 +7,7 @@ public class ShutdownManagerRequester @Inject constructor(
 	private val shutdownManager: ShutdownManager,
 ) : ShutdownRequester {
 
-	override fun requestShutdown() {
+	override suspend fun requestShutdown() {
 		this.shutdownManager.requestShutdown()
 	}
 }

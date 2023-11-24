@@ -5,5 +5,5 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.pollid.PollId
 
 public interface PollHolder {
 
-	public fun getPollDetailsByIdOrNull(pollId: PollId): PollDetails?
+	public suspend fun getPollDetailsByIdOrNull(pollId: PollId): PollDetails?
 }

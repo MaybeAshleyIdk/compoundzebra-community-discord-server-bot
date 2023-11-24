@@ -11,7 +11,7 @@ public class PrivateMessageEventHandlerImpl @Inject constructor(
 	private val logger: Logger,
 ) : PrivateMessageEventHandler {
 
-	override fun handleEvent(event: GenericEvent) {
+	override suspend fun handleEvent(event: GenericEvent) {
 		if ((event !is MessageReceivedEvent) || (event.channel.type != ChannelType.PRIVATE)) {
 			return
 		}

@@ -13,7 +13,7 @@ public class PollManagerCreator @Inject constructor(
 	private val pollManager: PollManager,
 ) : PollCreator {
 
-	override fun openNewPoll(
+	override suspend fun openNewPoll(
 		author: Member,
 		description: PollDescription,
 		optionLabels: List<PollOptionLabel>,
@@ -22,7 +22,7 @@ public class PollManagerCreator @Inject constructor(
 			.toPollCreatorNewPollDetails()
 	}
 
-	override fun closePoll(pollId: PollId, closerMember: Member) {
+	override suspend fun closePoll(pollId: PollId, closerMember: Member) {
 		this.pollManager.closePollUnrestricted(pollId, closerMember)
 	}
 }

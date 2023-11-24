@@ -9,7 +9,7 @@ public class PollManagerHolder @Inject constructor(
 	private val pollManager: PollManager,
 ) : PollHolder {
 
-	override fun getPollDetailsByIdOrNull(pollId: PollId): PollDetails? {
+	override suspend fun getPollDetailsByIdOrNull(pollId: PollId): PollDetails? {
 		return this.pollManager.getPollDetailsByIdOrNull(pollId)
 	}
 }

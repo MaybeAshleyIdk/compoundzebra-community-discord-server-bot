@@ -5,5 +5,5 @@ import net.dv8tion.jda.api.events.GenericEvent
 
 public interface PollEventListener : EventHandler {
 
-	override fun handleEvent(event: GenericEvent)
+	override suspend fun handleEvent(event: GenericEvent)
 }
