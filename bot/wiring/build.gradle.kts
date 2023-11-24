@@ -12,7 +12,7 @@ dependencies {
 	api(project(":bot:environment-type"))
 	api(project(":bot:token"))
 	api(project(":bot:logging"))
-	api(project(":bot:shutdown-wait"))
+	api(project(":bot:shutdown-callback-registry"))
 
 	implementation(project(":bot:jda-factory"))
 

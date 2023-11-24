@@ -107,15 +107,22 @@ include(
 
 	// region shutdown
 
+	":bot:shutdown-callbacks",
+
 	":bot:shutdown-manager:api",
-	":bot:shutdown-manager:impl-semaphore",
+	":bot:shutdown-manager:impl",
 	":bot:shutdown-manager:wiring",
 	":bot:shutdown-manager",
 
-	":bot:shutdown-wait:api",
-	":bot:shutdown-wait:impl-manager",
-	":bot:shutdown-wait:wiring",
-	":bot:shutdown-wait",
+	":bot:shutdown-event-handling:api",
+	":bot:shutdown-event-handling:impl-manager",
+	":bot:shutdown-event-handling:wiring",
+	":bot:shutdown-event-handling",
+
+	":bot:shutdown-callback-registry:api",
+	":bot:shutdown-callback-registry:impl-manager",
+	":bot:shutdown-callback-registry:wiring",
+	":bot:shutdown-callback-registry",
 
 	":bot:shutdown-request:api",
 	":bot:shutdown-request:impl-manager",

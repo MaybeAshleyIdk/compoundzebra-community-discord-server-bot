@@ -9,4 +9,6 @@ dependencies {
 	api(project(":bot:token"))
 
 	implementation(project(":bot:wiring"))
+
+	implementation(libs.kotlinx.coroutines.core)
 }

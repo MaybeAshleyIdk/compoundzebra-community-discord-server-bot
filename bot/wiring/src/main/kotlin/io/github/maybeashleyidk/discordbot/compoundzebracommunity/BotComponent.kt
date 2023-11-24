@@ -5,7 +5,7 @@ import dagger.Component
 import dagger.Lazy
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdownwait.ShutdownAwaiter
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdowncallbackregistry.ShutdownCallbackRegistry
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.token.BotToken
 import net.dv8tion.jda.api.entities.Activity
 import java.nio.file.Path
@@ -23,7 +23,7 @@ public interface BotComponent {
 
 	public val logger: Logger
 
-	public val shutdownAwaiter: ShutdownAwaiter
+	public val shutdownCallbackRegistry: ShutdownCallbackRegistry
 
 	@Component.Factory
 	@FunctionalInterface
