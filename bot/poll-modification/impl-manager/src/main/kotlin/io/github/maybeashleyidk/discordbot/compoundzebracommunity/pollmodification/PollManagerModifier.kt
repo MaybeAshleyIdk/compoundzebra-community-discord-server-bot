@@ -11,11 +11,11 @@ public class PollManagerModifier @Inject constructor(
 	private val pollManager: PollManager,
 ) : PollModifier {
 
-	override fun voteOption(pollId: PollId, voterMember: Member, optionValue: PollOptionValue): PollDetails? {
+	override suspend fun voteOption(pollId: PollId, voterMember: Member, optionValue: PollOptionValue): PollDetails? {
 		return this.pollManager.voteOption(pollId, voterMember, optionValue)
 	}
 
-	override fun closePollIfAllowed(pollId: PollId, member: Member): PollModifier.CloseResult {
+	override suspend fun closePollIfAllowed(pollId: PollId, member: Member): PollModifier.CloseResult {
 		return when (val closeResult: PollManager.CloseResult = this.pollManager.closePollIfAllowed(pollId, member)) {
 			is PollManager.CloseResult.Denied -> PollModifier.CloseResult.Denied
 			is PollManager.CloseResult.Closed -> PollModifier.CloseResult.Closed(closeResult.pollDetails)

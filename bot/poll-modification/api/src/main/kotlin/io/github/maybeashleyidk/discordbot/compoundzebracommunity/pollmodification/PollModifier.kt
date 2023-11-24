@@ -20,7 +20,7 @@ public interface PollModifier {
 	/**
 	 * Returns `null` if the poll with the ID [pollId] doesn't exist.
 	 */
-	public fun voteOption(pollId: PollId, voterMember: Member, optionValue: PollOptionValue): PollDetails?
+	public suspend fun voteOption(pollId: PollId, voterMember: Member, optionValue: PollOptionValue): PollDetails?
 
-	public fun closePollIfAllowed(pollId: PollId, member: Member): CloseResult
+	public suspend fun closePollIfAllowed(pollId: PollId, member: Member): CloseResult
 }
