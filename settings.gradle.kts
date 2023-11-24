@@ -57,6 +57,8 @@ include(
 
 	// endregion
 
+	":bot:event-handler",
+
 	":bot:emoji-stats:api",
 	":bot:emoji-stats:impl",
 	":bot:emoji-stats:wiring",
@@ -174,6 +176,11 @@ include(
 	":bot:private-message-event-handling:impl",
 	":bot:private-message-event-handling:wiring",
 	":bot:private-message-event-handling",
+
+	":bot:event-listening:api",
+	":bot:event-listening:impl",
+	":bot:event-listening:wiring",
+	":bot:event-listening",
 
 	":bot:jda-factory",
 	":bot:wiring",

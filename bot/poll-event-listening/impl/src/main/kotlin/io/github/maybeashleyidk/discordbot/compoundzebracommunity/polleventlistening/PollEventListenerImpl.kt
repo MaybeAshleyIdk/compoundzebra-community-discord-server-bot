@@ -22,7 +22,7 @@ public class PollEventListenerImpl @Inject constructor(
 	private val configSupplier: ConfigSupplier,
 ) : PollEventListener {
 
-	override fun onEvent(event: GenericEvent) {
+	override fun handleEvent(event: GenericEvent) {
 		// TODO: change this from runBlocking
 		runBlocking {
 			when (event) {

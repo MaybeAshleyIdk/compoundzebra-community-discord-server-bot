@@ -1,9 +1,7 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.jdafactory
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.BotTokenString
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventhandlermediation.MessageEventHandlerMediator
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polleventlistening.PollEventListener
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.privatemessageeventhandling.PrivateMessageEventHandler
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistening.MainEventListener
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.requests.GatewayIntent
@@ -13,20 +11,14 @@ import net.dv8tion.jda.api.JDA as Jda
 public class JdaFactory @Inject constructor(
 	@BotTokenString private val botToken: String,
 	private val initialActivity: Activity,
-	private val messageEventHandlerMediator: MessageEventHandlerMediator,
-	private val pollEventListener: PollEventListener,
-	private val privateMessageEventHandler: PrivateMessageEventHandler,
+	private val mainEventListener: MainEventListener,
 ) {
 
 	public fun create(): Jda {
 		return JDABuilder.createDefault(this.botToken)
 			.setActivity(this.initialActivity)
 			.enableIntents(GatewayIntent.MESSAGE_CONTENT)
-			.addEventListeners(
-				this.messageEventHandlerMediator,
-				this.pollEventListener,
-				this.privateMessageEventHandler,
-			)
+			.addEventListeners(this.mainEventListener)
 			.build()
 	}
 }

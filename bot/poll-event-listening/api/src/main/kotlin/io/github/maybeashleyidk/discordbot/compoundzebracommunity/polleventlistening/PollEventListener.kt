@@ -1,9 +1,9 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.polleventlistening
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventhandler.EventHandler
 import net.dv8tion.jda.api.events.GenericEvent
-import net.dv8tion.jda.api.hooks.EventListener
 
-public interface PollEventListener : EventListener {
+public interface PollEventListener : EventHandler {
 
-	override fun onEvent(event: GenericEvent)
+	override fun handleEvent(event: GenericEvent)
 }
