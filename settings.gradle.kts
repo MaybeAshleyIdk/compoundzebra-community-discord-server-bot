@@ -60,10 +60,16 @@ include(
 
 	":bot:event-handler",
 
+	// region features
+
+	// region emoji stats
+
 	":bot:emoji-stats:api",
 	":bot:emoji-stats:impl",
 	":bot:emoji-stats:wiring",
 	":bot:emoji-stats",
+
+	// endregion
 
 	// region polls
 
@@ -101,10 +107,14 @@ include(
 
 	// endregion
 
+	// region self-timeout
+
 	":bot:self-timeout:api",
 	":bot:self-timeout:impl",
 	":bot:self-timeout:wiring",
 	":bot:self-timeout",
+
+	// endregion
 
 	// region shutdown
 
@@ -131,6 +141,8 @@ include(
 	":bot:shutdown-request",
 
 	// endregion
+
+	// region commands
 
 	":bot:command-name",
 
@@ -170,10 +182,18 @@ include(
 
 	// endregion
 
+	// endregion
+
+	// region conditional messages
+
 	":bot:conditional-message-event-handling:api",
 	":bot:conditional-message-event-handling:impl",
 	":bot:conditional-message-event-handling:wiring",
 	":bot:conditional-message-event-handling",
+
+	// endregion
+
+	// endregion
 
 	":bot:message-event-handler-mediation:api",
 	":bot:message-event-handler-mediation:impl",
