@@ -1,14 +1,16 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules
 
 import dagger.Module
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdowncallbackregistry.ShutdownCallbackRegistryModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdowneventhandler.ShutdownEventHandlingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdownmanager.ShutdownManagerModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdownrequest.ShutdownRequestModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdownwait.ShutdownWaitModule
 
 @Module(
 	includes = [
 		ShutdownManagerModule::class,
-		ShutdownWaitModule::class,
+		ShutdownEventHandlingModule::class,
+		ShutdownCallbackRegistryModule::class,
 		ShutdownRequestModule::class,
 	],
 )

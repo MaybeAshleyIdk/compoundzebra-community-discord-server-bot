@@ -10,6 +10,6 @@ public object ShutdownManagerModule {
 	internal interface Bindings {
 
 		@Binds
-		fun bindShutdownManager(semaphoreShutdownManager: SemaphoreShutdownManager): ShutdownManager
+		fun bindShutdownManager(impl: ShutdownManagerImpl): ShutdownManager
 	}
 }
