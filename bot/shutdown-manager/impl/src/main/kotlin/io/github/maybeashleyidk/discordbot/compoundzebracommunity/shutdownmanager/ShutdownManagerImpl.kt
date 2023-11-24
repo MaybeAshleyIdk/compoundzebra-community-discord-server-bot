@@ -4,9 +4,14 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdowncallbacks.OnAfterShutdownCallback
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdowncallbacks.OnBeforeShutdownCallback
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdownmanager.ShutdownManager.EventHandlingResultStatus
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutines.ImmutableMutexValue
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutines.MutableMutexValue
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.Semaphore
+import kotlinx.coroutines.sync.withLock
 import net.dv8tion.jda.api.events.GenericEvent
 import net.dv8tion.jda.api.events.session.ShutdownEvent
-import java.util.concurrent.Semaphore
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 import javax.inject.Provider
@@ -31,29 +36,36 @@ public class ShutdownManagerImpl @Inject constructor(
 
 	private val jda: Jda by lazy(this.jdaProvider::get)
 
-	private val shutdownMonitor: Any = Any()
+	private val shutdownMutex: Mutex = Mutex()
 
-	private val onBeforeShutdownCallbacks: MutableList<OnBeforeShutdownCallback> = ArrayList()
-	private val onAfterShutdownCallbacks: MutableList<OnAfterShutdownCallback> = ArrayList()
+	private val onBeforeShutdownCallbacks: MutableMutexValue<MutableList<OnBeforeShutdownCallback>> =
+		MutableMutexValue(ArrayList())
+	private val onAfterShutdownCallbacks: MutableMutexValue<MutableList<OnAfterShutdownCallback>> =
+		MutableMutexValue(ArrayList())
 
-	private val currentStateMonitor: Any = Any()
-	private var currentState: State = State.RUNNING
+	private val currentState: ImmutableMutexValue<State> = ImmutableMutexValue(State.RUNNING)
 
 	private val shutdownRequested: AtomicBoolean = AtomicBoolean(false)
-	private val shutdownRequestSemaphore: Semaphore = Semaphore(1)
-		.also(Semaphore::acquire)
+	private val shutdownRequestSemaphore: Semaphore = Semaphore(1, acquiredPermits = 1)
 
 	init {
 		val jvmShutdownHookThread =
 			Thread {
-				this.shutDown()
+				runBlocking {
+					this@ShutdownManagerImpl.shutDown()
+				}
 			}
+
+		// TODO: runBlocking inside a Thread? there has to be a better way to do this
 
 		val shutdownAwaitThread =
 			Thread(
 				{
 					this.jda.awaitShutdown()
-					this.shutDown()
+
+					runBlocking {
+						this@ShutdownManagerImpl.shutDown()
+					}
 				},
 				"shutdown-await",
 			)
@@ -61,8 +73,11 @@ public class ShutdownManagerImpl @Inject constructor(
 		val shutdownRequestAwaitThread =
 			Thread(
 				{
-					this.shutdownRequestSemaphore.acquire()
-					this.fulfillShutdownRequest()
+					runBlocking {
+						this@ShutdownManagerImpl.shutdownRequestSemaphore.acquire()
+
+						this@ShutdownManagerImpl.fulfillShutdownRequest()
+					}
 				},
 				"shutdown-request-await",
 			)
@@ -77,11 +92,8 @@ public class ShutdownManagerImpl @Inject constructor(
 
 	override fun registerShutdownCallback(callback: OnBeforeShutdownCallback) {
 		val shouldExecuteNow: Boolean =
-			synchronized(this.onBeforeShutdownCallbacks) {
-				val currentState: State =
-					synchronized(this.currentStateMonitor) {
-						this.currentState
-					}
+			this.onBeforeShutdownCallbacks.visitBlocking { list: MutableList<OnBeforeShutdownCallback> ->
+				val currentState: State = this.currentState.get()
 
 				val shouldExecuteNow: Boolean =
 					when (currentState) {
@@ -92,7 +104,7 @@ public class ShutdownManagerImpl @Inject constructor(
 					}
 
 				if (!shouldExecuteNow) {
-					this.onBeforeShutdownCallbacks.add(callback)
+					list.add(callback)
 				}
 
 				shouldExecuteNow
@@ -105,11 +117,8 @@ public class ShutdownManagerImpl @Inject constructor(
 
 	override fun registerShutdownCallback(callback: OnAfterShutdownCallback) {
 		val shouldExecuteNow: Boolean =
-			synchronized(this.onAfterShutdownCallbacks) {
-				val currentState: State =
-					synchronized(this.currentStateMonitor) {
-						this.currentState
-					}
+			this.onAfterShutdownCallbacks.visitBlocking { list: MutableList<OnAfterShutdownCallback> ->
+				val currentState: State = this.currentState.get()
 
 				val shouldExecuteNow: Boolean =
 					when (currentState) {
@@ -121,7 +130,7 @@ public class ShutdownManagerImpl @Inject constructor(
 					}
 
 				if (!shouldExecuteNow) {
-					this.onAfterShutdownCallbacks.add(callback)
+					list.add(callback)
 				}
 
 				shouldExecuteNow
@@ -133,16 +142,16 @@ public class ShutdownManagerImpl @Inject constructor(
 	}
 
 	override fun unregisterShutdownCallback(callback: OnAfterShutdownCallback) {
-		synchronized(this.onAfterShutdownCallbacks) {
-			this.onAfterShutdownCallbacks
+		this.onAfterShutdownCallbacks.visitBlocking { list: MutableList<OnAfterShutdownCallback> ->
+			list
 				.asReversed()
 				.remove(callback)
 		}
 	}
 
 	override fun unregisterShutdownCallback(callback: OnBeforeShutdownCallback) {
-		synchronized(this.onBeforeShutdownCallbacks) {
-			this.onBeforeShutdownCallbacks
+		this.onBeforeShutdownCallbacks.visitBlocking { list: MutableList<OnBeforeShutdownCallback> ->
+			list
 				.asReversed()
 				.remove(callback)
 		}
@@ -150,7 +159,7 @@ public class ShutdownManagerImpl @Inject constructor(
 
 	// endregion
 
-	override fun handleShutdownEvent(event: GenericEvent): EventHandlingResultStatus {
+	override suspend fun handleShutdownEvent(event: GenericEvent): EventHandlingResultStatus {
 		if (event !is ShutdownEvent) {
 			return EventHandlingResultStatus.STILL_RUNNING
 		}
@@ -160,7 +169,7 @@ public class ShutdownManagerImpl @Inject constructor(
 		return EventHandlingResultStatus.SHUTTING_DOWN
 	}
 
-	override fun requestShutdown() {
+	override suspend fun requestShutdown() {
 		if (!(this.shutdownRequested.compareAndSet(false, true))) {
 			// shutdown already requested; do nothing
 			return
@@ -169,17 +178,17 @@ public class ShutdownManagerImpl @Inject constructor(
 		this.shutdownRequestSemaphore.release()
 	}
 
-	private fun fulfillShutdownRequest() {
-		synchronized(this.shutdownMonitor) {
+	private suspend fun fulfillShutdownRequest() {
+		this.shutdownMutex.withLock {
 			check(this.shutdownRequested.get()) {
 				"Shutdown has not been requested"
 			}
 
 			val onBeforeShutdownCallbacks: List<OnBeforeShutdownCallback> =
-				synchronized(this.onBeforeShutdownCallbacks) {
-					val copy: List<OnBeforeShutdownCallback> = this.onBeforeShutdownCallbacks.toList()
+				this.onBeforeShutdownCallbacks.visit { onBeforeShutdownCallbacks: MutableList<OnBeforeShutdownCallback> ->
+					val copy: List<OnBeforeShutdownCallback> = onBeforeShutdownCallbacks.toList()
 
-					this.onBeforeShutdownCallbacks.clear()
+					onBeforeShutdownCallbacks.clear()
 
 					copy
 				}
@@ -188,42 +197,42 @@ public class ShutdownManagerImpl @Inject constructor(
 				this.executeOnBeforeShutdownCallback(callback)
 			}
 
-			this.shutDownUnsynchronized()
+			this.shutDownWithoutLock()
 		}
 	}
 
-	private fun shutDown() {
-		synchronized(this.shutdownMonitor) {
-			this.shutDownUnsynchronized()
+	private suspend fun shutDown() {
+		this.shutdownMutex.withLock {
+			this.shutDownWithoutLock()
 		}
 	}
 
-	private fun shutDownUnsynchronized() {
+	private suspend fun shutDownWithoutLock() {
 		val onBeforeShutdownCallbacks: List<OnBeforeShutdownCallback> =
-			synchronized(this.onBeforeShutdownCallbacks) {
+			this.onBeforeShutdownCallbacks.visit { onBeforeShutdownCallbacks: MutableList<OnBeforeShutdownCallback> ->
 				val isRunning: Boolean =
-					synchronized(this.currentStateMonitor) currentState@{
+					this.currentState.visit { currentStateRef: ImmutableMutexValue.Ref<State> ->
 						val isRunning: Boolean =
-							when (val currentState: State = this.currentState) {
+							when (val currentState: State = currentStateRef.get()) {
 								State.RUNNING -> true
 								State.SHUTTING_DOWN -> error("Current state must not be $currentState")
 								State.SHUT_DOWN -> false
 							}
 
 						if (isRunning) {
-							this.currentState = State.SHUTTING_DOWN
+							currentStateRef.set(State.SHUTTING_DOWN)
 						}
 
 						isRunning
 					}
 
 				if (!isRunning) {
-					return@synchronized null
+					return@visit null
 				}
 
-				val copy: List<OnBeforeShutdownCallback> = this.onBeforeShutdownCallbacks.toList()
+				val copy: List<OnBeforeShutdownCallback> = onBeforeShutdownCallbacks.toList()
 
-				this.onBeforeShutdownCallbacks.clear()
+				onBeforeShutdownCallbacks.clear()
 
 				copy
 			}
@@ -236,26 +245,13 @@ public class ShutdownManagerImpl @Inject constructor(
 		shutDownJda(this.jda, this.logger)
 
 		val (previousState: State, onAfterShutdownCallbacks: List<OnAfterShutdownCallback>) =
-			synchronized(this.onAfterShutdownCallbacks) {
-				val previousState: State =
-					synchronized(this.currentStateMonitor) {
-						val previousState: State = this.currentState
+			this.onAfterShutdownCallbacks.visit { onAfterShutdownCallbacks: MutableList<OnAfterShutdownCallback> ->
+				val previousState: State = this.currentState.getAndSet(State.SHUT_DOWN)
 
-						this.currentState = State.SHUT_DOWN
+				val copy: List<OnAfterShutdownCallback> = onAfterShutdownCallbacks.toList()
+				onAfterShutdownCallbacks.clear()
 
-						previousState
-					}
-
-				val onAfterShutdownCallbacks: List<OnAfterShutdownCallback> =
-					synchronized(this.onAfterShutdownCallbacks) {
-						val copy: List<OnAfterShutdownCallback> = this.onAfterShutdownCallbacks.toList()
-
-						this.onAfterShutdownCallbacks.clear()
-
-						copy
-					}
-
-				previousState to onAfterShutdownCallbacks
+				previousState to copy
 			}
 
 		when (previousState) {
@@ -293,5 +289,11 @@ public class ShutdownManagerImpl @Inject constructor(
 				throw e
 			}
 		}
+	}
+}
+
+private fun <T, R> MutableMutexValue<T>.visitBlocking(block: suspend (T) -> R): R {
+	return runBlocking {
+		this@visitBlocking.visit(block)
 	}
 }
