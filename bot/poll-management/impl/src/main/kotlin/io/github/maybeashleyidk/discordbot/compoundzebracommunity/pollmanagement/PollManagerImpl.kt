@@ -8,8 +8,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polloption.Pol
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polloption.PollOptionLabel
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polloption.PollOptionValue
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.quoted
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutines.MutableMutexValue
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Member
 import javax.inject.Inject
@@ -21,8 +20,7 @@ public class PollManagerImpl @Inject constructor(
 	private val logger: Logger,
 ) : PollManager {
 
-	private val activePollsMutex: Mutex = Mutex()
-	private val activePolls: MutableMap<PollId, PollDetails> = HashMap()
+	private val activePolls: MutableMutexValue<MutableMap<PollId, PollDetails>> = MutableMutexValue(HashMap())
 
 	override suspend fun openNewPoll(
 		author: Member,
@@ -49,8 +47,8 @@ public class PollManagerImpl @Inject constructor(
 				options = options,
 			)
 
-		this.activePollsMutex.withLock {
-			this.activePolls[newPollDetails.id] =
+		this.activePolls.visit { activePolls: MutableMap<PollId, PollDetails> ->
+			activePolls[newPollDetails.id] =
 				PollDetails(
 					authorId = newPollDetails.authorId,
 					description = newPollDetails.description,
@@ -68,20 +66,20 @@ public class PollManagerImpl @Inject constructor(
 	}
 
 	override suspend fun getPollDetailsByIdOrNull(pollId: PollId): PollDetails? {
-		return this.activePollsMutex.withLock {
-			this.activePolls[pollId]
+		return this.activePolls.visit { activePolls: MutableMap<PollId, PollDetails> ->
+			activePolls[pollId]
 		}
 	}
 
 	override suspend fun voteOption(pollId: PollId, voterMember: Member, optionValue: PollOptionValue): PollDetails? {
 		val newDetails: PollDetails? =
-			this.activePollsMutex.withLock {
-				val oldDetails: PollDetails = this.activePolls[pollId]
-					?: return@withLock null
+			this.activePolls.visit { activePolls: MutableMap<PollId, PollDetails> ->
+				val oldDetails: PollDetails = activePolls[pollId]
+					?: return@visit null
 
 				val newDetails: PollDetails = oldDetails.withVoter(voterMember.idLong, optionValue)
 
-				this.activePolls[pollId] = newDetails
+				activePolls[pollId] = newDetails
 
 				newDetails
 			}
@@ -102,8 +100,8 @@ public class PollManagerImpl @Inject constructor(
 	}
 
 	override suspend fun closePollUnrestricted(pollId: PollId, closerMember: Member) {
-		this.activePollsMutex.withLock {
-			this.closePollWithoutLock(pollId)
+		this.activePolls.visit { activePolls: MutableMap<PollId, PollDetails> ->
+			activePolls.remove(pollId)
 		}
 
 		val logMsg: String = "Poll with ID $pollId was closed " +
@@ -113,15 +111,15 @@ public class PollManagerImpl @Inject constructor(
 
 	override suspend fun closePollIfAllowed(pollId: PollId, closerMember: Member): PollManager.CloseResult {
 		val result: PollManager.CloseResult =
-			this.activePollsMutex.withLock {
-				val pollDetails: PollDetails = this.activePolls[pollId]
-					?: return@withLock PollManager.CloseResult.Closed(pollDetails = null)
+			this.activePolls.visit { activePolls: MutableMap<PollId, PollDetails> ->
+				val pollDetails: PollDetails = activePolls[pollId]
+					?: return@visit PollManager.CloseResult.Closed(pollDetails = null)
 
 				if (!(pollDetails.isAllowedToBeClosedBy(closerMember))) {
-					return@withLock PollManager.CloseResult.Denied
+					return@visit PollManager.CloseResult.Denied
 				}
 
-				this.closePollWithoutLock(pollId)
+				activePolls.remove(pollId)
 
 				val closedPollDetails: PollDetails = pollDetails.withCloserMember(closerMember.idLong)
 				PollManager.CloseResult.Closed(closedPollDetails)
@@ -151,10 +149,6 @@ public class PollManagerImpl @Inject constructor(
 		}
 
 		return result
-	}
-
-	private fun closePollWithoutLock(pollId: PollId) {
-		this.activePolls.remove(pollId)
 	}
 }
 
