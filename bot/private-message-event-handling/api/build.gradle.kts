@@ -5,7 +5,5 @@ plugins {
 }
 
 dependencies {
-	api(libs.jda) {
-		exclude(module = "opus-java")
-	}
+	api(project(":bot:event-handler"))
 }

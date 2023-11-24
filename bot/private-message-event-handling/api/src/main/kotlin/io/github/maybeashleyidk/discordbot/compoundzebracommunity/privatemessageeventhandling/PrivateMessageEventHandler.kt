@@ -1,9 +1,9 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.privatemessageeventhandling
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventhandler.EventHandler
 import net.dv8tion.jda.api.events.GenericEvent
-import net.dv8tion.jda.api.hooks.EventListener
 
-public interface PrivateMessageEventHandler : EventListener {
+public interface PrivateMessageEventHandler : EventHandler {
 
-	override fun onEvent(event: GenericEvent)
+	override fun handleEvent(event: GenericEvent)
 }

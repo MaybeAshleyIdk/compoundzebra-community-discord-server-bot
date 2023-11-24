@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.emojistats.EmojiStatsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistening.EventListeningModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.jdafactory.JdaFactory
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.LoggingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.ConfigModule
@@ -26,6 +27,7 @@ import net.dv8tion.jda.api.JDA as Jda
 		ShutdownModule::class,
 		MessageEventHandlingModule::class,
 		PrivateMessageEventHandlingModule::class,
+		EventListeningModule::class,
 	],
 )
 internal object BotModule {

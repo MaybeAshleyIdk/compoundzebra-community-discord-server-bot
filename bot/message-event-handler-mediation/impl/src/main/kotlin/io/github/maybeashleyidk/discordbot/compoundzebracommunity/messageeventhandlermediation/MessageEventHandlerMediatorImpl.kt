@@ -11,7 +11,7 @@ public class MessageEventHandlerMediatorImpl @Inject constructor(
 	private val conditionalMessageEventHandler: ConditionalMessageEventHandler,
 ) : MessageEventHandlerMediator {
 
-	override fun onEvent(event: GenericEvent) {
+	override fun handleEvent(event: GenericEvent) {
 		// TODO: change this from runBlocking
 		runBlocking {
 			val consumed: Boolean = this@MessageEventHandlerMediatorImpl.commandMessageEventHandler.handleEvent(event)
