@@ -33,6 +33,15 @@ dependencies {
 
 // region executable file tasks
 
+tasks.shadowJar {
+	minimize {
+		// i dislike this very much, because with this, the module :main must have knowledge of
+		// implementation-details modules.
+		// might be that we won't need it anymore once we switch from JSON config to database?
+		exclude(project(":bot:config-serialization:impl-json"))
+	}
+}
+
 val createExecutable: TaskProvider<Task> by tasks.registering {
 	// <https://skife.org/java/unix/2011/06/20/really_executable_jars.html>
 
