@@ -15,6 +15,8 @@ okio = "com.squareup.okio:okio:3.6.0"
 moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
 moshi-kotlin-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
 
+sqlite-jdbc = "org.xerial:sqlite-jdbc:3.44.0.0"
+
 javax-inject = "javax.inject:javax.inject:1"
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
 dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
