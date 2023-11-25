@@ -1,4 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import proguard.gradle.ProGuardTask
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.OutputStream
@@ -32,6 +33,17 @@ dependencies {
 }
 
 // region executable file tasks
+
+val createMinimizedJar: TaskProvider<ProGuardTask> by tasks.registering(ProGuardTask::class) {
+
+	dependsOn(tasks.shadowJar)
+
+	injars(tasks.shadowJar)
+
+
+	dontobfuscate()
+
+}
 
 val createExecutable: TaskProvider<Task> by tasks.registering {
 	// <https://skife.org/java/unix/2011/06/20/really_executable_jars.html>

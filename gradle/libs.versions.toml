@@ -19,6 +19,8 @@ javax-inject = "javax.inject:javax.inject:1"
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
 dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
 
+binplugins-proguard = "com.guardsquare:proguard-gradle:7.1.0"
+
 [plugins]
 shadow = "com.github.johnrengelman.shadow:8.1.1"
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

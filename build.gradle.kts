@@ -10,6 +10,12 @@ plugins {
 	alias(libs.plugins.shadow) apply false
 }
 
+buildscript {
+	dependencies {
+		classpath(libs.binplugins.proguard)
+	}
+}
+
 val javaCompatibilityVersion: JavaVersion = JavaVersion.VERSION_17
 
 subprojects {
