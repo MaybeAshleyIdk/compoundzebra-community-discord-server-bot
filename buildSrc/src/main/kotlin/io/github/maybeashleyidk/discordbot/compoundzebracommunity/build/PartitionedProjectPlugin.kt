@@ -72,6 +72,7 @@ public class PartitionedProjectPlugin : Plugin<Project> {
 				.hasAnyPlugin(
 					StandaloneProjectPlugin::class,
 					ApiImplWiringProjectPlugin::class,
+					GroupProjectPlugin::class,
 					WiringAssimilationProjectPlugin::class,
 				)
 
