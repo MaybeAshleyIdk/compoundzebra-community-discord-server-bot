@@ -1,0 +1,52 @@
+* with the sqlite jdbc, the jar will have a size of of ~30MB (!!! this is a lot !!!)
+  can we use proguard to improve this? (https://github.com/Guardsquare/proguard)
+  shadow has minimize feature
+  (see branches about these things)
+
+* support for unicode quotation marks (“ and ”) (are there more?)
+
+* save chat log
+
+* excluded channels for conditional messages
+
+* send images
+
+* [internal/codebase] commands injected in map
+
+* [internal/codebase] commands don't have a name
+
+* [deployment] better logging into separate files dynamically by day
+	requires slf4j crap
+
+* [config] dynamic response commands
+
+* [internal/codebase] qualifier for the config file path
+
+* [public] command for adding response commands
+
+* [public] help command
+
+* [public] mod command to say something as the bot
+* [public] mod command to replace a message of the bot
+* [public] mod command to delete a message of the bot
+
+* [public+config] scheduled actions
+
+* [public] temperature conversion command
+	!tempconv
+
+	Examples:
+		* > !tempconv 0
+		  < No temperature unit given
+		* > !tempconv 0°C
+		  < 0°C = 32°F = 237.15K
+		* > !tempconv 20f -> °c
+		  < 2°C = -6.67°C
+
+* [public] currency conversion command
+	!currencyconv
+	!moneyconv
+	use the GNU units that are already on the system for that
+	(need to write at GNU units file parser for that)
+
+* twitch integration
