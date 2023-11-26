@@ -69,9 +69,9 @@ public class RngCommand @Inject constructor(
 				}
 			}
 
-		val serverLocale: Locale = catalystMessage.guild.locale.toLocale()
+		val guildLocale: Locale = catalystMessage.guild.locale.toLocale()
 
-		val inputFormat: NumberFormat = NumberFormat.getNumberInstance(serverLocale)
+		val inputFormat: NumberFormat = NumberFormat.getNumberInstance(guildLocale)
 		if (inputFormat is DecimalFormat) {
 			inputFormat.isParseBigDecimal = true
 		}
@@ -159,7 +159,7 @@ public class RngCommand @Inject constructor(
 		}
 
 		val random: Long = generateRandomLongValue(min, max)
-		val outputFormat: NumberFormat = NumberFormat.getIntegerInstance(serverLocale)
+		val outputFormat: NumberFormat = NumberFormat.getIntegerInstance(guildLocale)
 		val config: Config = this.configSupplier.get()
 
 		catalystMessage.reply(config.strings.command.rng.response(outputFormat.format(random))).await()
