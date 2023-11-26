@@ -78,7 +78,9 @@ public class PartitionedProjectPlugin : Plugin<Project> {
 
 			check(hasAllowedProjectTypePlugin) {
 				"The child $childProject of partitioned $project does not have any of " +
-					"the required project type plugins applied, but it must have"
+					"the required project type plugins applied " +
+					"(standalone, api-implementation-wiring, group or wiring-assimilation), " +
+					"but it must have"
 			}
 		}
 
