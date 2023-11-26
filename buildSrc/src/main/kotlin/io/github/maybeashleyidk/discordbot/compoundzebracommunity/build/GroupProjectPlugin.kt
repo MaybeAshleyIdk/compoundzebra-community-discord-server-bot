@@ -82,6 +82,8 @@ public class GroupProjectPlugin : Plugin<Project> {
 		}
 	}
 
+	// TODO: don't do this automatically. the build gradle file should need to do it explicitly itself, and the plugin
+	//       would then only check if all children have been added (?)
 	private fun addChildProjectsAsDependencies(project: Project) {
 		project.configurations.named("api") {
 			project.childProjects
