@@ -6,3 +6,102 @@ users can be selected either by user snowflake ID or by role snowflake ID to sel
 other features of the bot can then use user groups
 
 for example, only a certain group would be allowed to add new simple-response commands
+
+
+
+raw syntax is basically the same as the include/exclude everyone/role/user/userGroup syntax of the command
+
+
+
+=== command ===
+
+usage: userGroups list
+
+   or: userGroups show ( <name: String> | <id: String> )
+
+   or: userGroups add <name: String>
+
+   or: userGroups rename ( <oldName: String> | <id: String> ) <newName: String>
+
+   or: userGroups edit ( <name: String> | <id: String> ) [remove] include everyone
+   or: userGroups edit ( <name: String> | <id: String> ) [remove] include role <role: Role>
+   or: userGroups edit ( <name: String> | <id: String> ) [remove] include user <user: User>
+   or: userGroups edit ( <name: String> | <id: String> ) [remove] exclude role <role: Role>
+   or: userGroups edit ( <name: String> | <id: String> ) [remove] exclude user <user: User>
+   or: userGroups edit ( <name: String> | <id: String> ) [remove] includedIn ( <name: String> | <id: String> )
+   or: userGroups edit ( <name: String> | <id: String> ) raw ( get | set )
+
+   or: userGroups remove ( <name: String> | <id: String> )
+
+
+
+examples:
+
+< !userGroups list
+> No user groups have been added yet
+
+
+< !userGroups add "Plebs"
+> New (empty) user group _"Plebs"_ (internal ID: `[id]`) has been added
+
+< !userGroups add "plebs"
+> A user group with the name _"Plebs"_ (internal ID: `[id]`) exists already
+
+< !userGroups edit "plebs" include everyone
+
+< !userGroups list
+> * _"Plebs"_ (internal ID: `[id]`)
+
+< !userGroups show "Plebs"
+> The user group _"Plebs"_ (internal ID: `[id]`) contains the following rules:
+> * @everyone is included
+> (the full list of members is too big to display)
+(allow_mentions would be off for this message)
+
+
+< !userGroups add "admin"
+> New (empty) user group _"admin"_ (internal ID: `[id]`) has been added
+
+< !userGroups rename "admin" "Admins"
+> User group _"admin"_ (internal ID: `[id]`) was renamed to _"Admins"_
+
+< !userGroups show "admins"
+> The user group _"Admins"_ (internal ID: `[id]`) contains no rules
+
+< !userGroups edit "admins" raw set
+  ```
+  include role 00000000000000
+  ```
+
+
+< !userGroups remove "plebs"
+> The user group _"Plebs"_ was removed.
+
+
+
+------
+
+
+Plebs:
+	include everyone
+
+Staff:
+	include role <staff role snowflake id>
+
+Moderators:
+	includedIn "Staff"
+
+	include role <moderators role snowflake id>
+
+Maintainers:
+	includedIn "Staff"
+
+	include role <maintainers role snowflake id>
+
+Admins:
+	includedIn "Plebs"
+	includedIn "Staff"
+	includedIn "Moderators"
+	includedIn "Maintainers"
+
+	include role <admins role snowflake id>

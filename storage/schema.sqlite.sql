@@ -1,9 +1,18 @@
-PRAGMA user_version = 1; -- database version
+PRAGMA user_version = 1; -- database schema version code
+
+CREATE TABLE `GlobalConfig`(
+
+);
 
 CREATE TABLE `Guild`(
 	`id` INTEGER NOT NULL,
 
-	PRIMARY KEY(`id`)
+	`languageStrings` TEXT NOT NULL,
+	`commandPrefix`   TEXT NOT NULL,
+
+	PRIMARY KEY(`id`),
+
+	CONSTRAINT `Guild_commandPrefix_isNotEmpty` CHECK(`commandPrefix` != '')
 ) STRICT;
 
 CREATE TABLE `GuildMember`(
@@ -18,6 +27,63 @@ CREATE TABLE `GuildMember`(
 
 	CONSTRAINT `GuildMember_points_isNotNegative` CHECK(`points` >= 0)
 ) STRICT;
+
+CREATE TABLE `GuildSimpleResponseCommand`(
+	`id` INTEGER NOT NULL,
+
+	`name`              TEXT    NOT NULL,
+	`responseMessageId` INTEGER NOT NULL,
+
+	PRIMARY KEY(`id`),
+	FOREIGN KEY(`responseMessageId`) REFERENCES `PreparedMessage`(`id`),
+
+	CONSTRAINT `GuildSimpleResponseCommand_name_isNotEmpty` CHECK(`name` != '')
+) STRICT;
+
+CREATE TABLE `GuildUserGroup`(
+	`id` INTEGER NOT NULL,
+
+	`guildId` INTEGER NOT NULL,
+
+	`creationTimestamp` TEXT NOT NULL, -- RFC 3999
+
+	`name`  TEXT NOT NULL,
+	`rules` TEXT NOT NULL,
+
+	PRIMARY KEY(`id`),
+	FOREIGN KEY(`guildId`) REFERENCES `Guild`(`id`) ON DELETE CASCADE,
+
+	CONSTRAINT `GuildUserGroup_name_isNotEmpty` CHECK(`name` != ''),
+	CONSTRAINT `GuildUserGroup_creationTimestamp_isInCorrectFormat` CHECK(`creationTimestamp` = strftime('%Y-%m-%d %H:%M:%f', `creationTimestamp`))
+) STRICT;
+
+CREATE TABLE `GuildInterjections`(
+	`id` INTEGER NOT NULL,
+
+	`pattern`,
+	`response`,
+
+	PRIMARY KEY(`id`)
+) STRICT;
+
+CREATE TABLE `PreparedMessage`(
+	`id` INTEGER NOT NULL,
+
+	`content` TEXT NOT NULL,
+
+	PRIMARY KEY(`id`)
+);
+
+CREATE TABLE `File`(
+	`id` INTEGER NOT NULL,
+
+	`filename` TEXT NOT NULL,
+	`content`  BLOB NOT NULL,
+
+	PRIMARY KEY(`id`)
+);
+
+-- #region message history backup
 
 CREATE TABLE `GuildMessageAuthor`(
 	`guildId` INTEGER NOT NULL,
@@ -74,3 +140,5 @@ CREATE TABLE `MessageHistoryEntry`(
 	CONSTRAINT `MessageHistoryEntry_timestamp_isInCorrectFormat` CHECK(`timestamp` = strftime('%Y-%m-%d %H:%M:%f', `timestamp`)),
 	CONSTRAINT `MessageHistoryEntry_content_isNotEmpty` CHECK(`content` != '')
 ) STRICT;
+
+-- #endregion
