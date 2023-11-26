@@ -1,0 +1,37 @@
+IMPORTANT: instead of using String types, we're gonna need a custom markdown span type
+
+
+|                                   | Message.contentRaw | Message.contentDisplay | Message.contentStripped
+| mentionables in <ID> format       |        yes         |          no            |          no
+| no markdown-formatting characters |        no          |          no            |          yes
+
+contentDisplay is really just the worst of all worlds smh
+
+allows us a custom pattern matching languages thats more based on words
+
+
+argument types:
+	String  - generic string whose whitespace gets trimmed and squeezed
+	Integer - a 64-bit signed integer (parsed as arbitrary long, if too big it's invalid)
+	User    - a reference to a user. may either be the snowflake id or the mention format ("<@id>")
+	Channel - a reference to a channel. may either be the snowflake id or the mention format ("<#id>")
+	Message - a reference to a message in a channel. must be the permalink to the message ("https://discord.com/channels/guild_id/channel_id/message_id")
+	Raw     - generic string that is given raw without any modifications (can only be last, leading whitespace is still removed)
+
+existing:
+	CoinFlip ((no-args))
+	GetConfig ((no-args))
+	EmojiStats [<user: User>]
+	Magic8Ball <question: Raw>
+	GetPoll <pollId: String>
+	PollCreation <description: String> <option: String>...
+	Rng <min: Integer> <max: Integer>
+	DieRoll ((no-args))
+	Shutdown ((no-args))
+
+planned:
+	SendMessage <targetChannel: Channel> <message: Raw>
+	ReplaceMessage <targetMessage: Message> <message: Raw>
+	DeleteMessage <targetMessage: Message>
+
+	TemperatureConversion <syntax: Raw>

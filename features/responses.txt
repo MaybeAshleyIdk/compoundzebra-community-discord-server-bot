@@ -1,0 +1,36 @@
+feature name: "Responses"
+
+if any message meets the following conditions:
+* bot is mentioned (via @'ing)
+* message content starts with "bot, …"
+* message content ends with "…, bot"
+* message is a reply to a bot's message
+* previous message is from the bot
+
+then that message can be responded to by the bot
+
+
+
+responses:
+	> hello
+	  or
+	> hi
+	< Hello!
+
+	> thanks
+	< no problem!
+
+	> i love you
+	< awww thanks :PeepoShy:
+
+	> fight me
+	< PUT UP YOUR DUKES :PepeFight:
+
+	> fuck you
+	> well fuck you too
+
+	> i hate you
+	< that's not nice :Sadge:
+
+	> shut up nerd
+	< says the one currently having a conversation with a discord bot

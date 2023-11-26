@@ -1,0 +1,10 @@
+feature name: "Limited-Time Chat"
+
+set up a channel, hereby referred to as the "limited-time chat channel"
+
+set up a role, hereby referred to as the "limited-time chat role"
+
+initial start: the limited-time chat role is given to a fixed-amount (like 6?) of random guild members
+
+every few hours (around 4-8?) 30% (rounded up) of the members with the limited-time chat role will get that role removed
+and OTHER members (as many as it takes to go back up to the fixed-amount) that before DIDN'T have the role are given it instead

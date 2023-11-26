@@ -1,0 +1,74 @@
+feature name: "Guild Points"
+
+point sources:
+	* being member of the guild (over time income)
+	* writing a non-trivial, non-spam-y message
+	* predictions
+	* duels
+	* having your meme upvoted in the channel #memes
+	* participation of guild events (doesn't have to be included as much in point-rate calculations) (would happen ~every two months)
+
+(member names redacted for privacy reasons)
+in ~1.5months:
+	[member  1] wrote ~11.5k messages (wtf)
+	[member  2] wrote ~5.5k messages
+	[member  3] wrote ~4k messages
+	[member  4] wrote ~4k messages
+	[member  5] wrote ~3k messages
+	[member  6] wrote ~3k messages
+	[member  7] wrote ~2.5k messages
+	[member  8] wrote ~2.5k messages
+	[member  9] wrote ~2.5k messages
+	[member 10] wrote ~2k messages
+	[member 11] wrote ~2k messages
+	[member 12] wrote ~2k messages
+	[member 13] wrote ~1.5k messages
+	[member 14] wrote ~1.5k messages
+	[member 15] wrote ~1.5k messages
+	[member 16] wrote ~1.5k messages
+	[member 17] wrote ~500 messages
+	[member 18] wrote ~200 messages
+	[member 19] wrote ~200 messages
+	[member 20] wrote ~200 messages
+	[member 21] wrote ~20 messages
+----------------------------------
+avg: ~2500 messages
+
+avg / day: ~50 messages
+
+first thing i need to do is figure out how much points one member would be getting over a certain period of time,
+(with all sources, sans the guild events, included in the calculation) then i can pick a baseline, mid-price redemption
+and go from there
+
+redemptions:
+	* time-out someone else for a minute (very high price)
+	* add custom response command (high price)
+	* changing OTHER members nickname (high price)
+		* mid price for bot?
+	* protect against other's changing your own nickname (mid price)
+	* pin message (mid price)
+	* vanity roles (low price)
+	* changing own nickname (very low price)
+
+time out should be available ~every two months
+adding custom response command should be available ~every two months
+changing OTHER nickname should be available ~every month
+pin message should be available ~every two weeks
+vanity role change should be available ~every two weeks (color change)
+nickname change should be available ~every three days
+
+---
+
+role colors:
+
+default
+
+(light) teal [#1abc9c] | (light) green [#2ecc71] | (light) blue [#3498db] | (light) purple [#9b59b6] | light red / (light) pink [#e91e63]
+ dark   teal [#11806a] |  dark   green [#1f8b4c] |  dark   blue [#206694] |  dark   purple [#71368a] | dark  red /  dark   pink [#ad1457]
+
+(light) yellow [#f1c40f] | (light) orange         [#e67e22] | light reddish-brown [#e74c3c] | (light) gray/grey [#95a5a6] | (light) slate gray/grey [#607d8b]
+ dark   yellow [#c27c0e] |  dark   orange / brown [#a84300] | dark  reddish-brown [#992d22] |  dark   gray/grey [#979c9f] |  dark   slate gray/grey [#546e7a]
+
+if custom color #000000 is selected, silently change it to #010101 (discord displays completely black as default)
+
+colors can be blocked. have a +/- range of idk, like 32? that is also automatically blocked

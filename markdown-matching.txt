@@ -1,0 +1,19 @@
+DCMM - Discord Markdown (Pattern) Matching
+
+* case-insensitive by default
+* any whitespace in the pattern matches any whitespace in the text (e.g.: one space in pattern matches multiple spaces)
+* whitespace also matches certain punctuation characters
+* vowels (a, e, i, o & u) automatically match multiple consecutive times (e.g.: pattern /a/ matches multiple a's)
+  (should this be for ALL letters?)
+* certain letters match certain others that look similar (e.g.: letter 'O' also matches zero)
+
+dcmm/hello bot/
+->
+regex/^\s*[hH][eE3]+[lL1I]{2}[oO0]+(\s+|\s*,+\s*)[bB][oO0]+[tT]\s*$/
+
+tokens:
+	one or more letters next to each other -> word
+	one or more whitespace characters -> whitespace
+	three consecutive dots "..." -> matches anything. similar to regex's .*
+		a pattern of /... words .../ is like regex /words/
+	singular dot/period -> matches any punctuation characters or newlines

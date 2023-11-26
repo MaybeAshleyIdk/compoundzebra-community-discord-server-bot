@@ -1,0 +1,42 @@
+language strings file format:
+
+generally simple key-value list
+
+
+
+simple format:
+* no quotation marks
+* whitespace is trimmed (excluding newlines)
+* no escape sequences
+* terminated by newline or EOF
+
+```
+invalidCommandName = Invalid Command
+```
+
+
+advanced format:
+* must be surrounded by quotation marks
+* whitespace is NOT trimmed
+* escape sequences are supported
+
+```
+someString = "this is a string
+with newlines and stuff"
+```
+
+
+groups?
+* all entries in the group are prefixed with "${groupName}."
+probably not really necessary
+
+```
+commands (
+	pollCreation (
+		invalidSomething = blah blah blah
+	)
+
+	shutdown (
+	)
+)
+```

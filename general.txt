@@ -1,0 +1,47 @@
+if member leaves -> save roles
+
+
+
+* secure channels
+
+
+
+
+rock paper scissors (do this with slash commands and modals?)
+(australia has a different name for this, no? when region is selected to be australia then we could change it in the modal lmao)
+	[User1] !challenge @User2
+	[Bot] @User1 has challenged @User2 to a Rock-Paper-Scissors duel! Use `/rpsreply` to give your answer.
+
+
+
+time conversion:
+	any message with time in it (formats either '<num> am', '<num> pm' or '<num>:<num>') and a ping to the bot.
+	bot will then check the author's timezone (either do that with roles or via an internal state that each user can configure)
+	and send a message '<t:...:F> / <t:...:R>'
+
+	/\b[0-9]+(\s*:\s*[0-9]+)?\s*[ap]\s*m\b/i
+	/\b[0-9]+\s*:\s*[0-9]+\b/i
+
+	fun makeTimeReplyMessageString(match: String, timestamp: Instant) {
+		val unixSeconds: Long = instant.epochSecond
+		return "<t:$unixSeconds:F> | <t:$unixSeconds:R> (detected from the time \"`$match`\")"
+	}
+
+	<https://discord.com/developers/docs/reference#message-formatting-timestamp-styles>
+
+
+measurements conversion:
+	somebody uses <num>'<num>(")? and the bot will respond with it converted to the metric system, and vice-versa
+
+
+tone indicator explanation
+
+
+
+random chance 1 in 100 0000 that the bot replies to a message: "WAS THAT THE BITE OF '87?!?" with that pic of mark
+put in a filter of some sensitive words and don't reply to those
+
+
+
+xkcd #37 ("Hyphen")
+<https://xkcd.com/37/>

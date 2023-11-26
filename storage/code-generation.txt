@@ -1,0 +1,90 @@
+create a gradle plugin that reads in an sql schema (specifically sqlite) and generates code to interface with JDBC
+
+use https://github.com/JSQLParser/JSqlParser for the sql parsing and very high likely KotlinPoet for the generation
+
+---
+
+maybe instead just create an entire framework for SQLite + Kotlin that has this functionality built-in?
+
+
+CREATE TABLE `Foo`(
+	`id` INTEGER NOT NULL,
+	`name` TEXT,
+
+	PRIMARY KEY(`id`)
+);
+
+->
+
+public data class FooEntity(
+	public val `id`: Long,
+	public val `name`: String?,
+)
+
+public suspend fun readFromResultSet(resultSet: ResultSet): Sequence<FooEntity> {
+	return generateSequence {
+		TODO()
+	}
+}
+
+public interface FooTransactionDao {
+
+	public suspend fun selectAll(): Sequence<FooEntity>
+
+	public suspend fun selectWhere(condition: SqlCondition): Sequence<FooEntity>
+
+	public suspend fun insertOne(entity: FooEntity)
+
+	public suspend fun insertMany(entities: Sequence<FooEntity>)
+
+	public suspend fun delete(`id`: Long): Boolean
+}
+
+public interface FooDao {
+
+	public suspend fun <R> startTransaction(transactionBlock: suspend (FooTransactionDao) -> R)
+
+	public suspend fun selectAll(): Sequence<FooEntity>
+
+	public suspend fun selectWhere(condition: SqlCondition): Sequence<FooEntity>
+
+	public suspend fun insertOne(entity: FooEntity)
+
+	public suspend fun insertMany(entities: Sequence<FooEntity>)
+
+	public suspend fun delete(`id`: Long): Boolean
+}
+
+public suspend fun FooDao.insertMany(entities: Iterable<FooEntity>) {
+	this.insertMany(entities.toSequence())
+}
+
+public suspend fun FooDao.insertMany(vararg entities: FooEntity) {
+	this.insertMany(entities.toSequence())
+}
+
+public class TransactionFooDao(
+	private val dbConnection: Connection.
+) : FooTransactionDao {
+}
+
+public class FooDaoImpl @Inject constructor(
+	private val dbConnection: Connection.
+) {
+
+	override suspend fun <R> startTransaction(transactionBlock: suspend (FooDao) -> R) {
+
+	}
+
+	override suspend fun selectAll(): Sequence<FooEntity>
+
+	override suspend fun selectWhere(condition: SqlCondition): Sequence<FooEntity>
+
+	override suspend fun insertOne(entity: FooEntity)
+
+	override suspend fun insertMany(entities: Sequence<FooEntity>)
+
+	override suspend fun delete(`id`: Long): Boolean {
+		dbConnection.
+	}
+}

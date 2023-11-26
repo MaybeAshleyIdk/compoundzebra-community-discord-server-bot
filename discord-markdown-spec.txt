@@ -1,0 +1,80 @@
+Discord Markdown Spec:
+
+begin/end tags:
+ italic _
+ italic *
+ bold **
+ underline __
+
+search for longest tag
+
+
+/spoiler is the same as just putting everything in || … ||
+
+inside of spans cannot be empty (makes sense)
+if that is the case, then it is treated as regular text
+which means that: "****" is not <text>****</text> but instead: <italic>**</italic>
+it *would* be bold, but there is no text between the bold tag, so the italic tag rule
+
+inline code (monospace) is either 1 or 2 backticks
+code blocks are 3 backticks
+
+no nested quote blocks
+
+
+lists:
+ level 2 list requires at least one space at the beginning of the line
+ level 3 list requires a level 2 sublist before AND at least 3 spaces!
+ level N list (where N is > 2 and < 10) requires level N-1 before it AND at LEAST 1 + ((N - 2) * 2) spaces at the beginning of the line
+ goes up to level 10
+ a list item REQUIRES text
+
+
+lists cannot contain quote blocks
+
+
+TODO:
+ striketrough
+ headings
+ links
+
+
+HEADINGS CAN NOT BE USED IN LIST
+
+
+
+EBNF:
+
+special_char = '\'
+             | '*'
+             | '_'
+             | '|'
+
+escape = '\' special_char
+
+text = ( escape
+       | '\'? (any_char - special_char) // this also includes newlines! spans are NOT terminated at EOL
+       | '\' EOF )*
+
+
+monospace_text = '`' (any_char - '`')+ '`'
+               | ''
+
+bold = '**' span '**'
+
+underline = '__' span '__'
+
+hidden = '||' span '||'
+
+italic = '*' span '*'
+       | '_' span '_'
+
+span = bold | underline | hidden | italic | text
+
+
+
+
+<https://gist.github.com/matthewzring/9f7bbfd102003963f9be7dbcf7d40e51>
+<https://www.markdownguide.org/tools/discord/>
+<https://support.discord.com/hc/en-us/articles/210298617>
+<https://support.discord.com/hc/en-us/articles/360022320632>

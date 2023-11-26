@@ -1,0 +1,54 @@
+feature name: "Interjections" (formerly "Conditional Messages")
+
+trying to look for patterns in a message, and then "interjects" with some message
+(TODO: rename this feature? "interjections" sounds kinda… dumb and weird ngl, but it's very fitting so idk)
+
+
+possible to opt-out:
+	( ) User
+	    real
+
+	( ) Bot
+	    fake
+
+	( ) User
+	    ffs stupid bot
+	 .-> ( ) Bot  fake
+	( ) User
+	    !optout
+
+	 .-> ( ) User  !optout
+	( ) Bot
+	    Successfully opted-out of this interjection
+
+
+interjections:
+	> real
+	< fake
+
+	> imagine
+	< […dragons](<https://youtu.be/laHht8kGdVU>)
+
+	> rip
+	< :Prayge: :candle: :PraygeFlipped:
+
+	> hmm
+	< :HmmMeeting1::HmmMeeting2:
+
+	> crazy
+	< crazy?
+
+	> 69
+	< nice
+
+	> mail
+	> THE MAIL? THE MAIL COMES EVERY DAY!
+
+	> connection terminated
+	< I'm sorry to interrupt you Elizabeth, if you still even remember that name. But I'm afraid you've been misinformed. You are not here to receive a gift, nor have you been called here by the individual you assume. Although you have indeed been called.
+
+	> :FeetLore:
+	< feet lore
+
+	> feet lore
+	< :FeetLore:

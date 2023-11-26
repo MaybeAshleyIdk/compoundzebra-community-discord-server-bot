@@ -1,0 +1,8 @@
+feature name: "User Groups"
+
+pretty self-explanatory: allows to define groups of different users.
+users can be selected either by user snowflake ID or by role snowflake ID to select all in that role
+
+other features of the bot can then use user groups
+
+for example, only a certain group would be allowed to add new simple-response commands

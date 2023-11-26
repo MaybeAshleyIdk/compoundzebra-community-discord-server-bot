@@ -1,0 +1,1 @@
+no need for config anymore if storage is implemented

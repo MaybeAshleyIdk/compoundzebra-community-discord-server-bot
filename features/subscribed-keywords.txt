@@ -1,0 +1,16 @@
+feature name: "Subscribed Keywords"
+
+inspired by bttv highlighted keywords
+
+member A can subscribe to keywords (or matching patterns)
+
+if a member other then member A uses that keyword (or the pattern matches) in a message, notify member A (in private dms)
+would need to work out things that it doesn't get too spammy:
+* debounce the private message for a minute?
+  i.e.: wait for a minute before sending private message, if while in that time another keyword is found, reset the one minute waiting period
+        after the minute runs out, THEN send the message
+* if member A has written a message 5 minutes prior to other member using keyword, ignore that
+
+/subscribe <keyword>
+/subscribe --regex <regex>
+/subscribe --dcmm <dcmm>
