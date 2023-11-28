@@ -1,7 +1,14 @@
 current self-timeout duration function:
 	f(x) = 5 * 1.25^x
 
-once past mega timeout duration => change to linear function?
+initial mega timeout:
+	duration range: 6–12h (is randomly selected in this range)
+	chance: 0.5%
+
+once past min initial mega timeout duration (6h) =>
+	change regular timeout to use a linear function?
+	change mega timeout range to (currentTimeoutDuration * 1.5)–(currentTimeoutDuration * 2)
+	increase mega timeout chance to 1% (?)
 
 add a per-member cooldown after the timeout runs out
 10% of what the timeout was (e.g.: 1h timeout results in a 6min cooldown after the timeout is done)
@@ -17,3 +24,9 @@ or maybe it should be half-unit:
 * in total less than minute left (but more than 0.5 minutes) => tell member that approximately a minute is left
 * in total less than 0.5 minutes left => tell member that approximately half a minute is left
 (same with hour)
+
+add command that can be executed in bot dms: !timeToLive or something.
+reduces the currently remaining timeout duration by 75% of it's current value (i.e.: currentTimeoutDuration *= 0.25),
+but also resets whatever the next timeout duration would be back to whatever the current timeout duration was.
+(i.e.: pauses your timeout progress)
+if the resulting timeout duration, after subtracting the 75%, is less than or equal to 1min, just completely discard it (?)
