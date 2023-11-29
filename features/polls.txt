@@ -1,0 +1,52 @@
+currently implemented like so:
+
+	Poll by @user:
+	> description
+	option1: voteCount1
+	option2: voteCount2
+	optionN: voteCountN
+	[ options dropdown ]
+	[ close button ]
+
+
+change it to something like this?:
+
+	Poll by @user:
+	> description
+	option1: voteCount1
+	option2: voteCount2
+	optionN: voteCountN
+	[ vote button ]
+
+pressing on button opens modal:
+
+	Select vote:
+	[ options dropdown ]
+	[ confirm button ] [ close poll button ] [ exit button ]
+
+pre-select option that user has voted on.
+the close poll button would only be present to those that are allowed to close that particular poll
+(i.e.: the creator of the poll and admins)
+
+
+----
+
+/poll
+
+-> modal:
+
+	Description
+	+-----------------+
+	| text field      |
+	|                 |
+	+-----------------+
+
+	Options (separate by newlines)
+	+-----------------+
+	| text field      |
+	|                 |
+	+-----------------+
+
+	[ open button ]  [ cancel button ]
+
+(are checkboxes a thing? allow anonymous vs non-anonymous polls?)
