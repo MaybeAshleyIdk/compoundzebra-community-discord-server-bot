@@ -30,3 +30,7 @@ reduces the currently remaining timeout duration by 75% of it's current value (i
 but also resets whatever the next timeout duration would be back to whatever the current timeout duration was.
 (i.e.: pauses your timeout progress)
 if the resulting timeout duration, after subtracting the 75%, is less than or equal to 1min, just completely discard it (?)
+
+---
+
+new !timeoutLeaderboard command
