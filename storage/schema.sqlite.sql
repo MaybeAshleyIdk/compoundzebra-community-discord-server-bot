@@ -15,18 +15,27 @@ CREATE TABLE `Guild`(
 	CONSTRAINT `Guild_commandPrefix_isNotEmpty` CHECK(`commandPrefix` != '')
 ) STRICT;
 
+-- not using STRICT for this table because the column `points` uses the type affinity NUMERIC,
+-- which isn't a valid storage class for STRICT tables (it would need to be either INTEGER or REAL)
 CREATE TABLE `GuildMember`(
 	`guildId` INTEGER NOT NULL,
 	`userId`  INTEGER NOT NULL,
 
-	-- mutable:
-	`points` INTEGER NOT NULL DEFAULT 0,
+	-- points can be either a non-negative integer or positive infinity
+	`points` NUMERIC NOT NULL DEFAULT 0,
 
 	PRIMARY KEY(`guildId`, `userId`),
 	FOREIGN KEY(`guildId`) REFERENCES `Guild`(`id`) ON DELETE CASCADE,
 
-	CONSTRAINT `GuildMember_points_isNotNegative` CHECK(`points` >= 0)
-) STRICT;
+	-- since this table doesn't use STRICT, the datatype constraints need to be added manually
+	CONSTRAINT `GuildMember_guildId_isInteger` CHECK(typeof(`guildId`) = 'integer'),
+	CONSTRAINT `GuildMember_userId_isInteger` CHECK(typeof(`userId`) = 'integer'),
+	CONSTRAINT `GuildMember_points_isPositiveInfinityOrNonNegativeInteger` CHECK(
+		((typeof(`points`) = 'real') AND (`points` = 1e309)) -- 1e309 = positive infinity
+		OR
+		((typeof(`points`) = 'integer') AND (`points` >= 0))
+	)
+);
 
 CREATE TABLE `GuildSimpleResponseCommand`(
 	`id` INTEGER NOT NULL,
