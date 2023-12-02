@@ -42,6 +42,10 @@ include {
 		"snowflake"()
 		"snowflake-generator"()
 
+		"storage" {
+			"database".service(impl = "sqlite")
+		}
+
 		"config"()
 		"config-serialization".service(impl = "json")
 		"config-source".service(impl = "file")

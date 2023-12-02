@@ -14,12 +14,14 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollsMod
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.privatemessageeventhandling.PrivateMessageEventHandlingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.ShutdownModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.storage.StorageModule
 import javax.inject.Singleton
 import net.dv8tion.jda.api.JDA as Jda
 
 @Module(
 	includes = [
 		LoggingModule::class,
+		StorageModule::class,
 		ConfigModule::class,
 		EmojiStatsModule::class,
 		PollsModule::class,
