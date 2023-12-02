@@ -1,5 +1,6 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutines
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutines.internal
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutines.MutableMutexValue
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
