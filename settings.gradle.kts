@@ -32,6 +32,17 @@ include(
 	":bot:snowflake",
 	":bot:snowflake-generator",
 
+	// region storage
+
+	":bot:storage:database:api",
+	":bot:storage:database:impl-sqlite",
+	":bot:storage:database:wiring",
+	":bot:storage:database",
+
+	":bot:storage",
+
+	// endregion
+
 	// region config
 
 	":bot:config",
