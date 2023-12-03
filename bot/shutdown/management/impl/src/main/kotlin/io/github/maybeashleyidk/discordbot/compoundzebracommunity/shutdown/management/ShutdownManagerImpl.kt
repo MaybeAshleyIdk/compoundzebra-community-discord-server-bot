@@ -167,7 +167,7 @@ public class ShutdownManagerImpl @Inject constructor(
 		return EventHandlingResultStatus.SHUTTING_DOWN
 	}
 
-	override suspend fun requestShutdown() {
+	override fun requestShutdown() {
 		if (!(this.shutdownRequested.compareAndSet(false, true))) {
 			// shutdown already requested; do nothing
 			return
