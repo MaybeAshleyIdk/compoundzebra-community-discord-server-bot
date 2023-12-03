@@ -168,6 +168,8 @@ public class ShutdownManagerImpl @Inject constructor(
 	}
 
 	override fun requestShutdown() {
+		this.logger.logInfo("Requesting shutdown...")
+
 		if (!(this.shutdownRequested.compareAndSet(false, true))) {
 			// shutdown already requested; do nothing
 			return
