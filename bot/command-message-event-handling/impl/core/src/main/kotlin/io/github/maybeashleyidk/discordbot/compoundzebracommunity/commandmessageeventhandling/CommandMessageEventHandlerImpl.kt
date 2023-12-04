@@ -73,6 +73,16 @@ public class CommandMessageEventHandlerImpl @Inject constructor(
 			.firstOrNull { command: Command ->
 				command.name.isEquivalentTo(commandLine.commandName)
 			}
+			?.let { foundCommand: Command ->
+				val config: Config = this.configSupplier.get()
+
+				val isCommandEnabled: Boolean = config.disabledCommandNames
+					.none { disabledCommandName ->
+						disabledCommandName.isEquivalentTo(foundCommand.name)
+					}
+
+				foundCommand.takeIf { isCommandEnabled }
+			}
 
 		if (foundCommand == null) {
 			val config: Config = this.configSupplier.get()
