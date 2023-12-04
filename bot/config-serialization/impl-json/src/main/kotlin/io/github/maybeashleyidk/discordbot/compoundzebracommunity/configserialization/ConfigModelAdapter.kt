@@ -18,6 +18,7 @@ public class ConfigModelAdapter @Inject constructor() {
 			commandPrefix = CommandPrefix.ofString(configJson.commandPrefix),
 			commandDefinitions = configJson.commands.orEmpty().mapToCommandDefinitions(),
 			conditionalMessages = configJson.conditionalMessages.orEmpty().mapToConditionalMessages(),
+			disabledCommandNames = configJson.disabledCommandNames.orEmpty().mapToCommandNamesIfValid(),
 		)
 	}
 
@@ -81,6 +82,7 @@ public class ConfigModelAdapter @Inject constructor() {
 				}
 				.ifEmpty { null },
 			conditionalMessages = config.conditionalMessages.mapToConditionalMessagesJson().ifEmpty { null },
+			disabledCommandNames = config.disabledCommandNames.mapToStrings().ifEmpty { null },
 		)
 	}
 }
@@ -190,6 +192,25 @@ private fun Set<ConditionalMessage>.mapToConditionalMessagesJson(): Set<Conditio
 				regexPattern = conditionalMessage.condition.regex.pattern,
 				messageContent = conditionalMessage.messageContent,
 			)
+		}
+}
+
+private fun Set<CommandName>.mapToStrings(): Set<String> {
+	return this
+		.mapTo(
+			LinkedHashSet(this.size),
+			CommandName::toString,
+		)
+}
+
+private fun Set<String>.mapToCommandNamesIfValid(): Set<CommandName> {
+	return this
+		.mapNotNullTo(LinkedHashSet(this.size)) { commandNameString: String ->
+			if (!(CommandName.isValid(commandNameString))) {
+				return@mapNotNullTo null
+			}
+
+			CommandName.ofString(commandNameString)
 		}
 }
 
