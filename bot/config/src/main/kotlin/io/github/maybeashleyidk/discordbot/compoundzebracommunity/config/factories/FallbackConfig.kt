@@ -103,5 +103,6 @@ internal fun createFallbackConfig(botEnvironmentType: BotEnvironmentType): Confi
 		commandPrefix = commandPrefix,
 		commandDefinitions = emptySet(),
 		conditionalMessages = emptySet(),
+		disabledCommandNames = emptySet(),
 	)
 }

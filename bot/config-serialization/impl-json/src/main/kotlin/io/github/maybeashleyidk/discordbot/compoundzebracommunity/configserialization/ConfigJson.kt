@@ -10,6 +10,7 @@ internal data class ConfigJson(
 	@Json(name = "commandPrefix") val commandPrefix: String,
 	@Json(name = "commands") val commands: Map<String, CommandDetailsJson>?,
 	@Json(name = "conditionalMessages") val conditionalMessages: Set<ConditionalMessageJson>?,
+	@Json(name = "disabledCommandNames") val disabledCommandNames: Set<String>?,
 )
 
 @JsonClass(generateAdapter = true)
