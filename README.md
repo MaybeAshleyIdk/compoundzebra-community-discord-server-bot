@@ -19,13 +19,13 @@ The fully built executable JAR file (that is compressed using `gzip`) can be dow
 
 <!-- markdownlint-disable line-length -->
 ```sh
-wget -O- 'https://github.com/MaybeAshleyIdk/compoundzebra-community-discord-server-bot/releases/download/v0.1.0-indev11/czd-bot-0.1.0-indev11.gz' |
-	gzip -d > 'czd-bot-0.1.0-indev11' &&
-	chmod +x 'czd-bot-0.1.0-indev11'
+wget -O- 'https://github.com/MaybeAshleyIdk/compoundzebra-community-discord-server-bot/releases/download/v0.1.0-indev12/czd-bot-0.1.0-indev12.gz' |
+	gzip -d > 'czd-bot-0.1.0-indev12' &&
+	chmod +x 'czd-bot-0.1.0-indev12'
 ```
 <!-- markdownlint-enable line-length -->
 
-[GitHub release page]: <https://github.com/MaybeAshleyIdk/compoundzebra-community-discord-server-bot/releases/tag/v0.1.0-indev11> "Release Version 0.1.0-indev11 · MaybeAshleyIdk/compoundzebra-community-discord-server-bot"
+[GitHub release page]: <https://github.com/MaybeAshleyIdk/compoundzebra-community-discord-server-bot/releases/tag/v0.1.0-indev12> "Release Version 0.1.0-indev12 · MaybeAshleyIdk/compoundzebra-community-discord-server-bot"
 
 ## Usage ##
 
@@ -34,7 +34,7 @@ The bot token must be supplied in the environment variable `DISCORD_BOT_TOKEN`.
 
 ```sh
 DISCORD_BOT_TOKEN='************************************************************************' \
-	./czd-bot-0.1.0-indev11
+	./czd-bot-0.1.0-indev12
 ```
 
 If the JAR file is executed like shown above and the environment variable `JAVA_HOME` is *not* unset or empty, then
@@ -54,7 +54,7 @@ which obviously gives full control over which Java runtime is used and which JVM
 
 ```sh
 DISCORD_BOT_TOKEN='************************************************************************' \
-	java -jar czd-bot-0.1.0-indev11
+	java -jar czd-bot-0.1.0-indev12
 ```
 
 ## License ##
