@@ -1,3 +1,7 @@
+once guild points are implemented, change it so that each self-timeout requires points (increase it as duration goes on?)
+to discourage people from continuing to use it (first few timeouts free?)
+
+
 current self-timeout duration function:
 	f(x) = 5 * 1.25^x
 
