@@ -42,6 +42,8 @@ include {
 		"snowflake"()
 		"snowflake-generator"()
 
+		"guild-points"()
+
 		"storage" {
 			"database".service(impl = "sqlite")
 		}
