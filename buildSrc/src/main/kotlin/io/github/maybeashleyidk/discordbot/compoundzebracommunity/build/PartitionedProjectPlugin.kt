@@ -72,12 +72,15 @@ public class PartitionedProjectPlugin : Plugin<Project> {
 				.hasAnyPlugin(
 					StandaloneProjectPlugin::class,
 					ApiImplWiringProjectPlugin::class,
+					GroupProjectPlugin::class,
 					WiringAssimilationProjectPlugin::class,
 				)
 
 			check(hasAllowedProjectTypePlugin) {
-				"The child project $childProject of partitioned $project does not have any of " +
-					"the required project type plugins applied, but it must have"
+				"The child $childProject of partitioned $project does not have any of " +
+					"the required project type plugins applied " +
+					"(standalone, api-implementation-wiring, group or wiring-assimilation), " +
+					"but it must have"
 			}
 		}
 

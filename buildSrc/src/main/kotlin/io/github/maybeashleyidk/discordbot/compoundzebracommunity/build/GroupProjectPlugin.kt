@@ -75,13 +75,16 @@ public class GroupProjectPlugin : Plugin<Project> {
 		}
 
 		for (childProject: Project in project.childProjects.values) {
-			check(childProject.plugins.hasPlugin<StandaloneProjectPlugin>()) {
+			check(childProject.plugins.hasStandaloneOrApiImplWiringProjectPlugin()) {
 				"The child $childProject of the parent group $project doesn't have " +
-					"the standalone project plugin applied to it, but it must have"
+					"either the standalone- or the api-implementation-wiring project plugin applied to it, " +
+					"but it must have"
 			}
 		}
 	}
 
+	// TODO: don't do this automatically. the build gradle file should need to do it explicitly itself, and the plugin
+	//       would then only check if all children have been added (?)
 	private fun addChildProjectsAsDependencies(project: Project) {
 		project.configurations.named("api") {
 			project.childProjects
@@ -95,6 +98,10 @@ public class GroupProjectPlugin : Plugin<Project> {
 
 private fun String.isLegalProjectName(): Boolean {
 	return (this != "api") && (this != "impl") && (this != "wiring") && !(this.startsWith("impl-"))
+}
+
+private fun PluginContainer.hasStandaloneOrApiImplWiringProjectPlugin(): Boolean {
+	return this.hasPlugin<StandaloneProjectPlugin>() || this.hasPlugin<ApiImplWiringProjectPlugin>()
 }
 
 private inline fun <reified T : Plugin<*>> PluginContainer.hasPlugin(): Boolean {
