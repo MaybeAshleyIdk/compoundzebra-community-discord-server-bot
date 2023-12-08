@@ -32,6 +32,8 @@ include(
 	":bot:snowflake",
 	":bot:snowflake-generator",
 
+	":bot:guild-points",
+
 	// region storage
 
 	":bot:storage:database:api",
