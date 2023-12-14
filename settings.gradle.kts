@@ -46,6 +46,7 @@ include {
 
 		"storage" {
 			"database".service(impl = "sqlite")
+			"guild-member".service(impl = "db")
 		}
 
 		"config"()
