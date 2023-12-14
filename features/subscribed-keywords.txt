@@ -14,3 +14,8 @@ would need to work out things that it doesn't get too spammy:
 /subscribe <keyword>
 /subscribe --regex <regex>
 /subscribe --dcmm <dcmm>
+
+do that with context actions (or whatever it's called) and modals? (right clicking on the bot » Apps » Manage Subscribed Keywords)
+
+whatever we're gonna go with, DON'T do it via custom (guild) commands, because that is public for other members to see
+we could do it with custom commands in dms. would need to system to separate private channel- and guild commands
