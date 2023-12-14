@@ -37,6 +37,23 @@ CREATE TABLE `GuildMember`(
 	)
 );
 
+CREATE TABLE `GuildMemberSubscribedKeyword`(
+	`guildId` INTEGER NOT NULL,
+	`userId`  INTEGER NOT NULL,
+	`index`   INTEGER NOT NULL,
+
+	`word` TEXT NOT NULL,
+
+	`enabled` INTEGER NOT NULL DEFAULT 1,
+
+	PRIMARY KEY(`guildId`, `userId`, `index`),
+	FOREIGN KEY(`guildId`, `userId`) REFERENCES `GuildMember`(`guildId`, `userId`) ON DELETE CASCADE
+
+	CONSTRAINT `GuildMemberSubscribedKeyword_index_isNotNegative` CHECK(`index` >= 0),
+	CONSTRAINT `GuildMemberSubscribedKeyword_word_isNotEmpty` CHECK(`word` != ''),
+	CONSTRAINT `GuildMemberSubscribedKeyword_enabled_isZeroOrOne` CHECK((`enabled` = 0) OR (`enabled` = 1))
+) STRICT;
+
 CREATE TABLE `GuildSimpleResponseCommand`(
 	`id` INTEGER NOT NULL,
 
