@@ -41,6 +41,11 @@ include(
 	":bot:storage:database:wiring",
 	":bot:storage:database",
 
+	":bot:storage:guild-member:api",
+	":bot:storage:guild-member:impl-db",
+	":bot:storage:guild-member:wiring",
+	":bot:storage:guild-member",
+
 	":bot:storage",
 
 	// endregion
