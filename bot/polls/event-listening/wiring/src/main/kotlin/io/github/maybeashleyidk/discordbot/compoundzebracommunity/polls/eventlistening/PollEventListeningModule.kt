@@ -10,6 +10,6 @@ public object PollEventListeningModule {
 	internal interface Bindings {
 
 		@Binds
-		fun bindPollEventListener(impl: PollEventListenerImpl): PollEventListener
+		fun bindPollEventHandler(impl: PollEventHandlerImpl): PollEventHandler
 	}
 }
