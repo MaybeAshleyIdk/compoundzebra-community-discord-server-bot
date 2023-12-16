@@ -5,7 +5,7 @@ plugins {
 
 dependencies {
 	api(projects.bot.commands.commandName)
-	api(projects.bot.commands.prefix)
-	api(projects.bot.pollOption)
-	api(projects.bot.environmentType)
+	api(libs.jda) {
+		exclude(module = "opus-opus")
+	}
 }
