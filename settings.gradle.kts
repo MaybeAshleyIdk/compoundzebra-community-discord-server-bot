@@ -122,10 +122,10 @@ include(
 	":bot:shutdown:event-handling:wiring",
 	":bot:shutdown:event-handling",
 
-	":bot:shutdown:callback-registry:api",
-	":bot:shutdown:callback-registry:impl-manager",
-	":bot:shutdown:callback-registry:wiring",
-	":bot:shutdown:callback-registry",
+	":bot:shutdown:callback-registration:api",
+	":bot:shutdown:callback-registration:impl-manager",
+	":bot:shutdown:callback-registration:wiring",
+	":bot:shutdown:callback-registration",
 
 	":bot:shutdown:request:api",
 	":bot:shutdown:request:impl-manager",
