@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	api(projects.bot.eventHandler)
+	api(projects.bot.genericEventHandler)
 }
