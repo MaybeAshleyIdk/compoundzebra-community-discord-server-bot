@@ -37,8 +37,5 @@ dependencies {
 	implementation(projects.bot.pollModification.wiring)
 	implementation(projects.bot.privateMessageEventHandling.wiring)
 	implementation(projects.bot.selfTimeout.wiring)
-	implementation(projects.bot.shutdown.callbackRegistration.wiring)
-	implementation(projects.bot.shutdown.eventHandling.wiring)
-	implementation(projects.bot.shutdown.management.wiring)
-	implementation(projects.bot.shutdown.requesting.wiring)
+	implementation(projects.bot.shutdown.wiring)
 }
