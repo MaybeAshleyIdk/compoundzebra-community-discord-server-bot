@@ -3,7 +3,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistenin
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventhandler.EventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventhandlermediation.MessageEventHandlerMediator
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.eventlistening.PollEventListener
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.eventlistening.PollEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.privatemessageeventhandling.PrivateMessageEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbackregistraton.ShutdownCallbackRegistry
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbacks.OnAfterShutdownCallback
@@ -27,7 +27,7 @@ public class MainEventListenerImpl @Inject constructor(
 	private val shutdownEventHandler: ShutdownEventHandler,
 	shutdownCallbackRegistry: ShutdownCallbackRegistry,
 	messageEventHandlerMediator: MessageEventHandlerMediator,
-	pollEventListener: PollEventListener,
+	pollEventHandler: PollEventHandler,
 	privateMessageEventHandler: PrivateMessageEventHandler,
 ) : MainEventListener {
 
@@ -41,7 +41,7 @@ public class MainEventListenerImpl @Inject constructor(
 	private val otherEventHandlers: Set<EventHandler> =
 		setOf(
 			messageEventHandlerMediator,
-			pollEventListener,
+			pollEventHandler,
 			privateMessageEventHandler,
 		)
 

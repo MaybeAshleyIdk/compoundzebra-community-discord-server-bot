@@ -16,17 +16,17 @@ import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent
 import javax.inject.Inject
 
-public class PollEventListenerImpl @Inject constructor(
+public class PollEventHandlerImpl @Inject constructor(
 	private val pollComponentProtocol: PollComponentProtocol,
 	private val pollModifier: PollModifier,
 	private val configSupplier: ConfigSupplier,
-) : PollEventListener {
+) : PollEventHandler {
 
 	override suspend fun handleEvent(event: GenericEvent) {
 		coroutineScope {
 			when (event) {
-				is StringSelectInteractionEvent -> this@PollEventListenerImpl.onStringSelectInteractionEvent(event)
-				is ButtonInteractionEvent -> this@PollEventListenerImpl.onButtonInteractionEvent(event)
+				is StringSelectInteractionEvent -> this@PollEventHandlerImpl.onStringSelectInteractionEvent(event)
+				is ButtonInteractionEvent -> this@PollEventHandlerImpl.onButtonInteractionEvent(event)
 			}
 		}
 	}
