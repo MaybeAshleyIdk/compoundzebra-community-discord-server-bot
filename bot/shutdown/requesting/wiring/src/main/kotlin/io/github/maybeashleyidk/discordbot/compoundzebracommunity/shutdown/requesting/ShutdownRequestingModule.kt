@@ -3,8 +3,8 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requ
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [ShutdownRequestModule.Bindings::class])
-public object ShutdownRequestModule {
+@Module(includes = [ShutdownRequestingModule.Bindings::class])
+public object ShutdownRequestingModule {
 
 	@Module
 	internal interface Bindings {

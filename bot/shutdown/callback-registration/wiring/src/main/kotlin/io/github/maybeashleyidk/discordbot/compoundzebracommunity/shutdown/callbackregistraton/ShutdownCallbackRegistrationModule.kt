@@ -3,8 +3,8 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.call
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [ShutdownCallbackRegistryModule.Bindings::class])
-public object ShutdownCallbackRegistryModule {
+@Module(includes = [ShutdownCallbackRegistrationModule.Bindings::class])
+public object ShutdownCallbackRegistrationModule {
 
 	@Module
 	internal interface Bindings {
