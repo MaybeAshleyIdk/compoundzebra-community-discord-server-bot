@@ -1,6 +1,6 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.factories
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandprefix.CommandPrefix
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.prefix.CommandPrefix
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.LanguageStrings
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
