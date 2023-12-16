@@ -39,6 +39,6 @@ dependencies {
 	implementation(projects.bot.selfTimeout.wiring)
 	implementation(projects.bot.shutdown.callbackRegistry.wiring)
 	implementation(projects.bot.shutdown.eventHandling.wiring)
-	implementation(projects.bot.shutdown.manager.wiring)
+	implementation(projects.bot.shutdown.management.wiring)
 	implementation(projects.bot.shutdown.request.wiring)
 }

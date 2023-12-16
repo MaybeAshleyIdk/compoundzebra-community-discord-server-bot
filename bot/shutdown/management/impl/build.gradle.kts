@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-	api(projects.bot.shutdown.manager.api)
+	api(projects.bot.shutdown.management.api)
 	api(projects.bot.logging)
 
 	implementation(projects.bot.utilsCoroutines)
