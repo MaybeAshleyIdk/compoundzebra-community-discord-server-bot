@@ -1,5 +1,4 @@
 plugins {
-	WiringProject
 	`java-library`
 	kotlin("jvm")
 	alias(libs.plugins.ksp)
@@ -7,6 +6,8 @@ plugins {
 
 dependencies {
 	api(projects.bot.commandMessageEventHandling.impl)
+
+	api(projects.bot.commandMessageEventHandling.impl.wiring)
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)
