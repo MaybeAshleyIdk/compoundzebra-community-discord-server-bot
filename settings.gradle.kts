@@ -112,10 +112,10 @@ include(
 
 	":bot:shutdown:callbacks",
 
-	":bot:shutdown:manager:api",
-	":bot:shutdown:manager:impl",
-	":bot:shutdown:manager:wiring",
-	":bot:shutdown:manager",
+	":bot:shutdown:management:api",
+	":bot:shutdown:management:impl",
+	":bot:shutdown:management:wiring",
+	":bot:shutdown:management",
 
 	":bot:shutdown:event-handling:api",
 	":bot:shutdown:event-handling:impl-manager",
