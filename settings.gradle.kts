@@ -132,6 +132,8 @@ include(
 	":bot:shutdown:requesting:wiring",
 	":bot:shutdown:requesting",
 
+	":bot:shutdown:wiring",
+
 	":bot:shutdown",
 
 	// endregion
