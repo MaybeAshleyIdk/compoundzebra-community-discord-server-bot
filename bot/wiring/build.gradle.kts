@@ -11,7 +11,7 @@ dependencies {
 	api(projects.bot.environmentType)
 	api(projects.bot.token)
 	api(projects.bot.logging)
-	api(projects.bot.shutdown.callbackRegistry)
+	api(projects.bot.shutdown.callbackRegistration)
 
 	implementation(projects.bot.jdaFactory)
 
@@ -37,7 +37,7 @@ dependencies {
 	implementation(projects.bot.pollModification.wiring)
 	implementation(projects.bot.privateMessageEventHandling.wiring)
 	implementation(projects.bot.selfTimeout.wiring)
-	implementation(projects.bot.shutdown.callbackRegistry.wiring)
+	implementation(projects.bot.shutdown.callbackRegistration.wiring)
 	implementation(projects.bot.shutdown.eventHandling.wiring)
 	implementation(projects.bot.shutdown.management.wiring)
 	implementation(projects.bot.shutdown.request.wiring)
