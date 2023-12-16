@@ -1,4 +1,4 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls
 
 import dagger.Module
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.pollcreation.PollCreationModule
@@ -16,4 +16,4 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.pollmodificati
 		PollEventListeningModule::class,
 	],
 )
-internal object PollsModule
+public object PollsModule
