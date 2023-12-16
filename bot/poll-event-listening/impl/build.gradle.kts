@@ -1,5 +1,4 @@
 plugins {
-	ImplProject
 	`java-library`
 	kotlin("jvm")
 }
