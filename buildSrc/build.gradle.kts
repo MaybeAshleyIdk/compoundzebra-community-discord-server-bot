@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 
 plugins {
-	`kotlin-dsl`
+	`kotlin-dsl` apply false
 }
 
 allprojects {

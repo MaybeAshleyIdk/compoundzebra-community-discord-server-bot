@@ -1,5 +1,4 @@
 plugins {
-	InternalWiringProject
 	`java-library`
 	kotlin("jvm")
 	alias(libs.plugins.ksp)

@@ -78,27 +78,12 @@ root_dir_pathname="$(dirname -- "$0" && printf x)"
 root_dir_pathname="${root_dir_pathname%"$(printf '\nx')"}"
 readonly root_dir_pathname
 
-gradle_build_file_template_regular_pathname="$root_dir_pathname/module-templates/regular-gradle.build.kts"
-gradle_build_file_template_api_pathname="$root_dir_pathname/module-templates/api-gradle.build.kts"
-gradle_build_file_template_impl_pathname="$root_dir_pathname/module-templates/impl-gradle.build.kts"
-gradle_build_file_template_wiring_pathname="$root_dir_pathname/module-templates/wiring-gradle.build.kts"
-readonly gradle_build_file_template_regular_pathname \
-         gradle_build_file_template_api_pathname \
-         gradle_build_file_template_impl_pathname \
-         gradle_build_file_template_wiring_pathname
+gradle_build_file_template_pathname="$root_dir_pathname/module-templates/gradle.build.kts"
+readonly gradle_build_file_template_pathname
 
 printf 'include(\n'
 for module_path in "$@"; do
 	module_dir_pathname="$(printf '%s' "${module_path#:}" | sed -e s/:/'\/'/g)"
-
-	gradle_build_file_template_pathname="$gradle_build_file_template_regular_pathname"
-	if printf '%s' "$module_path" | grep -Eq ':api$'; then
-		gradle_build_file_template_pathname="$gradle_build_file_template_api_pathname"
-	elif printf '%s' "$module_path" | grep -Eq ':impl(-[^:]*)?$'; then
-		gradle_build_file_template_pathname="$gradle_build_file_template_impl_pathname"
-	elif printf '%s' "$module_path" | grep -Eq ':wiring$'; then
-		gradle_build_file_template_pathname="$gradle_build_file_template_wiring_pathname"
-	fi
 
 	mkdir -p -- "$root_dir_pathname/$module_dir_pathname/src/main/kotlin/io/github/maybeashleyidk/discordbot/compoundzebracommunity"
 
@@ -107,7 +92,6 @@ for module_path in "$@"; do
 
 	printf '\t"%s",\n' "$module_path"
 
-	unset -v gradle_build_file_template_pathname \
-	         module_dir_pathname
+	unset -v module_dir_pathname
 done; unset -v module_path
 printf ')\n'
