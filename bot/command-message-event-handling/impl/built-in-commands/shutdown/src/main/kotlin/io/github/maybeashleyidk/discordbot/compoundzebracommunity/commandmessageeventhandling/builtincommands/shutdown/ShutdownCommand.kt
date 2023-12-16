@@ -4,7 +4,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessage
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandname.CommandName
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdownrequest.ShutdownRequester
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequester
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutinesjda.await
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Member
