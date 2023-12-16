@@ -96,10 +96,10 @@ include(
 
 	":bot:polls:component-protocol",
 
-	":bot:polls:event-listening:api",
-	":bot:polls:event-listening:impl",
-	":bot:polls:event-listening:wiring",
-	":bot:polls:event-listening",
+	":bot:polls:event-handling:api",
+	":bot:polls:event-handling:impl",
+	":bot:polls:event-handling:wiring",
+	":bot:polls:event-handling",
 
 	":bot:polls:wiring",
 
