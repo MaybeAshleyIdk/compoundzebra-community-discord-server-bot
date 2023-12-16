@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-	api(projects.bot.shutdownCallbacks)
+	api(projects.bot.shutdown.callbacks)
 
 	api(libs.jda) {
 		exclude(module = "opus-java")

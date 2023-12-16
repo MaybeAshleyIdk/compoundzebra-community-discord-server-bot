@@ -6,7 +6,7 @@ plugins {
 dependencies {
 	api(projects.bot.commandMessageEventHandling.impl.command)
 	api(projects.bot.configSupplier)
-	api(projects.bot.shutdownRequest)
+	api(projects.bot.shutdown.request)
 
 	implementation(projects.bot.utilsCoroutinesJda)
 
