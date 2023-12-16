@@ -101,6 +101,8 @@ include(
 	":bot:polls:event-listening:wiring",
 	":bot:polls:event-listening",
 
+	":bot:polls:wiring",
+
 	":bot:polls",
 
 	// endregion

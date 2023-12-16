@@ -10,7 +10,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.jdafactory.Jda
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.LoggingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.ConfigModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.MessageEventHandlingModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.PollsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.privatemessageeventhandling.PrivateMessageEventHandlingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.ShutdownModule
