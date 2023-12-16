@@ -5,7 +5,7 @@ plugins {
 
 dependencies {
 	api(projects.bot.eventListening.api)
-	api(projects.bot.shutdown.callbackRegistry)
+	api(projects.bot.shutdown.callbackRegistration)
 	api(projects.bot.shutdown.eventHandling)
 	api(projects.bot.messageEventHandlerMediation)
 	api(projects.bot.pollEventListening)
