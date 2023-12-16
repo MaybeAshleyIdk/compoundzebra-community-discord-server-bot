@@ -110,27 +110,29 @@ include(
 
 	// region shutdown
 
-	":bot:shutdown-callbacks",
+	":bot:shutdown:callbacks",
 
-	":bot:shutdown-manager:api",
-	":bot:shutdown-manager:impl",
-	":bot:shutdown-manager:wiring",
-	":bot:shutdown-manager",
+	":bot:shutdown:manager:api",
+	":bot:shutdown:manager:impl",
+	":bot:shutdown:manager:wiring",
+	":bot:shutdown:manager",
 
-	":bot:shutdown-event-handling:api",
-	":bot:shutdown-event-handling:impl-manager",
-	":bot:shutdown-event-handling:wiring",
-	":bot:shutdown-event-handling",
+	":bot:shutdown:event-handling:api",
+	":bot:shutdown:event-handling:impl-manager",
+	":bot:shutdown:event-handling:wiring",
+	":bot:shutdown:event-handling",
 
-	":bot:shutdown-callback-registry:api",
-	":bot:shutdown-callback-registry:impl-manager",
-	":bot:shutdown-callback-registry:wiring",
-	":bot:shutdown-callback-registry",
+	":bot:shutdown:callback-registry:api",
+	":bot:shutdown:callback-registry:impl-manager",
+	":bot:shutdown:callback-registry:wiring",
+	":bot:shutdown:callback-registry",
 
-	":bot:shutdown-request:api",
-	":bot:shutdown-request:impl-manager",
-	":bot:shutdown-request:wiring",
-	":bot:shutdown-request",
+	":bot:shutdown:request:api",
+	":bot:shutdown:request:impl-manager",
+	":bot:shutdown:request:wiring",
+	":bot:shutdown:request",
+
+	":bot:shutdown",
 
 	// endregion
 
