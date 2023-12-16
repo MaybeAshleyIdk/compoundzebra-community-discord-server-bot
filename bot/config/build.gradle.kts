@@ -6,6 +6,6 @@ plugins {
 dependencies {
 	api(projects.bot.commands.commandName)
 	api(projects.bot.commands.prefix)
-	api(projects.bot.pollOption)
+	api(projects.bot.polls.option)
 	api(projects.bot.environmentType)
 }
