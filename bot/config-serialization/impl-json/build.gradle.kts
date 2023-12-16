@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:config-serialization:api"))
+	api(projects.bot.configSerialization.api)
 
 	implementation(libs.moshi)
 	ksp(libs.moshi.kotlin.codegen)

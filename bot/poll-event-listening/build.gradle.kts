@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:poll-event-listening:api"))
+	api(projects.bot.pollEventListening.api)
 }

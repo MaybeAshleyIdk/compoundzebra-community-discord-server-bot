@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:poll-details"))
+	api(projects.bot.pollDetails)
 	api(libs.jda) {
 		exclude(module = "opus-java")
 	}

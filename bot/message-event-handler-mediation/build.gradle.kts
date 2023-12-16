@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:message-event-handler-mediation:api"))
+	api(projects.bot.messageEventHandlerMediation.api)
 }

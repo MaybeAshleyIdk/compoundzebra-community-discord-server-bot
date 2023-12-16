@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:self-timeout:api"))
+	api(projects.bot.selfTimeout.api)
 }

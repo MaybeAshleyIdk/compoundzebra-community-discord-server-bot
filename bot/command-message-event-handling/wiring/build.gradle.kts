@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:command-message-event-handling:impl"))
+	api(projects.bot.commandMessageEventHandling.impl)
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)

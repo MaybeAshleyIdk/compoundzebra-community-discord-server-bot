@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:private-message-event-handling:impl"))
+	api(projects.bot.privateMessageEventHandling.impl)
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)

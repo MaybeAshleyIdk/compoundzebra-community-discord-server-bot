@@ -5,12 +5,12 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:poll-event-listening:api"))
-	api(project(":bot:poll-component-protocol"))
-	api(project(":bot:poll-modification"))
-	api(project(":bot:config-supplier"))
+	api(projects.bot.pollEventListening.api)
+	api(projects.bot.pollComponentProtocol)
+	api(projects.bot.pollModification)
+	api(projects.bot.configSupplier)
 
-	implementation(project(":bot:utils-coroutines-jda"))
+	implementation(projects.bot.utilsCoroutinesJda)
 
 	implementation(libs.kotlinx.coroutines.core)
 

@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:config-supplier:impl-cache"))
+	api(projects.bot.configSupplier.implCache)
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)

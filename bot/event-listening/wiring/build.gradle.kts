@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:event-listening:impl"))
+	api(projects.bot.eventListening.impl)
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)

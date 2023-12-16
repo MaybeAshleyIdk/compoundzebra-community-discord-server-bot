@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:shutdown-manager:api"))
+	api(projects.bot.shutdownManager.api)
 }

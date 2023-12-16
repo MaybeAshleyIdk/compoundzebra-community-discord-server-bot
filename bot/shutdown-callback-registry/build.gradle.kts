@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:shutdown-callback-registry:api"))
+	api(projects.bot.shutdownCallbackRegistry.api)
 }

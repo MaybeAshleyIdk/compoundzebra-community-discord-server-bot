@@ -5,8 +5,8 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:shutdown-callback-registry:api"))
-	api(project(":bot:shutdown-manager"))
+	api(projects.bot.shutdownCallbackRegistry.api)
+	api(projects.bot.shutdownManager)
 
 	implementation(libs.javax.inject)
 }

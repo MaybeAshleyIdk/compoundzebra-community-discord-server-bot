@@ -5,10 +5,10 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:private-message-event-handling:api"))
+	api(projects.bot.privateMessageEventHandling.api)
 
-	implementation(project(":bot:logging"))
-	implementation(project(":bot:utils"))
+	implementation(projects.bot.logging)
+	implementation(projects.bot.utils)
 
 	implementation(libs.javax.inject)
 }

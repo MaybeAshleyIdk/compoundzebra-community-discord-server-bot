@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-	api(project("${TODO()}:api"))
+	api(projects.TODO.api)
 
 	implementation(libs.javax.inject)
 }

@@ -5,14 +5,14 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:command-message-event-handling:impl:command"))
-	api(project(":bot:config-supplier"))
-	api(project(":bot:poll-creation"))
-	api(project(":bot:poll-holding"))
-	api(project(":bot:poll-component-protocol"))
+	api(projects.bot.commandMessageEventHandling.impl.command)
+	api(projects.bot.configSupplier)
+	api(projects.bot.pollCreation)
+	api(projects.bot.pollHolding)
+	api(projects.bot.pollComponentProtocol)
 
-	implementation(project(":bot:utils"))
-	implementation(project(":bot:utils-coroutines-jda"))
+	implementation(projects.bot.utils)
+	implementation(projects.bot.utilsCoroutinesJda)
 
 	implementation(libs.javax.inject)
 }

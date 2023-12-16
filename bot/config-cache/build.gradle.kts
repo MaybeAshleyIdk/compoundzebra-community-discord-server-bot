@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:config-cache:api"))
+	api(projects.bot.configCache.api)
 }

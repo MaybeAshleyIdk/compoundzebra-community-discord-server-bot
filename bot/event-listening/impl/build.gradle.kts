@@ -5,13 +5,13 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:event-listening:api"))
-	api(project(":bot:shutdown-callback-registry"))
-	api(project(":bot:shutdown-event-handling"))
-	api(project(":bot:message-event-handler-mediation"))
-	api(project(":bot:poll-event-listening"))
-	api(project(":bot:private-message-event-handling"))
-	api(project(":bot:logging"))
+	api(projects.bot.eventListening.api)
+	api(projects.bot.shutdownCallbackRegistry)
+	api(projects.bot.shutdownEventHandling)
+	api(projects.bot.messageEventHandlerMediation)
+	api(projects.bot.pollEventListening)
+	api(projects.bot.privateMessageEventHandling)
+	api(projects.bot.logging)
 
 	implementation(libs.kotlinx.coroutines.core)
 

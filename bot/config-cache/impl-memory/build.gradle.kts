@@ -5,9 +5,9 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:config-cache:api"))
-	api(project(":bot:config-source"))
-	api(project(":bot:logging"))
+	api(projects.bot.configCache.api)
+	api(projects.bot.configSource)
+	api(projects.bot.logging)
 
 	implementation(libs.javax.inject)
 }

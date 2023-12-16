@@ -5,9 +5,9 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:config-source:api"))
-	api(project(":bot:config-serialization"))
-	api(project(":bot:environment-type"))
+	api(projects.bot.configSource.api)
+	api(projects.bot.configSerialization)
+	api(projects.bot.environmentType)
 
 	implementation(libs.javax.inject)
 }

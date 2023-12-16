@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:config-serialization:impl-json"))
+	api(projects.bot.configSerialization.implJson)
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)

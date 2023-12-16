@@ -5,10 +5,10 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:emoji-stats:api"))
-	api(project(":bot:logging"))
+	api(projects.bot.emojiStats.api)
+	api(projects.bot.logging)
 
-	implementation(project(":bot:utils-coroutines-jda"))
+	implementation(projects.bot.utilsCoroutinesJda)
 
 	implementation(libs.kotlinx.coroutines.core)
 

@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:conditional-message-event-handling:api"))
+	api(projects.bot.conditionalMessageEventHandling.api)
 }

@@ -1,4 +1,4 @@
-rootProject.name = "CompoundZebra Community Discord Server Bot"
+rootProject.name = "compoundzebra-community-discord-server-bot"
 
 pluginManagement {
 	repositories {
@@ -13,6 +13,8 @@ dependencyResolutionManagement {
 		mavenCentral()
 	}
 }
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 @Suppress("ktlint:standard:no-blank-line-in-list")
 include(

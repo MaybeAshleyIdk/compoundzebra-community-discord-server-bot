@@ -5,12 +5,12 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:conditional-message-event-handling:api"))
-	api(project(":bot:config-supplier"))
-	api(project(":bot:logging"))
+	api(projects.bot.conditionalMessageEventHandling.api)
+	api(projects.bot.configSupplier)
+	api(projects.bot.logging)
 
-	implementation(project(":bot:utils"))
-	implementation(project(":bot:utils-coroutines-jda"))
+	implementation(projects.bot.utils)
+	implementation(projects.bot.utilsCoroutinesJda)
 
 	implementation(libs.kotlinx.coroutines.core)
 

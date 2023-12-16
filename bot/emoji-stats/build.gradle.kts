@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:emoji-stats:api"))
+	api(projects.bot.emojiStats.api)
 }

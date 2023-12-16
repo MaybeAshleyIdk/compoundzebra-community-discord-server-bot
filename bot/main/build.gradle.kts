@@ -5,10 +5,10 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:environment-type"))
-	api(project(":bot:token"))
+	api(projects.bot.environmentType)
+	api(projects.bot.token)
 
-	implementation(project(":bot:wiring"))
+	implementation(projects.bot.wiring)
 
 	implementation(libs.kotlinx.coroutines.core)
 }
