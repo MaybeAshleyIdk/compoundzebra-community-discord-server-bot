@@ -127,10 +127,10 @@ include(
 	":bot:shutdown:callback-registration:wiring",
 	":bot:shutdown:callback-registration",
 
-	":bot:shutdown:request:api",
-	":bot:shutdown:request:impl-manager",
-	":bot:shutdown:request:wiring",
-	":bot:shutdown:request",
+	":bot:shutdown:requesting:api",
+	":bot:shutdown:requesting:impl-manager",
+	":bot:shutdown:requesting:wiring",
+	":bot:shutdown:requesting",
 
 	":bot:shutdown",
 

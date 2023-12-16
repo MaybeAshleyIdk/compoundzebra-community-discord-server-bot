@@ -40,5 +40,5 @@ dependencies {
 	implementation(projects.bot.shutdown.callbackRegistration.wiring)
 	implementation(projects.bot.shutdown.eventHandling.wiring)
 	implementation(projects.bot.shutdown.management.wiring)
-	implementation(projects.bot.shutdown.request.wiring)
+	implementation(projects.bot.shutdown.requesting.wiring)
 }
