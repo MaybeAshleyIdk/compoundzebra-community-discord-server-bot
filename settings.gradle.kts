@@ -69,37 +69,39 @@ include(
 
 	// region polls
 
-	":bot:poll-id",
-	":bot:poll-description",
-	":bot:poll-option",
-	":bot:poll-details",
+	":bot:polls:id",
+	":bot:polls:description",
+	":bot:polls:option",
+	":bot:polls:details",
 
-	":bot:poll-management:api",
-	":bot:poll-management:impl",
-	":bot:poll-management:wiring",
-	":bot:poll-management",
+	":bot:polls:management:api",
+	":bot:polls:management:impl",
+	":bot:polls:management:wiring",
+	":bot:polls:management",
 
-	":bot:poll-creation:api",
-	":bot:poll-creation:impl-manager",
-	":bot:poll-creation:wiring",
-	":bot:poll-creation",
+	":bot:polls:creation:api",
+	":bot:polls:creation:impl-manager",
+	":bot:polls:creation:wiring",
+	":bot:polls:creation",
 
-	":bot:poll-holding:api",
-	":bot:poll-holding:impl-manager",
-	":bot:poll-holding:wiring",
-	":bot:poll-holding",
+	":bot:polls:holding:api",
+	":bot:polls:holding:impl-manager",
+	":bot:polls:holding:wiring",
+	":bot:polls:holding",
 
-	":bot:poll-modification:api",
-	":bot:poll-modification:impl-manager",
-	":bot:poll-modification:wiring",
-	":bot:poll-modification",
+	":bot:polls:modification:api",
+	":bot:polls:modification:impl-manager",
+	":bot:polls:modification:wiring",
+	":bot:polls:modification",
 
-	":bot:poll-component-protocol",
+	":bot:polls:component-protocol",
 
-	":bot:poll-event-listening:api",
-	":bot:poll-event-listening:impl",
-	":bot:poll-event-listening:wiring",
-	":bot:poll-event-listening",
+	":bot:polls:event-listening:api",
+	":bot:polls:event-listening:impl",
+	":bot:polls:event-listening:wiring",
+	":bot:polls:event-listening",
+
+	":bot:polls",
 
 	// endregion
 
