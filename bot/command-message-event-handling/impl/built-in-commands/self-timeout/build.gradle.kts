@@ -5,10 +5,10 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:command-message-event-handling:impl:command"))
-	api(project(":bot:self-timeout"))
+	api(projects.bot.commandMessageEventHandling.impl.command)
+	api(projects.bot.selfTimeout)
 
-	implementation(project(":bot:utils-coroutines-jda"))
+	implementation(projects.bot.utilsCoroutinesJda)
 
 	implementation(libs.javax.inject)
 }

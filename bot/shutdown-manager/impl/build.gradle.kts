@@ -5,10 +5,10 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:shutdown-manager:api"))
-	api(project(":bot:logging"))
+	api(projects.bot.shutdownManager.api)
+	api(projects.bot.logging)
 
-	implementation(project(":bot:utils-coroutines"))
+	implementation(projects.bot.utilsCoroutines)
 
 	implementation(libs.kotlinx.coroutines.core)
 

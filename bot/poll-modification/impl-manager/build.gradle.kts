@@ -5,8 +5,8 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:poll-modification:api"))
-	api(project(":bot:poll-management"))
+	api(projects.bot.pollModification.api)
+	api(projects.bot.pollManagement)
 
 	implementation(libs.javax.inject)
 }

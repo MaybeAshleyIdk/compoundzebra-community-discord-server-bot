@@ -5,6 +5,6 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:config"))
+	api(projects.bot.config)
 	api(libs.okio)
 }

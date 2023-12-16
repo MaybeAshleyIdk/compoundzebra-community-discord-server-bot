@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:conditional-message-event-handling:impl"))
+	api(projects.bot.conditionalMessageEventHandling.impl)
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)

@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:shutdown-callback-registry:impl-manager"))
+	api(projects.bot.shutdownCallbackRegistry.implManager)
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)

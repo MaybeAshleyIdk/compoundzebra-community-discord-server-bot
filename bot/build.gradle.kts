@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:main"))
+	api(projects.bot.main)
 }

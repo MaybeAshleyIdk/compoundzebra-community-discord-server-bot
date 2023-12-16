@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:self-timeout:impl"))
+	api(projects.bot.selfTimeout.impl)
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)

@@ -5,12 +5,12 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:self-timeout:api"))
-	api(project(":bot:logging"))
+	api(projects.bot.selfTimeout.api)
+	api(projects.bot.logging)
 
-	implementation(project(":bot:utils"))
-	implementation(project(":bot:utils-coroutines"))
-	implementation(project(":bot:utils-coroutines-jda"))
+	implementation(projects.bot.utils)
+	implementation(projects.bot.utilsCoroutines)
+	implementation(projects.bot.utilsCoroutinesJda)
 
 	implementation(libs.kotlinx.coroutines.core)
 

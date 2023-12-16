@@ -6,8 +6,8 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:command-message-event-handling:impl:built-in-commands"))
-	api(project(":bot:command-message-event-handling:impl:predefined-response-command"))
+	api(projects.bot.commandMessageEventHandling.impl.builtInCommands)
+	api(projects.bot.commandMessageEventHandling.impl.predefinedResponseCommand)
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)

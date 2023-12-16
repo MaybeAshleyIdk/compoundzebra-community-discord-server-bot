@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:config-serialization:api"))
+	api(projects.bot.configSerialization.api)
 }

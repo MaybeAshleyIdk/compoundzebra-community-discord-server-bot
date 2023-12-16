@@ -28,7 +28,7 @@ ktlint {
 }
 
 dependencies {
-	implementation(project(":bot"))
+	implementation(projects.bot)
 }
 
 // region executable file tasks

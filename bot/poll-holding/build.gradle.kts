@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:poll-holding:api"))
+	api(projects.bot.pollHolding.api)
 }

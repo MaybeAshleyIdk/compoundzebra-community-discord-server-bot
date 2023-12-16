@@ -6,6 +6,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.Standalo
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.WiringAssimilationProjectPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.Dependency
+import org.gradle.api.artifacts.DependencySet
 import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.plugins.PluginContainer
 import org.gradle.kotlin.dsl.hasPlugin
@@ -174,7 +176,7 @@ public class ApiImplWiringProjectPlugin : Plugin<Project> {
 		val apiChildProjectDependency: ProjectDependency = project.dependencies.project(apiChildProject.path)
 
 		project.configurations.named("api") {
-			check(this@named.dependencies.contains(apiChildProjectDependency)) {
+			check(this@named.dependencies.containsDependency(apiChildProjectDependency)) {
 				"The API-implementation-wiring $project has no API dependency on the child $apiChildProject" +
 					", but it must have"
 			}
@@ -185,14 +187,14 @@ public class ApiImplWiringProjectPlugin : Plugin<Project> {
 		val implChildProjectDependency: ProjectDependency = project.dependencies.project(implChildProject.path)
 
 		project.configurations.named("implementation") {
-			check(!(this@named.dependencies.contains(implChildProjectDependency))) {
+			check(!(this@named.dependencies.containsDependency(implChildProjectDependency))) {
 				"The API-implementation-wiring $project has a dependency on the child $implChildProject" +
 					", but it mustn't have"
 			}
 		}
 
 		project.configurations.named("api") {
-			check(!(this@named.dependencies.contains(implChildProjectDependency))) {
+			check(!(this@named.dependencies.containsDependency(implChildProjectDependency))) {
 				"The API-implementation-wiring $project has a dependency on the child $implChildProject" +
 					", but it mustn't have"
 			}
@@ -203,14 +205,14 @@ public class ApiImplWiringProjectPlugin : Plugin<Project> {
 		val wiringChildProjectDependency: ProjectDependency = project.dependencies.project(wiringChildProject.path)
 
 		project.configurations.named("implementation") {
-			check(!(this@named.dependencies.contains(wiringChildProjectDependency))) {
+			check(!(this@named.dependencies.containsDependency(wiringChildProjectDependency))) {
 				"The API-implementation-wiring $project has a dependency on the child $wiringChildProject" +
 					", but it mustn't have"
 			}
 		}
 
 		project.configurations.named("api") {
-			check(!(this@named.dependencies.contains(wiringChildProjectDependency))) {
+			check(!(this@named.dependencies.containsDependency(wiringChildProjectDependency))) {
 				"The API-implementation-wiring $project has a dependency on the child $wiringChildProject" +
 					", but it mustn't have"
 			}
@@ -230,4 +232,8 @@ private inline fun <reified T : Plugin<*>> PluginContainer.hasPlugin(): Boolean 
 
 private fun String.isLegalImplProjectName(): Boolean {
 	return (this == "impl") || (this.startsWith("impl-") && (this.length > 5))
+}
+
+private fun DependencySet.containsDependency(dependency: Dependency): Boolean {
+	return this.any { it.contentEquals(dependency) }
 }

@@ -5,13 +5,13 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:command-message-event-handling:api"))
-	api(project(":bot:command-message-event-handling:impl:message-parser"))
-	api(project(":bot:command-message-event-handling:impl:command"))
-	api(project(":bot:logging"))
+	api(projects.bot.commandMessageEventHandling.api)
+	api(projects.bot.commandMessageEventHandling.impl.messageParser)
+	api(projects.bot.commandMessageEventHandling.impl.command)
+	api(projects.bot.logging)
 
-	implementation(project(":bot:utils"))
-	implementation(project(":bot:utils-coroutines-jda"))
+	implementation(projects.bot.utils)
+	implementation(projects.bot.utilsCoroutinesJda)
 
 	implementation(libs.kotlinx.coroutines.core)
 

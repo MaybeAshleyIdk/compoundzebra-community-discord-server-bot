@@ -5,9 +5,9 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:message-event-handler-mediation:api"))
-	api(project(":bot:command-message-event-handling"))
-	api(project(":bot:conditional-message-event-handling"))
+	api(projects.bot.messageEventHandlerMediation.api)
+	api(projects.bot.commandMessageEventHandling)
+	api(projects.bot.conditionalMessageEventHandling)
 
 	implementation(libs.kotlinx.coroutines.core)
 

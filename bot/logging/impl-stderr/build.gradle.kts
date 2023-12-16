@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:logging:api"))
+	api(projects.bot.logging.api)
 
 	implementation(libs.javax.inject)
 }

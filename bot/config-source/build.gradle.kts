@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:config-source:api"))
+	api(projects.bot.configSource.api)
 }

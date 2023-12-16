@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:config-source:impl-file"))
+	api(projects.bot.configSource.implFile)
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)

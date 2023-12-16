@@ -5,6 +5,6 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:poll-id"))
-	api(project(":bot:poll-details"))
+	api(projects.bot.pollId)
+	api(projects.bot.pollDetails)
 }

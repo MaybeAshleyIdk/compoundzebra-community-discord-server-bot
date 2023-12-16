@@ -5,8 +5,8 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:shutdown-event-handling:api"))
-	api(project(":bot:shutdown-manager"))
+	api(projects.bot.shutdownEventHandling.api)
+	api(projects.bot.shutdownManager)
 
 	implementation(libs.javax.inject)
 }

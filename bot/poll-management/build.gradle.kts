@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:poll-management:api"))
+	api(projects.bot.pollManagement.api)
 }

@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:command-message-event-handling:impl:core"))
+	api(projects.bot.commandMessageEventHandling.impl.core)
 }

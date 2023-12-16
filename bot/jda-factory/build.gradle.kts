@@ -8,7 +8,7 @@ dependencies {
 	api(libs.jda) {
 		exclude(module = "opus-java")
 	}
-	api(project(":bot:event-listening"))
+	api(projects.bot.eventListening)
 
 	implementation(libs.javax.inject)
 }

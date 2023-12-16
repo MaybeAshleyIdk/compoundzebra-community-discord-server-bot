@@ -5,8 +5,8 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:command-name"))
-	api(project(":bot:command-prefix"))
-	api(project(":bot:poll-option"))
-	api(project(":bot:environment-type"))
+	api(projects.bot.commandName)
+	api(projects.bot.commandPrefix)
+	api(projects.bot.pollOption)
+	api(projects.bot.environmentType)
 }

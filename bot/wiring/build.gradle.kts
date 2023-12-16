@@ -9,12 +9,12 @@ dependencies {
 	api(libs.jda) {
 		exclude(module = "opus-java")
 	}
-	api(project(":bot:environment-type"))
-	api(project(":bot:token"))
-	api(project(":bot:logging"))
-	api(project(":bot:shutdown-callback-registry"))
+	api(projects.bot.environmentType)
+	api(projects.bot.token)
+	api(projects.bot.logging)
+	api(projects.bot.shutdownCallbackRegistry)
 
-	implementation(project(":bot:jda-factory"))
+	implementation(projects.bot.jdaFactory)
 
 	implementation(libs.moshi)
 

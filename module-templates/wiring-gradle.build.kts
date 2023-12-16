@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-	api(project("${TODO()}:impl"))
+	api(project.TODO.impl)
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)

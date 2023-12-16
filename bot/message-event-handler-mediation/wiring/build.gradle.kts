@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:message-event-handler-mediation:impl"))
+	api(projects.bot.messageEventHandlerMediation.impl)
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)

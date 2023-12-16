@@ -5,11 +5,11 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:command-message-event-handling:impl:command"))
-	api(project(":bot:config-supplier"))
-	api(project(":bot:shutdown-request"))
+	api(projects.bot.commandMessageEventHandling.impl.command)
+	api(projects.bot.configSupplier)
+	api(projects.bot.shutdownRequest)
 
-	implementation(project(":bot:utils-coroutines-jda"))
+	implementation(projects.bot.utilsCoroutinesJda)
 
 	implementation(libs.javax.inject)
 }

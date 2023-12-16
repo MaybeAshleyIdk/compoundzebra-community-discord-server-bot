@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-	api(project(":bot:poll-creation:impl-manager"))
+	api(projects.bot.pollCreation.implManager)
 
 	implementation(libs.dagger)
 	ksp(libs.dagger.compiler)
