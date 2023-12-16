@@ -138,41 +138,49 @@ include(
 
 	// endregion
 
-	":bot:command-name",
+	// region commands
 
-	":bot:command-prefix",
+	// this project isn't called just ":bot:commands:name" because the type-safe project accessors already have
+	// a property called `name` and if a project name would be "name" then it would lead to conflicts
+	":bot:commands:command-name",
 
-	// region command message event handling
+	":bot:commands:prefix",
 
-	":bot:command-message-event-handling:api",
+	// region message event handling
+
+	":bot:commands:message-event-handling:api",
 
 	// region implementation
 
-	":bot:command-message-event-handling:impl:message-parser",
-	":bot:command-message-event-handling:impl:command",
+	":bot:commands:message-event-handling:impl:message-parser",
+	":bot:commands:message-event-handling:impl:command",
 
-	":bot:command-message-event-handling:impl:built-in-commands:coin-flip",
-	":bot:command-message-event-handling:impl:built-in-commands:config",
-	":bot:command-message-event-handling:impl:built-in-commands:dev",
-	":bot:command-message-event-handling:impl:built-in-commands:emoji-stats",
-	":bot:command-message-event-handling:impl:built-in-commands:magic8ball",
-	":bot:command-message-event-handling:impl:built-in-commands:polls",
-	":bot:command-message-event-handling:impl:built-in-commands:rng",
-	":bot:command-message-event-handling:impl:built-in-commands:self-timeout",
-	":bot:command-message-event-handling:impl:built-in-commands:shutdown",
-	":bot:command-message-event-handling:impl:built-in-commands:source-code",
-	":bot:command-message-event-handling:impl:built-in-commands",
+	":bot:commands:message-event-handling:impl:built-in-commands:coin-flip",
+	":bot:commands:message-event-handling:impl:built-in-commands:config",
+	":bot:commands:message-event-handling:impl:built-in-commands:dev",
+	":bot:commands:message-event-handling:impl:built-in-commands:emoji-stats",
+	":bot:commands:message-event-handling:impl:built-in-commands:magic8ball",
+	":bot:commands:message-event-handling:impl:built-in-commands:polls",
+	":bot:commands:message-event-handling:impl:built-in-commands:rng",
+	":bot:commands:message-event-handling:impl:built-in-commands:self-timeout",
+	":bot:commands:message-event-handling:impl:built-in-commands:shutdown",
+	":bot:commands:message-event-handling:impl:built-in-commands:source-code",
+	":bot:commands:message-event-handling:impl:built-in-commands",
 
-	":bot:command-message-event-handling:impl:predefined-response-command",
-	":bot:command-message-event-handling:impl:core",
-	":bot:command-message-event-handling:impl:wiring",
-	":bot:command-message-event-handling:impl",
+	":bot:commands:message-event-handling:impl:predefined-response-command",
+	":bot:commands:message-event-handling:impl:core",
+	":bot:commands:message-event-handling:impl:wiring",
+	":bot:commands:message-event-handling:impl",
 
 	// endregion
 
-	":bot:command-message-event-handling:wiring",
+	":bot:commands:message-event-handling:wiring",
 
-	":bot:command-message-event-handling",
+	":bot:commands:message-event-handling",
+
+	// endregion
+
+	":bot:commands",
 
 	// endregion
 
@@ -203,3 +211,6 @@ include(
 
 	":main",
 )
+
+val botCommandsNameProject: ProjectDescriptor = project(":bot:commands:command-name")
+botCommandsNameProject.projectDir = botCommandsNameProject.projectDir.parentFile.resolve("name")
