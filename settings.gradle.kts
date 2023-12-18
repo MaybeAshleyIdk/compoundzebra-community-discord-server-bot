@@ -173,7 +173,7 @@ include(
 	":bot:commands:message-event-handling:impl:built-in-commands-wiring",
 
 	":bot:commands:message-event-handling:impl:predefined-response-command",
-	":bot:commands:message-event-handling:impl:core",
+	":bot:commands:message-event-handling:impl:event-handler-impl",
 	":bot:commands:message-event-handling:impl:wiring",
 	":bot:commands:message-event-handling:impl",
 
