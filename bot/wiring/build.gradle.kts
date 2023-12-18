@@ -18,7 +18,7 @@ dependencies {
 	implementation(libs.moshi)
 
 	api(libs.dagger)
-	ksp(libs.dagger.compiler)
+	ksp(libs.daggerCompiler)
 
 	implementation(projects.bot.commands.messageEventHandling.wiring)
 	implementation(projects.bot.conditionalMessageEventHandling.wiring)

@@ -9,8 +9,8 @@ dependencies {
 
 	implementation(projects.bot.utilsCoroutinesJda)
 
-	implementation(libs.kotlinx.coroutines.core)
+	implementation(libs.kotlinxCoroutinesCore)
 
 	implementation(libs.dagger)
-	ksp(libs.dagger.compiler)
+	ksp(libs.daggerCompiler)
 }

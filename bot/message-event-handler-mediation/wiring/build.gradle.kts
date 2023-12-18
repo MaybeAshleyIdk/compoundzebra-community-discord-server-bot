@@ -8,5 +8,5 @@ dependencies {
 	api(projects.bot.messageEventHandlerMediation.impl)
 
 	implementation(libs.dagger)
-	ksp(libs.dagger.compiler)
+	ksp(libs.daggerCompiler)
 }

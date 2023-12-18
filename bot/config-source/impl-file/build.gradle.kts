@@ -8,5 +8,5 @@ dependencies {
 	api(projects.bot.configSerialization)
 	api(projects.bot.environmentType)
 
-	implementation(libs.javax.inject)
+	implementation(libs.javaxInject)
 }

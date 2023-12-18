@@ -11,7 +11,7 @@ dependencies {
 	implementation(projects.bot.utils)
 	implementation(projects.bot.utilsCoroutines)
 
-	implementation(libs.kotlinx.coroutines.core)
+	implementation(libs.kotlinxCoroutinesCore)
 
-	implementation(libs.javax.inject)
+	implementation(libs.javaxInject)
 }

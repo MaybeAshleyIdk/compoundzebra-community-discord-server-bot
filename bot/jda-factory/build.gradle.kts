@@ -9,5 +9,5 @@ dependencies {
 	}
 	api(projects.bot.eventListening)
 
-	implementation(libs.javax.inject)
+	implementation(libs.javaxInject)
 }

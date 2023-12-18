@@ -19,5 +19,5 @@ for (builtInCommandProject: Project in builtInCommandsProject.childProjects.valu
 
 dependencies {
 	implementation(libs.dagger)
-	ksp(libs.dagger.compiler)
+	ksp(libs.daggerCompiler)
 }

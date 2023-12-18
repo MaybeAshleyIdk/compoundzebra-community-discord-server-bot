@@ -8,5 +8,5 @@ dependencies {
 		exclude(module = "opus-java")
 	}
 
-	implementation(libs.kotlinx.coroutines.core)
+	implementation(libs.kotlinxCoroutinesCore)
 }
