@@ -170,6 +170,7 @@ include(
 	":bot:commands:message-event-handling:impl:built-in-commands:shutdown",
 	":bot:commands:message-event-handling:impl:built-in-commands:source-code",
 	":bot:commands:message-event-handling:impl:built-in-commands",
+	":bot:commands:message-event-handling:impl:built-in-commands-wiring",
 
 	":bot:commands:message-event-handling:impl:predefined-response-command",
 	":bot:commands:message-event-handling:impl:core",

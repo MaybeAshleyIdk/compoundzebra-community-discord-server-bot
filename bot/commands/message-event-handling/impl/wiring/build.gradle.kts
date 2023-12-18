@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-	api(projects.bot.commands.messageEventHandling.impl.builtInCommands)
+	api(projects.bot.commands.messageEventHandling.impl.builtInCommandsWiring)
 	api(projects.bot.commands.messageEventHandling.impl.predefinedResponseCommand)
 
 	implementation(libs.dagger)
