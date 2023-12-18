@@ -62,6 +62,8 @@ include {
 
 			"event-handling".service()
 
+			"sending".service()
+
 			"wiring"()
 		}
 
