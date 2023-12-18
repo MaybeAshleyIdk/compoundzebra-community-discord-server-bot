@@ -56,12 +56,12 @@ public class PollEventHandlerImpl @Inject constructor(
 	}
 
 	private suspend fun onButtonInteractionEvent(event: ButtonInteractionEvent) {
+		val pollId: PollId = this.pollComponentProtocol.mapCloseButtonComponentIdToPollId(event.componentId)
+			?: return
+
 		// acknowledge.
 		// if a lot of votes are coming in at once, then close() may block for an extended period of time
 		event.deferEdit().await()
-
-		val pollId: PollId = this.pollComponentProtocol.mapCloseButtonComponentIdToPollId(event.componentId)
-			?: return
 
 		val member: Member = event.member
 			?: return
