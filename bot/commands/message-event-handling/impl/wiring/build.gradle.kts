@@ -9,5 +9,5 @@ dependencies {
 	api(projects.bot.commands.messageEventHandling.impl.predefinedResponseCommand)
 
 	implementation(libs.dagger)
-	ksp(libs.dagger.compiler)
+	ksp(libs.daggerCompiler)
 }

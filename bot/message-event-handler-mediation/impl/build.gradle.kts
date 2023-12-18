@@ -8,7 +8,7 @@ dependencies {
 	api(projects.bot.commands.messageEventHandling)
 	api(projects.bot.conditionalMessageEventHandling)
 
-	implementation(libs.kotlinx.coroutines.core)
+	implementation(libs.kotlinxCoroutinesCore)
 
-	implementation(libs.javax.inject)
+	implementation(libs.javaxInject)
 }

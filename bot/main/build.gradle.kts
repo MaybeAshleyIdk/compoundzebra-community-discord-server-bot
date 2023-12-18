@@ -9,5 +9,5 @@ dependencies {
 
 	implementation(projects.bot.wiring)
 
-	implementation(libs.kotlinx.coroutines.core)
+	implementation(libs.kotlinxCoroutinesCore)
 }

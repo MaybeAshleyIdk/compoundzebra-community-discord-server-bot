@@ -8,5 +8,5 @@ dependencies {
 	api(projects.bot.eventListening.impl)
 
 	implementation(libs.dagger)
-	ksp(libs.dagger.compiler)
+	ksp(libs.daggerCompiler)
 }

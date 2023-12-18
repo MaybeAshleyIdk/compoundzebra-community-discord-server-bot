@@ -12,7 +12,7 @@ dependencies {
 	api(projects.bot.privateMessageEventHandling)
 	api(projects.bot.logging)
 
-	implementation(libs.kotlinx.coroutines.core)
+	implementation(libs.kotlinxCoroutinesCore)
 
-	implementation(libs.javax.inject)
+	implementation(libs.javaxInject)
 }

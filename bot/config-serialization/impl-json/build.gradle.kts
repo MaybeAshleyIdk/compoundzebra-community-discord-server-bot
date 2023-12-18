@@ -8,7 +8,7 @@ dependencies {
 	api(projects.bot.configSerialization.api)
 
 	implementation(libs.moshi)
-	ksp(libs.moshi.kotlin.codegen)
+	ksp(libs.moshiKotlinCodegen)
 
-	implementation(libs.javax.inject)
+	implementation(libs.javaxInject)
 }

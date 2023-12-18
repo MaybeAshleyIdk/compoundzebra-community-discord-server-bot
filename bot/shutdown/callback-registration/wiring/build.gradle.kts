@@ -8,5 +8,5 @@ dependencies {
 	api(projects.bot.shutdown.callbackRegistration.implManager)
 
 	implementation(libs.dagger)
-	ksp(libs.dagger.compiler)
+	ksp(libs.daggerCompiler)
 }
