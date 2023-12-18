@@ -6,6 +6,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.eventhan
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.PollsHoldingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.management.PollsManagementModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.modification.PollsModificationModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.sending.PollsSendingModule
 
 @Module(
 	includes = [
@@ -14,6 +15,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.modifica
 		PollsHoldingModule::class,
 		PollsModificationModule::class,
 		PollsEventHandlingModule::class,
+		PollsSendingModule::class,
 	],
 )
 public object PollsModule
