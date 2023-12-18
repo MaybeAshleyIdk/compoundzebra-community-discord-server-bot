@@ -1,19 +1,19 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls
 
 import dagger.Module
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation.PollCreationModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.eventhandling.PollEventHandlingModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.PollHoldingModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.management.PollManagementModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.modification.PollModificationModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation.PollsCreationModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.eventhandling.PollsEventHandlingModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.PollsHoldingModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.management.PollsManagementModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.modification.PollsModificationModule
 
 @Module(
 	includes = [
-		PollManagementModule::class,
-		PollCreationModule::class,
-		PollHoldingModule::class,
-		PollModificationModule::class,
-		PollEventHandlingModule::class,
+		PollsManagementModule::class,
+		PollsCreationModule::class,
+		PollsHoldingModule::class,
+		PollsModificationModule::class,
+		PollsEventHandlingModule::class,
 	],
 )
 public object PollsModule
