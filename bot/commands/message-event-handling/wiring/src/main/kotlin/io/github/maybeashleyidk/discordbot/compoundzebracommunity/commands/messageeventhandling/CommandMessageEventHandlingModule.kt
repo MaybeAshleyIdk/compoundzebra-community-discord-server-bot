@@ -5,8 +5,8 @@ import dagger.Module
 
 @Module(
 	includes = [
-		CommandMessageEventHandlingModule.Binding::class,
 		CommandMessageEventHandlingImplModule::class,
+		CommandMessageEventHandlingModule.Binding::class,
 	],
 )
 public object CommandMessageEventHandlingModule {
