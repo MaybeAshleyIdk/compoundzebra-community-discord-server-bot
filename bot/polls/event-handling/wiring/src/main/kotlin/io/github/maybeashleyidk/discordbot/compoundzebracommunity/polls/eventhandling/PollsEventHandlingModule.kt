@@ -3,8 +3,8 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.eventha
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [PollEventHandlingModule.Bindings::class])
-public object PollEventHandlingModule {
+@Module(includes = [PollsEventHandlingModule.Bindings::class])
+public object PollsEventHandlingModule {
 
 	@Module
 	internal interface Bindings {

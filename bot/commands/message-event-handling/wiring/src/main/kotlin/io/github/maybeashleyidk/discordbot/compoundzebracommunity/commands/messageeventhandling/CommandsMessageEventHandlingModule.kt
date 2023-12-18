@@ -5,11 +5,11 @@ import dagger.Module
 
 @Module(
 	includes = [
-		CommandMessageEventHandlingImplModule::class,
-		CommandMessageEventHandlingModule.Binding::class,
+		CommandsMessageEventHandlingImplModule::class,
+		CommandsMessageEventHandlingModule.Binding::class,
 	],
 )
-public object CommandMessageEventHandlingModule {
+public object CommandsMessageEventHandlingModule {
 
 	@Module
 	internal interface Binding {

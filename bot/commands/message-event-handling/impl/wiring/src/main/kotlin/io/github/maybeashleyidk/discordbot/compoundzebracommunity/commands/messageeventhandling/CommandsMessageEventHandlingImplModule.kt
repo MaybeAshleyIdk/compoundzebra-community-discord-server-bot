@@ -12,11 +12,11 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier
 
 @Module(
 	includes = [
-		CommandMessageEventHandlingImplModule.Bindings::class,
+		CommandsMessageEventHandlingImplModule.Bindings::class,
 		BuiltInCommandsModule::class,
 	],
 )
-public object CommandMessageEventHandlingImplModule {
+public object CommandsMessageEventHandlingImplModule {
 
 	@Module
 	internal interface Bindings {

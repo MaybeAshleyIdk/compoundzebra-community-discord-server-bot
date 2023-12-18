@@ -3,8 +3,8 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [PollHoldingModule.Bindings::class])
-public object PollHoldingModule {
+@Module(includes = [PollsHoldingModule.Bindings::class])
+public object PollsHoldingModule {
 
 	@Module
 	internal interface Bindings {
