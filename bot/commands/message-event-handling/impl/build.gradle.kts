@@ -3,5 +3,5 @@ plugins {
 }
 
 dependencies {
-	api(projects.bot.commands.messageEventHandling.impl.core)
+	api(projects.bot.commands.messageEventHandling.impl.eventHandlerImpl)
 }
