@@ -11,5 +11,5 @@ dependencies {
 	api(projects.bot.shutdown.requesting.wiring)
 
 	api(libs.dagger)
-	ksp(libs.dagger.compiler)
+	ksp(libs.daggerCompiler)
 }

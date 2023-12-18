@@ -8,5 +8,5 @@ dependencies {
 	api(projects.bot.configSource)
 	api(projects.bot.logging)
 
-	implementation(libs.javax.inject)
+	implementation(libs.javaxInject)
 }

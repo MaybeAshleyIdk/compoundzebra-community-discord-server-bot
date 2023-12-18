@@ -9,7 +9,7 @@ dependencies {
 
 	implementation(projects.bot.utilsCoroutinesJda)
 
-	implementation(libs.kotlinx.coroutines.core)
+	implementation(libs.kotlinxCoroutinesCore)
 
-	implementation(libs.javax.inject)
+	implementation(libs.javaxInject)
 }

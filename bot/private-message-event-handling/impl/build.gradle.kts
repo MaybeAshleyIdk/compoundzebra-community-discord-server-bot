@@ -9,5 +9,5 @@ dependencies {
 	implementation(projects.bot.logging)
 	implementation(projects.bot.utils)
 
-	implementation(libs.javax.inject)
+	implementation(libs.javaxInject)
 }

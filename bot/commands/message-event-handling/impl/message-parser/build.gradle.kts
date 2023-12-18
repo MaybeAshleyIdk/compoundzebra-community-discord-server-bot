@@ -6,5 +6,5 @@ plugins {
 dependencies {
 	api(projects.bot.configSupplier)
 
-	implementation(libs.javax.inject)
+	implementation(libs.javaxInject)
 }

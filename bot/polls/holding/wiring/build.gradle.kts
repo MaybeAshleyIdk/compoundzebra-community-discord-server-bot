@@ -8,5 +8,5 @@ dependencies {
 	api(projects.bot.polls.holding.implManager)
 
 	implementation(libs.dagger)
-	ksp(libs.dagger.compiler)
+	ksp(libs.daggerCompiler)
 }
