@@ -56,7 +56,12 @@ public class PollSenderImpl @Inject constructor(
 				.addActionRow(closeButton)
 				.await()
 		} catch (e: Throwable) {
-			this.pollCreator.closePoll(newPollDetails.id, closerMember = author)
+			try {
+				this.pollCreator.closePoll(newPollDetails.id, closerMember = author)
+			} catch (closeException: Throwable) {
+				e.addSuppressed(closeException)
+			}
+
 			throw e
 		}
 	}
