@@ -4,12 +4,11 @@ plugins {
 }
 
 dependencies {
-	api(projects.bot.commands.messageEventHandling.impl.command)
+	api(projects.bot.polls.sending.api)
+	api(projects.bot.polls.creation)
+	api(projects.bot.polls.componentProtocol)
 	api(projects.bot.configSupplier)
-	api(projects.bot.polls.sending)
-	api(projects.bot.polls.holding)
 
-	implementation(projects.bot.utils)
 	implementation(projects.bot.utilsCoroutinesJda)
 
 	implementation(libs.javaxInject)

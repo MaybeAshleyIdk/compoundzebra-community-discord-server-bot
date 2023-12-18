@@ -101,6 +101,11 @@ include(
 	":bot:polls:event-handling:wiring",
 	":bot:polls:event-handling",
 
+	":bot:polls:sending:api",
+	":bot:polls:sending:impl",
+	":bot:polls:sending:wiring",
+	":bot:polls:sending",
+
 	":bot:polls:wiring",
 
 	":bot:polls",

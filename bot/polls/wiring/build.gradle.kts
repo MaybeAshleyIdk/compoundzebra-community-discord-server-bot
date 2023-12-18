@@ -10,6 +10,7 @@ dependencies {
 	api(projects.bot.polls.holding.wiring)
 	api(projects.bot.polls.management.wiring)
 	api(projects.bot.polls.modification.wiring)
+	api(projects.bot.polls.sending.wiring)
 
 	implementation(libs.dagger)
 	ksp(libs.daggerCompiler)
