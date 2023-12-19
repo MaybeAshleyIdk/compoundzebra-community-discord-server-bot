@@ -5,6 +5,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.eventhandling.PollsEventHandlingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.PollsHoldingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.management.PollsManagementModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.messagecreation.PollsMessageCreationModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.modification.PollsModificationModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.sending.PollsSendingModule
 
@@ -14,6 +15,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.sending.
 		PollsCreationModule::class,
 		PollsHoldingModule::class,
 		PollsModificationModule::class,
+		PollsMessageCreationModule::class,
 		PollsEventHandlingModule::class,
 		PollsSendingModule::class,
 	],

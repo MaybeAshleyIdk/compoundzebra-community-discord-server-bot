@@ -9,6 +9,7 @@ dependencies {
 	api(projects.bot.polls.creation.wiring)
 	api(projects.bot.polls.holding.wiring)
 	api(projects.bot.polls.modification.wiring)
+	api(projects.bot.polls.messageCreation.wiring)
 	api(projects.bot.polls.eventHandling.wiring)
 	api(projects.bot.polls.sending.wiring)
 

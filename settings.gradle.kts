@@ -97,6 +97,11 @@ include(
 
 	":bot:polls:component-protocol",
 
+	":bot:polls:message-creation:api",
+	":bot:polls:message-creation:impl",
+	":bot:polls:message-creation:wiring",
+	":bot:polls:message-creation",
+
 	":bot:polls:event-handling:api",
 	":bot:polls:event-handling:impl",
 	":bot:polls:event-handling:wiring",
