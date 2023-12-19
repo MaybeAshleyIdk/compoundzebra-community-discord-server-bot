@@ -1,4 +1,4 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.newpolldetails
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.LanguageStrings
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.description.PollDescription

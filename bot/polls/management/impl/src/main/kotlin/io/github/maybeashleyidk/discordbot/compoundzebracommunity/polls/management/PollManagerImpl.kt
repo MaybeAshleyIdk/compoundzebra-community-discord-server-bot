@@ -4,6 +4,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.description.PollDescription
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.details.PollDetails
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.id.PollId
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.newpolldetails.NewPollDetails
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOption
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOptionLabel
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOptionValue

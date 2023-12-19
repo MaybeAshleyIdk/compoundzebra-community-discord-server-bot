@@ -52,6 +52,7 @@ include {
 			"description"()
 			"option"()
 			"details"()
+			"new-poll-details"()
 
 			"management".service()
 			"creation".service(impl = "manager")

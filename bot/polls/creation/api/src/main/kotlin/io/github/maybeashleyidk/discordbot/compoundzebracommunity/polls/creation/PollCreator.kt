@@ -2,6 +2,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creatio
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.description.PollDescription
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.id.PollId
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.newpolldetails.NewPollDetails
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOptionLabel
 import net.dv8tion.jda.api.entities.Member
 
