@@ -63,8 +63,10 @@ public class PollEventHandlerImpl @Inject constructor(
 		// if a lot of votes are coming in at once, then close() may block for an extended period of time
 		event.deferEdit().await()
 
-		val member: Member = event.member
-			?: return
+		val member: Member =
+			checkNotNull(event.member) {
+				"No member associated with poll close button interaction event"
+			}
 
 		when (val closeResult: PollModifier.CloseResult = this.pollModifier.closePollIfAllowed(pollId, member)) {
 			is PollModifier.CloseResult.Denied -> {
