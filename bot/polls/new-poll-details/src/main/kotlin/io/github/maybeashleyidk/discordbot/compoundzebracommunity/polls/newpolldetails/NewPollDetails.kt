@@ -1,6 +1,5 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.newpolldetails
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.LanguageStrings
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.description.PollDescription
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.details.PollDetails
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.id.PollId
@@ -13,16 +12,13 @@ public data class NewPollDetails(
 	val options: List<PollOption>,
 ) {
 
-	public fun createMessageContent(pollStrings: LanguageStrings.Poll): String {
-		val pollDetails =
-			PollDetails(
-				authorId = this.authorId,
-				description = this.description,
-				options = this.options,
-				votes = emptyMap(),
-				closerMemberId = null,
-			)
-
-		return pollDetails.createMessageContent(pollStrings)
+	public fun toEmptyPollDetails(): PollDetails {
+		return PollDetails(
+			authorId = this.authorId,
+			description = this.description,
+			options = this.options,
+			votes = emptyMap(),
+			closerMemberId = null,
+		)
 	}
 }

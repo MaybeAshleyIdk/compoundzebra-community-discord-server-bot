@@ -33,7 +33,7 @@ public class PollSenderImpl @Inject constructor(
 		try {
 			val config: Config = this.configSupplier.get()
 
-			val messageContent: String = newPollDetails.createMessageContent(config.strings.poll)
+			val messageContent: String = newPollDetails.toEmptyPollDetails().createMessageContent(config.strings.poll)
 
 			val selectOptions: List<SelectOption> = newPollDetails.options
 				.map { option: PollOption ->
