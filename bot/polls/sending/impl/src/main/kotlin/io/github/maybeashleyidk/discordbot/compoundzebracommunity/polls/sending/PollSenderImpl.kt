@@ -3,9 +3,9 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.sending
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.componentprotocol.PollComponentProtocol
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation.NewPollDetails
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation.PollCreator
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.description.PollDescription
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.newpolldetails.NewPollDetails
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOption
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOptionLabel
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutinesjda.await

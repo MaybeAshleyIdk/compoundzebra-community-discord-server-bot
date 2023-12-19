@@ -73,6 +73,7 @@ include(
 	":bot:polls:description",
 	":bot:polls:option",
 	":bot:polls:details",
+	":bot:polls:new-poll-details",
 
 	":bot:polls:management:api",
 	":bot:polls:management:impl",
