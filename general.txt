@@ -14,22 +14,6 @@ rock paper scissors (do this with slash commands and modals?)
 
 
 
-time conversion:
-	any message with time in it (formats either '<num> am', '<num> pm' or '<num>:<num>') and a ping to the bot.
-	bot will then check the author's timezone (either do that with roles or via an internal state that each user can configure)
-	and send a message '<t:...:F> / <t:...:R>'
-
-	/\b[0-9]+(\s*:\s*[0-9]+)?\s*[ap]\s*m\b/i
-	/\b[0-9]+\s*:\s*[0-9]+\b/i
-
-	fun makeTimeReplyMessageString(match: String, timestamp: Instant) {
-		val unixSeconds: Long = instant.epochSecond
-		return "<t:$unixSeconds:F> | <t:$unixSeconds:R> (detected from the time \"`$match`\")"
-	}
-
-	<https://discord.com/developers/docs/reference#message-formatting-timestamp-styles>
-
-
 measurements conversion:
 	somebody uses <num>'<num>(")? and the bot will respond with it converted to the metric system, and vice-versa
 
