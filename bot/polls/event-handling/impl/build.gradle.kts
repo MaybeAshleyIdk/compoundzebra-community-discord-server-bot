@@ -5,6 +5,8 @@ plugins {
 
 dependencies {
 	api(projects.bot.polls.eventHandling.api)
+	api(projects.bot.polls.creation)
+	api(projects.bot.polls.messageCreation)
 	api(projects.bot.polls.componentProtocol)
 	api(projects.bot.polls.modification)
 	api(projects.bot.configSupplier)

@@ -9,5 +9,8 @@ dependencies {
 	}
 	api(projects.bot.eventListening)
 
+	implementation(libs.kotlinxCoroutinesCore)
+	implementation(projects.bot.utilsCoroutinesJda)
+
 	implementation(libs.javaxInject)
 }
