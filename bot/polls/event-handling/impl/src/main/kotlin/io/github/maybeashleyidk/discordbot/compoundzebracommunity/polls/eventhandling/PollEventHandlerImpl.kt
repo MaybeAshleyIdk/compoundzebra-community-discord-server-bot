@@ -3,20 +3,33 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.eventha
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.componentprotocol.PollComponentProtocol
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation.PollCreator
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.description.PollDescription
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.details.PollDetails
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.id.PollId
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.messagecreation.PollMessageCreator
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.modification.PollModifier
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.newpolldetails.NewPollDetails
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOptionLabel
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOptionValue
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutinesjda.await
 import kotlinx.coroutines.coroutineScope
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.events.GenericEvent
+import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent
+import net.dv8tion.jda.api.interactions.components.text.TextInput
+import net.dv8tion.jda.api.interactions.components.text.TextInputStyle
+import net.dv8tion.jda.api.interactions.modals.Modal
+import net.dv8tion.jda.api.utils.messages.MessageCreateData
 import javax.inject.Inject
 
 public class PollEventHandlerImpl @Inject constructor(
+	private val pollCreator: PollCreator,
+	private val pollMessageCreator: PollMessageCreator,
 	private val pollComponentProtocol: PollComponentProtocol,
 	private val pollModifier: PollModifier,
 	private val configSupplier: ConfigSupplier,
@@ -25,9 +38,114 @@ public class PollEventHandlerImpl @Inject constructor(
 	override suspend fun handleEvent(event: GenericEvent) {
 		coroutineScope {
 			when (event) {
+				is SlashCommandInteractionEvent -> this@PollEventHandlerImpl.onSlashCommandInteractionEvent(event)
+				is ModalInteractionEvent -> this@PollEventHandlerImpl.onModalInteractionEvent(event)
 				is StringSelectInteractionEvent -> this@PollEventHandlerImpl.onStringSelectInteractionEvent(event)
 				is ButtonInteractionEvent -> this@PollEventHandlerImpl.onButtonInteractionEvent(event)
 			}
+		}
+	}
+
+	private suspend fun onSlashCommandInteractionEvent(event: SlashCommandInteractionEvent) {
+		if (event.name != "poll") {
+			return
+		}
+
+		val desc = TextInput.create("pollDescription", "Description", TextInputStyle.SHORT)
+			.setRequired(true)
+			.setMinLength(1)
+			.build()
+
+		val options = TextInput.create("pollOptions", "Options", TextInputStyle.PARAGRAPH)
+			.setRequired(true)
+			.setMinLength(1)
+			.setPlaceholder("Place each separate option on a separate line")
+			.build()
+
+		val modal = Modal.create("pollModal", "New Poll")
+			.addActionRow(desc)
+			.addActionRow(options)
+			.build()
+
+		event.replyModal(modal).await()
+	}
+
+	private suspend fun onModalInteractionEvent(event: ModalInteractionEvent) {
+		// TODO: if only spaces are put in the text fields then discord says that there was an error when submitting
+		//       do we get an event and do we fuck up or is that on discord?
+
+		if (event.modalId != "pollModal") {
+			return
+		}
+
+		val member: Member =
+			checkNotNull(event.member) {
+				TODO()
+			}
+
+		val pollDescription: PollDescription? = event.interaction.values
+			.single { it.id == "pollDescription" }.asString
+			.ifBlank { null }
+			?.let(PollDescription::ofString)
+
+		if (pollDescription == null) {
+			event
+				.reply("Description is empty")
+				.setEphemeral(true)
+				.await()
+
+			return
+		}
+
+		val pollOptionLabels: List<PollOptionLabel> = event.interaction.values
+			.single { it.id == "pollOptions" }.asString
+			.lines()
+			.filter(String::isNotBlank)
+			.map(PollOptionLabel::ofString)
+
+		when (pollOptionLabels.size) {
+			0 -> {
+				event
+					.reply("No options")
+					.setEphemeral(true)
+					.await()
+
+				return
+			}
+
+			1 -> {
+				event
+					.reply("only one option")
+					.setEphemeral(true)
+					.await()
+
+				return
+			}
+		}
+
+		val newPollDetails: NewPollDetails = this.pollCreator
+			.openNewPoll(
+				author = member,
+				description = pollDescription,
+				optionLabels = pollOptionLabels,
+			)
+
+		try {
+			val messageCreateData: MessageCreateData = this.pollMessageCreator
+				.createMessageData(
+					pollId = newPollDetails.id,
+					pollDetails = newPollDetails.toEmptyPollDetails(),
+				)
+
+			event.reply(messageCreateData).await()
+		} catch (e: Throwable) {
+			try {
+				this.pollCreator.closePoll(pollId = newPollDetails.id, closerMember = member)
+			} catch (closeException: Throwable) {
+				e.addSuppressed(closeException)
+			}
+
+			throw e
 		}
 	}
 
