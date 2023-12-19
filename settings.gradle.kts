@@ -61,6 +61,8 @@ include {
 
 			"component-protocol"()
 
+			"message-creation".service()
+
 			"event-handling".service()
 
 			"sending".service()
