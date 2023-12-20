@@ -24,6 +24,12 @@ CREATE TABLE `GuildMember`(
 	-- points can be either a non-negative integer or positive infinity
 	`points` NUMERIC NOT NULL DEFAULT 0,
 
+	-- using BLOB here as type affinity so that SQLite won't change the type that is being stored. BLOB is basically
+	-- the same as an "any" type.
+	-- using TEXT here would be a bad idea because then trying to store integers here would always result in them being
+	-- converted to text
+	`timezone` BLOB NULL DEFAULT NULL,
+
 	PRIMARY KEY(`guildId`, `userId`),
 	FOREIGN KEY(`guildId`) REFERENCES `Guild`(`id`) ON DELETE CASCADE,
 
@@ -34,6 +40,24 @@ CREATE TABLE `GuildMember`(
 		((typeof(`points`) = 'real') AND (`points` = 1e309)) -- 1e309 = positive infinity
 		OR
 		((typeof(`points`) = 'integer') AND (`points` >= 0))
+	),
+	CONSTRAINT `GuildMember_timezone_isValid` CHECK(
+		(
+			(typeof(`timezone`) = 'text')
+			AND
+			(
+				-- tz database time zone in the format of "<area>/<city>"
+				-- <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
+				(`timezone` GLOB 'tz:?*/?*')
+				OR
+				-- time zone abbreviation
+				-- <https://en.wikipedia.org/wiki/List_of_time_zone_abbreviations>
+				(`timezone` GLOB 'abbr:?*')
+			)
+		)
+		OR
+		-- UTC offset in minutes
+		(typeof(`timezone`) = 'integer')
 	)
 );
 
