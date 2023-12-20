@@ -1,4 +1,5 @@
 plugins {
+	buildSrc.projectType.`service-wiring`
 	`java-library`
 	kotlin("jvm")
 	alias(libs.plugins.ksp)
