@@ -18,7 +18,7 @@ if no timezone, check the timezone (or offset!) the user configured before
 if no timezone -> send ephemeral message
 
 if all is well, convert the date-time that we have now to UTC instant and send message like this:
-	"(original time with timezone) is <t:...:F> / <t:...:R> in your local timezone"
+	"(original time with timezone) is <t:...:F> (<t:...:R>) in your local timezone"
 
 it should reply to the message that the interaction was triggered on.
 we have to reply to the interaction itself with an ephemeral that says something like "all done!" or some stuff
