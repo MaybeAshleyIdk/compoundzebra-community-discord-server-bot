@@ -3,22 +3,16 @@
   shadow has minimize feature
   (see branches about these things)
 
-* support for unicode quotation marks (“ and ”) (are there more?)
-
 * save chat log
 
 * excluded channels for conditional messages
 
 * send images
 
-* [internal/codebase] commands injected in map
-
-* [internal/codebase] commands don't have a name
-
 * [deployment] better logging into separate files dynamically by day
 	requires slf4j crap
 
-* [config] dynamic response commands
+* [config, moved to storage] dynamic response commands
 
 * [internal/codebase] qualifier for the config file path
 
@@ -30,7 +24,7 @@
 * [public] mod command to replace a message of the bot
 * [public] mod command to delete a message of the bot
 
-* [public+config] scheduled actions
+* [public+config, moved to storage] scheduled actions
 
 * [public] temperature conversion command
 	!tempconv

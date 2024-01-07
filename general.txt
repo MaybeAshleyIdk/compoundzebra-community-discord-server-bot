@@ -1,31 +1,11 @@
 if member leaves -> save roles
 
 
-
-* secure channels
-
-
-
-
 rock paper scissors (do this with slash commands and modals?)
 (australia has a different name for this, no? when region is selected to be australia then we could change it in the modal lmao)
 	[User1] !challenge @User2
 	[Bot] @User1 has challenged @User2 to a Rock-Paper-Scissors duel! Use `/rpsreply` to give your answer.
 
 
-
 measurements conversion:
 	somebody uses <num>'<num>(")? and the bot will respond with it converted to the metric system, and vice-versa
-
-
-tone indicator explanation
-
-
-
-random chance 1 in 100 0000 that the bot replies to a message: "WAS THAT THE BITE OF '87?!?" with that pic of mark
-put in a filter of some sensitive words and don't reply to those
-
-
-
-xkcd #37 ("Hyphen")
-<https://xkcd.com/37/>
