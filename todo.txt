@@ -42,5 +42,3 @@
 	!moneyconv
 	use the GNU units that are already on the system for that
 	(need to write at GNU units file parser for that)
-
-* twitch integration

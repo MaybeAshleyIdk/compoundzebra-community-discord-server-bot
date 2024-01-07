@@ -1,0 +1,6 @@
+/twitch setup <twitch channel name> <discord guild target channel>
+
+/twitch remove
+
+use twitch API and send message to guild target channel if the twitch channel goes live
+if the channel goes offline for less than 5 minutes before going live again, don't send another message
