@@ -1,0 +1,18 @@
+custom commands: !foo
+slash commands: /foo
+
+both have their ups and downs, but slash command provide auto complete and allow for modals, which is super helpful and
+we also don't need to implement argument parsing with different argument types and whatnot ourselves
+
+big downside for slash commands is no support varargs or other rest-type argument types, tough only like two commands
+need it atm.
+those two being poll creation and send message as bot and for the poll one we want to replace it with
+a slash-command + modal anyway because varargs are hard to understand for users lmao
+the second one can also be easily replaced with writing the message first and then just referencing it via
+the message's id
+
+so ig it's time to migrate all custom commands to slash commands.
+
+tho what about response commands? i kinda wanna keep them as custom commands, in part because they are supposed to be
+a guild point redemption at some point so there could be a few of them and that would clutter up the slash command
+autocompletion
