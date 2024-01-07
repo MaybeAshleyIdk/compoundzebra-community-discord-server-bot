@@ -4,15 +4,54 @@ CREATE TABLE `GlobalConfig`(
 
 );
 
+CREATE TABLE `User`(
+	`id` INTEGER NOT NULL,
+
+	`timezone`   TEXT NULL DEFAULT NULL,
+	`timeFormat` TEXT NULL DEFAULT NULL,
+
+	PRIMARY KEY(`id`),
+
+	CONSTRAINT `User_timezone_isValid` CHECK(
+		-- tz database time zone in the format of "<area>/<city>"
+		-- <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
+		(`timezone` GLOB 'tz:?*/?*')
+		OR
+		-- time zone abbreviation
+		-- <https://en.wikipedia.org/wiki/List_of_time_zone_abbreviations>
+		(`timezone` GLOB 'abbr:?*')
+	),
+	CONSTRAINT `User_timeFormat_isValid` CHECK(
+		(`timeFormat` IS NULL)
+		OR
+		(`timeFormat` IN ('12h-omit_zero_minutes-lowercase', '24h'))
+	)
+);
+
 CREATE TABLE `Guild`(
 	`id` INTEGER NOT NULL,
 
 	`languageStrings` TEXT NOT NULL,
 	`commandPrefix`   TEXT NOT NULL,
 
+	`twitchIntegrationId` INTEGER NULL DEFAULT NULL,
+
+	PRIMARY KEY(`id`),
+	FOREIGN KEY(`twitchIntegrationId`) REFERENCES `GuildTwitchIntegration`(`id`),
+
+	CONSTRAINT `Guild_commandPrefix_isNotEmpty` CHECK(`commandPrefix` != ''),
+) STRICT;
+
+CREATE TABLE `GuildTwitchIntegration`(
+	`id` INTEGER NOT NULL,
+
+	`twitchChannelName`    TEXT    NOT NULL,
+	`guildTargetChannelId` INTEGER NOT NULL,
+
 	PRIMARY KEY(`id`),
 
-	CONSTRAINT `Guild_commandPrefix_isNotEmpty` CHECK(`commandPrefix` != '')
+	CONSTRAINT `GuildTwitchIntegration_twitchChannelName_isNotEmpty` CHECK(`twitchChannelName` != '')
+	CONSTRAINT `GuildTwitchIntegration_unique` UNIQUE(`twitchChannelName`, `guildTargetChannelId`)
 ) STRICT;
 
 -- not using STRICT for this table because the column `points` uses the type affinity NUMERIC,
@@ -24,12 +63,6 @@ CREATE TABLE `GuildMember`(
 	-- points can be either a non-negative integer or positive infinity
 	`points` NUMERIC NOT NULL DEFAULT 0,
 
-	-- using BLOB here as type affinity so that SQLite won't change the type that is being stored. BLOB is basically
-	-- the same as an "any" type.
-	-- using TEXT here would be a bad idea because then trying to store integers here would always result in them being
-	-- converted to text
-	`timezone` BLOB NULL DEFAULT NULL,
-
 	PRIMARY KEY(`guildId`, `userId`),
 	FOREIGN KEY(`guildId`) REFERENCES `Guild`(`id`) ON DELETE CASCADE,
 
@@ -40,24 +73,6 @@ CREATE TABLE `GuildMember`(
 		((typeof(`points`) = 'real') AND (`points` = 1e309)) -- 1e309 = positive infinity
 		OR
 		((typeof(`points`) = 'integer') AND (`points` >= 0))
-	),
-	CONSTRAINT `GuildMember_timezone_isValid` CHECK(
-		(
-			(typeof(`timezone`) = 'text')
-			AND
-			(
-				-- tz database time zone in the format of "<area>/<city>"
-				-- <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
-				(`timezone` GLOB 'tz:?*/?*')
-				OR
-				-- time zone abbreviation
-				-- <https://en.wikipedia.org/wiki/List_of_time_zone_abbreviations>
-				(`timezone` GLOB 'abbr:?*')
-			)
-		)
-		OR
-		-- UTC offset in minutes
-		(typeof(`timezone`) = 'integer')
 	)
 );
 
