@@ -12,13 +12,13 @@ TODO: pattern with timezone as well (things like UTC, [+-][0-9]+[:.][0-9]+, GMT 
       if that is also found, add that timezone/offset to it
       if none is found we have a java.time.LocalDateTime, but with the timezone/offset we'd have java.time.ZonedDateTime or java.time.OffsetDateTime
 
-if no timezone, check the timezone (or offset!) the user configured before
-	/timezone or something
+if no timezone, check the timezone (~~~or offset!~~~ won't support just offsets) the user configured before
+	/mytimezone, check below
 
 if no timezone -> send ephemeral message
 
 if all is well, convert the date-time that we have now to UTC instant and send message like this:
-	"(original time with timezone) is <t:...:F> (<t:...:R>) in your local timezone"
+	"**(original time with timezone)** is <t:...:F> (<t:...:R>) in your local timezone"
 
 it should reply to the message that the interaction was triggered on.
 we have to reply to the interaction itself with an ephemeral that says something like "all done!" or some stuff
@@ -32,5 +32,178 @@ time zones like CET aren't really part of any standard, but are still used a lot
 
 members can configured these types of "timezones":
 * tz timezones (e.g.: Europe/Vienna) - this is preferred
-* UTC offsets
-* non-standard timezone abbreviation (e.g.: CET, CEST)
+~~~* UTC offsets~~~
+* non-standardized timezone abbreviation (e.g.: CET, CEST)
+
+UTC offsets aren't really needed, i doubt anyone would actually use it
+kinda also wanna remove the non-standardized timezones, but i think people would complain about it
+
+
+---
+
+
+Personal time format command
+
+
+usage: /mytimeformat show
+   or: /mytimeformat set (12|24)[h]
+
+
+demo:
+
+> /mytimeformat show
+< You do not have a personal time format set (defaulting to *both* 24- and 12 hour clock)
+
+> /mytimeformat set 24h
+< Your personal time format was set to the **24 hour clock**
+
+> /mytimeformat set 12h
+< Your personal time format was set to the **12 hour clock (AM/PM)**
+
+> /mytimeformat show
+< Your personal time format is set to the **12 hour clock (AM/PM)**
+
+
+if personal timezone is also set:
+
+> /mytimeformat set 24h
+< Your personal time format was set to the **24 hour clock**
+  The current time in your personal timezone is: 13:00
+
+> /mytimeformat set 12h
+< Your personal time format was set to the **12 hour clock (am/pm)**
+  The current time in your personal timezone is: 1pm
+
+> /mytimeformat show
+< Your personal time format is set to the **12 hour clock (am/pm)**
+  The current time in your personal timezone is: 1pm
+
+
+---
+
+
+Personal timezone command
+
+
+usage: /mytimezone show
+   or: /mytimezone set <timezone>
+
+
+demo:
+
+> /mytimezone show
+< You do not have a personal timezone set
+
+> /mytimezone set europE/vIeNna
+< Your personal timezone was set to **Europe/Vienna** (tz timezone)
+  * Current UTC offset: `UTC+01:00`
+  * Current local time: <time>
+  > **Note:** Daylight saving time (DST) is handled automatically based on the region selected
+(java.time.ZoneId.of(String) is CASE SENSITIVE! we can hopefully implement case insensitivity ourselves by going through
+all available timezones or by fixing the case ourselves (turn string lowercase, turn first char uppercase and
+turn first char after the slash uppercase))
+
+> /mytimezone show
+< Your personal timezone is set to **Europe/Vienna** (tz timezone)
+  * Current UTC offset: `UTC+01:00`
+  * Current local time: <time>
+  > **Note:** Daylight saving time (DST) is handled automatically based on the region selected
+
+> /mytimezone set cEt
+< Your personal timezone was set to **CET (Central European Time) / CEST (Central European Summer Time)** (non-standardized timezone)
+  * Current UTC offset: `UTC+01:00`
+  * Current local time: <time>
+  > **Note:** Daylight saving time (DST) is handled automatically and will be switched to from the last Sunday of March to the last Sunday of October
+
+> /mytimezone set blah
+< Invalid timezone
+
+
+> /mytimezone set utc
+(any string that starts with "utc" or "gmt" (case-insensitive))
+< Invalid timezone. Use a timezone based on a geographical region (rather than a fixed offset) to let the bot handle daylight saving time (DST) automatically
+
+---
+
+Member's local time query command
+
+
+usage: /localtime <user>
+
+
+demo:
+
+> /localtime @userA
+< Cannot show member's local time because they don't have a personal timezone set
+(can we check discord's pronouns field? parse some of the common ones like she/her and he/him)
+
+> /localtime @userB
+< @userB's current local time is: <time>
+
+
+---
+
+Timestamp share command
+(only for staff)
+
+
+/sharetime
+
+-> opens modal:
+
+	+--------------------------------+
+	| Timezone                       |
+	| +----------------------------+ |
+	| |                            | |
+	| +----------------------------+ |
+	|                                |
+	| Date-times to share            |
+	| +----------------------------+ |
+	| |                            | |
+	| |                            | |
+	| |                            | |
+	| |                            | |
+	| |                            | |
+	| +----------------------------+ |
+	+--------------------------------+
+
+pre-fill the timezone field with the member's personal time zone?
+would need to ask connor if he'd use this command himself, otherwise it'd be useless for me
+
+timezone field would be the timezone for any entered datetimes that don't have a timezone
+this timezone is allowed to be an offset (UTC, GMT and stuff) cuz we really only need the offset
+
+date-times paragraph field is a list of datetimes (separated by newlines)
+each datetime is converted into a discord timestamp in this format:
+
+	**<original datetime, normalized>** is <t:...:F> (<t:...:R>) in your local timezone
+
+all converted messages are then concatenated by newlines and the bot then sends this concatenated message in the channel
+the command was used
+
+if one of the entries is just a time, without a date, select the current day
+and if a year is missing (i.e.: it's just a month-day) then select the current year
+
+
+demo:
+
+> /sharetime
+
+	+--------------------------------+
+	| Timezone                       |
+	| +----------------------------+ |
+	| | GMT                        | |
+	| +----------------------------+ |
+	|                                |
+	| Date-times to share            |
+	| +----------------------------+ |
+	| | 9pm                        | |
+	| | 5th january 8pm            | |
+	| |                            | |
+	| |                            | |
+	| |                            | |
+	| +----------------------------+ |
+	+--------------------------------+
+
+< **9pm GMT** is <t:...:F> (<t:...:R>) in your local timezone
+  **5th january 8pm GMT** is <t:...:F> (<t:...:R>) in your local timezone
