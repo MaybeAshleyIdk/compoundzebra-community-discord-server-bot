@@ -34,6 +34,8 @@ CREATE TABLE `Guild`(
 	`languageStrings` TEXT NOT NULL,
 	`commandPrefix`   TEXT NOT NULL,
 
+	`userGroupsJson` TEXT NOT NULL DEFAULT '[]',
+
 	`twitchIntegrationId` INTEGER NULL DEFAULT NULL,
 
 	PRIMARY KEY(`id`),
@@ -112,8 +114,10 @@ CREATE TABLE `GuildUserGroup`(
 
 	`creationTimestamp` TEXT NOT NULL, -- RFC 3999
 
-	`name`  TEXT NOT NULL,
-	`rules` TEXT NOT NULL,
+	`name`                 TEXT NOT NULL,
+	`auxiliaryGroupIds`    TEXT NOT NULL,
+	`memberInclusionRoles` TEXT NOT NULL,
+	`permissions`          TEXT NOT NULL,
 
 	PRIMARY KEY(`id`),
 	FOREIGN KEY(`guildId`) REFERENCES `Guild`(`id`) ON DELETE CASCADE,

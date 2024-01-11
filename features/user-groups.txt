@@ -9,73 +9,104 @@ for example, only a certain group would be allowed to add new simple-response co
 
 
 
-raw syntax is basically the same as the include/exclude everyone/role/user/userGroup syntax of the command
+
+
+user groups need hierarchy
+
+each user group needs:
+	list of auxiliary groups (i still don't like that name)
+	list of member inclusion rules
+	list of permissions
+
+   ^
+   |
+all of this is pretty stupid to represent as SQL, maybe just save JSON in the db?
 
 
 
-=== command ===
 
-usage: userGroups list
 
-   or: userGroups show ( <name: String> | <id: String> )
 
-   or: userGroups add <name: String>
+associated auto role:
+	an "associated auto role" is a discord role that is associated with a user group
+	/leave <group name>
 
-   or: userGroups rename ( <oldName: String> | <id: String> ) <newName: String>
 
-   or: userGroups edit ( <name: String> | <id: String> ) [remove] include everyone
-   or: userGroups edit ( <name: String> | <id: String> ) [remove] include role <role: Role>
-   or: userGroups edit ( <name: String> | <id: String> ) [remove] include user <user: User>
-   or: userGroups edit ( <name: String> | <id: String> ) [remove] exclude role <role: Role>
-   or: userGroups edit ( <name: String> | <id: String> ) [remove] exclude user <user: User>
-   or: userGroups edit ( <name: String> | <id: String> ) [remove] includedIn ( <name: String> | <id: String> )
-   or: userGroups edit ( <name: String> | <id: String> ) raw ( get | set )
+usage: /userGroups add <name: String>
+   or: /userGroups list
+   or: /userGroups show <name: String>
+   or: /userGroups edit <name: String>
+   or: /userGroups rename <name: String> <newName: String>
+   or: /userGroups remove <name: String>
 
-   or: userGroups remove ( <name: String> | <id: String> )
+
+modal of /userGroups edit:
+
+	+--------
+	| Name
+	| +------
+	| |
+	| +------
+	|
+	| Auxiliary Groups
+	| +------
+	| |
+	| |
+	| |
+	| +------------------------
+	|
+	| Member Inclusion Rules
+	| +-----------------------
+	| | include user <id> <name>
+	| | include user <id>
+	| | include <id>
+	| | include role <id> <name>
+	| | include role <id>
+	| | include <id>
+	| +----------------------
+	|
+	+------------------------
+
+
 
 
 
 examples:
 
-< !userGroups list
+< /userGroups list
 > No user groups have been added yet
 
 
-< !userGroups add "Plebs"
-> New (empty) user group _"Plebs"_ (internal ID: `[id]`) has been added
+< /userGroups add Plebs
+> The new (empty) user group _"Plebs"_ has been added
 
-< !userGroups add "plebs"
-> A user group with the name _"Plebs"_ (internal ID: `[id]`) exists already
+< /userGroups add plebs
+> A user group with the name _"Plebs"_ already exists
 
-< !userGroups edit "plebs" include everyone
+< /userGroups edit plebs
 
-< !userGroups list
-> * _"Plebs"_ (internal ID: `[id]`)
+< /userGroups list
+> * _"Plebs"_
 
-< !userGroups show "Plebs"
-> The user group _"Plebs"_ (internal ID: `[id]`) contains the following rules:
+< /userGroups show plebs
+> The user group _"Plebs"_ contains the following rules:
 > * @everyone is included
 > (the full list of members is too big to display)
 (allow_mentions would be off for this message)
 
 
-< !userGroups add "admin"
-> New (empty) user group _"admin"_ (internal ID: `[id]`) has been added
+< /userGroups add admin
+> The new (empty) user group _"admin"_ has been added
 
-< !userGroups rename "admin" "Admins"
-> User group _"admin"_ (internal ID: `[id]`) was renamed to _"Admins"_
+< /userGroups rename admin Admins
+> The user group _"admin"_ was renamed to _"Admins"_
 
-< !userGroups show "admins"
-> The user group _"Admins"_ (internal ID: `[id]`) contains no rules
-
-< !userGroups edit "admins" raw set
-  ```
-  include role 00000000000000
-  ```
+< /userGroups show admins
+> The user group _"Admins"_ contains no rules
 
 
-< !userGroups remove "plebs"
-> The user group _"Plebs"_ was removed.
+< /userGroups remove plebs
+> The user group _"Plebs"_ was removed
 
 
 
@@ -83,25 +114,49 @@ examples:
 
 
 Plebs:
-	include everyone
+	auxiliary groups: (none)
+
+	member inclusion rules:
+		include everyone
+
+	permissions: (none)
 
 Staff:
-	include role <staff role snowflake id>
+	auxiliary groups: (none)
+
+	member inclusion rules:
+		include role <staff role snowflake id>
+
+	permissions: (none)
 
 Moderators:
-	includedIn "Staff"
+	auxiliary groups:
+		Staff
 
-	include role <moderators role snowflake id>
+	member inclusion rules:
+		include role <moderators role snowflake id>
+
+	permissions:
 
 Maintainers:
-	includedIn "Staff"
+	auxiliary groups:
+		Staff
 
-	include role <maintainers role snowflake id>
+	member inclusion rules:
+		include role <maintainers role snowflake id>
+
+	permissions:
+		userGroups.*
 
 Admins:
-	includedIn "Plebs"
-	includedIn "Staff"
-	includedIn "Moderators"
-	includedIn "Maintainers"
+	auxiliary groups:
+		Plebs
+		Staff
+		Moderators
+		Maintainers
 
-	include role <admins role snowflake id>
+	member inclusion rules:
+		include role <admins role snowflake id>
+
+	permissions:
+		*
