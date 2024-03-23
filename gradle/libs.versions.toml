@@ -1,25 +1,25 @@
 [versions]
-kotlin = "1.9.20"
-ksp = "1.9.20-1.0.14"
-ktlint = "1.0.1"
-moshi = "1.15.0"
-dagger = "2.48.1"
+kotlin = "1.9.23"
+ksp = "1.9.23-1.0.19"
+ktlint = "1.2.1"
+moshi = "1.15.1"
+dagger = "2.51"
 
 [libraries]
-kotlinx-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
+kotlinx-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
 
-jda = "net.dv8tion:JDA:5.0.0-beta.17"
+jda = "net.dv8tion:JDA:5.0.0-beta.21"
 
-okio = "com.squareup.okio:okio:3.6.0"
+okio = "com.squareup.okio:okio:3.9.0"
 
-moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
-moshi-kotlin-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
+moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
 
 javax-inject = "javax.inject:javax.inject:1"
-dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
-dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 
 [plugins]
 shadow = "com.github.johnrengelman.shadow:8.1.1"
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-ktlint = "io.github.mfederczuk.ktlint:0.1.0-indev08"
+ktlint = "io.github.mfederczuk.ktlint:0.1.0-indev09"
