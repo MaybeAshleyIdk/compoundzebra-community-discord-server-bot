@@ -1,7 +1,12 @@
 PRAGMA user_version = 1; -- database schema version code
 
-CREATE TABLE `GlobalConfig`(
+CREATE TABLE `File`(
+	`id` INTEGER NOT NULL,
 
+	`filename` TEXT NOT NULL,
+	`content`  BLOB NOT NULL,
+
+	PRIMARY KEY(`id`)
 );
 
 CREATE TABLE `User`(
@@ -24,36 +29,39 @@ CREATE TABLE `User`(
 	CONSTRAINT `User_timeFormat_isValid` CHECK(
 		(`timeFormat` IS NULL)
 		OR
-		(`timeFormat` IN ('12h-omit_zero_minutes-lowercase', '24h'))
+		(`timeFormat` IN ('12h-omitZeroMinutes-lowercase', '24h'))
 	)
 );
+
+-- #region guild
 
 CREATE TABLE `Guild`(
 	`id` INTEGER NOT NULL,
 
-	`languageStrings` TEXT NOT NULL,
-	`commandPrefix`   TEXT NOT NULL,
-
-	`userGroupsJson` TEXT NOT NULL DEFAULT '[]',
-
-	`twitchIntegrationId` INTEGER NULL DEFAULT NULL,
+	`languageStrings`     TEXT    NOT NULL,
+	`userGroupsJson`      TEXT    NOT NULL DEFAULT '[]',
+	`twitchIntegrationId` INTEGER     NULL DEFAULT NULL,
 
 	PRIMARY KEY(`id`),
-	FOREIGN KEY(`twitchIntegrationId`) REFERENCES `GuildTwitchIntegration`(`id`),
-
-	CONSTRAINT `Guild_commandPrefix_isNotEmpty` CHECK(`commandPrefix` != ''),
+	FOREIGN KEY(`twitchIntegrationId`) REFERENCES `GuildTwitchIntegration`(`id`)
 ) STRICT;
 
 CREATE TABLE `GuildTwitchIntegration`(
 	`id` INTEGER NOT NULL,
 
-	`twitchChannelName`    TEXT    NOT NULL,
-	`guildTargetChannelId` INTEGER NOT NULL,
+	`twitchChannelName`      TEXT    NOT NULL,
+	`messageContentTemplate` TEXT    NOT NULL,
+	`guildTargetChannelId`   INTEGER NOT NULL,
 
 	PRIMARY KEY(`id`),
 
-	CONSTRAINT `GuildTwitchIntegration_twitchChannelName_isNotEmpty` CHECK(`twitchChannelName` != '')
-	CONSTRAINT `GuildTwitchIntegration_unique` UNIQUE(`twitchChannelName`, `guildTargetChannelId`)
+	CONSTRAINT `GuildTwitchIntegration_twitchChannelName_isNotEmpty` CHECK(`twitchChannelName` != ''),
+	CONSTRAINT `GuildTwitchIntegration_messageContentTemplate_isNotEmpty` CHECK(`messageContentTemplate` != ''),
+	CONSTRAINT `GuildTwitchIntegration_unique` UNIQUE(
+		`twitchChannelName`,
+		`messageContentTemplate`,
+		`guildTargetChannelId`
+	)
 ) STRICT;
 
 -- not using STRICT for this table because the column `points` uses the type affinity NUMERIC,
@@ -88,7 +96,7 @@ CREATE TABLE `GuildMemberSubscribedKeyword`(
 	`enabled` INTEGER NOT NULL DEFAULT 1,
 
 	PRIMARY KEY(`guildId`, `userId`, `index`),
-	FOREIGN KEY(`guildId`, `userId`) REFERENCES `GuildMember`(`guildId`, `userId`) ON DELETE CASCADE
+	FOREIGN KEY(`guildId`, `userId`) REFERENCES `GuildMember`(`guildId`, `userId`) ON DELETE CASCADE,
 
 	CONSTRAINT `GuildMemberSubscribedKeyword_index_isNotNegative` CHECK(`index` >= 0),
 	CONSTRAINT `GuildMemberSubscribedKeyword_word_isNotEmpty` CHECK(`word` != ''),
@@ -143,15 +151,6 @@ CREATE TABLE `PreparedMessage`(
 	PRIMARY KEY(`id`)
 );
 
-CREATE TABLE `File`(
-	`id` INTEGER NOT NULL,
-
-	`filename` TEXT NOT NULL,
-	`content`  BLOB NOT NULL,
-
-	PRIMARY KEY(`id`)
-);
-
 -- #region message history backup
 
 CREATE TABLE `GuildMessageAuthor`(
@@ -193,9 +192,9 @@ CREATE TABLE `GuildMessageInfo`(
 	CONSTRAINT `GuildMessageInfo_deletionTimestamp_isInCorrectFormat` CHECK(`deletionTimestamp` = strftime('%Y-%m-%d %H:%M:%f', `deletionTimestamp`))
 ) STRICT;
 
--- rows of this table represent the history of a guild message.
--- each time the message is updated, the row `index` is incremented by one.
--- the initial message has an index of 0
+-- rows of this table represent the history of a single guild message.
+-- for the original message, the row `index` is set to 0.
+-- each time the message is updated, a new row of this table is added with the column `index` incremented by one.
 CREATE TABLE `MessageHistoryEntry`(
 	`messageId` INTEGER NOT NULL,
 	`index`     INTEGER NOT NULL,
@@ -209,5 +208,7 @@ CREATE TABLE `MessageHistoryEntry`(
 	CONSTRAINT `MessageHistoryEntry_timestamp_isInCorrectFormat` CHECK(`timestamp` = strftime('%Y-%m-%d %H:%M:%f', `timestamp`)),
 	CONSTRAINT `MessageHistoryEntry_content_isNotEmpty` CHECK(`content` != '')
 ) STRICT;
+
+-- #endregion
 
 -- #endregion
