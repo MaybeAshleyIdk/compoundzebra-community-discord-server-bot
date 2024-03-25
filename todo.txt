@@ -1,9 +1,17 @@
+* module system rework
+
+* storage
+
+  * save chat log
+
+  * scheduled messages
+
+---
+
 * with the sqlite jdbc, the jar will have a size of of ~30MB (!!! this is a lot !!!)
   can we use proguard to improve this? (https://github.com/Guardsquare/proguard)
   shadow has minimize feature
   (see branches about these things)
-
-* save chat log
 
 * excluded channels for conditional messages
 
@@ -23,8 +31,6 @@
 * [public] mod command to say something as the bot
 * [public] mod command to replace a message of the bot
 * [public] mod command to delete a message of the bot
-
-* [public+config, moved to storage] scheduled actions
 
 * [public] temperature conversion command
 	!tempconv

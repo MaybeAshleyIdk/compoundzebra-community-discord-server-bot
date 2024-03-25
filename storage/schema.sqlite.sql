@@ -46,6 +46,23 @@ CREATE TABLE `Guild`(
 	FOREIGN KEY(`twitchIntegrationId`) REFERENCES `GuildTwitchIntegration`(`id`)
 ) STRICT;
 
+CREATE TABLE `GuildScheduledMessage`(
+	`id`      INTEGER NOT NULL,
+	`guildId` INTEGER NOT NULL,
+
+	`name`            TEXT    NOT NULL,
+	`content`         TEXT    NOT NULL,
+	`targetChannelId` INTEGER NOT NULL,
+	`spamProtected`   INTEGER NOT NULL,
+
+	PRIMARY KEY(`id`, `guildId`),
+
+	CONSTRAINT `GuildScheduledMessage_name_isNotEmpty` CHECK(`name` != ''),
+	CONSTRAINT `GuildScheduledMessage_name_isUnique` UNIQUE(`id`, `guildId`),
+	CONSTRAINT `GuildScheduledMessage_content_isNotEmpty` CHECK(`content` != ''),
+	CONSTRAINT `GuildScheduledMessage_spamProtected_isZeroOrOne` CHECK((`spamProtected` = 0) OR (`spamProtected` = 1))
+) STRICT;
+
 CREATE TABLE `GuildTwitchIntegration`(
 	`id` INTEGER NOT NULL,
 
