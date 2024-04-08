@@ -8,3 +8,24 @@ initial start: the limited-time chat role is given to a fixed-amount (like 6?) o
 
 every few hours (around 4-8?) 30% (rounded up) of the members with the limited-time chat role will get that role removed
 and OTHER members (as many as it takes to go back up to the fixed-amount) that before DIDN'T have the role are given it instead
+
+
+/limitedTimeChat set-up <Role> <Channel>
+/limitedTimeChat info
+/limitedTimeChat start
+/limitedTimeChat stop
+/limitedTimeChat remove
+
+
+user group permissions:
+	limitedTimeChat.setUpAndRemove
+		allows setting up the limited-time chat and removing that setup as well
+
+	limitedTimeChat.showInfo
+		allows showing info on the limited-time chat setup
+
+	limitedTimeChat.startAndStop
+		allows starting and stopping the limited-time chat
+
+
+TODO: rename to "Rotating Chat" or something like that?
