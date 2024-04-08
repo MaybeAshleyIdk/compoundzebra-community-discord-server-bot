@@ -9,99 +9,261 @@ for example, only a certain group would be allowed to add new simple-response co
 
 
 
-raw syntax is basically the same as the include/exclude everyone/role/user/userGroup syntax of the command
+
+
+user groups need hierarchy
+
+each user group needs:
+	list of auxiliary groups (i'm still not 100% happy with that name)
+	list of member inclusion rules
+	list of permissions
 
 
 
-=== command ===
 
-usage: userGroups list
+=== permissions ===
 
-   or: userGroups show ( <name: String> | <id: String> )
+each user group can be given a set of permissions.
+each permission allows the user to do a specific thing.
+by default, a user group has no permissions at all.
 
-   or: userGroups add <name: String>
 
-   or: userGroups rename ( <oldName: String> | <id: String> ) <newName: String>
+Permission string syntax:
+	<namespace> ( '.' <sub-namespace> )* '.' <action> [ ':' <argument> ]
 
-   or: userGroups edit ( <name: String> | <id: String> ) [remove] include everyone
-   or: userGroups edit ( <name: String> | <id: String> ) [remove] include role <role: Role>
-   or: userGroups edit ( <name: String> | <id: String> ) [remove] include user <user: User>
-   or: userGroups edit ( <name: String> | <id: String> ) [remove] exclude role <role: Role>
-   or: userGroups edit ( <name: String> | <id: String> ) [remove] exclude user <user: User>
-   or: userGroups edit ( <name: String> | <id: String> ) [remove] includedIn ( <name: String> | <id: String> )
-   or: userGroups edit ( <name: String> | <id: String> ) raw ( get | set )
+	<namespace>, <sub-namespace>s and <action> all must be camelCase identifiers
+	<argument> must not be empty and must only consist of ascii letters and digits
 
-   or: userGroups remove ( <name: String> | <id: String> )
+
+	```
+	value class PermissionNamespace(val string: String)
+	value class PermissionSubNamespace(val string: String)
+	value class PermissionAction(val string: String)
+
+	value class PermissionArgument(val string: String)
+
+	data class PermissionInfo(
+		val namespace: PermissionNamespace,
+		val subNamespaces: List<PermissionSubNamespace>,
+		val action: PermissionAction,
+	)
+
+	interface PermissionManager {
+
+		suspend fun isMemberAllowedToPerformAction(member: Member, permissionInfo: PermissionInfo): Boolean
+
+		suspend fun isMemberAllowedToPerformAction(
+			member: Member,
+			permissionInfo: PermissionInfo,
+			argument: PermissionArgument,
+		): Boolean
+	}
+
+
+	val POLLS_PERMISSION_NAMESPACE = PermissionNamespace.ofString("polls")
+
+	val POLL_CREATION_PERMISSION_INFO =
+		PermissionInfo(
+			POLLS_PERMISSION_NAMESPACE,
+			PermissionAction.ofString("create"),
+		)
+
+	permissionManager.isMemberAllowedToPerformAction(commandExecuter, POLL_CREATION_PERMISSION_INFO)
+
+
+	val AUTO_CHANNELS_SORTING_PERMISSION_NAMESPACE = PermissionNamespace.ofString("autoChannelsSorting")
+
+	val AUTO_CHANNELS_SORTING_EDITING_PERMISSION_INFO =
+		PermissionInfo(
+			AUTO_CHANNELS_SORTING_PERMISSION_NAMESPACE,
+			PermissionAction.ofString("edit"),
+		)
+
+	permissionManager.isMemberAllowedToPerformAction(
+		commandExecuter,
+		AUTO_CHANNELS_SORTING_EDITING_PERMISSION_INFO,
+		channelCategory.id,
+	)
+	```
+
+
+
+
+
+=== user groups management command ===
+
+
+usage: /userGroups add <name: String>
+   or: /userGroups list
+   or: /userGroups show <name: String>
+   or: /userGroups edit <name: String>
+   or: /userGroups rename <name: String> <newName: String>
+   or: /userGroups remove <name: String>
+   or: /userGroups edit-hierarchy
+
+
+modal of /userGroups edit: (add subcommand should also just open this and not have a <name> argument)
+
+	+------------------------------------------------+
+	| Name                                           |
+	| +--------------------------------------------+ |
+	| |                                            | |
+	| +--------------------------------------------+ |
+	|                                                |
+	| Auxiliary Groups                               |
+	| +--------------------------------------------+ |
+	| |                                            | |
+	| |                                            | |
+	| |                                            | |
+	| |                                            | |
+	| |                                            | |
+	| |                                            | |
+	| +--------------------------------------------+ |
+	|                                                |
+	| Member Inclusion Rules                         |
+	| +--------------------------------------------+ |
+	| | include user <id> <name>                   | |
+	| | include user <id>                          | |
+	| | include <id>                               | |
+	| | include role <id> <name>                   | |
+	| | include role <id>                          | |
+	| | include <id>                               | |
+	| +--------------------------------------------+ |
+	|                                                |
+	+------------------------------------------------+
+
+
 
 
 
 examples:
 
-< !userGroups list
+< /userGroups list
 > No user groups have been added yet
 
 
-< !userGroups add "Plebs"
-> New (empty) user group _"Plebs"_ (internal ID: `[id]`) has been added
+< /userGroups add Plebs
+> The new (empty) user group _"Plebs"_ has been added
 
-< !userGroups add "plebs"
-> A user group with the name _"Plebs"_ (internal ID: `[id]`) exists already
+< /userGroups add plebs
+> A user group with the name _"Plebs"_ already exists
 
-< !userGroups edit "plebs" include everyone
+< /userGroups edit plebs
 
-< !userGroups list
-> * _"Plebs"_ (internal ID: `[id]`)
+< /userGroups list
+> * _"Plebs"_
 
-< !userGroups show "Plebs"
-> The user group _"Plebs"_ (internal ID: `[id]`) contains the following rules:
+< /userGroups show plebs
+> The user group _"Plebs"_ contains the following rules:
 > * @everyone is included
 > (the full list of members is too big to display)
 (allow_mentions would be off for this message)
 
 
-< !userGroups add "admin"
-> New (empty) user group _"admin"_ (internal ID: `[id]`) has been added
+< /userGroups add admin
+> The new (empty) user group _"admin"_ has been added
 
-< !userGroups rename "admin" "Admins"
-> User group _"admin"_ (internal ID: `[id]`) was renamed to _"Admins"_
+< /userGroups rename admin Admins
+> The user group _"admin"_ was renamed to _"Admins"_
 
-< !userGroups show "admins"
-> The user group _"Admins"_ (internal ID: `[id]`) contains no rules
-
-< !userGroups edit "admins" raw set
-  ```
-  include role 00000000000000
-  ```
+< /userGroups show admins
+> The user group _"Admins"_ contains no rules
 
 
-< !userGroups remove "plebs"
-> The user group _"Plebs"_ was removed.
+< /userGroups remove plebs
+> The user group _"Plebs"_ was removed
 
+
+
+
+permissions:
+	userGroups.addAndEditHierarchy
+		allows adding new user groups and editing the hierarchy of all the groups below the user's highest one
+
+	userGroups.listRestricted
+		allows listing the users highest user group and all user groups that are below the highest one
+
+	userGroups.listAll
+		allows listing all user groups
+
+	userGroups.show:<userGroupName>
+		allows showing the details of the user group with the name <userGroupName> if that group is the user's highest
+		user group or if it is below the highest one
+
+	userGroups.edit:<userGroupName>
+		allows editing (which includes renaming) the user group with the name <userGroupName> if that group is below
+		that user's highest user group
+		users can only add auxiliary groups that are below their highest group
+		users can only add permissions that they themselves have
+
+	userGroups.remove:<userGroupName>
+		allows removing the user group with the name <userGroupName> if that group is below that user's highest
+		user group
+
+
+	bot.shutDown
+		allows the bot to be shut down
 
 
 ------
 
 
 Plebs:
-	include everyone
+	auxiliary groups: (none)
+
+	member inclusion rules:
+		include everyone
+
+	permissions:
+		polls.create
 
 Staff:
-	include role <staff role snowflake id>
+	auxiliary groups:
+		Plebs
+
+	member inclusion rules:
+		include role <staff role snowflake id>
+
+	permissions:
+		shareDateTime.use
 
 Moderators:
-	includedIn "Staff"
+	auxiliary groups:
+		Staff
 
-	include role <moderators role snowflake id>
+	member inclusion rules:
+		include role <moderators role snowflake id>
+
+	permissions:
+		userGroups.listRestricted
+		userGroups.show
+
+		polls.close
+
+		autoChannelsSorting.show:*
+		autoChannelsSorting.enableDisable:*
 
 Maintainers:
-	includedIn "Staff"
+	auxiliary groups:
+		Staff
 
-	include role <maintainers role snowflake id>
+	member inclusion rules:
+		include role <maintainers role snowflake id>
+
+	permissions:
+		userGroups.*
+		autoChannelsSorting.*
+		twitch.use
+		bot.shutDown
 
 Admins:
-	includedIn "Plebs"
-	includedIn "Staff"
-	includedIn "Moderators"
-	includedIn "Maintainers"
+	auxiliary groups:
+		Staff
+		Moderators
+		Maintainers
 
-	include role <admins role snowflake id>
+	member inclusion rules:
+		include role <admins role snowflake id>
+
+	permissions:
+		*

@@ -126,14 +126,19 @@ CREATE TABLE `GuildUserGroup`(
 
 	`creationTimestamp` TEXT NOT NULL, -- RFC 3999
 
-	`name`  TEXT NOT NULL,
-	`rules` TEXT NOT NULL,
+	`name`                 TEXT NOT NULL,
+	`auxiliaryGroupIds`    TEXT NOT NULL,
+	`memberInclusionRules` TEXT NOT NULL,
+	`permissionStrings`    TEXT NOT NULL,
+
+	`hierarchyIndex` INTEGER NOT NULL,
 
 	PRIMARY KEY(`id`),
 	FOREIGN KEY(`guildId`) REFERENCES `Guild`(`id`) ON DELETE CASCADE,
 
 	CONSTRAINT `GuildUserGroup_name_isNotEmpty` CHECK(`name` != ''),
-	CONSTRAINT `GuildUserGroup_creationTimestamp_isInCorrectFormat` CHECK(`creationTimestamp` = strftime('%Y-%m-%d %H:%M:%f', `creationTimestamp`))
+	CONSTRAINT `GuildUserGroup_creationTimestamp_isInCorrectFormat` CHECK(`creationTimestamp` = strftime('%Y-%m-%d %H:%M:%f', `creationTimestamp`)),
+	CONSTRAINT `GuildUserGroup_hierarchyIndex_isUnique` UNIQUE(`guildId`, `hierarchyIndex`)
 ) STRICT;
 
 CREATE TABLE `GuildInterjections`(
