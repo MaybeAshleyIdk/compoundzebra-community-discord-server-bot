@@ -1,0 +1,104 @@
+Feature name: "Automatic Channels Sorting"
+
+Sorts channels of a category based on member activity of the previous month, every month
+the most active channels are sorted at the top, the least active channels are sorted at the bottom
+
+command:
+	/autoChannelsSorting edit <targetCategory: ChannelCategory>
+	/autoChannelsSorting show <targetCategory: ChannelCategory>
+	/autoChannelsSorting enable <targetCategory: ChannelCategory>
+	/autoChannelsSorting disable <targetCategory: ChannelCategory>
+	/autoChannelsSorting remove <targetCategory: ChannelCategory>
+
+	show:
+		> /autoChannelsSorting show 0000000000000000000
+		< No automatic channels sorting has been set up for the channel category _"{categoryName}"_
+
+		> /autoChannelsSorting show 0000000000000000000
+		< The automatic channels sorting rules for the channel category _"{categoryName}"_ are:
+		  ```
+		  {sortingRules}
+		  ```
+
+		> /autoChannelsSorting show 0000000000000000000
+		< The automatic channels sorting rules for the channel category _"{categoryName}"_ are: (currently *disabled*)
+		  ```
+		  {sortingRules}
+		  ```
+
+	enable:
+		> /autoChannelsSorting enable 0000000000000000000
+		< The automatic channels sorting for the channel category _"{categoryName}"_ has been **enabled** again
+
+		> /autoChannelsSorting enable 0000000000000000000
+		< The automatic channels sorting for the channel category _"{categoryName}"_ is already enabled
+
+	disable:
+		> /autoChannelsSorting enable 0000000000000000000
+		< The automatic channels sorting for the channel category _"{categoryName}"_ has been **disabled**
+
+		> /autoChannelsSorting enable 0000000000000000000
+		< The automatic channels sorting for the channel category _"{categoryName}"_ is already disabled
+
+	remove:
+		> /autoChannelsSorting remove 0000000000000000000
+		< The automatic channels sorting setup for the channel category _"{categoryName}"_ has been removed
+
+		> /autoChannelsSorting remove 0000000000000000000
+		< No automatic channels sorting has been set up for the channel category _"{categoryName}"_
+
+	edit:
+		opens up modal:
+			+------------------------------------------------+
+			|                                                |
+			| Channels                                       |
+			| +--------------------------------------------+ |
+			| | sort #channel-name (0000000000000000000)   | |
+			| | sort #channel-name (0000000000000000000)   | |
+			| | sort #channel-name (0000000000000000000)   | |
+			| | sort #channel-name (0000000000000000000)   | |
+			| |                                            | |
+			| |                                            | |
+			| +--------------------------------------------+ |
+			|                                                |
+			+------------------------------------------------+
+
+		modal paragraph input field syntax ebnf:
+			action ::= 'sort'
+					| 'keep'
+
+			channel ::= [ '#' channel-name ] [ '(' ] channel-snowflake-id [ ')' ]
+			// channel name will actually be ignored and just exists for the user
+
+			channel-rule ::= action channel
+
+			channel-rules ::= channel-rule ('\n' channel-rule)*
+
+		input field will be pre-filled with all channels of the category in the order that they currently are in
+
+
+db stored rules syntax ebnf:
+	action ::= 'sort'
+	         | 'keep'
+
+	channel-rule ::= action channel-snowflake-id
+
+	channel-rules ::= channel-rule ('\n' channel-rule)*
+
+
+user group permissions:
+	autoChannelsSorting.edit:<channelCategorySnowflakeId>
+		allows editing the auto channels sorting rules for the channel category with
+		the snowflake id <channelCategorySnowflakeId>
+
+	autoChannelsSorting.show:<channelCategorySnowflakeId>
+		allows showing the auto channels sorting setup for the channel category with
+		the snowflake id <channelCategorySnowflakeId>
+
+	autoChannelsSorting.enableAndDisable:<channelCategorySnowflakeId>
+		allows enabling and disabling the auto channels sorting for the channel category with
+		the snowflake id <channelCategorySnowflakeId>
+
+	autoChannelsSorting.remove:<channelCategorySnowflakeId>
+		allows removing the auto channels sorting setup for the channel category with
+		the snowflake id <channelCategorySnowflakeId>

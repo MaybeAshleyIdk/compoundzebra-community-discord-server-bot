@@ -42,6 +42,20 @@ CREATE TABLE `Guild`(
 	CONSTRAINT `Guild_commandPrefix_isNotEmpty` CHECK(`commandPrefix` != ''),
 ) STRICT;
 
+CREATE TABLE `GuildAutoChannelsSorting`(
+	`guildId`           INTEGER NOT NULL,
+	`channelCategoryId` INTEGER NOT NULL,
+
+	`sortingRules` TEXT NOT NULL,
+
+	`enabled` INTEGER NOT NULL DEFAULT 1,
+
+	PRIMARY KEY(`guildId`, `channelCategoryId`),
+	FOREIGN KEY(`guildId`) REFERENCES `Guild`(`id`) ON DELETE CASCADE,
+
+	CONSTRAINT `GuildAutoChannelsSorting_enabled_isZeroOrOne` CHECK((`enabled` = 0) OR (`enabled` = 1))
+) STRICT;
+
 CREATE TABLE `GuildTwitchIntegration`(
 	`id` INTEGER NOT NULL,
 
