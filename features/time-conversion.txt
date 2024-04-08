@@ -207,3 +207,9 @@ demo:
 
 < **9pm GMT** is <t:...:F> (<t:...:R>) in your local timezone
   **5th january 8pm GMT** is <t:...:F> (<t:...:R>) in your local timezone
+
+
+
+user group permissions:
+	shareDateTime.use
+		allows the use of the command /sharetime
