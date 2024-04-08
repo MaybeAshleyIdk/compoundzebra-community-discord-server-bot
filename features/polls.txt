@@ -54,3 +54,12 @@ TODO: check if this is actually possible
 	[ open button ]  [ cancel button ]
 
 (are checkboxes a thing? allow anonymous vs non-anonymous polls?)
+
+
+
+user group permissions:
+	polls.openNew
+		allows creating and opening new polls
+
+	polls.closeAny
+		allows closing any polls
