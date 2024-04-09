@@ -1,0 +1,28 @@
+/history show-channel <Channel> <beginDateTime: String> <endDateTime: String>
+/history show-user <User> <beginDateTime: String> <endDateTime: String>
+/history search-user-message <User> <query: String>
+
+maybe change it to a modal?
+wouldn't need separate subcommands, simply have fields for channel, user, begin datetime, end datetime and query
+
+
+if begin datetime is only a date, without time, then turn it into a datetime ourselves:
+change the given date to the day before at the time 10:00
+
+datetime args can also use the special string "now"
+
+if begin is after end, silently swap them
+
+
+after using the command, the bot will collect the messages and send the result in dms to the user that executed
+the command
+
+
+use a dynamic thread pool for these operations (maybe even a thread pool per-operation?)
+max threads is 3
+very unlikely that more moderators are gonna use it at the same time
+
+
+user group permissions:
+	messageHistoryBackup.view
+		allows viewing, querying and searching the message history backup
