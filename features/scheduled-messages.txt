@@ -1,0 +1,122 @@
+/scheduledMessages list
+/scheduledMessages show <name: String>
+
+/scheduledMessages create
+/scheduledMessages edit <name: String>
+/scheduledMessages remove <name: String>
+
+/scheduledMessages enable <name: String>
+/scheduledMessages disable <name: String>
+
+
+commands `/scheduledMessages create|edit` opens modal:
+
+	+------------------------------------------------+
+	| Name                                           |
+	| +--------------------------------------------+ |
+	| |                                            | |
+	| +--------------------------------------------+ |
+	|                                                |
+	| Target Channel                                 |
+	| +--------------------------------------------+ |
+	| |     [[dropdown]]                           | |
+	| +--------------------------------------------+ |
+	|                                                |
+	| Schedule                                       |
+	| +--------------------------------------------+ |
+	| |                                            | |
+	| +--------------------------------------------+ |
+	|                                                |
+	| Message Content                                |
+	| +--------------------------------------------+ |
+	| |                                            | |
+	| |                                            | |
+	| |                                            | |
+	| |                                            | |
+	| |                                            | |
+	| |                                            | |
+	| +--------------------------------------------+ |
+	|                                                |
+	| Avoid Spamming?                                |
+	| +--------------------------------------------+ |
+	| |     [[dropdown:yes/no]]                    | |
+	| +--------------------------------------------+ |
+	|                                                |
+	+------------------------------------------------+
+
+
+FIRST VERSION WILL ONLY HAVE REPEATING SCHEDULES, NO ONE-TIME ONES!
+
+schedule ebnf:
+	duration ::= ( <number> ( 'hour' 's'? | 'h'
+	                        | 'minute' 's'? | 'm' ) )+
+
+	24h daytime ::= <integer> ':' <integer>
+	12h daytime ::= <integer> ( ':' <integer> )? ( 'am' | 'pm' )
+	daytime ::= <24h daytime> | <12h daytime>
+
+
+	repeating schedule ::= 'every' ( <duration>
+	                               | 'day' 'at' <daytime> ( ',' <daytime> )* )
+
+	one-time schedule ::= 'once' ( 'in' <duration>
+	                             | 'at' <daytime> )
+
+	schedule ::= <repeating schedule> | <one-time schedule>
+
+possible kotlin code:
+	```
+	sealed class Schedule {
+
+		sealed class Repeating : Schedule() {
+
+			data class Relative(
+				val duration: java.time.Duration,
+			) : Repeating()
+
+			data class Absolute(
+				val firstDaytime: java.time.LocalTime,
+				val otherDaytimes: List<java.time.LocalTime>,
+			): Repeating() {
+
+				fun getAllDaytimes(): Sequence<java.time.LocalTime>
+			}
+		}
+
+		sealed class OneTime : Schedule() {
+
+
+		}
+	}
+
+	interface ScheduleFormatter {
+
+		fun parseString(scheduleString: String): Schedule?
+
+		fun format(schedule: Schedule): String
+	}
+
+	object UserScheduleFormatter : ScheduleFormatter {
+
+		override fun parseString(scheduleString: String): Schedule? {
+		}
+
+		override fun format(schedule: Schedule): String {
+		}
+	}
+
+	object InternalScheduleFormatter : ScheduleFormatter {
+
+		override fun parseString(scheduleString: String): Schedule? {
+		}
+
+		override fun format(schedule: Schedule): String {
+		}
+	}
+	```
+
+user group permissions:
+	scheduledMessages.list
+	scheduledMessages.show
+	scheduledMessages.createAndEditAndRemove
+	scheduledMessages.enableAndDisable

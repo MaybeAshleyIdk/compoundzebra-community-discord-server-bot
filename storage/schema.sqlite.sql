@@ -59,6 +59,25 @@ CREATE TABLE `GuildAutoChannelsSorting`(
 	CONSTRAINT `GuildAutoChannelsSorting_enabled_isZeroOrOne` CHECK((`enabled` = 0) OR (`enabled` = 1))
 ) STRICT;
 
+CREATE TABLE `GuildScheduledMessage`(
+	`id`      INTEGER NOT NULL,
+	`guildId` INTEGER NOT NULL,
+
+	`name`            TEXT    NOT NULL,
+	`schedule`        TEXT    NOT NULL,
+	`targetChannelId` INTEGER NOT NULL,
+	`content`         TEXT    NOT NULL,
+	`spamProtected`   INTEGER NOT NULL,
+
+	PRIMARY KEY(`id`, `guildId`),
+
+	CONSTRAINT `GuildScheduledMessage_name_isNotEmpty` CHECK(`name` != ''),
+	CONSTRAINT `GuildScheduledMessage_name_isUnique` UNIQUE(`id`, `guildId`),
+	CONSTRAINT `GuildScheduledMessage_schedule_isNotEmpty` CHECK(`schedule` != ''),
+	CONSTRAINT `GuildScheduledMessage_content_isNotEmpty` CHECK(`content` != ''),
+	CONSTRAINT `GuildScheduledMessage_spamProtected_isZeroOrOne` CHECK((`spamProtected` = 0) OR (`spamProtected` = 1))
+) STRICT;
+
 CREATE TABLE `GuildTwitchIntegration`(
 	`id` INTEGER NOT NULL,
 
