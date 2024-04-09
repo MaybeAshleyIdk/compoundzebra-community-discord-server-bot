@@ -62,17 +62,17 @@ CREATE TABLE `GuildAutoChannelsSorting`(
 CREATE TABLE `GuildTwitchIntegration`(
 	`id` INTEGER NOT NULL,
 
-	`twitchChannelName`      TEXT    NOT NULL,
-	`messageContentTemplate` TEXT    NOT NULL,
-	`guildTargetChannelId`   INTEGER NOT NULL,
+	`twitchChannelName`    TEXT    NOT NULL,
+	`messageContent`       TEXT    NOT NULL,
+	`guildTargetChannelId` INTEGER NOT NULL,
 
 	PRIMARY KEY(`id`),
 
 	CONSTRAINT `GuildTwitchIntegration_twitchChannelName_isNotEmpty` CHECK(`twitchChannelName` != ''),
-	CONSTRAINT `GuildTwitchIntegration_messageContentTemplate_isNotEmpty` CHECK(`messageContentTemplate` != ''),
+	CONSTRAINT `GuildTwitchIntegration_messageContent_isNotEmpty` CHECK(`messageContent` != ''),
 	CONSTRAINT `GuildTwitchIntegration_unique` UNIQUE(
 		`twitchChannelName`,
-		`messageContentTemplate`,
+		`messageContent`,
 		`guildTargetChannelId`
 	)
 ) STRICT;

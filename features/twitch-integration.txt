@@ -1,11 +1,36 @@
-/twitch setup <twitch channel name> <discord guild target channel>
-
+/twitch setup
 /twitch remove
+
+command `/twitch setup` opens modal:
+
+	+------------------------------------------------+
+	| Twitch Channel Name (case insensitive)         |
+	| +--------------------------------------------+ |
+	| |                                            | |
+	| +--------------------------------------------+ |
+	|                                                |
+	| Server Target Channel                          |
+	| +--------------------------------------------+ |
+	| |     [[dropdown]]                           | |
+	| +--------------------------------------------+ |
+	|                                                |
+	| Message                                        |
+	| +--------------------------------------------+ |
+	| |                                            | |
+	| |                                            | |
+	| |                                            | |
+	| |                                            | |
+	| |                                            | |
+	| |                                            | |
+	| +--------------------------------------------+ |
+	|                                                |
+	+------------------------------------------------+
+
 
 use twitch API and send message to guild target channel if the twitch channel goes live
 if the channel goes offline for less than 5 minutes before going live again, don't send another message
 
 
 user group permissions:
-	twitch.setupAndRemove
-		allows the use of the command /twitch
+	twitchIntegration.setupAndRemove
+		allows setting-up and removal of the twitch integration
