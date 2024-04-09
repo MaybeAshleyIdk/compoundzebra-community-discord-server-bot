@@ -1,0 +1,47 @@
+[NONE OF THIS IS FINAL]
+
+bot file tree:
+	<data dir>/
+	`-- storage.sqlite.db
+
+	<config dir>/
+	`-- token.txt
+	`-- bot.properties  ((currently nothing planned - maybe in the future))
+
+	<logging dir>/
+	`-- read-all*
+	`-- latest.log  ->  <YYYY>/latest.log
+	`-- <YYYY>/
+	    `-- latest.log  ->  <MM>-<DD>.log
+	    `-- <MM>-<DD>.log
+	    `-- <MM>-<DD>.log.gz
+
+	<runtime dir>/
+	`-- console=
+
+
+
+usage: cz-discord-bot [--name=<name>] [@<file>]
+
+    Options:
+      --name=<name>
+
+      --data-dir=<data dir path>
+      --config-dir=<config dir path>
+      --logging-dir=<logging dir path>
+      --runtime-dir=<runtime dir path>
+
+
+if effective uid != 0:
+	default config dir = $XDG_CONFIG_HOME/czd-bot/<name>/
+	default runtime dir = $XDG_RUNTIME_DIR/czd-bot/<name>/
+	default logging dir = $XDG_STATE_HOME/log/czd-bot/<name>/
+	default data dir = $XDG_DATA_HOME/czd-bot/<name>/
+else:
+	default config dir = /etc/czd-bot/<name>/
+	default runtime dir = /run/czd-bot/<name>/
+	default logging dir = /var/log/czd-bot/<name>/
+	default data dir = [TODO]/czd-bot/<name>/
+
+
+default <name> is "default"
