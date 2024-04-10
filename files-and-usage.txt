@@ -19,7 +19,7 @@ bot file tree:
 
 
 
-usage: cobot [--name=<name>] [@<file>]
+usage: cobot ( [<option>] | [@<file>] )... [console [<command> [<args>...]]]
 
     Options:
       --name=<name>  Sets the bot instance name.
@@ -51,15 +51,15 @@ default <name> is "default"
 
 /etc/systemd/system/cobot.service:
 	[Unit]
-	Description=CompoundZebra Community Discord Guild Bot
-	Documentation=https://github.com/MaybeAshleyIdk/compoundzebra-community-discord-server-bot#readme
+	Description=Cobot community Discord bot (default instance)
+	Documentation=https://github.com/MaybeAshleyIdk/cobot#readme
 	Requires=network-online.target
 	After=network-online.target
 
 	[Service]
 	Type=exec
 	ExecStart=/usr/bin/cobot @%E/cobot-systemd/options.txt
-	# ExecStop=/usr/bin/cobot @%E/cobot-systemd/options.txt --console
+	ExecStop=/usr/bin/cobot @%E/cobot-systemd/options.txt console shutdown now
 	Restart=on-failure
 
 	[Install]
@@ -68,14 +68,15 @@ default <name> is "default"
 
 /etc/systemd/system/cobot@.service:
 	[Unit]
-	Description=CompoundZebra Community Discord Guild Bot
-	Documentation=https://github.com/MaybeAshleyIdk/compoundzebra-community-discord-server-bot#readme
+	Description=Cobot community Discord bot (instance %I)
+	Documentation=https://github.com/MaybeAshleyIdk/cobot#readme
 	Requires=network-online.target
 	After=network-online.target
 
 	[Service]
 	Type=exec
 	ExecStart=/usr/bin/cobot @%E/cobot-systemd/options.txt --name=%i @%E/cobot-systemd/instance-options/%i.txt
+	ExecStop=/usr/bin/cobot @%E/cobot-systemd/options.txt --name=%i @%E/cobot-systemd/instance-options/%i.txt console shutdown now
 	Restart=on-failure
 
 	[Install]
@@ -88,8 +89,9 @@ by default, none of the '%E/cobot-systemd/options.txt' or '%E/cobot-systemd/inst
 
 /etc/systemd/system/cz-community-dc-bot.service:
 	[Unit]
-	Description=CompoundZebra Community Discord Guild Bot
+	Description=CompoundZebra community Discord guild bot (Cobot instance)
 	Documentation=https://github.com/MaybeAshleyIdk/compoundzebra-community-discord-server-bot#readme
+	Documentation=https://github.com/MaybeAshleyIdk/cobot#readme
 	Requires=network-online.target
 	After=network-online.target
 
@@ -98,6 +100,7 @@ by default, none of the '%E/cobot-systemd/options.txt' or '%E/cobot-systemd/inst
 	Group=<gid>
 	Type=exec
 	ExecStart=/usr/bin/cobot @%E/cobot-systemd/options.txt @%E/cobot-systemd/instance-options/cz-community-dc-bot.txt --name=cz-community-dc-bot @$HOME/cz-community-dc-bot/options.txt
+	ExecStop=/usr/bin/cobot @%E/cobot-systemd/options.txt @%E/cobot-systemd/instance-options/cz-community-dc-bot.txt --name=cz-community-dc-bot @$HOME/cz-community-dc-bot/options.txt console shutdown now
 	Restart=on-failure
 
 	[Install]
