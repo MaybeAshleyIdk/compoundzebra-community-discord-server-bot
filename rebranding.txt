@@ -1,0 +1,9 @@
+Rebranding the bot to "cobot"
+
+the "co" part of the name is derived from 3 things:
+* Community
+* CompoundZebra
+* Connor
+
+maybe in the future a separate repo for the flavor of cobot specifically for cz community guild?
+would mostly just contain a script or two for setting up the environment
