@@ -1,0 +1,8 @@
+when somebody writes a message like:
+	||some text|| tw: blah blah
+or:
+	||some text|| cw: blah blah
+
+then reply to that message to hint that the tw/cw should come BEFORE the hidden text
+
+also, check for some keywords in messages and reply to that message to hint that it should be hidden
