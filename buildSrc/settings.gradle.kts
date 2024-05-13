@@ -22,6 +22,7 @@ include(
 
 include(
 	":project-structure:project-name",
+	":project-structure:tree",
 )
 
 include(
