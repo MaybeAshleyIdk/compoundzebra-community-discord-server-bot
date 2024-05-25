@@ -13,7 +13,7 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinTopLevelExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 
-public class ConventionsPlugin : Plugin<Project> {
+internal class ConventionsPlugin : Plugin<Project> {
 
 	override fun apply(project: Project) {
 		project.plugins.withType<ApplicationPlugin> {

@@ -1,4 +1,4 @@
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions.ConventionsPlugin
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions.applyConventionsToAllProjects
 
 plugins {
 	// The line
@@ -13,9 +13,7 @@ plugins {
 	alias(libs.plugins.shadow) apply false
 }
 
-allprojects {
-	apply<ConventionsPlugin>()
-}
+applyConventionsToAllProjects()
 
 tasks.wrapper {
 	// Download sources and documentation by default.
