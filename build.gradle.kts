@@ -1,4 +1,4 @@
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.ConventionsPlugin
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions.ConventionsPlugin
 
 plugins {
 	// The line
