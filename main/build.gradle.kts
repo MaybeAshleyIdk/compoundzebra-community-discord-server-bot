@@ -1,8 +1,8 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.GzipTask
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.OutputStream
-import java.util.zip.GZIPOutputStream
 
 plugins {
 	StandaloneProject
@@ -84,36 +84,18 @@ tasks.assemble {
 	dependsOn(createExecutable)
 }
 
-val createGzippedExecutable: TaskProvider<Task> by tasks.registering {
+val createGzippedExecutable: TaskProvider<out Task> by tasks.registering(GzipTask::class) {
 	group = "distribution"
 	description = "Creates a gzipped executable file of the bot in the root project's directory"
 
 	dependsOn(createExecutable)
 
-	val executableFileProvider: Provider<File> = createExecutable
+	inputFile = createExecutable
 		.map { executableCreationTask: Task ->
 			executableCreationTask.outputs.files.singleFile
 		}
 
-	val gzippedExecutableFileProvider: Provider<RegularFile> = project.rootProject
-		.layout.projectDirectory.file(
-			executableFileProvider.map { executableFile: File ->
-				"${executableFile.name}.gz"
-			},
-		)
-
-	inputs.file(executableFileProvider)
-	outputs.file(gzippedExecutableFileProvider)
-
-	doLast {
-		GZIPOutputStream(outputs.files.singleFile.outputStream().buffered())
-			.use { outputFileStream: OutputStream ->
-				inputs.files.singleFile.inputStream()
-					.use { inputFileStream: FileInputStream ->
-						inputFileStream.transferTo(outputFileStream)
-					}
-			}
-	}
+	outputDirectory(project.rootProject.layout.projectDirectory)
 }
 tasks.clean {
 	delete(createGzippedExecutable.map(Task::getOutputs))
