@@ -27,6 +27,7 @@ include(
 	":project-structure:project-policy",
 	":project-structure:project-type-policies",
 	":project-structure:enforcement",
+	":project-structure:markers",
 )
 
 include(
