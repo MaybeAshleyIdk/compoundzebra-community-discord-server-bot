@@ -3,12 +3,12 @@ kotlin = "2.0.0"
 ksp = "2.0.0-1.0.21"
 ktlint = "1.2.1"
 moshi = "1.15.1"
-dagger = "2.51"
+dagger = "2.51.1"
 
 [libraries]
-kotlinx-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
+kotlinx-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1"
 
-jda = "net.dv8tion:JDA:5.0.0-beta.21"
+jda = "net.dv8tion:JDA:5.0.0-beta.24"
 
 okio = "com.squareup.okio:okio:3.9.0"
 
