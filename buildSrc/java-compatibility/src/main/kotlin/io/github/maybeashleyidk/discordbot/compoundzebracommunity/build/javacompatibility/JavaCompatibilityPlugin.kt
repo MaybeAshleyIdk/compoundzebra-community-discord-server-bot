@@ -1,4 +1,4 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.javacompatibility
 
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 
-internal class JavaCompatibilityPlugin : Plugin<Project> {
+public class JavaCompatibilityPlugin : Plugin<Project> {
 
 	// See <https://jakewharton.com/gradle-toolchains-are-rarely-a-good-idea/> as to why no toolchains are configured.
 
@@ -66,19 +66,4 @@ private fun Project.provideKotlinJvmTargetFromJavaTargetCompatibility(): Provide
 
 			javaPluginExtension.targetCompatibility.toKotlinJvmTarget()
 		}
-}
-
-private fun JavaVersion.toKotlinJvmTarget(): JvmTarget {
-	val javaVersionName: String = this.toString()
-
-	val kotlinJvmTarget: JvmTarget? = JvmTarget.values()
-		.firstOrNull { jvmTarget: JvmTarget ->
-			jvmTarget.target == javaVersionName
-		}
-
-	checkNotNull(kotlinJvmTarget) {
-		"The Java version $javaVersionName is not a Kotlin JVM target"
-	}
-
-	return kotlinJvmTarget
 }

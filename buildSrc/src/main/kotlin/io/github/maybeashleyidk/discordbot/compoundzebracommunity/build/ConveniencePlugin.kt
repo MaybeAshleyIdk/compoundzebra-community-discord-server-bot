@@ -1,5 +1,6 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.javacompatibility.JavaCompatibilityPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.ApplicationPlugin

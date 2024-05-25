@@ -20,6 +20,8 @@ dependencies {
 
 	implementation(kotlinGradlePluginDependencyProvider)
 
+	implementation(projects.javaCompatibility)
+
 	api(projects.reallyExecutableJar)
 	api(projects.gzip)
 }
