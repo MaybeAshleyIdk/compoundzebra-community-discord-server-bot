@@ -1,8 +1,7 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import java.io.FileInputStream
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.GzipTask
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.ReallyExecutableJarTask
 import java.io.FileNotFoundException
-import java.io.OutputStream
-import java.util.zip.GZIPOutputStream
 
 plugins {
 	StandaloneProject
@@ -33,87 +32,37 @@ dependencies {
 
 // region executable file tasks
 
-val createExecutable: TaskProvider<Task> by tasks.registering {
-	// <https://skife.org/java/unix/2011/06/20/really_executable_jars.html>
-
+val createExecutable: TaskProvider<ReallyExecutableJarTask> by tasks.registering(ReallyExecutableJarTask::class) {
 	group = "distribution"
 	description = "Creates an executable file of the bot"
 
 	dependsOn(tasks.shadowJar)
 
-	val jarExecScriptFile: RegularFile = project.layout.projectDirectory.file("jar-exec-script.sh")
+	jarExecScriptFile = project.layout.projectDirectory.file("jar-exec-script.sh")
 
-	val shadowJarFileProvider: Provider<File> = tasks.shadowJar
+	inputJarFile = tasks.shadowJar
 		.map { shadowJarTask: ShadowJar ->
 			shadowJarTask.outputs.files.singleFile
 		}
 
-	val executableFileProvider: Provider<RegularFile> = project.layout.buildDirectory
+	outputJarFile = project.layout.buildDirectory
 		.dir("distributions")
 		.map { distDir: Directory ->
 			distDir.file("${project.application.applicationName}-${project.version}")
 		}
-
-	inputs.files(jarExecScriptFile, shadowJarFileProvider)
-	outputs.file(executableFileProvider)
-
-	doLast {
-		val executableFile: File = executableFileProvider.get().asFile
-
-		executableFile
-			.outputStream()
-			.buffered()
-			.use { executableFileStream: OutputStream ->
-				jarExecScriptFile.asFile
-					.inputStream()
-					.use { jarExecScriptFileStream: FileInputStream ->
-						jarExecScriptFileStream.transferTo(executableFileStream)
-					}
-
-				shadowJarFileProvider.get()
-					.inputStream()
-					.use { shadowJarFileStream: FileInputStream ->
-						shadowJarFileStream.transferTo(executableFileStream)
-					}
-			}
-
-		executableFile.setExecutable(true)
-	}
 }
 tasks.assemble {
 	dependsOn(createExecutable)
 }
 
-val createGzippedExecutable: TaskProvider<Task> by tasks.registering {
+val createGzippedExecutable: TaskProvider<out Task> by tasks.registering(GzipTask::class) {
 	group = "distribution"
 	description = "Creates a gzipped executable file of the bot in the root project's directory"
 
 	dependsOn(createExecutable)
 
-	val executableFileProvider: Provider<File> = createExecutable
-		.map { executableCreationTask: Task ->
-			executableCreationTask.outputs.files.singleFile
-		}
-
-	val gzippedExecutableFileProvider: Provider<RegularFile> = project.rootProject
-		.layout.projectDirectory.file(
-			executableFileProvider.map { executableFile: File ->
-				"${executableFile.name}.gz"
-			},
-		)
-
-	inputs.file(executableFileProvider)
-	outputs.file(gzippedExecutableFileProvider)
-
-	doLast {
-		GZIPOutputStream(outputs.files.singleFile.outputStream().buffered())
-			.use { outputFileStream: OutputStream ->
-				inputs.files.singleFile.inputStream()
-					.use { inputFileStream: FileInputStream ->
-						inputFileStream.transferTo(outputFileStream)
-					}
-			}
-	}
+	inputFile = createExecutable.flatMap(ReallyExecutableJarTask::outputJarFile)
+	outputDirectory(project.rootProject.layout.projectDirectory)
 }
 tasks.clean {
 	delete(createGzippedExecutable.map(Task::getOutputs))
