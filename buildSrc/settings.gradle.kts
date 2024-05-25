@@ -16,5 +16,6 @@ dependencyResolutionManagement {
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(
+	":really-executable-jar",
 	":gzip",
 )

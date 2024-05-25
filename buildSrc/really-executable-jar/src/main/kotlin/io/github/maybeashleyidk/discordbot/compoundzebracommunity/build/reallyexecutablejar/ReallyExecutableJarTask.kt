@@ -1,4 +1,4 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.reallyexecutablejar
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.RegularFileProperty
