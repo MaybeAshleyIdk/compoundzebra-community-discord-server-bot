@@ -1,3 +1,3 @@
 <component name="DependencyValidationManager">
-  <scope name="Non-Gradle Files" pattern="!file[CompoundZebra_Community_Discord_Server_Bot]:settings.gradle.kts&amp;&amp;!file:build.gradle.kts" />
+  <scope name="Non-Gradle Files" pattern="!file:settings.gradle.kts&amp;&amp;!file:build.gradle.kts" />
 </component>
