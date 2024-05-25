@@ -12,3 +12,15 @@ dependencyResolutionManagement {
 		}
 	}
 }
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+include(
+	":java-compatibility",
+	":conventions",
+)
+
+include(
+	":really-executable-jar",
+	":gzip",
+)

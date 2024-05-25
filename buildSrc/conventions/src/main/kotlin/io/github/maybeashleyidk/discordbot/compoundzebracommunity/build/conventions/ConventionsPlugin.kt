@@ -1,5 +1,6 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.javacompatibility.JavaCompatibilityPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.ApplicationPlugin
@@ -12,7 +13,7 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinTopLevelExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 
-public class ConveniencePlugin : Plugin<Project> {
+internal class ConventionsPlugin : Plugin<Project> {
 
 	override fun apply(project: Project) {
 		project.plugins.withType<ApplicationPlugin> {

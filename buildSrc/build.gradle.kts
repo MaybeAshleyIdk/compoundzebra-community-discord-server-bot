@@ -1,16 +1,20 @@
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+
 plugins {
 	`kotlin-dsl`
 }
 
-dependencies {
-	val kotlinGradlePluginDependencyProvider: Provider<Any> = libs.versions.kotlin
-		.map { kotlinVersion: String ->
-			kotlin("gradle-plugin", version = kotlinVersion)
+allprojects {
+	plugins.withType<KotlinDslPlugin> {
+		extensions.configure<KotlinJvmProjectExtension> {
+			explicitApi()
 		}
-
-	implementation(kotlinGradlePluginDependencyProvider)
+	}
 }
 
-kotlin {
-	explicitApi()
+dependencies {
+	api(projects.conventions)
+
+	api(projects.reallyExecutableJar)
+	api(projects.gzip)
 }

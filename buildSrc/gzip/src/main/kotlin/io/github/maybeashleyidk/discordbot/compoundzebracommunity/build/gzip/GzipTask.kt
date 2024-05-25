@@ -1,4 +1,4 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.gzip
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.Directory
@@ -26,7 +26,7 @@ public abstract class GzipTask : DefaultTask() {
 	public abstract val outputFile: RegularFileProperty
 
 	public fun outputDirectory(directory: Directory) {
-		// The call call .getLocationOnly() is important! Otherwise we get configuration errors.
+		// The call .getLocationOnly() is important! Otherwise we get configuration errors.
 		val outputFilenameProvider: Provider<String> = this.inputFile.locationOnly
 			.map { inputFile: RegularFile ->
 				"${inputFile.asFile.name}.gz"
