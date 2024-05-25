@@ -5,4 +5,10 @@ dependencyResolutionManagement {
 	repositories {
 		mavenCentral()
 	}
+
+	versionCatalogs {
+		create("libs") {
+			from(files(rootProject.projectDir.resolve("../gradle/libs.versions.toml")))
+		}
+	}
 }
