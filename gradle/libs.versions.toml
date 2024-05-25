@@ -1,6 +1,6 @@
 [versions]
-kotlin = "1.9.23"
-ksp = "1.9.23-1.0.19"
+kotlin = "2.0.0"
+ksp = "2.0.0-1.0.21"
 ktlint = "1.2.1"
 moshi = "1.15.1"
 dagger = "2.51"
