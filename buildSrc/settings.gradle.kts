@@ -24,6 +24,7 @@ include(
 	":project-structure:project-name",
 	":project-structure:tree",
 	":project-structure:project-type",
+	":project-structure:project-policy",
 )
 
 include(
