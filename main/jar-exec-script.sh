@@ -61,7 +61,7 @@ readonly java_command
 
 #region check Java version
 
-min_java_version=17
+min_java_version=21
 readonly min_java_version
 
 

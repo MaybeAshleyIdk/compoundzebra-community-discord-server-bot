@@ -27,7 +27,7 @@ internal class JavaCompatibilityPlugin : Plugin<Project> {
 
 	private fun configureJavaIn(project: Project) {
 		project.extensions.configure<JavaPluginExtension> {
-			this@configure.targetCompatibility = JavaVersion.VERSION_17
+			this@configure.targetCompatibility = JavaVersion.VERSION_21
 			this@configure.sourceCompatibility = this@configure.targetCompatibility
 		}
 	}
