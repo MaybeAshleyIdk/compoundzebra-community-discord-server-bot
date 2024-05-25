@@ -1,3 +1,7 @@
+# This file seems to be created when the explicitly set root project name (see `settings.gradle.kts`) is not the same as
+# the directory name containing said root project.
+/.name
+
 /compiler.xml
 /gradle.xml
 /jarRepositories.xml
