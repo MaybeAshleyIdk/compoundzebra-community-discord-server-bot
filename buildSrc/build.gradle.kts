@@ -19,4 +19,6 @@ dependencies {
 		}
 
 	implementation(kotlinGradlePluginDependencyProvider)
+
+	api(projects.gzip)
 }

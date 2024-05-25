@@ -1,6 +1,6 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.GzipTask
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.ReallyExecutableJarTask
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.gzip.GzipTask
 import java.io.FileNotFoundException
 
 plugins {
