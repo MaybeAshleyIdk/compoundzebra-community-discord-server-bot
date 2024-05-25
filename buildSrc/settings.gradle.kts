@@ -25,6 +25,7 @@ include(
 	":project-structure:tree",
 	":project-structure:project-type",
 	":project-structure:project-policy",
+	":project-structure:project-type-policies",
 )
 
 include(
