@@ -1,4 +1,4 @@
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.ConveniencePlugin
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.ConventionsPlugin
 
 plugins {
 	// The line
@@ -14,7 +14,7 @@ plugins {
 }
 
 allprojects {
-	apply<ConveniencePlugin>()
+	apply<ConventionsPlugin>()
 }
 
 tasks.wrapper {
