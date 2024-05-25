@@ -16,3 +16,8 @@ plugins {
 allprojects {
 	apply<ConveniencePlugin>()
 }
+
+tasks.wrapper {
+	// Download sources and documentation by default.
+	distributionType = Wrapper.DistributionType.ALL
+}
