@@ -2,7 +2,11 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinTopLevelExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 
 plugins {
-	kotlin("jvm") version libs.versions.kotlin apply false
+	// The line
+	//         kotlin("jvm") version libs.versions.kotlin apply false
+	// is omitted because the Kotlin Gradle plugin is already on the classpath because the buildSrc module added it as
+	// a dependency.
+	// See the issue <https://github.com/gradle/gradle/issues/20084>
 
 	alias(libs.plugins.ksp) apply false
 
