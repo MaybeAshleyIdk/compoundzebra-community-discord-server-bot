@@ -1,4 +1,5 @@
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions.applyConventionsToAllProjects
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectstructure.subprojectcreation.SubprojectCreationTask
 
 plugins {
 	// The line
@@ -20,4 +21,15 @@ applyConventionsToAllProjects()
 tasks.wrapper {
 	// Download sources and documentation by default.
 	distributionType = Wrapper.DistributionType.ALL
+}
+
+tasks.register<SubprojectCreationTask>("createModule") {
+	group = "modulization"
+
+	basePackageName = "io.github.maybeashleyidk.discordbot.compoundzebracommunity"
+	packageIgnoredProjectPathPrefixes =
+		listOf(
+			":bot",
+			":main",
+		)
 }
