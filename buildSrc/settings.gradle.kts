@@ -21,6 +21,10 @@ include(
 )
 
 include(
+	":project-structure:project-name",
+)
+
+include(
 	":really-executable-jar",
 	":gzip",
 )
