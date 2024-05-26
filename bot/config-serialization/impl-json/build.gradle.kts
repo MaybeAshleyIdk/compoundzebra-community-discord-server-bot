@@ -1,6 +1,9 @@
 plugins {
+	buildSrc.projectStructure.`service-implementation`.standalone
+
 	`java-library`
 	kotlin("jvm")
+
 	alias(libs.plugins.ksp)
 }
 

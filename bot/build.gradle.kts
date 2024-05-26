@@ -1,4 +1,5 @@
 plugins {
+	buildSrc.projectStructure.composite
 	`java-library`
 }
 

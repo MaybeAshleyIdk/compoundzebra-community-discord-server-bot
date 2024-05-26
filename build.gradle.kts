@@ -11,6 +11,8 @@ plugins {
 
 	alias(libs.plugins.ktlint) apply false
 	alias(libs.plugins.shadow) apply false
+
+	buildSrc.projectStructure.namespace
 }
 
 applyConventionsToAllProjects()

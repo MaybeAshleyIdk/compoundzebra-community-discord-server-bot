@@ -1,4 +1,5 @@
 plugins {
+	buildSrc.projectStructure.`service-implementation`.composite
 	`java-library`
 }
 

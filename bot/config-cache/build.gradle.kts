@@ -1,4 +1,5 @@
 plugins {
+	buildSrc.projectStructure.service
 	`java-library`
 }
 
