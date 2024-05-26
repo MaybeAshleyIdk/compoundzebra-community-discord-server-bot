@@ -1,0 +1,4 @@
+# noinspection EditorConfigKeyCorrectness
+[src/main/resources/io/github/maybeashleyidk/discordbot/compoundzebracommunity/build/projectstructure/subprojectcreation/gradlebuildfiles/*.gradle.kts]
+ktlint_standard_max-line-length = disabled
+ktlint_standard_argument-list-wrapping = disabled

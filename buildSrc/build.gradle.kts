@@ -16,6 +16,7 @@ dependencies {
 	api(projects.conventions)
 
 	api(projects.projectStructure.markers)
+	api(projects.projectStructure.subprojectCreation)
 
 	api(projects.reallyExecutableJar)
 	api(projects.gzip)
