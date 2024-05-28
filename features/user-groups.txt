@@ -13,10 +13,10 @@ for example, only a certain group would be allowed to add new simple-response co
 
 user groups need hierarchy
 
-each user group needs:
-	list of auxiliary groups (i'm still not 100% happy with that name)
-	list of member inclusion rules
-	list of permissions
+each user group has:
+	* a list of implied groups
+	* a list of member inclusion rules
+	* a list of permissions
 
 
 
@@ -110,7 +110,7 @@ modal of /userGroups edit: (add subcommand should also just open this and not ha
 	| |                                            | |
 	| +--------------------------------------------+ |
 	|                                                |
-	| Auxiliary Groups                               |
+	| Implied Groups                                 |
 	| +--------------------------------------------+ |
 	| |                                            | |
 	| |                                            | |
@@ -193,7 +193,7 @@ permissions:
 	userGroups.edit:<userGroupName>
 		allows editing (which includes renaming) the user group with the name <userGroupName> if that group is below
 		that user's highest user group
-		users can only add auxiliary groups that are below their highest group
+		users can only add implied groups that are below their highest group
 		users can only add permissions that they themselves have
 
 	userGroups.remove:<userGroupName>
@@ -209,7 +209,7 @@ permissions:
 
 
 Plebs:
-	auxiliary groups: (none)
+	implied groups: (none)
 
 	member inclusion rules:
 		include everyone
@@ -218,7 +218,7 @@ Plebs:
 		polls.create
 
 Staff:
-	auxiliary groups:
+	implied groups:
 		Plebs
 
 	member inclusion rules:
@@ -228,7 +228,7 @@ Staff:
 		shareDateTime.use
 
 Moderators:
-	auxiliary groups:
+	implied groups:
 		Staff
 
 	member inclusion rules:
@@ -244,7 +244,7 @@ Moderators:
 		autoChannelsSorting.enableDisable:*
 
 Maintainers:
-	auxiliary groups:
+	implied groups:
 		Staff
 
 	member inclusion rules:
@@ -257,7 +257,7 @@ Maintainers:
 		bot.shutDown
 
 Admins:
-	auxiliary groups:
+	implied groups:
 		Staff
 		Moderators
 		Maintainers

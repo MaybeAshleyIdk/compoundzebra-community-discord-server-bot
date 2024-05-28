@@ -155,7 +155,7 @@ CREATE TABLE `GuildUserGroup`(
 	`creationTimestamp` TEXT NOT NULL, -- RFC 3999
 
 	`name`                 TEXT NOT NULL,
-	`auxiliaryGroupIds`    TEXT NOT NULL,
+	`impliedGroupIds`      TEXT NOT NULL,
 	`memberInclusionRules` TEXT NOT NULL,
 	`permissionStrings`    TEXT NOT NULL,
 
