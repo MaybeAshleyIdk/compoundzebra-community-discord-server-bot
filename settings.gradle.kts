@@ -1,10 +1,16 @@
 rootProject.name = "compoundzebra-community-discord-server-bot"
 
 pluginManagement {
+	includeBuild(rootProject.projectDir.resolve("include-dsl").toString())
+
 	repositories {
 		mavenCentral()
 		gradlePluginPortal()
 	}
+}
+
+plugins {
+	id("include-dsl")
 }
 
 dependencyResolutionManagement {
