@@ -22,206 +22,103 @@ dependencyResolutionManagement {
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-@Suppress("ktlint:standard:no-blank-line-in-list")
-include(
-	":bot:utils",
-	":bot:utils-coroutines",
-	":bot:utils-coroutines-jda",
+include {
+	"bot" {
+		"utils"()
+		"utils-coroutines"()
+		"utils-coroutines-jda"()
 
-	":bot:environment-type",
+		"environment-type"()
 
-	":bot:token",
+		"token"()
 
-	":bot:logging:api",
-	":bot:logging:impl-stderr",
-	":bot:logging:wiring",
-	":bot:logging",
+		"logging".service(impl = "stderr")
 
-	":bot:snowflake",
-	":bot:snowflake-generator",
+		"snowflake"()
+		"snowflake-generator"()
 
-	// region config
+		"config"()
+		"config-serialization".service(impl = "json")
+		"config-source".service(impl = "file")
+		"config-cache".service(impl = "memory")
+		"config-supplier".service(impl = "cache")
 
-	":bot:config",
+		"generic-event-handler"()
 
-	":bot:config-serialization:api",
-	":bot:config-serialization:impl-json",
-	":bot:config-serialization:wiring",
-	":bot:config-serialization",
+		"emoji-stats".service()
 
-	":bot:config-source:api",
-	":bot:config-source:impl-file",
-	":bot:config-source:wiring",
-	":bot:config-source",
+		"polls" {
+			"id"()
+			"description"()
+			"option"()
+			"details"()
 
-	":bot:config-cache:api",
-	":bot:config-cache:impl-memory",
-	":bot:config-cache:wiring",
-	":bot:config-cache",
+			"management".service()
+			"creation".service(impl = "manager")
+			"holding".service(impl = "manager")
+			"modification".service(impl = "manager")
 
-	":bot:config-supplier:api",
-	":bot:config-supplier:impl-cache",
-	":bot:config-supplier:wiring",
-	":bot:config-supplier",
+			"component-protocol"()
 
-	// endregion
+			"event-handling".service()
 
-	":bot:generic-event-handler",
+			"wiring"()
+		}
 
-	":bot:emoji-stats:api",
-	":bot:emoji-stats:impl",
-	":bot:emoji-stats:wiring",
-	":bot:emoji-stats",
+		"self-timeout".service()
 
-	// region polls
+		"shutdown" {
+			"callbacks"()
 
-	":bot:polls:id",
-	":bot:polls:description",
-	":bot:polls:option",
-	":bot:polls:details",
+			"management".service()
+			"event-handling".service(impl = "manager")
+			"callback-registration".service(impl = "manager")
+			"requesting".service(impl = "manager")
 
-	":bot:polls:management:api",
-	":bot:polls:management:impl",
-	":bot:polls:management:wiring",
-	":bot:polls:management",
+			"wiring"()
+		}
 
-	":bot:polls:creation:api",
-	":bot:polls:creation:impl-manager",
-	":bot:polls:creation:wiring",
-	":bot:polls:creation",
+		"commands" {
+			"name"()
+			"prefix"()
 
-	":bot:polls:holding:api",
-	":bot:polls:holding:impl-manager",
-	":bot:polls:holding:wiring",
-	":bot:polls:holding",
+			"message-event-handling".service {
+				"message-parser"()
+				"command"()
 
-	":bot:polls:modification:api",
-	":bot:polls:modification:impl-manager",
-	":bot:polls:modification:wiring",
-	":bot:polls:modification",
+				"built-in-commands" {
+					"coin-flip"()
+					"config"()
+					"dev"()
+					"emoji-stats"()
+					"magic8ball"()
+					"polls"()
+					"rng"()
+					"self-timeout"()
+					"shutdown"()
+					"source-code"()
+				}
+				"built-in-commands-wiring"()
 
-	":bot:polls:component-protocol",
+				"predefined-response-command"()
 
-	":bot:polls:event-handling:api",
-	":bot:polls:event-handling:impl",
-	":bot:polls:event-handling:wiring",
-	":bot:polls:event-handling",
+				"event-handler-impl"()
+				"wiring"()
+			}
+		}
 
-	":bot:polls:wiring",
+		"conditional-message-event-handling".service()
 
-	":bot:polls",
+		"message-event-handler-mediation".service()
 
-	// endregion
+		"private-message-event-handling".service()
 
-	":bot:self-timeout:api",
-	":bot:self-timeout:impl",
-	":bot:self-timeout:wiring",
-	":bot:self-timeout",
+		"event-listening".service()
 
-	// region shutdown
+		"jda-factory"()
+		"wiring"()
+		"main"()
+	}
 
-	":bot:shutdown:callbacks",
-
-	":bot:shutdown:management:api",
-	":bot:shutdown:management:impl",
-	":bot:shutdown:management:wiring",
-	":bot:shutdown:management",
-
-	":bot:shutdown:event-handling:api",
-	":bot:shutdown:event-handling:impl-manager",
-	":bot:shutdown:event-handling:wiring",
-	":bot:shutdown:event-handling",
-
-	":bot:shutdown:callback-registration:api",
-	":bot:shutdown:callback-registration:impl-manager",
-	":bot:shutdown:callback-registration:wiring",
-	":bot:shutdown:callback-registration",
-
-	":bot:shutdown:requesting:api",
-	":bot:shutdown:requesting:impl-manager",
-	":bot:shutdown:requesting:wiring",
-	":bot:shutdown:requesting",
-
-	":bot:shutdown:wiring",
-
-	":bot:shutdown",
-
-	// endregion
-
-	// region commands
-
-	// this project isn't called just ":bot:commands:name" because the type-safe project accessors already have
-	// a property called `name` and if a project name would be "name" then it would lead to conflicts
-	":bot:commands:command-name",
-
-	":bot:commands:prefix",
-
-	// region message event handling
-
-	":bot:commands:message-event-handling:api",
-
-	// region implementation
-
-	":bot:commands:message-event-handling:impl:message-parser",
-	":bot:commands:message-event-handling:impl:command",
-
-	":bot:commands:message-event-handling:impl:built-in-commands:coin-flip",
-	":bot:commands:message-event-handling:impl:built-in-commands:config",
-	":bot:commands:message-event-handling:impl:built-in-commands:dev",
-	":bot:commands:message-event-handling:impl:built-in-commands:emoji-stats",
-	":bot:commands:message-event-handling:impl:built-in-commands:magic8ball",
-	":bot:commands:message-event-handling:impl:built-in-commands:polls",
-	":bot:commands:message-event-handling:impl:built-in-commands:rng",
-	":bot:commands:message-event-handling:impl:built-in-commands:self-timeout",
-	":bot:commands:message-event-handling:impl:built-in-commands:shutdown",
-	":bot:commands:message-event-handling:impl:built-in-commands:source-code",
-	":bot:commands:message-event-handling:impl:built-in-commands",
-	":bot:commands:message-event-handling:impl:built-in-commands-wiring",
-
-	":bot:commands:message-event-handling:impl:predefined-response-command",
-	":bot:commands:message-event-handling:impl:event-handler-impl",
-	":bot:commands:message-event-handling:impl:wiring",
-	":bot:commands:message-event-handling:impl",
-
-	// endregion
-
-	":bot:commands:message-event-handling:wiring",
-
-	":bot:commands:message-event-handling",
-
-	// endregion
-
-	":bot:commands",
-
-	// endregion
-
-	":bot:conditional-message-event-handling:api",
-	":bot:conditional-message-event-handling:impl",
-	":bot:conditional-message-event-handling:wiring",
-	":bot:conditional-message-event-handling",
-
-	":bot:message-event-handler-mediation:api",
-	":bot:message-event-handler-mediation:impl",
-	":bot:message-event-handler-mediation:wiring",
-	":bot:message-event-handler-mediation",
-
-	":bot:private-message-event-handling:api",
-	":bot:private-message-event-handling:impl",
-	":bot:private-message-event-handling:wiring",
-	":bot:private-message-event-handling",
-
-	":bot:event-listening:api",
-	":bot:event-listening:impl",
-	":bot:event-listening:wiring",
-	":bot:event-listening",
-
-	":bot:jda-factory",
-	":bot:wiring",
-	":bot:main",
-	":bot",
-
-	":main",
-)
-
-val botCommandsNameProject: ProjectDescriptor = project(":bot:commands:command-name")
-botCommandsNameProject.projectDir = botCommandsNameProject.projectDir.parentFile.resolve("name")
+	"main"()
+}
