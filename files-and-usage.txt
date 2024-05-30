@@ -4,7 +4,7 @@ bot file tree:
 
 	<config dir>/
 	`-- token.txt
-	`-- bot.properties  ((currently nothing planned - maybe in the future))
+	`-- bot.properties
 
 	<logging dir>/
 	`-- read-all*
@@ -45,6 +45,11 @@ else:
 
 
 default <name> is "default"
+
+
+bot.properties file can contain the key `admins`, which is a comma-separated list of user snowflake IDs that are admins
+of the bot.
+bot admins can shutdown the bot via DMs
 
 
 
