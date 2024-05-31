@@ -69,6 +69,16 @@ include {
 			}
 		}
 
+		//"feature-previews" {
+		//	"user-groups" {
+		//		"name"()
+		//		"permission-pattern"()
+		//
+		//		"permissions-checking-impl"()
+		//		"permissions-checking-wiring"()
+		//	}
+		//}
+
 		"emoji-stats".service()
 
 		"polls" {

@@ -1,0 +1,3 @@
+plugins {
+	buildSrc.projectStructure.namespace
+}
