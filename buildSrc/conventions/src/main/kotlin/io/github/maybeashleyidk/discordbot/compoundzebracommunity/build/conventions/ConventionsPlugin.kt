@@ -18,10 +18,12 @@ internal class ConventionsPlugin : Plugin<Project> {
 	override fun apply(project: Project) {
 		project.plugins.withType<ApplicationPlugin> {
 			project.apply<JavaCompatibilityPlugin>()
+			project.apply<TestingConventionsPlugin>()
 		}
 
 		project.plugins.withType<JavaLibraryPlugin> {
 			project.apply<JavaCompatibilityPlugin>()
+			project.apply<TestingConventionsPlugin>()
 
 			project.plugins.withType<KotlinPluginWrapper> {
 				project.extensions.configure<KotlinTopLevelExtension> {

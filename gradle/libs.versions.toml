@@ -19,6 +19,9 @@ javax-inject = "javax.inject:javax.inject:1"
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 
+junit-jupiter = "org.junit.jupiter:junit-jupiter:5.10.2"
+junit-platformLauncher = "org.junit.platform:junit-platform-launcher:1.10.2"
+
 [plugins]
 shadow = "com.github.johnrengelman.shadow:8.1.1"
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
