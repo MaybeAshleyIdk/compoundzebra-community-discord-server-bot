@@ -6,9 +6,7 @@ plugins {
 }
 
 dependencies {
-	api(libs.jda) {
-		exclude(module = "opus-java")
-	}
+	api(`jda-without-opusJava`)
 
 	implementation(libs.kotlinxCoroutinesCore)
 }

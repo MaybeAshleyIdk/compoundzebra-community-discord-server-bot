@@ -7,7 +7,5 @@ plugins {
 
 dependencies {
 	api(projects.bot.commands.commandName)
-	api(libs.jda) {
-		exclude(module = "opus-opus")
-	}
+	api(`jda-without-opusJava`)
 }

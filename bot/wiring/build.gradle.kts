@@ -8,9 +8,7 @@ plugins {
 }
 
 dependencies {
-	api(libs.jda) {
-		exclude(module = "opus-java")
-	}
+	api(`jda-without-opusJava`)
 	api(projects.bot.environmentType)
 	api(projects.bot.token)
 	api(projects.bot.logging)

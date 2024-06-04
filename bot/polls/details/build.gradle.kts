@@ -11,7 +11,5 @@ dependencies {
 	api(projects.bot.polls.option)
 	api(projects.bot.config)
 
-	implementation(libs.jda) {
-		exclude(module = "opus-java")
-	}
+	implementation(`jda-without-opusJava`)
 }

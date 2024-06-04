@@ -10,9 +10,7 @@ dependencies {
 	api(projects.bot.polls.description)
 	api(projects.bot.polls.option)
 	api(projects.bot.config)
-	api(libs.jda) {
-		exclude(module = "opus-java")
-	}
+	api(`jda-without-opusJava`)
 
 	implementation(projects.bot.polls.details)
 }
