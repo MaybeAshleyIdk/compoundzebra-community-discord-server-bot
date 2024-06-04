@@ -1,11 +1,11 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions.internal.provideLibsVersionCatalog
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions.internal.utils.requireLibrary
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.artifacts.MinimalExternalModuleDependency
 import org.gradle.api.artifacts.VersionCatalog
-import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.plugins.ApplicationPlugin
 import org.gradle.api.plugins.JavaLibraryPlugin
 import org.gradle.api.plugins.JavaPluginExtension
@@ -20,7 +20,6 @@ import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.hasPlugin
 import org.gradle.kotlin.dsl.register
 import org.gradle.language.base.plugins.LifecycleBasePlugin
-import java.util.Optional
 
 // <https://jakewharton.com/build-on-latest-java-test-through-lowest-java/>
 
@@ -38,20 +37,14 @@ internal class TestingConventionsPlugin : Plugin<Project> {
 	}
 
 	private fun setUpJUnitDependenciesIn(project: Project) {
-		val versionCatalogProvider: Provider<VersionCatalog> = project
-			.provider {
-				val versionCatalogs: VersionCatalogsExtension =
-					project.extensions.getByName<VersionCatalogsExtension>(name = "versionCatalogs")
-
-				versionCatalogs.named("libs")
-			}
+		val versionCatalogProvider: Provider<VersionCatalog> = project.provideLibsVersionCatalog()
 
 		project.configurations.named("testImplementation") {
-			this@named.dependencies.addLater(versionCatalogProvider.getLibrary("junit-jupiter"))
+			this@named.dependencies.addLater(versionCatalogProvider.requireLibrary(alias = "junit-jupiter"))
 		}
 
 		project.configurations.named("testRuntimeOnly") {
-			this@named.dependencies.addLater(versionCatalogProvider.getLibrary("junit-platformLauncher"))
+			this@named.dependencies.addLater(versionCatalogProvider.requireLibrary(alias = "junit-platformLauncher"))
 		}
 	}
 
@@ -112,18 +105,5 @@ private fun Project.provideJavaToolchainLauncherFor(javaVersion: JavaVersion): P
 			javaToolchains.launcherFor {
 				this@launcherFor.languageVersion.set(JavaLanguageVersion.of(javaVersion.majorVersion))
 			}
-		}
-}
-
-private fun Provider<VersionCatalog>.getLibrary(alias: String): Provider<MinimalExternalModuleDependency> {
-	return this
-		.flatMap { versionCatalog: VersionCatalog ->
-			val optionalLibraryProvider: Optional<Provider<MinimalExternalModuleDependency>> =
-				versionCatalog.findLibrary(alias)
-
-			optionalLibraryProvider
-				.orElseThrow {
-					IllegalStateException("No library found with name \"$alias\"")
-				}
 		}
 }
