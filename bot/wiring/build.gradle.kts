@@ -29,6 +29,7 @@ dependencies {
 	implementation(projects.bot.configSupplier.wiring)
 	implementation(projects.bot.emojiStats.wiring)
 	implementation(projects.bot.eventListening.wiring)
+	implementation(projects.bot.experimental.recentMessages.wiring)
 	implementation(projects.bot.logging.wiring)
 	implementation(projects.bot.messageEventHandlerMediation.wiring)
 	implementation(projects.bot.polls.wiring)

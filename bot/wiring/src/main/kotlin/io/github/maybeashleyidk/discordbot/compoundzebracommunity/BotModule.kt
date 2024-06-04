@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.Reusable
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.emojistats.EmojiStatsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistening.EventListeningModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.experimental.recentmessages.RecentMessagesModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.jdafactory.JdaFactory
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.LoggingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.ConfigModule
@@ -30,6 +31,7 @@ import net.dv8tion.jda.api.JDA as Jda
 		MessageEventHandlingModule::class,
 		PrivateMessageEventHandlingModule::class,
 		EventListeningModule::class,
+		RecentMessagesModule::class,
 	],
 )
 internal object BotModule {
