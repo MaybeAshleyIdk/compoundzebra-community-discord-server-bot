@@ -54,6 +54,10 @@ include {
 		"config-cache".service(impl = "memory")
 		"config-supplier".service(impl = "cache")
 
+		"experimental" {
+			"recent-messages".service()
+		}
+
 		"generic-event-handler"()
 
 		"emoji-stats".service()
