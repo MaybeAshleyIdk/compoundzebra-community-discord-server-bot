@@ -1,4 +1,4 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions.internal.utils
 
 internal fun <E : Enum<E>> ClosedRange<E>.asIterable(enumClass: Class<E>): Iterable<E> {
 	return EnumRangeIterable(enumClass, range = this)

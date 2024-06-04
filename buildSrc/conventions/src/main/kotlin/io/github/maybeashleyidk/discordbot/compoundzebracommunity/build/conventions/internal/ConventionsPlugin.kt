@@ -1,4 +1,4 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions.internal
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.javacompatibility.JavaCompatibilityPlugin
 import org.gradle.api.Plugin

@@ -1,6 +1,6 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions.internal
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions.internal.provideLibsVersionCatalog
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions.internal.utils.asIterable
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventions.internal.utils.requireLibrary
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
