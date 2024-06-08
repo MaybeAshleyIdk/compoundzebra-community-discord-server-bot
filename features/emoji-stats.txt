@@ -1,0 +1,6 @@
+=== Permission Definitions ===
+
+	The resource <member> is identified by its snowflake ID.
+
+	emojiStats.queryMember:<member>
+		Permits querying the emoji statistics for the guild member <member>.

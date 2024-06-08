@@ -17,15 +17,19 @@ and OTHER members (as many as it takes to go back up to the fixed-amount) that b
 /limitedTimeChat remove
 
 
-user group permissions:
-	limitedTimeChat.setUpAndRemove
-		allows setting up the limited-time chat and removing that setup as well
+=== Permission Definitions ===
 
-	limitedTimeChat.showInfo
-		allows showing info on the limited-time chat setup
+	limitedTimeChat.setUp
+		Permits setting up the limited-time chat.
 
-	limitedTimeChat.startAndStop
-		allows starting and stopping the limited-time chat
+	limitedTimeChat.show:singleton
+		Permits showing the info of the limited-time chat setup.
+
+	limitedTimeChat.start&stop:singleton
+		Permits starting and stopping the limited-time chat.
+
+	limitedTimeChat.remove:singleton
+		Permits removing the limited-time chat setup.
 
 
 TODO: rename to "Rotating Chat" or something like that?

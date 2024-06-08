@@ -1,0 +1,15 @@
+=== Permission Definitions ===
+
+	The resource <command> is identified by its name.
+
+	macroCommands.create
+		Permits creating new macro commands.
+
+	macroCommands.list
+		Permits listing all macro commands the user has access to. (depends on other granted permissions)
+
+	macroCommands.enable&disable:<command>
+		Permits enabling & disabling the macro command <command>.
+
+	macroCommands.remove:<command>
+		Permits removing the macro command <command>.

@@ -176,46 +176,50 @@ examples:
 
 
 
-permissions:
-	userGroups.addAndEditHierarchy
-		allows adding new user groups and editing the hierarchy of all the groups below the user's highest one
+=== Permission Definitions ===
 
-	userGroups.listRestricted
-		allows listing the users highest user group and all user groups that are below the highest one
+	The resource <userGroup> is identified by its name.
 
-	userGroups.listAll
-		allows listing all user groups
+	userGroups.create&editHierarchy
+		Permits creating a new user group and editing the hierarchy of all the groups below the user's highest one.
 
-	userGroups.show:<userGroupName>
-		allows showing the details of the user group with the name <userGroupName> if that group is the user's highest
-		user group or if it is below the highest one
+	userGroups.list
+		Permits listing the user's highest user group and all user groups that are below the highest one.
 
-	userGroups.edit:<userGroupName>
-		allows editing (which includes renaming) the user group with the name <userGroupName> if that group is below
-		that user's highest user group
-		users can only add implied groups that are below their highest group
-		users can only add permissions that they themselves have
+	userGroups.show
+		Permits showing the details of the user's highest user group and all user groups that are below the highest one.
+
+	userGroups.edit:<userGroup>
+		Permits editing the user group <userGroup> if that group is below the user's highest user group.
+		Users can only add permissions that they themselves have.
 
 	userGroups.remove:<userGroupName>
-		allows removing the user group with the name <userGroupName> if that group is below that user's highest
-		user group
-
-
-	bot.shutDown
-		allows the bot to be shut down
+		Permits removing the user group <userGroupName> if that group is below that user's highest user group-
 
 
 ------
 
 
-Plebs:
+Everyone:
 	implied groups: (none)
 
 	member inclusion rules:
 		include everyone
 
 	permissions:
+		polls.vote:[owned by user group "Plebs"]
+
+Plebs:
+	implied groups:
+		Everyone
+
+	member inclusion rules:
+		include role <zebra enjoyer role snowflake id>
+
+	permissions:
 		polls.create
+		polls.vote:[*]
+		polls.close:[owned by self]
 
 Staff:
 	implied groups:
@@ -225,7 +229,7 @@ Staff:
 		include role <staff role snowflake id>
 
 	permissions:
-		shareDateTime.use
+		dateTimeSharing.use
 
 Moderators:
 	implied groups:
@@ -235,13 +239,13 @@ Moderators:
 		include role <moderators role snowflake id>
 
 	permissions:
-		userGroups.listRestricted
+		userGroups.list
 		userGroups.show
 
-		polls.close
+		polls.close:[owned by user group "Staff"]
 
 		autoChannelsSorting.show:*
-		autoChannelsSorting.enableDisable:*
+		autoChannelsSorting.enable&disable:*
 
 Maintainers:
 	implied groups:
@@ -251,10 +255,10 @@ Maintainers:
 		include role <maintainers role snowflake id>
 
 	permissions:
+		polls.*
 		userGroups.*
 		autoChannelsSorting.*
-		twitch.use
-		bot.shutDown
+		twitchIntegration.*
 
 Admins:
 	implied groups:

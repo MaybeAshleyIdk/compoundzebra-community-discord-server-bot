@@ -19,3 +19,9 @@ do that with context actions (or whatever it's called) and modals? (right clicki
 
 whatever we're gonna go with, DON'T do it via custom (guild) commands, because that is public for other members to see
 we could do it with custom commands in dms. would need to system to separate private channel- and guild commands
+
+
+=== Permission Definitions ===
+
+	subscribedKeywords.use
+		Permits using subscribed keywords.

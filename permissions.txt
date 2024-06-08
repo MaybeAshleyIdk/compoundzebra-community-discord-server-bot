@@ -1,0 +1,59 @@
+the bot's user permission system is used by various features to restrict actions and access of resources of commands to
+certain permitted users
+
+most features of the bot work with "shared resources"
+shared resources --- or just resources for short --- can be anything from the set-up twitch integration to
+scheduled messages to polls.
+every resource has an owner, which is the user that created the resource
+
+note that users themselves are also considered resources
+this is just because only one feature has permissions focused on guild members, so adding a system of members would be
+too much work for a single feature, that feature being emoji stats
+
+
+permission patterns:
+	ebnf:
+		NamespaceName ::= [a-z][A-Za-z0-9]*
+		NamespaceQualifier ::= NamespaceName ( "." NamespaceName )*
+
+		PermissionActionName ::= [a-z][A-Za-z0-9]*
+		PermissionName ::= PermissionActionName ( "&" PermissionActionName )*
+
+		PermissionId ::= NamespaceQualifier "." PermissionName
+
+
+		resourceAccessByIdentification ::= "identified" ws+ "by" ws+ TODO
+		resourceAccessSingleton        ::= "singleton"
+		resourceAccessByOwnedUserGroup ::= "owned" ws+ "by" ws+ "user" ws+ "group" ws+ TODO
+		resourceAccessByOwnedSelf      ::= "owned" ws+ "by" ws+ "self"
+		resourceAccessWildcard         ::= "*"
+		ResourceAccess ::= "[" ws*
+		                   ( resourceAccessByIdentification
+		                   | resourceAccessSingleton
+		                   | resourceAccessByOwnedUserGroup
+		                   | resourceAccessByOwnedSelf
+		                   | resourceAccessWildcard
+		                   )
+		                   ws* "]"
+
+		PermissionPattern ::= PermissionId ( ":" ResourceAccess )?
+
+
+	scheduledMessages.create
+	scheduledMessages.enable&disable:[owned by self]
+	scheduledMessages.remove:[owned by self]
+
+	polls.close:[identified by ""]
+	polls.close:[singleton]
+	polls.close:[owned by user group "Plebs"]
+	polls.close:[owned by self]
+	polls.close:[*]
+
+
+perms common <-- perms def
+
+perms common <-- perms pattern
+user group name <-- perms pattern
+
+perms pattern <-- user groups
+user group name <-- user groups

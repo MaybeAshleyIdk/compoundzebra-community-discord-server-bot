@@ -57,9 +57,15 @@ TODO: check if this is actually possible
 
 
 
-user group permissions:
-	polls.openNew
-		allows creating and opening new polls
+=== Permission Definitions ===
 
-	polls.closeAny
-		allows closing any polls
+	The resource <poll> is identified by its internal ID.
+
+	polls.open
+		Permits opening up new polls.
+
+	polls.vote:<poll>
+		Permits voting on the poll <poll>.
+
+	polls.close:<poll>
+		Permits closing the poll <poll>.

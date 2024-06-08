@@ -115,8 +115,24 @@ possible kotlin code:
 	}
 	```
 
-user group permissions:
+=== Permission Definitions ===
+
+	The resource <scheduledMessage> is identified by its internal ID.
+
+	scheduledMessages.create
+		Permits creating a new scheduled message.
+
+	scheduledMessages.show:<scheduledMessage>
+		Permits showing the details of the scheduled message <scheduledMessage>.
+
 	scheduledMessages.list
-	scheduledMessages.show
-	scheduledMessages.createAndEditAndRemove
-	scheduledMessages.enableAndDisable
+		Permits listing all scheduled messages the user has access to (depends on other granted permissions).
+
+	scheduledMessages.edit:<scheduledMessage>
+		Permits editing the details of the scheduled message <scheduledMessage>.
+
+	scheduledMessages.enable&disable:<scheduledMessage>
+		Permits enabling and disabling the scheduled message <scheduledMessage>.
+
+	scheduledMessages.remove:<scheduledMessage>
+		Permits removing the scheduled message <scheduledMessage>.

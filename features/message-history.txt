@@ -23,6 +23,7 @@ max threads is 3
 very unlikely that more moderators are gonna use it at the same time
 
 
-user group permissions:
-	messageHistoryBackup.view
-		allows viewing, querying and searching the message history backup
+=== Permission Definitions ===
+
+	messageHistory.view
+		Permits viewing, querying and searching the backed-up message history.

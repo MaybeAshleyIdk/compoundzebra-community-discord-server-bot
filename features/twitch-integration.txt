@@ -31,6 +31,10 @@ use twitch API and send message to guild target channel if the twitch channel go
 if the channel goes offline for less than 5 minutes before going live again, don't send another message
 
 
-user group permissions:
-	twitchIntegration.setupAndRemove
-		allows setting-up and removal of the twitch integration
+=== Permission Definitions ===
+
+	twitchIntegration.setUp
+		Permits setting up the Twitch integration.
+
+	twitchIntegration.remove:singleton
+		Permits removing the Twitch integration setup.

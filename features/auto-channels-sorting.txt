@@ -86,19 +86,21 @@ db stored rules syntax ebnf:
 	channel-rules ::= channel-rule ('\n' channel-rule)*
 
 
-user group permissions:
-	autoChannelsSorting.edit:<channelCategorySnowflakeId>
-		allows editing the auto channels sorting rules for the channel category with
-		the snowflake id <channelCategorySnowflakeId>
+=== Permission Definitions ===
 
-	autoChannelsSorting.show:<channelCategorySnowflakeId>
-		allows showing the auto channels sorting setup for the channel category with
-		the snowflake id <channelCategorySnowflakeId>
+	The resource <channelCategory> is identified by its snowflake ID.
 
-	autoChannelsSorting.enableAndDisable:<channelCategorySnowflakeId>
-		allows enabling and disabling the auto channels sorting for the channel category with
-		the snowflake id <channelCategorySnowflakeId>
+	autoChannelsSorting.setUp
+		Permits adding a auto channels sorting setup to any channel category.
 
-	autoChannelsSorting.remove:<channelCategorySnowflakeId>
-		allows removing the auto channels sorting setup for the channel category with
-		the snowflake id <channelCategorySnowflakeId>
+	autoChannelsSorting.show:<channelCategory>
+		Permits showing the auto channels sorting setup for the channel category <channelCategory>.
+
+	autoChannelsSorting.edit:<channelCategory>
+		Permits editing the auto channels sorting setup for the channel category <channelCategory>.
+
+	autoChannelsSorting.enable&disable:<channelCategory>
+		Permits enabling and disabling the auto channels sorting setup for the channel category <channelCategory>.
+
+	autoChannelsSorting.remove:<channelCategory>
+		Permits removing the auto channels sorting setup for the channel category <channelCategory>.
