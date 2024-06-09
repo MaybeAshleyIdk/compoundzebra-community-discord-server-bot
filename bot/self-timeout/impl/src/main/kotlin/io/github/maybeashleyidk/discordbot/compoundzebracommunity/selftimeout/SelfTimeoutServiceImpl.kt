@@ -1,7 +1,7 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.MutableMutexValue
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutinesatomic.AtomicVal
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutinesjda.await
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.strings.quoted
 import kotlinx.coroutines.sync.Mutex
@@ -36,8 +36,7 @@ public class SelfTimeoutServiceImpl @Inject constructor(
 		var currentDuration: Duration = SelfTimeoutServiceImpl.INITIAL_TIMEOUT_DURATION
 	}
 
-	private val infoMap: MutableMutexValue<MutableMap<GuildMemberKey, SelfTimeoutMemberInfo>> =
-		MutableMutexValue(HashMap())
+	private val infoMap: AtomicVal<MutableMap<GuildMemberKey, SelfTimeoutMemberInfo>> = AtomicVal(HashMap())
 
 	override suspend fun timeOutMember(member: Member) {
 		val guild: Guild = member.guild

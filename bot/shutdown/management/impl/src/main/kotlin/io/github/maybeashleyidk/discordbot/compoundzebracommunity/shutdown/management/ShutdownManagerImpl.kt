@@ -4,8 +4,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbacks.OnAfterShutdownCallback
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbacks.OnBeforeShutdownCallback
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.management.ShutdownManager.EventHandlingResultStatus
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.ImmutableMutexValue
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.MutableMutexValue
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutinesatomic.AtomicVal
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutinesatomic.AtomicVar
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.Semaphore
@@ -38,12 +38,10 @@ public class ShutdownManagerImpl @Inject constructor(
 
 	private val shutdownMutex: Mutex = Mutex()
 
-	private val onBeforeShutdownCallbacks: MutableMutexValue<MutableList<OnBeforeShutdownCallback>> =
-		MutableMutexValue(ArrayList())
-	private val onAfterShutdownCallbacks: MutableMutexValue<MutableList<OnAfterShutdownCallback>> =
-		MutableMutexValue(ArrayList())
+	private val onBeforeShutdownCallbacks: AtomicVal<MutableList<OnBeforeShutdownCallback>> = AtomicVal(ArrayList())
+	private val onAfterShutdownCallbacks: AtomicVal<MutableList<OnAfterShutdownCallback>> = AtomicVal(ArrayList())
 
-	private val currentState: ImmutableMutexValue<State> = ImmutableMutexValue(State.RUNNING)
+	private val currentState: AtomicVar<State> = AtomicVar(State.RUNNING)
 
 	private val shutdownRequested: AtomicBoolean = AtomicBoolean(false)
 	private val shutdownRequestSemaphore: Semaphore = Semaphore(1, acquiredPermits = 1)
@@ -211,16 +209,16 @@ public class ShutdownManagerImpl @Inject constructor(
 		val onBeforeShutdownCallbacks: List<OnBeforeShutdownCallback> =
 			this.onBeforeShutdownCallbacks.visit { onBeforeShutdownCallbacks: MutableList<OnBeforeShutdownCallback> ->
 				val isRunning: Boolean =
-					this.currentState.visit { currentStateRef: ImmutableMutexValue.Ref<State> ->
+					this.currentState.visit { currentStateHandle: AtomicVar.Handle<State> ->
 						val isRunning: Boolean =
-							when (val currentState: State = currentStateRef.get()) {
+							when (val currentState: State = currentStateHandle.get()) {
 								State.RUNNING -> true
 								State.SHUTTING_DOWN -> error("Current state must not be $currentState")
 								State.SHUT_DOWN -> false
 							}
 
 						if (isRunning) {
-							currentStateRef.set(State.SHUTTING_DOWN)
+							currentStateHandle.set(State.SHUTTING_DOWN)
 						}
 
 						isRunning
@@ -292,7 +290,7 @@ public class ShutdownManagerImpl @Inject constructor(
 	}
 }
 
-private fun <T, R> MutableMutexValue<T>.visitBlocking(block: suspend (T) -> R): R {
+private fun <T, R> AtomicVal<T>.visitBlocking(block: suspend (T) -> R): R {
 	return runBlocking {
 		this@visitBlocking.visit(block)
 	}

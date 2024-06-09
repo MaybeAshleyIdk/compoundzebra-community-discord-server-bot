@@ -7,7 +7,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.id.PollI
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOption
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOptionLabel
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOptionValue
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.MutableMutexValue
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutinesatomic.AtomicVal
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.strings.quoted
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Member
@@ -20,7 +20,7 @@ public class PollManagerImpl @Inject constructor(
 	private val logger: Logger,
 ) : PollManager {
 
-	private val activePolls: MutableMutexValue<MutableMap<PollId, PollDetails>> = MutableMutexValue(HashMap())
+	private val activePolls: AtomicVal<MutableMap<PollId, PollDetails>> = AtomicVal(HashMap())
 
 	override suspend fun openNewPoll(
 		author: Member,
@@ -66,9 +66,7 @@ public class PollManagerImpl @Inject constructor(
 	}
 
 	override suspend fun getPollDetailsByIdOrNull(pollId: PollId): PollDetails? {
-		return this.activePolls.visit { activePolls: MutableMap<PollId, PollDetails> ->
-			activePolls[pollId]
-		}
+		return this.activePolls.get()[pollId]
 	}
 
 	override suspend fun voteOption(pollId: PollId, voterMember: Member, optionValue: PollOptionValue): PollDetails? {

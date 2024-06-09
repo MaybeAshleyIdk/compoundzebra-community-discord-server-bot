@@ -11,7 +11,7 @@ dependencies {
 
 	implementation(projects.bot.snowflakeGenerator)
 	implementation(projects.bot.utils.strings)
-	implementation(projects.bot.utils.coroutines)
+	implementation(projects.bot.utils.coroutinesAtomic)
 
 	implementation(libs.kotlinxCoroutinesCore)
 
