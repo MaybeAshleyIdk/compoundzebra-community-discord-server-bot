@@ -29,6 +29,7 @@ include {
 
 			"coroutines"()
 			"coroutines-read-write-mutex"()
+			"coroutines-atomic"()
 
 			"coroutines-jda"()
 		}
