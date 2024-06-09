@@ -27,7 +27,6 @@ include {
 		"utils" {
 			"strings"()
 
-			"coroutines"()
 			"coroutines-read-write-mutex"()
 			"coroutines-atomic"()
 
