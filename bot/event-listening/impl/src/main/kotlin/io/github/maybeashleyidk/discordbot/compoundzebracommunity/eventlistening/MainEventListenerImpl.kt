@@ -1,14 +1,14 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistening
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventhandler.EventHandler
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.genericeventhandler.GenericEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventhandlermediation.MessageEventHandlerMediator
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polleventlistening.PollEventListener
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.eventhandling.PollEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.privatemessageeventhandling.PrivateMessageEventHandler
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdowncallbackregistry.ShutdownCallbackRegistry
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdowncallbacks.OnAfterShutdownCallback
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdowncallbacks.OnBeforeShutdownCallback
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdowneventhandler.ShutdownEventHandler
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbackregistraton.ShutdownCallbackRegistry
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbacks.OnAfterShutdownCallback
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbacks.OnBeforeShutdownCallback
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.eventhandling.ShutdownEventHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.asCoroutineDispatcher
@@ -27,7 +27,7 @@ public class MainEventListenerImpl @Inject constructor(
 	private val shutdownEventHandler: ShutdownEventHandler,
 	shutdownCallbackRegistry: ShutdownCallbackRegistry,
 	messageEventHandlerMediator: MessageEventHandlerMediator,
-	pollEventListener: PollEventListener,
+	pollEventHandler: PollEventHandler,
 	privateMessageEventHandler: PrivateMessageEventHandler,
 ) : MainEventListener {
 
@@ -38,10 +38,10 @@ public class MainEventListenerImpl @Inject constructor(
 		const val EVENT_HANDLERS_THREAD_POOL_TERMINATION_TIMEOUT_MS: Long = 7500
 	}
 
-	private val otherEventHandlers: Set<EventHandler> =
+	private val otherEventHandlers: Set<GenericEventHandler> =
 		setOf(
 			messageEventHandlerMediator,
-			pollEventListener,
+			pollEventHandler,
 			privateMessageEventHandler,
 		)
 
@@ -86,7 +86,7 @@ public class MainEventListenerImpl @Inject constructor(
 		}
 
 		val eventHandlingJobs: List<Job> = this.otherEventHandlers
-			.map { eventHandler: EventHandler ->
+			.map { eventHandler: GenericEventHandler ->
 				// each event handler get its own coroutine scope
 				CoroutineScope(this.eventHandlersCoroutineContext)
 					.launch {
@@ -97,7 +97,7 @@ public class MainEventListenerImpl @Inject constructor(
 		eventHandlingJobs.joinAll()
 	}
 
-	private suspend fun executeEventHandler(eventHandler: EventHandler, event: GenericEvent) {
+	private suspend fun executeEventHandler(eventHandler: GenericEventHandler, event: GenericEvent) {
 		try {
 			eventHandler.handleEvent(event)
 		} catch (e: Throwable) {

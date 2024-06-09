@@ -1,5 +1,5 @@
 plugins {
-	PartitionedProject
+	buildSrc.projectStructure.composite
 	`java-library`
 }
 

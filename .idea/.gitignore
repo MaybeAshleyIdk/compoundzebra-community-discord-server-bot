@@ -2,6 +2,8 @@
 # the directory name containing said root project.
 /.name
 
+/compoundzebra-community-discord-server-bot.iml
+
 /compiler.xml
 /gradle.xml
 /jarRepositories.xml

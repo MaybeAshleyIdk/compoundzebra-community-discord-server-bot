@@ -21,6 +21,17 @@ include(
 )
 
 include(
+	":project-structure:project-name",
+	":project-structure:tree",
+	":project-structure:project-type",
+	":project-structure:project-policy",
+	":project-structure:project-type-policies",
+	":project-structure:enforcement",
+	":project-structure:markers",
+	":project-structure:subproject-creation",
+)
+
+include(
 	":really-executable-jar",
 	":gzip",
 )

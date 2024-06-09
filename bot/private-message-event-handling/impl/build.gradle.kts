@@ -1,5 +1,6 @@
 plugins {
-	ImplProject
+	buildSrc.projectStructure.`service-implementation`.standalone
+
 	`java-library`
 	kotlin("jvm")
 }
@@ -10,5 +11,5 @@ dependencies {
 	implementation(projects.bot.logging)
 	implementation(projects.bot.utils)
 
-	implementation(libs.javax.inject)
+	implementation(libs.javaxInject)
 }

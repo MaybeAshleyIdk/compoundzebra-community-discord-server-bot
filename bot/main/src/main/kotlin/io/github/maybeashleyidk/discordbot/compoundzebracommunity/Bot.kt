@@ -1,7 +1,7 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdowncallbackregistry.awaitShutdown
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbackregistraton.awaitShutdown
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.token.BotToken
 import kotlinx.coroutines.runBlocking
 import net.dv8tion.jda.api.entities.Activity

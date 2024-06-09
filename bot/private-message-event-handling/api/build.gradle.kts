@@ -1,9 +1,10 @@
 plugins {
-	ApiProject
+	buildSrc.projectStructure.`service-interface`
+
 	`java-library`
 	kotlin("jvm")
 }
 
 dependencies {
-	api(projects.bot.eventHandler)
+	api(projects.bot.genericEventHandler)
 }

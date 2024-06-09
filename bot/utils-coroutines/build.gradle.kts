@@ -1,9 +1,10 @@
 plugins {
-	StandaloneProject
+	buildSrc.projectStructure.standalone
+
 	`java-library`
 	kotlin("jvm")
 }
 
 dependencies {
-	implementation(libs.kotlinx.coroutines.core)
+	implementation(libs.kotlinxCoroutinesCore)
 }

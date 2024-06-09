@@ -1,10 +1,16 @@
 rootProject.name = "compoundzebra-community-discord-server-bot"
 
 pluginManagement {
+	includeBuild(rootProject.projectDir.resolve("include-dsl").toString())
+
 	repositories {
 		mavenCentral()
 		gradlePluginPortal()
 	}
+}
+
+plugins {
+	id("include-dsl")
 }
 
 dependencyResolutionManagement {
@@ -16,186 +22,103 @@ dependencyResolutionManagement {
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-@Suppress("ktlint:standard:no-blank-line-in-list")
-include(
-	":bot:utils",
-	":bot:utils-coroutines",
-	":bot:utils-coroutines-jda",
+include {
+	"bot" {
+		"utils"()
+		"utils-coroutines"()
+		"utils-coroutines-jda"()
 
-	":bot:environment-type",
+		"environment-type"()
 
-	":bot:token",
+		"token"()
 
-	":bot:logging:api",
-	":bot:logging:impl-stderr",
-	":bot:logging:wiring",
-	":bot:logging",
+		"logging".service(impl = "stderr")
 
-	":bot:snowflake",
-	":bot:snowflake-generator",
+		"snowflake"()
+		"snowflake-generator"()
 
-	// region config
+		"config"()
+		"config-serialization".service(impl = "json")
+		"config-source".service(impl = "file")
+		"config-cache".service(impl = "memory")
+		"config-supplier".service(impl = "cache")
 
-	":bot:config",
+		"generic-event-handler"()
 
-	":bot:config-serialization:api",
-	":bot:config-serialization:impl-json",
-	":bot:config-serialization:wiring",
-	":bot:config-serialization",
+		"emoji-stats".service()
 
-	":bot:config-source:api",
-	":bot:config-source:impl-file",
-	":bot:config-source:wiring",
-	":bot:config-source",
+		"polls" {
+			"id"()
+			"description"()
+			"option"()
+			"details"()
 
-	":bot:config-cache:api",
-	":bot:config-cache:impl-memory",
-	":bot:config-cache:wiring",
-	":bot:config-cache",
+			"management".service()
+			"creation".service(impl = "manager")
+			"holding".service(impl = "manager")
+			"modification".service(impl = "manager")
 
-	":bot:config-supplier:api",
-	":bot:config-supplier:impl-cache",
-	":bot:config-supplier:wiring",
-	":bot:config-supplier",
+			"component-protocol"()
 
-	// endregion
+			"event-handling".service()
 
-	":bot:event-handler",
+			"wiring"()
+		}
 
-	":bot:emoji-stats:api",
-	":bot:emoji-stats:impl",
-	":bot:emoji-stats:wiring",
-	":bot:emoji-stats",
+		"self-timeout".service()
 
-	// region polls
+		"shutdown" {
+			"callbacks"()
 
-	":bot:poll-id",
-	":bot:poll-description",
-	":bot:poll-option",
-	":bot:poll-details",
+			"management".service()
+			"event-handling".service(impl = "manager")
+			"callback-registration".service(impl = "manager")
+			"requesting".service(impl = "manager")
 
-	":bot:poll-management:api",
-	":bot:poll-management:impl",
-	":bot:poll-management:wiring",
-	":bot:poll-management",
+			"wiring"()
+		}
 
-	":bot:poll-creation:api",
-	":bot:poll-creation:impl-manager",
-	":bot:poll-creation:wiring",
-	":bot:poll-creation",
+		"commands" {
+			"name"()
+			"prefix"()
 
-	":bot:poll-holding:api",
-	":bot:poll-holding:impl-manager",
-	":bot:poll-holding:wiring",
-	":bot:poll-holding",
+			"message-event-handling".service {
+				"message-parser"()
+				"command"()
 
-	":bot:poll-modification:api",
-	":bot:poll-modification:impl-manager",
-	":bot:poll-modification:wiring",
-	":bot:poll-modification",
+				"built-in-commands" {
+					"coin-flip"()
+					"config"()
+					"dev"()
+					"emoji-stats"()
+					"magic8ball"()
+					"polls"()
+					"rng"()
+					"self-timeout"()
+					"shutdown"()
+					"source-code"()
+				}
+				"built-in-commands-wiring"()
 
-	":bot:poll-component-protocol",
+				"predefined-response-command"()
 
-	":bot:poll-event-listening:api",
-	":bot:poll-event-listening:impl",
-	":bot:poll-event-listening:wiring",
-	":bot:poll-event-listening",
+				"event-handler-impl"()
+				"wiring"()
+			}
+		}
 
-	// endregion
+		"conditional-message-event-handling".service()
 
-	":bot:self-timeout:api",
-	":bot:self-timeout:impl",
-	":bot:self-timeout:wiring",
-	":bot:self-timeout",
+		"message-event-handler-mediation".service()
 
-	// region shutdown
+		"private-message-event-handling".service()
 
-	":bot:shutdown-callbacks",
+		"event-listening".service()
 
-	":bot:shutdown-manager:api",
-	":bot:shutdown-manager:impl",
-	":bot:shutdown-manager:wiring",
-	":bot:shutdown-manager",
+		"jda-factory"()
+		"wiring"()
+		"main"()
+	}
 
-	":bot:shutdown-event-handling:api",
-	":bot:shutdown-event-handling:impl-manager",
-	":bot:shutdown-event-handling:wiring",
-	":bot:shutdown-event-handling",
-
-	":bot:shutdown-callback-registry:api",
-	":bot:shutdown-callback-registry:impl-manager",
-	":bot:shutdown-callback-registry:wiring",
-	":bot:shutdown-callback-registry",
-
-	":bot:shutdown-request:api",
-	":bot:shutdown-request:impl-manager",
-	":bot:shutdown-request:wiring",
-	":bot:shutdown-request",
-
-	// endregion
-
-	":bot:command-name",
-
-	":bot:command-prefix",
-
-	// region command message event handling
-
-	":bot:command-message-event-handling:api",
-
-	// region implementation
-
-	":bot:command-message-event-handling:impl:message-parser",
-	":bot:command-message-event-handling:impl:command",
-
-	":bot:command-message-event-handling:impl:built-in-commands:coin-flip",
-	":bot:command-message-event-handling:impl:built-in-commands:config",
-	":bot:command-message-event-handling:impl:built-in-commands:dev",
-	":bot:command-message-event-handling:impl:built-in-commands:emoji-stats",
-	":bot:command-message-event-handling:impl:built-in-commands:magic8ball",
-	":bot:command-message-event-handling:impl:built-in-commands:polls",
-	":bot:command-message-event-handling:impl:built-in-commands:rng",
-	":bot:command-message-event-handling:impl:built-in-commands:self-timeout",
-	":bot:command-message-event-handling:impl:built-in-commands:shutdown",
-	":bot:command-message-event-handling:impl:built-in-commands:source-code",
-	":bot:command-message-event-handling:impl:built-in-commands",
-
-	":bot:command-message-event-handling:impl:predefined-response-command",
-	":bot:command-message-event-handling:impl:core",
-	":bot:command-message-event-handling:impl:wiring",
-	":bot:command-message-event-handling:impl",
-
-	// endregion
-
-	":bot:command-message-event-handling:wiring",
-
-	":bot:command-message-event-handling",
-
-	// endregion
-
-	":bot:conditional-message-event-handling:api",
-	":bot:conditional-message-event-handling:impl",
-	":bot:conditional-message-event-handling:wiring",
-	":bot:conditional-message-event-handling",
-
-	":bot:message-event-handler-mediation:api",
-	":bot:message-event-handler-mediation:impl",
-	":bot:message-event-handler-mediation:wiring",
-	":bot:message-event-handler-mediation",
-
-	":bot:private-message-event-handling:api",
-	":bot:private-message-event-handling:impl",
-	":bot:private-message-event-handling:wiring",
-	":bot:private-message-event-handling",
-
-	":bot:event-listening:api",
-	":bot:event-listening:impl",
-	":bot:event-listening:wiring",
-	":bot:event-listening",
-
-	":bot:jda-factory",
-	":bot:wiring",
-	":bot:main",
-	":bot",
-
-	":main",
-)
+	"main"()
+}

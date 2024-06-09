@@ -5,7 +5,7 @@ import dagger.Component
 import dagger.Lazy
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdowncallbackregistry.ShutdownCallbackRegistry
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbackregistraton.ShutdownCallbackRegistry
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.token.BotToken
 import net.dv8tion.jda.api.entities.Activity
 import java.nio.file.Path

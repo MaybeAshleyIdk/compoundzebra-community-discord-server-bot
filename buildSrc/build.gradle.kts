@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 
 plugins {
-	`kotlin-dsl`
+	`kotlin-dsl` apply false
 }
 
 allprojects {
@@ -14,6 +14,9 @@ allprojects {
 
 dependencies {
 	api(projects.conventions)
+
+	api(projects.projectStructure.markers)
+	api(projects.projectStructure.subprojectCreation)
 
 	api(projects.reallyExecutableJar)
 	api(projects.gzip)

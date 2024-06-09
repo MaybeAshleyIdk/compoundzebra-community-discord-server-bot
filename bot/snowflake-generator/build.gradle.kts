@@ -1,5 +1,5 @@
 plugins {
-	StandaloneProject
+	buildSrc.projectStructure.standalone
 	`java-library`
 	kotlin("jvm")
 }

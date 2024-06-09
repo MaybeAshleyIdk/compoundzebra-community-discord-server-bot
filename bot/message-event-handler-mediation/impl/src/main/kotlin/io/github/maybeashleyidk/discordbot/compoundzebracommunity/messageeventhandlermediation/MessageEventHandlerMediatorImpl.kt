@@ -1,6 +1,6 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventhandlermediation
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandmessageeventhandling.CommandMessageEventHandler
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.CommandMessageEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalmessageeventhandling.ConditionalMessageEventHandler
 import kotlinx.coroutines.coroutineScope
 import net.dv8tion.jda.api.events.GenericEvent

@@ -1,19 +1,20 @@
 plugins {
-	ImplProject
+	buildSrc.projectStructure.`service-implementation`.standalone
+
 	`java-library`
 	kotlin("jvm")
 }
 
 dependencies {
 	api(projects.bot.eventListening.api)
-	api(projects.bot.shutdownCallbackRegistry)
-	api(projects.bot.shutdownEventHandling)
+	api(projects.bot.shutdown.callbackRegistration)
+	api(projects.bot.shutdown.eventHandling)
 	api(projects.bot.messageEventHandlerMediation)
-	api(projects.bot.pollEventListening)
+	api(projects.bot.polls.eventHandling)
 	api(projects.bot.privateMessageEventHandling)
 	api(projects.bot.logging)
 
-	implementation(libs.kotlinx.coroutines.core)
+	implementation(libs.kotlinxCoroutinesCore)
 
-	implementation(libs.javax.inject)
+	implementation(libs.javaxInject)
 }

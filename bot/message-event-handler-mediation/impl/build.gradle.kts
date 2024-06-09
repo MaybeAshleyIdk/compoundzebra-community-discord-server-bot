@@ -1,15 +1,16 @@
 plugins {
-	ImplProject
+	buildSrc.projectStructure.`service-implementation`.standalone
+
 	`java-library`
 	kotlin("jvm")
 }
 
 dependencies {
 	api(projects.bot.messageEventHandlerMediation.api)
-	api(projects.bot.commandMessageEventHandling)
+	api(projects.bot.commands.messageEventHandling)
 	api(projects.bot.conditionalMessageEventHandling)
 
-	implementation(libs.kotlinx.coroutines.core)
+	implementation(libs.kotlinxCoroutinesCore)
 
-	implementation(libs.javax.inject)
+	implementation(libs.javaxInject)
 }

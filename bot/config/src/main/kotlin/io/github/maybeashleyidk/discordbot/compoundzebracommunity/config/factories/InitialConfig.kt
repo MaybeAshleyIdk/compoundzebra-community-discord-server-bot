@@ -1,6 +1,6 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.factories
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commandname.CommandName
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.name.CommandName
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Action
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.CommandDefinition
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config

@@ -1,14 +1,13 @@
 plugins {
-	StandaloneProject
+	buildSrc.projectStructure.standalone
+
 	`java-library`
 	kotlin("jvm")
 }
 
 dependencies {
-	api(libs.jda) {
-		exclude(module = "opus-java")
-	}
+	api(`jda-without-opusJava`)
 	api(projects.bot.eventListening)
 
-	implementation(libs.javax.inject)
+	implementation(libs.javaxInject)
 }

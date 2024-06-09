@@ -4,7 +4,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.reallyex
 import java.io.FileNotFoundException
 
 plugins {
-	StandaloneProject
+	buildSrc.projectStructure.standalone
 
 	application
 	kotlin("jvm")

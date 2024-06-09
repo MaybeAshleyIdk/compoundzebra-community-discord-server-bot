@@ -6,18 +6,18 @@ moshi = "1.15.1"
 dagger = "2.51.1"
 
 [libraries]
-kotlinx-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1"
+kotlinxCoroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1"
 
 jda = "net.dv8tion:JDA:5.0.0-beta.24"
 
 okio = "com.squareup.okio:okio:3.9.0"
 
 moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
-moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
+moshiKotlinCodegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
 
-javax-inject = "javax.inject:javax.inject:1"
+javaxInject = "javax.inject:javax.inject:1"
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+daggerCompiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 
 junit-jupiter = "org.junit.jupiter:junit-jupiter:5.10.2"
 junit-platformLauncher = "org.junit.platform:junit-platform-launcher:1.10.2"

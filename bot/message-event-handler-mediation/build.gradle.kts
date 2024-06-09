@@ -1,5 +1,5 @@
 plugins {
-	ApiImplWiringProject
+	buildSrc.projectStructure.service
 	`java-library`
 }
 
