@@ -26,6 +26,7 @@ include {
 	"bot" {
 		"utils" {
 			"strings"()
+			"sequences"()
 
 			"coroutines-read-write-mutex"()
 			"coroutines-atomic"()
