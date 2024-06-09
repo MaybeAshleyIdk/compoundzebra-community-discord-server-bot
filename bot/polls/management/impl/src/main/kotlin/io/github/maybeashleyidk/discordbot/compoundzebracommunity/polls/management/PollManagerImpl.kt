@@ -7,8 +7,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.id.PollI
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOption
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOptionLabel
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOptionValue
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.quoted
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutines.MutableMutexValue
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.MutableMutexValue
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.strings.quoted
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Member
 import javax.inject.Inject

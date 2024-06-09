@@ -1,6 +1,6 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.prefix
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.quoted
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.strings.quoted
 
 @JvmInline
 public value class CommandPrefix private constructor(private val string: String) {

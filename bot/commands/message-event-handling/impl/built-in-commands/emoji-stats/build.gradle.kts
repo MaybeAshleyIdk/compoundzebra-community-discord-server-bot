@@ -10,7 +10,7 @@ dependencies {
 	api(projects.bot.configSupplier)
 	api(projects.bot.emojiStats)
 
-	implementation(projects.bot.utilsCoroutinesJda)
+	implementation(projects.bot.utils.coroutinesJda)
 
 	implementation(libs.javaxInject)
 }

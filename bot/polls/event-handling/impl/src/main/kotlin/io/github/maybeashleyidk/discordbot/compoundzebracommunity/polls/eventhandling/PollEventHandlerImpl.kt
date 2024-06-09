@@ -7,7 +7,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.details.
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.id.PollId
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.modification.PollModifier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOptionValue
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutinesjda.await
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutinesjda.await
 import kotlinx.coroutines.coroutineScope
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.entities.Message

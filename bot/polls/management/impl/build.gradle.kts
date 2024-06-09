@@ -10,8 +10,8 @@ dependencies {
 	api(projects.bot.logging)
 
 	implementation(projects.bot.snowflakeGenerator)
-	implementation(projects.bot.utils)
-	implementation(projects.bot.utilsCoroutines)
+	implementation(projects.bot.utils.strings)
+	implementation(projects.bot.utils.coroutines)
 
 	implementation(libs.kotlinxCoroutinesCore)
 

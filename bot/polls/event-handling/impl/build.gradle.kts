@@ -11,7 +11,7 @@ dependencies {
 	api(projects.bot.polls.modification)
 	api(projects.bot.configSupplier)
 
-	implementation(projects.bot.utilsCoroutinesJda)
+	implementation(projects.bot.utils.coroutinesJda)
 
 	implementation(libs.kotlinxCoroutinesCore)
 

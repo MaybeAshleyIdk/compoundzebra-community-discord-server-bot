@@ -24,9 +24,11 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include {
 	"bot" {
-		"utils"()
-		"utils-coroutines"()
-		"utils-coroutines-jda"()
+		"utils" {
+			"strings"()
+			"coroutines"()
+			"coroutines-jda"()
+		}
 
 		"environment-type"()
 

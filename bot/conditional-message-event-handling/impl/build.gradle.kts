@@ -10,8 +10,8 @@ dependencies {
 	api(projects.bot.configSupplier)
 	api(projects.bot.logging)
 
-	implementation(projects.bot.utils)
-	implementation(projects.bot.utilsCoroutinesJda)
+	implementation(projects.bot.utils.strings)
+	implementation(projects.bot.utils.coroutinesJda)
 
 	implementation(libs.kotlinxCoroutinesCore)
 
