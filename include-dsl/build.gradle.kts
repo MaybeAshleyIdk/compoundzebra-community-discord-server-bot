@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 
 plugins {
@@ -7,6 +8,10 @@ plugins {
 allprojects {
 	plugins.withType<KotlinDslPlugin> {
 		extensions.configure<KotlinJvmProjectExtension> {
+			compilerOptions {
+				jvmTarget = JvmTarget.JVM_21
+			}
+
 			explicitApi()
 		}
 	}
