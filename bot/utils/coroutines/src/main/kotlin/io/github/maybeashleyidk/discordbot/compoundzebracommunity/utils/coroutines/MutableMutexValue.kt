@@ -1,4 +1,4 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutines
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines
 
 import kotlinx.coroutines.sync.Mutex
 

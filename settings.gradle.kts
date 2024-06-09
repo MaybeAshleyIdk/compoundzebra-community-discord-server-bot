@@ -26,8 +26,8 @@ include {
 	"bot" {
 		"utils" {
 			"strings"()
+			"coroutines"()
 		}
-		"utils-coroutines"()
 		"utils-coroutines-jda"()
 
 		"environment-type"()

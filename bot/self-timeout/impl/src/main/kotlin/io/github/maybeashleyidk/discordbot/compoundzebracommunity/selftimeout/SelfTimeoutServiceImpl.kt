@@ -1,8 +1,8 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutines.MutableMutexValue
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.strings.quoted
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutines.MutableMutexValue
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutinesjda.await
 import kotlinx.coroutines.sync.Mutex
 import net.dv8tion.jda.api.Permission
