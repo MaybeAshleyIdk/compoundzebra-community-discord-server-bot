@@ -21,5 +21,5 @@ public interface ShutdownManager {
 
 	public suspend fun handleShutdownEvent(event: GenericEvent): EventHandlingResultStatus
 
-	public suspend fun requestShutdown()
+	public fun requestShutdown()
 }
