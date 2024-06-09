@@ -26,7 +26,10 @@ include {
 	"bot" {
 		"utils" {
 			"strings"()
-			"coroutines"()
+
+			"coroutines-read-write-mutex"()
+			"coroutines-atomic"()
+
 			"coroutines-jda"()
 		}
 

@@ -9,7 +9,7 @@ dependencies {
 	api(projects.bot.shutdown.management.api)
 	api(projects.bot.logging)
 
-	implementation(projects.bot.utils.coroutines)
+	implementation(projects.bot.utils.coroutinesAtomic)
 
 	implementation(libs.kotlinxCoroutinesCore)
 
