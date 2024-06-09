@@ -56,6 +56,13 @@ include {
 
 		"generic-event-handler"()
 
+		"experimental" {
+			"markdown" {
+				"models"()
+				"parsing"()
+			}
+		}
+
 		"emoji-stats".service()
 
 		"polls" {
