@@ -1,0 +1,3 @@
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.experimental.permissions.definition
+
+public sealed interface PermissionDefinition

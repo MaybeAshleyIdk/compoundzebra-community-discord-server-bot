@@ -12,6 +12,7 @@ pluginManagement {
 plugins {
 	id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
 	id("include-dsl")
+	id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 
 dependencyResolutionManagement {
@@ -56,6 +57,17 @@ include {
 		"config-supplier".service(impl = "cache")
 
 		"generic-event-handler"()
+
+		"experimental" {
+			"permissions" {
+				"namespace-name"()
+				//"namespace-qualifier"()
+				//"id"()
+				//"resource"()
+				//"definition"()
+				//"checking-api"()
+			}
+		}
 
 		"emoji-stats".service()
 
