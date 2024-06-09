@@ -12,7 +12,7 @@ dependencies {
 	api(projects.bot.polls.holding)
 	api(projects.bot.polls.componentProtocol)
 
-	implementation(projects.bot.utils)
+	implementation(projects.bot.utils.strings)
 	implementation(projects.bot.utilsCoroutinesJda)
 
 	implementation(libs.javaxInject)

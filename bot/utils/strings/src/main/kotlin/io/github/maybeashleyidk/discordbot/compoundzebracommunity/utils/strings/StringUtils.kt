@@ -1,4 +1,4 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.strings
 
 private val WHITESPACE_REGEX_PATTERN: Regex = Regex("\\s+")
 

@@ -11,7 +11,7 @@ dependencies {
 	api(projects.bot.commands.messageEventHandling.impl.command)
 	api(projects.bot.logging)
 
-	implementation(projects.bot.utils)
+	implementation(projects.bot.utils.strings)
 	implementation(projects.bot.utilsCoroutinesJda)
 
 	implementation(libs.kotlinxCoroutinesCore)

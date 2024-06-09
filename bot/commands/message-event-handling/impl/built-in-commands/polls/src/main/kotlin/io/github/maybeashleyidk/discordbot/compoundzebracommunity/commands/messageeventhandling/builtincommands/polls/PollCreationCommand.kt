@@ -10,7 +10,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.description.PollDescription
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOption
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOptionLabel
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.trimAndSqueezeWhitespace
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.strings.trimAndSqueezeWhitespace
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutinesjda.await
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.entities.Message

@@ -9,7 +9,7 @@ dependencies {
 	api(projects.bot.selfTimeout.api)
 	api(projects.bot.logging)
 
-	implementation(projects.bot.utils)
+	implementation(projects.bot.utils.strings)
 	implementation(projects.bot.utilsCoroutines)
 	implementation(projects.bot.utilsCoroutinesJda)
 

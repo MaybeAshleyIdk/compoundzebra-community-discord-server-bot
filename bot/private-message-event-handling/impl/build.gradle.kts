@@ -9,7 +9,7 @@ dependencies {
 	api(projects.bot.privateMessageEventHandling.api)
 
 	implementation(projects.bot.logging)
-	implementation(projects.bot.utils)
+	implementation(projects.bot.utils.strings)
 
 	implementation(libs.javaxInject)
 }
