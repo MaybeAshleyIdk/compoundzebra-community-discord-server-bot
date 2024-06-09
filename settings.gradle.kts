@@ -27,8 +27,8 @@ include {
 		"utils" {
 			"strings"()
 			"coroutines"()
+			"coroutines-jda"()
 		}
-		"utils-coroutines-jda"()
 
 		"environment-type"()
 

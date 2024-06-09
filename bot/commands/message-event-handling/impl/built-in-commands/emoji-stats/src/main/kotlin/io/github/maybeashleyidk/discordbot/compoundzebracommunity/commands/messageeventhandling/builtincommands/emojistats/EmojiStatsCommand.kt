@@ -5,7 +5,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.name.
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.emojistats.EmojiStatsManager
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutinesjda.await
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutinesjda.await
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.entities.emoji.CustomEmoji

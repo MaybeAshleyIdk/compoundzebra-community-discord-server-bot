@@ -11,7 +11,7 @@ dependencies {
 	api(projects.bot.logging)
 
 	implementation(projects.bot.utils.strings)
-	implementation(projects.bot.utilsCoroutinesJda)
+	implementation(projects.bot.utils.coroutinesJda)
 
 	implementation(libs.kotlinxCoroutinesCore)
 

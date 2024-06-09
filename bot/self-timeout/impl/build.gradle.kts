@@ -11,7 +11,7 @@ dependencies {
 
 	implementation(projects.bot.utils.strings)
 	implementation(projects.bot.utils.coroutines)
-	implementation(projects.bot.utilsCoroutinesJda)
+	implementation(projects.bot.utils.coroutinesJda)
 
 	implementation(libs.kotlinxCoroutinesCore)
 

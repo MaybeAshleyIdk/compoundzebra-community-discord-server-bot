@@ -13,7 +13,7 @@ dependencies {
 	api(projects.bot.polls.componentProtocol)
 
 	implementation(projects.bot.utils.strings)
-	implementation(projects.bot.utilsCoroutinesJda)
+	implementation(projects.bot.utils.coroutinesJda)
 
 	implementation(libs.javaxInject)
 }

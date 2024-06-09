@@ -1,4 +1,4 @@
-package io.github.maybeashleyidk.discordbot.compoundzebracommunity.utilscoroutinesjda
+package io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutinesjda
 
 import kotlinx.coroutines.future.await
 import net.dv8tion.jda.api.requests.RestAction

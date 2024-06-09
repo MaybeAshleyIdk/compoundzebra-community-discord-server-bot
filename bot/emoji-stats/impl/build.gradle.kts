@@ -9,7 +9,7 @@ dependencies {
 	api(projects.bot.emojiStats.api)
 	api(projects.bot.logging)
 
-	implementation(projects.bot.utilsCoroutinesJda)
+	implementation(projects.bot.utils.coroutinesJda)
 
 	implementation(libs.kotlinxCoroutinesCore)
 
