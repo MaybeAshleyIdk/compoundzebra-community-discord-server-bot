@@ -47,6 +47,11 @@ include {
 			"wiring"()
 		}
 
+		"experimental" {
+			"unicode"()
+			"word-pattern-matching"()
+		}
+
 		"config"()
 		"config-serialization".service(impl = "json")
 		"config-source".service(impl = "file")
