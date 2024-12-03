@@ -25,7 +25,7 @@ dependencies {
 	implementation(projects.bot.conditionalMessageEventHandling.wiring)
 	implementation(projects.bot.configCache.wiring)
 	implementation(projects.bot.configSerialization.implJson)
-	implementation(projects.bot.configSource.wiring)
+	implementation(projects.bot.configSource.implFile)
 	implementation(projects.bot.configSupplier.wiring)
 	implementation(projects.bot.emojiStats.wiring)
 	implementation(projects.bot.eventListening.wiring)
