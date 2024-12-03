@@ -6,10 +6,9 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import java.time.Instant
 import java.util.concurrent.locks.ReadWriteLock
 import java.util.concurrent.locks.ReentrantReadWriteLock
-import javax.inject.Inject
 import kotlin.concurrent.withLock
 
-public class MemoryConfigCache @Inject constructor(
+public class MemoryConfigCache(
 	private val configSource: ConfigSource,
 	private val logger: Logger,
 ) : ConfigCache {

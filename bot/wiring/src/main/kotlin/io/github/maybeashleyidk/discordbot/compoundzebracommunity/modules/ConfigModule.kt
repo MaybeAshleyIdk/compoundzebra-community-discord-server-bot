@@ -3,18 +3,20 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configcache.ConfigCacheModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configcache.ConfigCache
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configcache.MemoryConfigCache
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configserialization.ConfigJsonSerializer
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configserialization.ConfigSerializer
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsource.ConfigFileManager
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsource.ConfigSource
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplierModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import java.nio.file.Path
+import javax.inject.Singleton
 
 @Module(
 	includes = [
-		ConfigCacheModule::class,
 		ConfigSupplierModule::class,
 	],
 )
@@ -36,5 +38,11 @@ internal object ConfigModule {
 			botEnvironmentType,
 			configFilePath,
 		)
+	}
+
+	@Provides
+	@Singleton
+	fun provideConfigCache(configSource: ConfigSource, logger: Logger): ConfigCache {
+		return MemoryConfigCache(configSource, logger)
 	}
 }

@@ -23,7 +23,7 @@ dependencies {
 
 	implementation(projects.bot.commands.messageEventHandling.wiring)
 	implementation(projects.bot.conditionalMessageEventHandling.wiring)
-	implementation(projects.bot.configCache.wiring)
+	implementation(projects.bot.configCache.implMemory)
 	implementation(projects.bot.configSerialization.implJson)
 	implementation(projects.bot.configSource.implFile)
 	implementation(projects.bot.configSupplier.wiring)
