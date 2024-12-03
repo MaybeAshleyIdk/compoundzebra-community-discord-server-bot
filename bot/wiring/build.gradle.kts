@@ -29,7 +29,7 @@ dependencies {
 	implementation(projects.bot.configSerialization.implJson)
 	implementation(projects.bot.configSource.implFile)
 	implementation(projects.bot.configSupplier.implCache)
-	implementation(projects.bot.emojiStats.wiring)
+	implementation(projects.bot.emojiStats.impl)
 	implementation(projects.bot.eventListening.wiring)
 	implementation(projects.bot.logging.implStderr)
 	implementation(projects.bot.messageEventHandlerMediation.wiring)
