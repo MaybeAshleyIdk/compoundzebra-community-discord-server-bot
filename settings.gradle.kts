@@ -58,7 +58,7 @@ include {
 
 		"generic-event-handler"()
 
-		"emoji-stats".service()
+		"emoji-stats".serviceWithoutWiring()
 
 		"polls" {
 			"id"()

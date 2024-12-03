@@ -5,7 +5,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.emojistats.EmojiStatsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.emojistats.EmojiStatsManager
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.emojistats.EmojiStatsManagerImpl
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistening.EventListeningModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.jdafactory.JdaFactory
@@ -29,7 +30,6 @@ import net.dv8tion.jda.api.JDA as Jda
 
 @Module(
 	includes = [
-		EmojiStatsModule::class,
 		PollsModule::class,
 		SelfTimeoutModule::class,
 		ShutdownModule::class,
@@ -89,6 +89,11 @@ internal object BotModule {
 	@Provides
 	fun provideDatabase(storageModule: StorageModule): Database {
 		return storageModule.database
+	}
+
+	@Provides
+	fun provideEmojiStatsManager(logger: Logger): EmojiStatsManager {
+		return EmojiStatsManagerImpl(logger)
 	}
 
 	@Provides
