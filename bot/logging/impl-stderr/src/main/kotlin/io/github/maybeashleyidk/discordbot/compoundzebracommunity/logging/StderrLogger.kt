@@ -1,9 +1,8 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging
 
 import java.time.Instant
-import javax.inject.Inject
 
-public class StderrLogger @Inject constructor() : Logger {
+public class StderrLogger : Logger {
 
 	override fun logError(e: Throwable, msg: String) {
 		this.log(LogLevel.ERROR, msg, throwable = e)

@@ -40,7 +40,7 @@ include {
 
 		"token"()
 
-		"logging".service(impl = "stderr")
+		"logging".serviceWithoutWiring(impl = "stderr")
 
 		"snowflake"()
 		"snowflake-generator"()
