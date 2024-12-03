@@ -31,7 +31,7 @@ public enum class ProjectType {
 	// region service
 
 	/**
-	 * A service project does not contain any source code itself, is a combination of its three child projects:
+	 * A service project does not contain any source code itself, it is a combination of its three child projects:
 	 *
 	 * * the interface ([SERVICE_INTERFACE])
 	 * * the implementation ([SERVICE_IMPLEMENTATION_STANDALONE] or [SERVICE_IMPLEMENTATION_COMPOSITE])
