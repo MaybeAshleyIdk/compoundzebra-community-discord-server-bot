@@ -4,9 +4,12 @@ import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.emojistats.EmojiStatsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistening.EventListeningModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.jdafactory.JdaFactory
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.LoggingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.ConfigModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.MessageEventHandlingModule
@@ -15,6 +18,9 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.privatemessage
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.ShutdownModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.storage.StorageModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
+import java.nio.file.Path
+import javax.inject.Provider
 import javax.inject.Singleton
 import net.dv8tion.jda.api.JDA as Jda
 
@@ -22,7 +28,6 @@ import net.dv8tion.jda.api.JDA as Jda
 	includes = [
 		LoggingModule::class,
 		StorageModule::class,
-		ConfigModule::class,
 		EmojiStatsModule::class,
 		PollsModule::class,
 		SelfTimeoutModule::class,
@@ -35,10 +40,33 @@ import net.dv8tion.jda.api.JDA as Jda
 internal object BotModule {
 
 	@Provides
+	@Singleton
+	fun provideDiScope(): DiScope {
+		return DiScope()
+	}
+
+	@Provides
 	@Reusable
 	fun provideMoshi(): Moshi {
 		return Moshi.Builder()
 			.build()
+	}
+
+	@Provides
+	@Reusable
+	fun provideConfigModule(
+		scope: DiScope,
+		moshi: Provider<Moshi>,
+		botEnvironmentType: Provider<BotEnvironmentType>,
+		configFilePath: Provider<Path>,
+		logger: Provider<Logger>,
+	): ConfigModule {
+		return ConfigModule(scope, moshi, botEnvironmentType, configFilePath, logger)
+	}
+
+	@Provides
+	fun provideConfigSupplier(configModule: ConfigModule): ConfigSupplier {
+		return configModule.configSupplier
 	}
 
 	@Provides

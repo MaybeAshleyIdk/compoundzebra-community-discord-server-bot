@@ -14,6 +14,8 @@ dependencies {
 	api(projects.bot.logging)
 	api(projects.bot.shutdown.callbackRegistration)
 
+	implementation(projects.bot.utils.di)
+
 	implementation(projects.bot.jdaFactory)
 
 	implementation(libs.moshi)
