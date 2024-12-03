@@ -16,9 +16,10 @@ import javax.inject.Singleton
 
 @Singleton
 public class PollManagerImpl @Inject constructor(
-	private val pollIdGenerator: PollIdGenerator,
 	private val logger: Logger,
 ) : PollManager {
+
+	private val pollIdGenerator: PollIdGenerator = PollIdGenerator()
 
 	private val activePolls: AtomicVal<MutableMap<PollId, PollDetails>> = AtomicVal(HashMap())
 
