@@ -54,7 +54,7 @@ include {
 		"config-serialization".serviceWithoutWiring(impl = "json")
 		"config-source".serviceWithoutWiring(impl = "file")
 		"config-cache".serviceWithoutWiring(impl = "memory")
-		"config-supplier".service(impl = "cache")
+		"config-supplier".serviceWithoutWiring(impl = "cache")
 
 		"generic-event-handler"()
 

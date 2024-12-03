@@ -26,7 +26,7 @@ dependencies {
 	implementation(projects.bot.configCache.implMemory)
 	implementation(projects.bot.configSerialization.implJson)
 	implementation(projects.bot.configSource.implFile)
-	implementation(projects.bot.configSupplier.wiring)
+	implementation(projects.bot.configSupplier.implCache)
 	implementation(projects.bot.emojiStats.wiring)
 	implementation(projects.bot.eventListening.wiring)
 	implementation(projects.bot.logging.wiring)
