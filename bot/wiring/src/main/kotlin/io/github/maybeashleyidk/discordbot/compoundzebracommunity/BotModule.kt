@@ -10,7 +10,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttyp
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistening.EventListeningModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.jdafactory.JdaFactory
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.LoggingModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.StderrLogger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.ConfigModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.MessageEventHandlingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollsModule
@@ -26,7 +26,6 @@ import net.dv8tion.jda.api.JDA as Jda
 
 @Module(
 	includes = [
-		LoggingModule::class,
 		StorageModule::class,
 		EmojiStatsModule::class,
 		PollsModule::class,
@@ -43,6 +42,11 @@ internal object BotModule {
 	@Singleton
 	fun provideDiScope(): DiScope {
 		return DiScope()
+	}
+
+	@Provides
+	fun provideLogger(): Logger {
+		return StderrLogger()
 	}
 
 	@Provides
