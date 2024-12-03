@@ -32,6 +32,8 @@ include {
 			"coroutines-atomic"()
 
 			"coroutines-jda"()
+
+			"di"()
 		}
 
 		"environment-type"()
