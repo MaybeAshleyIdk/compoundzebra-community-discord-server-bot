@@ -51,7 +51,7 @@ include {
 		}
 
 		"config"()
-		"config-serialization".service(impl = "json")
+		"config-serialization".serviceWithoutWiring(impl = "json")
 		"config-source".service(impl = "file")
 		"config-cache".service(impl = "memory")
 		"config-supplier".service(impl = "cache")
