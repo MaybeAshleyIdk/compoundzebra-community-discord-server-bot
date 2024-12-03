@@ -14,6 +14,7 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.ProjectDependency
 
+@Deprecated("Dagger wiring projects are going to be removed in favor of manual dependency injection")
 internal val SERVICE_WIRING_POLICY: ProjectDetailsPolicy =
 	ProjectDetailsPolicy(
 		namePolicy = ProjectNamePolicy.FixedString("wiring".toProjectName(), isReserved = false),

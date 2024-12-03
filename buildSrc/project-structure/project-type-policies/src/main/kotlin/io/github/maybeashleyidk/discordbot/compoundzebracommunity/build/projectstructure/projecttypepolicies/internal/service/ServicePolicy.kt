@@ -75,12 +75,14 @@ private object ServiceChildrenPolicy : ProjectChildrenPolicy {
 		check(childrenTypes.count(ProjectType::isServiceImplementation) == 1) {
 			"The $project must have exactly 1 child of type service-implementation (standalone or composite)"
 		}
-		check(childrenTypes.count(ProjectType::isServiceWiring) == 1) {
-			"The $project must have exactly 1 child of type service-wiring"
+		when (childrenTypes.count(ProjectType::isServiceWiring)) {
+			0 -> Unit
+			1 -> project.logger.warn("The $project has a deprecated service-wiring child")
+			else -> error("The $project must have either none or one child of type service-wiring")
 		}
 
-		check(childrenTypes.size == 3) {
-			"The $project must have exactly 3 children"
+		check(childrenTypes.size in 2..3) {
+			"The $project must have 2 or 3 children"
 		}
 	}
 }
