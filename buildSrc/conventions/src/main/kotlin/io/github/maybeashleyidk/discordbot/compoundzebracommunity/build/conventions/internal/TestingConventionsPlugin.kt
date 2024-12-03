@@ -28,7 +28,7 @@ internal class TestingConventionsPlugin : Plugin<Project> {
 
 	private companion object {
 
-		val HIGHEST_JAVA_VERSION_TO_TEST: JavaVersion = JavaVersion.VERSION_22
+		val HIGHEST_JAVA_VERSION_TO_TEST: JavaVersion = JavaVersion.VERSION_23
 	}
 
 	override fun apply(project: Project) {
