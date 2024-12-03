@@ -6,9 +6,8 @@ import com.squareup.moshi.adapter
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import okio.BufferedSink
 import okio.BufferedSource
-import javax.inject.Inject
 
-public class ConfigJsonSerializer @Inject constructor(moshi: Moshi) : ConfigSerializer {
+public class ConfigJsonSerializer(moshi: Moshi) : ConfigSerializer {
 
 	@OptIn(ExperimentalStdlibApi::class)
 	private val configJsonAdapter: JsonAdapter<ConfigJson> = moshi.adapter<ConfigJson>()

@@ -12,6 +12,4 @@ dependencies {
 
 	implementation(libs.moshi)
 	ksp(libs.moshiKotlinCodegen)
-
-	implementation(libs.javaxInject)
 }
