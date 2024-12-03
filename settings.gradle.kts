@@ -46,7 +46,7 @@ include {
 		"snowflake-generator"()
 
 		"storage" {
-			"database".service(impl = "sqlite")
+			"database".serviceWithoutWiring(impl = "sqlite")
 			"wiring"()
 		}
 
