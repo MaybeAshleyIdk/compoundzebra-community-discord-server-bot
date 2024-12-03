@@ -53,7 +53,7 @@ include {
 		"config"()
 		"config-serialization".serviceWithoutWiring(impl = "json")
 		"config-source".serviceWithoutWiring(impl = "file")
-		"config-cache".service(impl = "memory")
+		"config-cache".serviceWithoutWiring(impl = "memory")
 		"config-supplier".service(impl = "cache")
 
 		"generic-event-handler"()
