@@ -5,11 +5,13 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.conventi
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.plugins.ApplicationPlugin
 import org.gradle.api.plugins.JavaLibraryPlugin
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.provider.Provider
+import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.api.tasks.testing.Test
 import org.gradle.jvm.toolchain.JavaLanguageVersion
@@ -19,7 +21,6 @@ import org.gradle.kotlin.dsl.getByName
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.hasPlugin
 import org.gradle.kotlin.dsl.register
-import org.gradle.language.base.plugins.LifecycleBasePlugin
 
 // <https://jakewharton.com/build-on-latest-java-test-through-lowest-java/>
 
@@ -67,16 +68,21 @@ internal class TestingConventionsPlugin : Plugin<Project> {
 		return (javaPluginExtension.targetCompatibility..Companion.HIGHEST_JAVA_VERSION_TO_TEST)
 			.asIterable()
 			.map { javaVersion: JavaVersion ->
-				this.registerTestTask(project, javaVersion)
+				this.registerTestTask(project.tasks, javaVersion)
 			}
 	}
 
-	private fun registerTestTask(project: Project, javaVersion: JavaVersion): TaskProvider<Test> {
-		return project.tasks.register<Test>("testJava${javaVersion.majorVersion}") {
-			this@register.description = "Runs the test suite with a Java $javaVersion runtime environment."
-			this@register.group = LifecycleBasePlugin.VERIFICATION_GROUP
+	private fun registerTestTask(taskContainer: TaskContainer, javaVersion: JavaVersion): TaskProvider<Test> {
+		return taskContainer.register<Test>(name = "testJava${javaVersion.majorVersion}") {
+			val testTask: Test = this@register.project.tasks.getByName<Test>("test")
 
-			this@register.javaLauncher.set(project.provideJavaToolchainLauncherFor(javaVersion))
+			this@register.description = "Runs the test suite with a Java $javaVersion runtime environment."
+			(this@register as Task).group = testTask.group
+
+			this@register.testClassesDirs = testTask.testClassesDirs
+			this@register.classpath = testTask.classpath
+
+			this@register.javaLauncher.set(this@register.project.provideJavaToolchainLauncherFor(javaVersion))
 
 			this@register.useJUnitPlatform()
 		}
