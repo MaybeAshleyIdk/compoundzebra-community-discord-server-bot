@@ -17,7 +17,10 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollsMod
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.privatemessageeventhandling.PrivateMessageEventHandlingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.ShutdownModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbackregistraton.ShutdownCallbackRegistry
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequester
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.storage.StorageModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.storage.database.Database
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
 import java.nio.file.Path
 import javax.inject.Provider
@@ -26,7 +29,6 @@ import net.dv8tion.jda.api.JDA as Jda
 
 @Module(
 	includes = [
-		StorageModule::class,
 		EmojiStatsModule::class,
 		PollsModule::class,
 		SelfTimeoutModule::class,
@@ -71,6 +73,22 @@ internal object BotModule {
 	@Provides
 	fun provideConfigSupplier(configModule: ConfigModule): ConfigSupplier {
 		return configModule.configSupplier
+	}
+
+	@Provides
+	@Reusable
+	fun provideStorageModule(
+		scope: DiScope,
+		shutdownCallbackRegistry: Provider<ShutdownCallbackRegistry>,
+		shutdownRequester: Provider<ShutdownRequester>,
+		logger: Provider<Logger>,
+	): StorageModule {
+		return StorageModule(scope, shutdownCallbackRegistry, shutdownRequester, logger)
+	}
+
+	@Provides
+	fun provideDatabase(storageModule: StorageModule): Database {
+		return storageModule.database
 	}
 
 	@Provides
