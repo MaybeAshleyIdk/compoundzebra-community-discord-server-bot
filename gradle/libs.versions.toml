@@ -1,30 +1,30 @@
 [versions]
-kotlin = "2.0.0"
-ksp = "2.0.0-1.0.21"
-ktlint = "1.2.1"
+kotlin = "2.1.0"
+ksp = "2.1.0-1.0.29"
+ktlint = "1.4.1"
 moshi = "1.15.1"
-dagger = "2.51.1"
+dagger = "2.53"
 
 [libraries]
-kotlinxCoroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1"
+kotlinxCoroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0"
 
-jda = "net.dv8tion:JDA:5.0.0-beta.24"
+jda = "net.dv8tion:JDA:5.2.1"
 
-okio = "com.squareup.okio:okio:3.9.0"
+okio = "com.squareup.okio:okio:3.9.1"
 
 moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 moshiKotlinCodegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
 
-sqliteJdbc = "org.xerial:sqlite-jdbc:3.44.0.0"
+sqliteJdbc = "org.xerial:sqlite-jdbc:3.47.1.0"
 
 javaxInject = "javax.inject:javax.inject:1"
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 daggerCompiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 
-junit-jupiter = "org.junit.jupiter:junit-jupiter:5.10.2"
-junit-platformLauncher = "org.junit.platform:junit-platform-launcher:1.10.2"
+junit-jupiter = "org.junit.jupiter:junit-jupiter:5.11.3"
+junit-platformLauncher = "org.junit.platform:junit-platform-launcher:1.11.3"
 
 [plugins]
-shadow = "com.github.johnrengelman.shadow:8.1.1"
+shadow = "com.gradleup.shadow:8.3.5"
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ktlint = "io.github.mfederczuk.ktlint:0.1.0-indev09"
