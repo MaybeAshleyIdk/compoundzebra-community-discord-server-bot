@@ -40,6 +40,8 @@ public enum class ProjectType {
 	 * Similar to a composite project ([COMPOSITE]), a service project declares its interface child project as its only
 	 * API dependency.
 	 * All three children of a service project are also considered private, just like in a composite project.
+	 *
+	 * > Note: Dagger wiring projects are going to be removed in favor of manual dependency injection.
 	 */
 	SERVICE,
 
@@ -84,6 +86,7 @@ public enum class ProjectType {
 	 * its service-implementation ([SERVICE_IMPLEMENTATION_STANDALONE] or [SERVICE_IMPLEMENTATION_COMPOSITE]) sibling
 	 * project as an API dependency.
 	 */
+	@Deprecated("Dagger wiring projects are going to be removed in favor of manual dependency injection")
 	SERVICE_WIRING,
 
 	// endregion
