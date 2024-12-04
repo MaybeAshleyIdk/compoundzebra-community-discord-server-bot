@@ -5,13 +5,10 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.id.PollI
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.management.PollManager
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOptionLabel
 import net.dv8tion.jda.api.entities.Member
-import javax.inject.Inject
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation.NewPollDetails as PollCreatorNewPollDetails
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.management.NewPollDetails as PollManagerNewPollDetails
 
-public class PollManagerCreator @Inject constructor(
-	private val pollManager: PollManager,
-) : PollCreator {
+public class PollManagerCreator(private val pollManager: PollManager) : PollCreator {
 
 	override suspend fun openNewPoll(
 		author: Member,

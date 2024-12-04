@@ -67,7 +67,7 @@ include {
 			"details"()
 
 			"management".serviceWithoutWiring()
-			"creation".service(impl = "manager")
+			"creation".serviceWithoutWiring(impl = "manager")
 			"holding".service(impl = "manager")
 			"modification".service(impl = "manager")
 

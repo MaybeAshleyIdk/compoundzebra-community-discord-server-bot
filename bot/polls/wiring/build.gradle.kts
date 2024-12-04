@@ -8,7 +8,7 @@ plugins {
 }
 
 dependencies {
-	api(projects.bot.polls.creation.wiring)
+	api(projects.bot.polls.creation.implManager)
 	api(projects.bot.polls.eventHandling.wiring)
 	api(projects.bot.polls.holding.wiring)
 	api(projects.bot.polls.management.impl)
