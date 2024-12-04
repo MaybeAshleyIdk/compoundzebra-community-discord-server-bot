@@ -68,7 +68,7 @@ include {
 
 			"management".serviceWithoutWiring()
 			"creation".serviceWithoutWiring(impl = "manager")
-			"holding".service(impl = "manager")
+			"holding".serviceWithoutWiring(impl = "manager")
 			"modification".service(impl = "manager")
 
 			"component-protocol"()
