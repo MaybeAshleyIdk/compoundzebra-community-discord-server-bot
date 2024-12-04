@@ -7,6 +7,4 @@ plugins {
 
 dependencies {
 	api(projects.bot.polls.id)
-
-	implementation(libs.javaxInject)
 }

@@ -23,7 +23,6 @@ import javax.inject.Inject
 public class PollCreationCommand @Inject constructor(
 	private val configSupplier: ConfigSupplier,
 	private val pollCreator: PollCreator,
-	private val pollComponentProtocol: PollComponentProtocol,
 ) : Command(name = CommandName.ofString("poll")) {
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
@@ -73,13 +72,13 @@ public class PollCreationCommand @Inject constructor(
 				}
 
 			val optionsMenu: StringSelectMenu = StringSelectMenu
-				.create(this.pollComponentProtocol.mapPollIdToOptionsSelectMenuComponentId(newPollDetails.id))
+				.create(PollComponentProtocol.mapPollIdToOptionsSelectMenuComponentId(newPollDetails.id))
 				.addOptions(selectOptions)
 				.build()
 
 			val closeButton: Button = Button
 				.primary(
-					this.pollComponentProtocol.mapPollIdToCloseButtonComponentId(newPollDetails.id),
+					PollComponentProtocol.mapPollIdToCloseButtonComponentId(newPollDetails.id),
 					config.strings.poll.action.close,
 				)
 
