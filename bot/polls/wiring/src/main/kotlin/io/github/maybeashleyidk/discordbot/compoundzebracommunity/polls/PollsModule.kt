@@ -10,12 +10,12 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.PollManagerHolder
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.management.PollManager
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.management.PollManagerImpl
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.modification.PollsModificationModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.modification.PollManagerModifier
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.modification.PollModifier
 import javax.inject.Singleton
 
 @Module(
 	includes = [
-		PollsModificationModule::class,
 		PollsEventHandlingModule::class,
 	],
 )
@@ -35,5 +35,10 @@ public object PollsModule {
 	@Provides
 	internal fun providePollHolder(pollManager: PollManager): PollHolder {
 		return PollManagerHolder(pollManager)
+	}
+
+	@Provides
+	internal fun providePollModifier(pollManager: PollManager): PollModifier {
+		return PollManagerModifier(pollManager)
 	}
 }

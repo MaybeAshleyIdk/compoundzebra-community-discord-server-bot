@@ -5,11 +5,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.id.PollI
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.management.PollManager
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOptionValue
 import net.dv8tion.jda.api.entities.Member
-import javax.inject.Inject
 
-public class PollManagerModifier @Inject constructor(
-	private val pollManager: PollManager,
-) : PollModifier {
+public class PollManagerModifier(private val pollManager: PollManager) : PollModifier {
 
 	override suspend fun voteOption(pollId: PollId, voterMember: Member, optionValue: PollOptionValue): PollDetails? {
 		return this.pollManager.voteOption(pollId, voterMember, optionValue)
