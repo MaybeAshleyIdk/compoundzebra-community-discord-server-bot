@@ -13,6 +13,5 @@ dependencies {
 	api(projects.bot.commands.messageEventHandling.impl.predefinedResponseCommand)
 	api(projects.bot.commands.messageEventHandling.impl.eventHandlerImpl)
 
-	implementation(libs.dagger)
-	ksp(libs.daggerCompiler)
+	api(projects.bot.utils.di)
 }
