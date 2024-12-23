@@ -19,6 +19,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messa
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands.sourcecode.SourceCodeCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutCommand
 import java.nio.file.Path
 
@@ -34,10 +35,6 @@ public object BuiltInCommandsModule {
 		@Multibinds
 		@DevCommand
 		fun multibindDevCommands(): Set<@JvmSuppressWildcards Command>
-
-		@Binds
-		@IntoSet
-		fun bindMagic8BallCommand(magic8BallCommand: Magic8BallCommand): Command
 
 		@Binds
 		@IntoSet
@@ -96,6 +93,12 @@ public object BuiltInCommandsModule {
 	// ): Command {
 	// 	return EmojiStatsCommand(configSupplier, emojiStatsManager)
 	// }
+
+	@Provides
+	@IntoSet
+	internal fun provideMagic8BallCommand(configSupplier: ConfigSupplier, logger: Logger): Command {
+		return Magic8BallCommand(configSupplier, logger)
+	}
 
 	@Provides
 	@ElementsIntoSet

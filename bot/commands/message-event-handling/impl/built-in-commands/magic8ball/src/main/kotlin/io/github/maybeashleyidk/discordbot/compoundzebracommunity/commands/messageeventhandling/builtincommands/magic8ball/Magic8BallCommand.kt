@@ -8,9 +8,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutinesjda.await
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
-import javax.inject.Inject
 
-public class Magic8BallCommand @Inject constructor(
+public class Magic8BallCommand(
 	private val configSupplier: ConfigSupplier,
 	private val logger: Logger,
 ) : Command(name = CommandName.ofString("8ball")) {
