@@ -30,7 +30,9 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.event
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequester
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.storage.StorageModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.storage.database.Database
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.token.BotToken
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
+import net.dv8tion.jda.api.entities.Activity
 import java.nio.file.Path
 import javax.inject.Provider
 import javax.inject.Singleton
@@ -172,6 +174,15 @@ internal object BotModule {
 			pollEventHandler,
 			privateMessageEventHandler,
 		)
+	}
+
+	@Provides
+	fun provideJdaFactory(
+		@BotTokenString botTokenString: String,
+		initialActivity: Activity,
+		mainEventListener: MainEventListener,
+	): JdaFactory {
+		return JdaFactory(BotToken.ofString(botTokenString), initialActivity, mainEventListener)
 	}
 
 	@Provides
