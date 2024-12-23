@@ -20,6 +20,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messa
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation.PollCreator
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.PollHolder
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutCommand
 import java.nio.file.Path
 
@@ -35,14 +37,6 @@ public object BuiltInCommandsModule {
 		@Multibinds
 		@DevCommand
 		fun multibindDevCommands(): Set<@JvmSuppressWildcards Command>
-
-		@Binds
-		@IntoSet
-		fun bindPollCreationCommand(pollCreationCommand: PollCreationCommand): Command
-
-		@Binds
-		@IntoSet
-		fun bindPollQueryCommand(pollQueryCommand: PollQueryCommand): Command
 
 		@Binds
 		@IntoSet
@@ -98,6 +92,18 @@ public object BuiltInCommandsModule {
 	@IntoSet
 	internal fun provideMagic8BallCommand(configSupplier: ConfigSupplier, logger: Logger): Command {
 		return Magic8BallCommand(configSupplier, logger)
+	}
+
+	@Provides
+	@IntoSet
+	internal fun providePollCreationCommand(configSupplier: ConfigSupplier, pollCreator: PollCreator): Command {
+		return PollCreationCommand(configSupplier, pollCreator)
+	}
+
+	@Provides
+	@IntoSet
+	internal fun providePollQueryCommand(configSupplier: ConfigSupplier, pollHolder: PollHolder): Command {
+		return PollQueryCommand(configSupplier, pollHolder)
 	}
 
 	@Provides

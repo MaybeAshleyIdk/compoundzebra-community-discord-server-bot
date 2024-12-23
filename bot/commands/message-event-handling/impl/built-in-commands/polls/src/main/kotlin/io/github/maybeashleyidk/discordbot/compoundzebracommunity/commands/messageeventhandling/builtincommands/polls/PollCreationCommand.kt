@@ -18,9 +18,8 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.interactions.components.buttons.Button
 import net.dv8tion.jda.api.interactions.components.selections.SelectOption
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu
-import javax.inject.Inject
 
-public class PollCreationCommand @Inject constructor(
+public class PollCreationCommand(
 	private val configSupplier: ConfigSupplier,
 	private val pollCreator: PollCreator,
 ) : Command(name = CommandName.ofString("poll")) {
