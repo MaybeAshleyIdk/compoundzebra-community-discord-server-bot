@@ -23,7 +23,6 @@ gradlePlugin {
 				Info("service-interface", "ServiceInterfaceProjectMarkerPlugin"),
 				Info("service-implementation.standalone", "StandaloneServiceImplementationProjectMarkerPlugin"),
 				Info("service-implementation.composite", "CompositeServiceImplementationProjectMarkerPlugin"),
-				Info("service-wiring", "ServiceWiringProjectMarkerPlugin"),
 			)
 
 		for (info: Info in infoList) {

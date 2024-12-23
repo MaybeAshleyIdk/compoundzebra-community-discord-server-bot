@@ -95,6 +95,5 @@ private fun ProjectType.isServiceInterface(): Boolean {
 		ProjectType.SERVICE_INTERFACE -> true
 		ProjectType.SERVICE_IMPLEMENTATION_STANDALONE -> false
 		ProjectType.SERVICE_IMPLEMENTATION_COMPOSITE -> false
-		ProjectType.SERVICE_WIRING -> false
 	}
 }
