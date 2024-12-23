@@ -18,7 +18,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollsMod
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation.PollCreator
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.eventhandling.PollEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.PollHolder
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.privatemessageeventhandling.PrivateMessageEventHandlingModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.privatemessageeventhandling.PrivateMessageEventHandler
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.privatemessageeventhandling.PrivateMessageEventHandlerImpl
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutService
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutServiceImpl
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.ShutdownModule
@@ -36,7 +37,6 @@ import net.dv8tion.jda.api.JDA as Jda
 @Module(
 	includes = [
 		MessageEventHandlingModule::class,
-		PrivateMessageEventHandlingModule::class,
 		EventListeningModule::class,
 	],
 )
@@ -147,6 +147,11 @@ internal object BotModule {
 	@Provides
 	fun provideSelfTimeoutService(logger: Logger): SelfTimeoutService {
 		return SelfTimeoutServiceImpl(logger)
+	}
+
+	@Provides
+	fun providePrivateMessageEventHandler(logger: Logger): PrivateMessageEventHandler {
+		return PrivateMessageEventHandlerImpl(logger)
 	}
 
 	@Provides

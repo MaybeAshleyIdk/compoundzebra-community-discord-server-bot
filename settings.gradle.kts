@@ -124,7 +124,7 @@ include {
 
 		"message-event-handler-mediation".serviceWithoutWiring()
 
-		"private-message-event-handling".service()
+		"private-message-event-handling".serviceWithoutWiring()
 
 		"event-listening".service()
 
