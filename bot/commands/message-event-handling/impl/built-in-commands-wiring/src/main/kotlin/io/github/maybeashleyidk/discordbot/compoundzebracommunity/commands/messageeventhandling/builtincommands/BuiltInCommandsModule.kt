@@ -40,14 +40,6 @@ public object BuiltInCommandsModule {
 
 		@Binds
 		@IntoSet
-		fun bindDieRollingCommand(dieRollingCommand: DieRollingCommand): Command
-
-		@Binds
-		@IntoSet
-		fun bindRngCommand(rngCommand: RngCommand): Command
-
-		@Binds
-		@IntoSet
 		fun bindSelfTimeoutCommand(selfTimeoutCommand: SelfTimeoutCommand): Command
 
 		@Binds
@@ -104,6 +96,18 @@ public object BuiltInCommandsModule {
 	@IntoSet
 	internal fun providePollQueryCommand(configSupplier: ConfigSupplier, pollHolder: PollHolder): Command {
 		return PollQueryCommand(configSupplier, pollHolder)
+	}
+
+	@Provides
+	@IntoSet
+	internal fun provideDieRollingCommand(): Command {
+		return DieRollingCommand()
+	}
+
+	@Provides
+	@IntoSet
+	internal fun provideRngCommand(configSupplier: ConfigSupplier): Command {
+		return RngCommand(configSupplier)
 	}
 
 	@Provides

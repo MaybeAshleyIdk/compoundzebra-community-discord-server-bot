@@ -10,6 +10,4 @@ dependencies {
 	api(projects.bot.configSupplier)
 
 	implementation(projects.bot.utils.coroutinesJda)
-
-	implementation(libs.javaxInject)
 }
