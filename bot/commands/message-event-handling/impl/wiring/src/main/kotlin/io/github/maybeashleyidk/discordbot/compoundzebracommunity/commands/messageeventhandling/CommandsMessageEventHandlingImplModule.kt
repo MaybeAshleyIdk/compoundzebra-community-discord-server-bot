@@ -71,25 +71,19 @@ public object CommandsMessageEventHandlingImplModule {
 	// TODO: find a way to do this dynamic
 	@Provides
 	@ElementsIntoSet
-	internal fun provideConfiguredPredefinedResponseCommands(
-		predefinedResponseCommandFactory: PredefinedResponseCommand.Factory,
-		configSupplier: ConfigSupplier,
-	): Set<Command> {
+	internal fun provideConfiguredPredefinedResponseCommands(configSupplier: ConfigSupplier): Set<Command> {
 		val config: Config = configSupplier.get()
 		return config.commandDefinitions
 			.mapTo(
 				LinkedHashSet(config.commandDefinitions.size),
-				predefinedResponseCommandFactory::buildFromCommandDefinition,
+				CommandDefinition::toPredefinedResponseCommand,
 			)
 	}
 }
 
-private fun PredefinedResponseCommand.Factory.buildFromCommandDefinition(
-	commandDefinition: CommandDefinition,
-): PredefinedResponseCommand {
-	return this
-		.build(
-			commandDefinition.commandName,
-			(commandDefinition.action as Action.Response).message,
-		)
+private fun CommandDefinition.toPredefinedResponseCommand(): PredefinedResponseCommand {
+	return PredefinedResponseCommand(
+		this.commandName,
+		(this.action as Action.Response).message,
+	)
 }
