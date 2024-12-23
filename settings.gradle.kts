@@ -95,7 +95,7 @@ include {
 			"name"()
 			"prefix"()
 
-			"message-event-handling".service {
+			"message-event-handling".serviceWithoutWiring {
 				"message-parser"()
 				"command"()
 

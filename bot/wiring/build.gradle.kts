@@ -23,7 +23,7 @@ dependencies {
 	api(libs.dagger)
 	ksp(libs.daggerCompiler)
 
-	implementation(projects.bot.commands.messageEventHandling.wiring)
+	implementation(projects.bot.commands.messageEventHandling.impl)
 	implementation(projects.bot.conditionalMessageEventHandling.impl)
 	implementation(projects.bot.configCache.implMemory)
 	implementation(projects.bot.configSerialization.implJson)
