@@ -24,6 +24,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.PollHolder
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutService
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequester
 import java.nio.file.Path
 
 @Module(includes = [BuiltInCommandsModule.Bindings::class])
@@ -38,10 +39,6 @@ public object BuiltInCommandsModule {
 		@Multibinds
 		@DevCommand
 		fun multibindDevCommands(): Set<@JvmSuppressWildcards Command>
-
-		@Binds
-		@IntoSet
-		fun bindShutdownCommand(shutdownCommand: ShutdownCommand): Command
 
 		@Binds
 		@IntoSet
@@ -111,6 +108,12 @@ public object BuiltInCommandsModule {
 	@IntoSet
 	internal fun provideSelfTimeoutCommand(selfTimeoutService: SelfTimeoutService): Command {
 		return SelfTimeoutCommand(selfTimeoutService)
+	}
+
+	@Provides
+	@IntoSet
+	internal fun provideShutdownCommand(configSupplier: ConfigSupplier, shutdownRequester: ShutdownRequester): Command {
+		return ShutdownCommand(configSupplier, shutdownRequester)
 	}
 
 	@Provides
