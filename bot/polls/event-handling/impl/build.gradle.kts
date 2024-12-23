@@ -14,6 +14,4 @@ dependencies {
 	implementation(projects.bot.utils.coroutinesJda)
 
 	implementation(libs.kotlinxCoroutinesCore)
-
-	implementation(libs.javaxInject)
 }

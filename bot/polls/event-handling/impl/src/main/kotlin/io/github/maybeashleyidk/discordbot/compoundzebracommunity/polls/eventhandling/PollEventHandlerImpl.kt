@@ -14,9 +14,8 @@ import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.events.GenericEvent
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent
-import javax.inject.Inject
 
-public class PollEventHandlerImpl @Inject constructor(
+public class PollEventHandlerImpl(
 	private val pollModifier: PollModifier,
 	private val configSupplier: ConfigSupplier,
 ) : PollEventHandler {

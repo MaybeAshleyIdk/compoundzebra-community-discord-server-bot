@@ -73,7 +73,7 @@ include {
 
 			"component-protocol"()
 
-			"event-handling".service()
+			"event-handling".serviceWithoutWiring()
 
 			"wiring"()
 		}
