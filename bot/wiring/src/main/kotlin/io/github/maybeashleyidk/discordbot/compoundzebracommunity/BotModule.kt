@@ -23,6 +23,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.Se
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutServiceImpl
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.ShutdownModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbackregistraton.ShutdownCallbackRegistry
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.eventhandling.ShutdownEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequester
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.storage.StorageModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.storage.database.Database
@@ -34,7 +35,6 @@ import net.dv8tion.jda.api.JDA as Jda
 
 @Module(
 	includes = [
-		ShutdownModule::class,
 		MessageEventHandlingModule::class,
 		PrivateMessageEventHandlingModule::class,
 		EventListeningModule::class,
@@ -58,6 +58,27 @@ internal object BotModule {
 	fun provideMoshi(): Moshi {
 		return Moshi.Builder()
 			.build()
+	}
+
+	@Provides
+	@Reusable
+	fun provideShutdownModule(scope: DiScope, jda: Provider<Jda>, logger: Provider<Logger>): ShutdownModule {
+		return ShutdownModule(scope, jda, logger)
+	}
+
+	@Provides
+	fun provideShutdownEventHandler(shutdownModule: ShutdownModule): ShutdownEventHandler {
+		return shutdownModule.shutdownEventHandler
+	}
+
+	@Provides
+	fun provideShutdownCallbackRegistry(shutdownModule: ShutdownModule): ShutdownCallbackRegistry {
+		return shutdownModule.shutdownCallbackRegistry
+	}
+
+	@Provides
+	fun provideShutdownRequester(shutdownModule: ShutdownModule): ShutdownRequester {
+		return shutdownModule.shutdownRequester
 	}
 
 	@Provides

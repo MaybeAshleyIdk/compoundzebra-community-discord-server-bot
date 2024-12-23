@@ -13,6 +13,5 @@ dependencies {
 	api(projects.bot.shutdown.callbackRegistration.implManager)
 	api(projects.bot.shutdown.requesting.implManager)
 
-	api(libs.dagger)
-	ksp(libs.daggerCompiler)
+	api(projects.bot.utils.di)
 }

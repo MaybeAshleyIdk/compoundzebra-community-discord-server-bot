@@ -1,7 +1,5 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown
 
-import dagger.Module
-import dagger.Provides
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbackregistraton.ShutdownCallbackRegistry
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbackregistraton.ShutdownManagerCallbackRegistry
@@ -11,32 +9,37 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.manag
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.management.ShutdownManagerImpl
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownManagerRequester
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequester
-import net.dv8tion.jda.api.JDA
-import java.util.function.Supplier
-import javax.inject.Provider
-import javax.inject.Singleton
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.DiModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.Provider
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.asSupplier
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.getValue
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
+import net.dv8tion.jda.api.JDA as Jda
 
-@Module
-public object ShutdownModule {
+public class ShutdownModule(
+	scope: DiScope,
+	private val jda: Provider<Jda>,
+	logger: Provider<Logger>,
+) : DiModule(scope) {
 
-	@Provides
-	@Singleton
-	internal fun provideShutdownManager(jdaProvider: Provider<JDA>, logger: Logger): ShutdownManager {
-		return ShutdownManagerImpl(Supplier(jdaProvider::get), logger)
+	private val logger: Logger by logger
+
+	private val shutdownManager: ShutdownManager by this.singleton {
+		ShutdownManagerImpl(this.jda.asSupplier(), this.logger)
 	}
 
-	@Provides
-	internal fun provideShutdownEventHandler(shutdownManager: ShutdownManager): ShutdownEventHandler {
-		return ShutdownManagerEventHandler(shutdownManager)
-	}
+	public val shutdownEventHandler: ShutdownEventHandler
+		get() {
+			return ShutdownManagerEventHandler(this.shutdownManager)
+		}
 
-	@Provides
-	internal fun provideShutdownCallbackRegistry(shutdownManager: ShutdownManager): ShutdownCallbackRegistry {
-		return ShutdownManagerCallbackRegistry(shutdownManager)
-	}
+	public val shutdownCallbackRegistry: ShutdownCallbackRegistry
+		get() {
+			return ShutdownManagerCallbackRegistry(this.shutdownManager)
+		}
 
-	@Provides
-	internal fun provideShutdownRequester(shutdownManager: ShutdownManager): ShutdownRequester {
-		return ShutdownManagerRequester(shutdownManager)
-	}
+	public val shutdownRequester: ShutdownRequester
+		get() {
+			return ShutdownManagerRequester(this.shutdownManager)
+		}
 }
