@@ -32,7 +32,7 @@ dependencies {
 	implementation(projects.bot.emojiStats.impl)
 	implementation(projects.bot.eventListening.wiring)
 	implementation(projects.bot.logging.implStderr)
-	implementation(projects.bot.messageEventHandlerMediation.wiring)
+	implementation(projects.bot.messageEventHandlerMediation.impl)
 	implementation(projects.bot.polls.wiring)
 	implementation(projects.bot.privateMessageEventHandling.wiring)
 	implementation(projects.bot.selfTimeout.impl)

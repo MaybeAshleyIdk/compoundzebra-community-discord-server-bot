@@ -122,7 +122,7 @@ include {
 
 		"conditional-message-event-handling".serviceWithoutWiring()
 
-		"message-event-handler-mediation".service()
+		"message-event-handler-mediation".serviceWithoutWiring()
 
 		"private-message-event-handling".service()
 

@@ -11,6 +11,4 @@ dependencies {
 	api(projects.bot.conditionalMessageEventHandling)
 
 	implementation(libs.kotlinxCoroutinesCore)
-
-	implementation(libs.javaxInject)
 }
