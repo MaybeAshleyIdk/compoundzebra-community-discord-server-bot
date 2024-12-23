@@ -8,6 +8,7 @@ plugins {
 }
 
 dependencies {
+	api(projects.bot.commands.messageEventHandling.impl.messageParser)
 	api(projects.bot.commands.messageEventHandling.impl.builtInCommandsWiring)
 	api(projects.bot.commands.messageEventHandling.impl.predefinedResponseCommand)
 
