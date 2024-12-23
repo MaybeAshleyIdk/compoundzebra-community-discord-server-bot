@@ -84,6 +84,16 @@ public object CommandsMessageEventHandlingImplModule {
 				CommandDefinition::toPredefinedResponseCommand,
 			)
 	}
+
+	@Provides
+	internal fun provideCommandMessageEventHandlerImpl(
+		commandMessageParser: CommandMessageParser,
+		configSupplier: ConfigSupplier,
+		commands: Set<@JvmSuppressWildcards Command>,
+		logger: Logger,
+	): CommandMessageEventHandlerImpl {
+		return CommandMessageEventHandlerImpl(commandMessageParser, configSupplier, commands, logger)
+	}
 }
 
 private fun CommandDefinition.toPredefinedResponseCommand(): PredefinedResponseCommand {
