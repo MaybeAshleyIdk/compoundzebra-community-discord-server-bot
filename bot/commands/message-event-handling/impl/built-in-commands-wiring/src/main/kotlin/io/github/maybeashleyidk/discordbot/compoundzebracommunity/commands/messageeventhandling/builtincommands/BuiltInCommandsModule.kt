@@ -35,11 +35,6 @@ public object BuiltInCommandsModule {
 		@DevCommand
 		fun multibindDevCommands(): Set<@JvmSuppressWildcards Command>
 
-		@Binds
-		@DevCommand
-		@IntoSet
-		fun bindDevTestCommand(devTestCommand: DevTestCommand): Command
-
 		// disabled for now
 		// @Binds
 		// @IntoSet
@@ -82,6 +77,13 @@ public object BuiltInCommandsModule {
 	@IntoSet
 	internal fun provideCoinFlipCommand(configSupplier: ConfigSupplier): Command {
 		return CoinFlipCommand(configSupplier)
+	}
+
+	@Provides
+	@DevCommand
+	@IntoSet
+	internal fun provideDevTestCommand(): Command {
+		return DevTestCommand()
 	}
 
 	@Provides
