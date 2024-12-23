@@ -11,7 +11,7 @@ dependencies {
 	api(projects.bot.shutdown.management.impl)
 	api(projects.bot.shutdown.eventHandling.implManager)
 	api(projects.bot.shutdown.callbackRegistration.implManager)
-	api(projects.bot.shutdown.requesting.wiring)
+	api(projects.bot.shutdown.requesting.implManager)
 
 	api(libs.dagger)
 	ksp(libs.daggerCompiler)

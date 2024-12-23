@@ -9,17 +9,14 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.event
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.eventhandling.ShutdownManagerEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.management.ShutdownManager
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.management.ShutdownManagerImpl
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequestingModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownManagerRequester
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequester
 import net.dv8tion.jda.api.JDA
 import java.util.function.Supplier
 import javax.inject.Provider
 import javax.inject.Singleton
 
-@Module(
-	includes = [
-		ShutdownRequestingModule::class,
-	],
-)
+@Module
 public object ShutdownModule {
 
 	@Provides
@@ -36,5 +33,10 @@ public object ShutdownModule {
 	@Provides
 	internal fun provideShutdownCallbackRegistry(shutdownManager: ShutdownManager): ShutdownCallbackRegistry {
 		return ShutdownManagerCallbackRegistry(shutdownManager)
+	}
+
+	@Provides
+	internal fun provideShutdownRequester(shutdownManager: ShutdownManager): ShutdownRequester {
+		return ShutdownManagerRequester(shutdownManager)
 	}
 }
