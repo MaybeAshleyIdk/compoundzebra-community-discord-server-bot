@@ -8,7 +8,7 @@ plugins {
 }
 
 dependencies {
-	api(projects.bot.shutdown.management.wiring)
+	api(projects.bot.shutdown.management.impl)
 	api(projects.bot.shutdown.eventHandling.wiring)
 	api(projects.bot.shutdown.callbackRegistration.wiring)
 	api(projects.bot.shutdown.requesting.wiring)

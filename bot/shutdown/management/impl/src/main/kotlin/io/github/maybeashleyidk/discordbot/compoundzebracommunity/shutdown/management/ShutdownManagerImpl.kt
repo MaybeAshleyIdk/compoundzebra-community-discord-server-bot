@@ -13,18 +13,15 @@ import kotlinx.coroutines.sync.withLock
 import net.dv8tion.jda.api.events.GenericEvent
 import net.dv8tion.jda.api.events.session.ShutdownEvent
 import java.util.concurrent.atomic.AtomicBoolean
-import javax.inject.Inject
-import javax.inject.Provider
-import javax.inject.Singleton
+import java.util.function.Supplier
 import net.dv8tion.jda.api.JDA as Jda
 
-// the JDA instance is injected via a Provider because otherwise we'd have a circular dependency.
+// the JDA instance is injected via a Supplier because otherwise we'd have a circular dependency.
 // i'm not happy with this fix, bob. not. happy.
 // but it works, so for now it stays
 
-@Singleton
-public class ShutdownManagerImpl @Inject constructor(
-	private val jdaProvider: Provider<Jda>,
+public class ShutdownManagerImpl(
+	private val jdaSupplier: Supplier<Jda>,
 	private val logger: Logger,
 ) : ShutdownManager {
 
@@ -34,7 +31,7 @@ public class ShutdownManagerImpl @Inject constructor(
 		SHUT_DOWN,
 	}
 
-	private val jda: Jda by lazy(this.jdaProvider::get)
+	private val jda: Jda by lazy(this.jdaSupplier::get)
 
 	private val shutdownMutex: Mutex = Mutex()
 

@@ -12,6 +12,4 @@ dependencies {
 	implementation(projects.bot.utils.coroutinesAtomic)
 
 	implementation(libs.kotlinxCoroutinesCore)
-
-	implementation(libs.javaxInject)
 }

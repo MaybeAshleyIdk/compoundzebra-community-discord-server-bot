@@ -83,7 +83,7 @@ include {
 		"shutdown" {
 			"callbacks"()
 
-			"management".service()
+			"management".serviceWithoutWiring()
 			"event-handling".service(impl = "manager")
 			"callback-registration".service(impl = "manager")
 			"requesting".service(impl = "manager")
