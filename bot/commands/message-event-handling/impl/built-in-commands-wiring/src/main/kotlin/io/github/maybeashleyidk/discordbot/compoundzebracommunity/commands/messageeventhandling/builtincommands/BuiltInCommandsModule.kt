@@ -17,6 +17,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messa
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands.rng.RngCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands.shutdown.ShutdownCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands.sourcecode.SourceCodeCommand
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutCommand
 
@@ -32,10 +33,6 @@ public object BuiltInCommandsModule {
 		@Multibinds
 		@DevCommand
 		fun multibindDevCommands(): Set<@JvmSuppressWildcards Command>
-
-		@Binds
-		@IntoSet
-		fun bindCoinFlipCommand(coinFlipCommand: CoinFlipCommand): Command
 
 		@Binds
 		@IntoSet
@@ -82,6 +79,12 @@ public object BuiltInCommandsModule {
 		@Binds
 		@IntoSet
 		fun bindSourceCodeCommand(sourceCodeCommand: SourceCodeCommand): Command
+	}
+
+	@Provides
+	@IntoSet
+	internal fun provideCoinFlipCommand(configSupplier: ConfigSupplier): Command {
+		return CoinFlipCommand(configSupplier)
 	}
 
 	@Provides
