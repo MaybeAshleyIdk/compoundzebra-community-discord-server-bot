@@ -1,10 +1,5 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling
 
-import dagger.Module
-import dagger.Provides
-import dagger.Reusable
-import dagger.multibindings.ElementsIntoSet
-import dagger.multibindings.Multibinds
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands.BuiltInCommandsModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Action
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.CommandDefinition
@@ -16,44 +11,35 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.PollHolder
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutService
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequester
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.DiModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.Provider
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.getValue
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
 import java.nio.file.Path
-import javax.inject.Provider
 
-@Module(
-	includes = [
-		CommandsMessageEventHandlingImplModule.Bindings::class,
-	],
-)
-public object CommandsMessageEventHandlingImplModule {
+public class CommandsMessageEventHandlingImplModule(
+	scope: DiScope,
+	configSupplier: Provider<ConfigSupplier>,
+	configFilePath: Provider<Path>,
+	// emojiStatsManager: Provider<EmojiStatsManager>,
+	pollCreator: Provider<PollCreator>,
+	pollHolder: Provider<PollHolder>,
+	selfTimeoutService: Provider<SelfTimeoutService>,
+	shutdownRequester: Provider<ShutdownRequester>,
+	botEnvironmentType: Provider<BotEnvironmentType>,
+	logger: Provider<Logger>,
+) : DiModule(scope) {
 
-	@Module
-	internal interface Bindings {
+	private val configSupplier: ConfigSupplier by configSupplier
+	private val logger: Logger by logger
 
-		@Multibinds
-		fun multibindCommands(): Set<@JvmSuppressWildcards Command>
-	}
+	private val commandMessageParser: CommandMessageParser
+		get() {
+			return CommandMessageParser(this.configSupplier)
+		}
 
-	@Provides
-	internal fun provideCommandMessageParser(configSupplier: ConfigSupplier): CommandMessageParser {
-		return CommandMessageParser(configSupplier)
-	}
-
-	@Provides
-	@Reusable
-	internal fun provideBuiltInCommandsModule(
-		scope: DiScope,
-		configSupplier: Provider<ConfigSupplier>,
-		configFilePath: Provider<Path>,
-		// emojiStatsManager: Provider<EmojiStatsManager>,
-		pollCreator: Provider<PollCreator>,
-		pollHolder: Provider<PollHolder>,
-		selfTimeoutService: Provider<SelfTimeoutService>,
-		shutdownRequester: Provider<ShutdownRequester>,
-		botEnvironmentType: Provider<BotEnvironmentType>,
-		logger: Provider<Logger>,
-	): BuiltInCommandsModule {
-		return BuiltInCommandsModule(
+	private val builtInCommandsModule: BuiltInCommandsModule by this.reusable {
+		BuiltInCommandsModule(
 			scope,
 			configSupplier,
 			configFilePath,
@@ -67,33 +53,31 @@ public object CommandsMessageEventHandlingImplModule {
 		)
 	}
 
-	@Provides
-	@ElementsIntoSet
-	internal fun provideBuiltInCommands(builtInCommandsModule: BuiltInCommandsModule): Set<Command> {
-		return builtInCommandsModule.builtInCommands
-	}
+	private val configuredPredefinedResponseCommands: Set<Command>
+		get() {
+			val config: Config = this.configSupplier.get()
 
-	// TODO: find a way to do this dynamic
-	@Provides
-	@ElementsIntoSet
-	internal fun provideConfiguredPredefinedResponseCommands(configSupplier: ConfigSupplier): Set<Command> {
-		val config: Config = configSupplier.get()
-		return config.commandDefinitions
-			.mapTo(
-				LinkedHashSet(config.commandDefinitions.size),
-				CommandDefinition::toPredefinedResponseCommand,
+			return config.commandDefinitions
+				.mapTo(
+					LinkedHashSet(config.commandDefinitions.size),
+					CommandDefinition::toPredefinedResponseCommand,
+				)
+		}
+
+	private val commands: Set<Command>
+		get() {
+			return (this.builtInCommandsModule.builtInCommands + this.configuredPredefinedResponseCommands)
+		}
+
+	public val commandMessageEventHandlerImpl: CommandMessageEventHandlerImpl
+		get() {
+			return CommandMessageEventHandlerImpl(
+				this.commandMessageParser,
+				this.configSupplier,
+				this.commands,
+				this.logger,
 			)
-	}
-
-	@Provides
-	internal fun provideCommandMessageEventHandlerImpl(
-		commandMessageParser: CommandMessageParser,
-		configSupplier: ConfigSupplier,
-		commands: Set<@JvmSuppressWildcards Command>,
-		logger: Logger,
-	): CommandMessageEventHandlerImpl {
-		return CommandMessageEventHandlerImpl(commandMessageParser, configSupplier, commands, logger)
-	}
+		}
 }
 
 private fun CommandDefinition.toPredefinedResponseCommand(): PredefinedResponseCommand {
