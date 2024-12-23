@@ -35,11 +35,6 @@ public object BuiltInCommandsModule {
 		@DevCommand
 		fun multibindDevCommands(): Set<@JvmSuppressWildcards Command>
 
-		// disabled for now
-		// @Binds
-		// @IntoSet
-		// fun bindEmojiStatsCommand(emojiStatsCommand: EmojiStatsCommand): Command
-
 		@Binds
 		@IntoSet
 		fun bindMagic8BallCommand(magic8BallCommand: Magic8BallCommand): Command
@@ -91,6 +86,16 @@ public object BuiltInCommandsModule {
 	internal fun provideGetConfigCommand(configSupplier: ConfigSupplier, configFilePath: Path): Command {
 		return GetConfigCommand(configSupplier, configFilePath)
 	}
+
+	// disabled for now
+	// @Provides
+	// @IntoSet
+	// internal fun provideEmojiStatsCommand(
+	// 	configSupplier: ConfigSupplier,
+	// 	emojiStatsManager: EmojiStatsManager,
+	// ): Command {
+	// 	return EmojiStatsCommand(configSupplier, emojiStatsManager)
+	// }
 
 	@Provides
 	@ElementsIntoSet
