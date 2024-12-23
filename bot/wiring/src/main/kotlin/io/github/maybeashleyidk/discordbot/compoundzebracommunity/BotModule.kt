@@ -15,6 +15,9 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Stderr
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.ConfigModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.MessageEventHandlingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation.PollCreator
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.eventhandling.PollEventHandler
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.PollHolder
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.privatemessageeventhandling.PrivateMessageEventHandlingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.ShutdownModule
@@ -30,7 +33,6 @@ import net.dv8tion.jda.api.JDA as Jda
 
 @Module(
 	includes = [
-		PollsModule::class,
 		SelfTimeoutModule::class,
 		ShutdownModule::class,
 		MessageEventHandlingModule::class,
@@ -89,6 +91,31 @@ internal object BotModule {
 	@Provides
 	fun provideDatabase(storageModule: StorageModule): Database {
 		return storageModule.database
+	}
+
+	@Provides
+	@Reusable
+	fun providePollsModule(
+		scope: DiScope,
+		logger: Provider<Logger>,
+		configSupplier: Provider<ConfigSupplier>,
+	): PollsModule {
+		return PollsModule(scope, logger, configSupplier)
+	}
+
+	@Provides
+	fun providePollCreator(pollsModule: PollsModule): PollCreator {
+		return pollsModule.pollCreator
+	}
+
+	@Provides
+	fun providePollHolder(pollsModule: PollsModule): PollHolder {
+		return pollsModule.pollHolder
+	}
+
+	@Provides
+	fun providePollEventHandler(pollsModule: PollsModule): PollEventHandler {
+		return pollsModule.pollEventHandler
 	}
 
 	@Provides

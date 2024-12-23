@@ -1,7 +1,5 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls
 
-import dagger.Module
-import dagger.Provides
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation.PollCreator
@@ -14,34 +12,41 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.manageme
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.management.PollManagerImpl
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.modification.PollManagerModifier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.modification.PollModifier
-import javax.inject.Singleton
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.DiModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.Provider
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.getValue
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
 
-@Module
-public object PollsModule {
+public class PollsModule(
+	scope: DiScope,
+	logger: Provider<Logger>,
+	configSupplier: Provider<ConfigSupplier>,
+) : DiModule(scope) {
 
-	@Provides
-	@Singleton
-	internal fun providePollManager(logger: Logger): PollManager {
-		return PollManagerImpl(logger)
+	private val logger: Logger by logger
+	private val configSupplier: ConfigSupplier by configSupplier
+
+	private val pollManager: PollManager by this.singleton {
+		PollManagerImpl(this.logger)
 	}
 
-	@Provides
-	internal fun providePollCreator(pollManager: PollManager): PollCreator {
-		return PollManagerCreator(pollManager)
-	}
+	private val pollModifier: PollModifier
+		get() {
+			return PollManagerModifier(this.pollManager)
+		}
 
-	@Provides
-	internal fun providePollHolder(pollManager: PollManager): PollHolder {
-		return PollManagerHolder(pollManager)
-	}
+	public val pollCreator: PollCreator
+		get() {
+			return PollManagerCreator(this.pollManager)
+		}
 
-	@Provides
-	internal fun providePollModifier(pollManager: PollManager): PollModifier {
-		return PollManagerModifier(pollManager)
-	}
+	public val pollHolder: PollHolder
+		get() {
+			return PollManagerHolder(this.pollManager)
+		}
 
-	@Provides
-	internal fun providePollEventHandler(pollModifier: PollModifier, configSupplier: ConfigSupplier): PollEventHandler {
-		return PollEventHandlerImpl(pollModifier, configSupplier)
-	}
+	public val pollEventHandler: PollEventHandler
+		get() {
+			return PollEventHandlerImpl(this.pollModifier, this.configSupplier)
+		}
 }

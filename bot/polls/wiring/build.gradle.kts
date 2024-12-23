@@ -14,6 +14,5 @@ dependencies {
 	api(projects.bot.polls.management.impl)
 	api(projects.bot.polls.modification.implManager)
 
-	implementation(libs.dagger)
-	ksp(libs.daggerCompiler)
+	api(projects.bot.utils.di)
 }
