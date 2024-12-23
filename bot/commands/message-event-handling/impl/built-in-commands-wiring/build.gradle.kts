@@ -21,6 +21,5 @@ for (builtInCommandProject: Project in builtInCommandsProject.childProjects.valu
 }
 
 dependencies {
-	implementation(libs.dagger)
-	ksp(libs.daggerCompiler)
+	api(projects.bot.utils.di)
 }

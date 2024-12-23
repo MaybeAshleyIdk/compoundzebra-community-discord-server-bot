@@ -1,10 +1,7 @@
+@file:Suppress("ktlint:standard:spacing-between-declarations-with-comments")
+
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands
 
-import dagger.Module
-import dagger.Provides
-import dagger.multibindings.ElementsIntoSet
-import dagger.multibindings.IntoSet
-import dagger.multibindings.Multibinds
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.Command
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands.coinflip.CoinFlipCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands.config.GetConfigCommand
@@ -24,108 +21,125 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutService
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequester
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.DiModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.Provider
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.getValue
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
 import java.nio.file.Path
 
-@Module(includes = [BuiltInCommandsModule.Bindings::class])
-public object BuiltInCommandsModule {
+public class BuiltInCommandsModule(
+	scope: DiScope,
+	configSupplier: Provider<ConfigSupplier>,
+	configFilePath: Provider<Path>,
+	// emojiStatsManager: Provider<EmojiStatsManager>,
+	pollCreator: Provider<PollCreator>,
+	pollHolder: Provider<PollHolder>,
+	selfTimeoutService: Provider<SelfTimeoutService>,
+	shutdownRequester: Provider<ShutdownRequester>,
+	botEnvironmentType: Provider<BotEnvironmentType>,
+	logger: Provider<Logger>,
+) : DiModule(scope) {
 
-	@Module
-	internal interface Bindings {
+	private val configSupplier: ConfigSupplier by configSupplier
+	private val configFilePath: Path by configFilePath
+	// private val emojiStatsManager: EmojiStatsManager by emojiStatsManager
+	private val pollCreator: PollCreator by pollCreator
+	private val pollHolder: PollHolder by pollHolder
+	private val selfTimeoutService: SelfTimeoutService by selfTimeoutService
+	private val shutdownRequester: ShutdownRequester by shutdownRequester
+	private val botEnvironmentType: BotEnvironmentType by botEnvironmentType
+	private val logger: Logger by logger
 
-		@Multibinds
-		fun multibindCommands(): Set<@JvmSuppressWildcards Command>
+	private val coinFlipCommand: CoinFlipCommand
+		get() {
+			return CoinFlipCommand(this.configSupplier)
+		}
 
-		@Multibinds
-		@DevCommand
-		fun multibindDevCommands(): Set<@JvmSuppressWildcards Command>
-	}
+	private val devTestCommand: DevTestCommand
+		get() {
+			return DevTestCommand()
+		}
 
-	@Provides
-	@IntoSet
-	internal fun provideCoinFlipCommand(configSupplier: ConfigSupplier): Command {
-		return CoinFlipCommand(configSupplier)
-	}
-
-	@Provides
-	@DevCommand
-	@IntoSet
-	internal fun provideDevTestCommand(): Command {
-		return DevTestCommand()
-	}
-
-	@Provides
-	@IntoSet
-	internal fun provideGetConfigCommand(configSupplier: ConfigSupplier, configFilePath: Path): Command {
-		return GetConfigCommand(configSupplier, configFilePath)
-	}
+	private val getConfigCommand: GetConfigCommand
+		get() {
+			return GetConfigCommand(this.configSupplier, this.configFilePath)
+		}
 
 	// disabled for now
-	// @Provides
-	// @IntoSet
-	// internal fun provideEmojiStatsCommand(
-	// 	configSupplier: ConfigSupplier,
-	// 	emojiStatsManager: EmojiStatsManager,
-	// ): Command {
-	// 	return EmojiStatsCommand(configSupplier, emojiStatsManager)
-	// }
+	// private val emojiStatsCommand: EmojiStatsCommand
+	// 	get() {
+	// 		return EmojiStatsCommand(this.configSupplier, this.emojiStatsManager)
+	// 	}
 
-	@Provides
-	@IntoSet
-	internal fun provideMagic8BallCommand(configSupplier: ConfigSupplier, logger: Logger): Command {
-		return Magic8BallCommand(configSupplier, logger)
-	}
-
-	@Provides
-	@IntoSet
-	internal fun providePollCreationCommand(configSupplier: ConfigSupplier, pollCreator: PollCreator): Command {
-		return PollCreationCommand(configSupplier, pollCreator)
-	}
-
-	@Provides
-	@IntoSet
-	internal fun providePollQueryCommand(configSupplier: ConfigSupplier, pollHolder: PollHolder): Command {
-		return PollQueryCommand(configSupplier, pollHolder)
-	}
-
-	@Provides
-	@IntoSet
-	internal fun provideDieRollingCommand(): Command {
-		return DieRollingCommand()
-	}
-
-	@Provides
-	@IntoSet
-	internal fun provideRngCommand(configSupplier: ConfigSupplier): Command {
-		return RngCommand(configSupplier)
-	}
-
-	@Provides
-	@IntoSet
-	internal fun provideSelfTimeoutCommand(selfTimeoutService: SelfTimeoutService): Command {
-		return SelfTimeoutCommand(selfTimeoutService)
-	}
-
-	@Provides
-	@IntoSet
-	internal fun provideShutdownCommand(configSupplier: ConfigSupplier, shutdownRequester: ShutdownRequester): Command {
-		return ShutdownCommand(configSupplier, shutdownRequester)
-	}
-
-	@Provides
-	@IntoSet
-	internal fun provideSourceCodeCommand(): Command {
-		return SourceCodeCommand()
-	}
-
-	@Provides
-	@ElementsIntoSet
-	internal fun provideCommandsFromDevCommands(
-		botEnvironmentType: BotEnvironmentType,
-		@DevCommand devCommands: Set<@JvmSuppressWildcards Command>,
-	): Set<@JvmSuppressWildcards Command> {
-		return when (botEnvironmentType) {
-			BotEnvironmentType.DEVELOPMENT -> devCommands
-			BotEnvironmentType.PRODUCTION -> emptySet()
+	private val magic8BallCommand: Magic8BallCommand
+		get() {
+			return Magic8BallCommand(this.configSupplier, this.logger)
 		}
+
+	private val pollCreationCommand: PollCreationCommand
+		get() {
+			return PollCreationCommand(this.configSupplier, this.pollCreator)
+		}
+
+	private val pollQueryCommand: PollQueryCommand
+		get() {
+			return PollQueryCommand(this.configSupplier, this.pollHolder)
+		}
+
+	private val dieRollingCommand: DieRollingCommand
+		get() {
+			return DieRollingCommand()
+		}
+
+	private val rngCommand: RngCommand
+		get() {
+			return RngCommand(this.configSupplier)
+		}
+
+	private val selfTimeoutCommand: SelfTimeoutCommand
+		get() {
+			return SelfTimeoutCommand(this.selfTimeoutService)
+		}
+
+	private val shutdownCommand: ShutdownCommand
+		get() {
+			return ShutdownCommand(this.configSupplier, this.shutdownRequester)
+		}
+
+	private val sourceCodeCommand: SourceCodeCommand
+		get() {
+			return SourceCodeCommand()
+		}
+
+	private val devCommands: Set<Command>
+		get() {
+			return setOf(
+				this.devTestCommand,
+			)
+		}
+
+	public val builtInCommands: Set<Command> by this.singleton {
+		val mainCommands: Set<Command> =
+			setOf(
+				this.coinFlipCommand,
+				this.getConfigCommand,
+				// this.emojiStatsCommand,
+				this.magic8BallCommand,
+				this.pollCreationCommand,
+				this.pollQueryCommand,
+				this.dieRollingCommand,
+				this.rngCommand,
+				this.selfTimeoutCommand,
+				this.shutdownCommand,
+				this.sourceCodeCommand,
+			)
+
+		val devCommands: Set<Command> =
+			when (this.botEnvironmentType) {
+				BotEnvironmentType.DEVELOPMENT -> this.devCommands
+				BotEnvironmentType.PRODUCTION -> emptySet()
+			}
+
+		mainCommands + devCommands
 	}
 }
