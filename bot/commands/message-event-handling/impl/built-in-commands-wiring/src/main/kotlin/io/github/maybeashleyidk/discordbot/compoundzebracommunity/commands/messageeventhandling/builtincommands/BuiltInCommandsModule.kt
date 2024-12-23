@@ -20,6 +20,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messa
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutCommand
+import java.nio.file.Path
 
 @Module(includes = [BuiltInCommandsModule.Bindings::class])
 public object BuiltInCommandsModule {
@@ -33,10 +34,6 @@ public object BuiltInCommandsModule {
 		@Multibinds
 		@DevCommand
 		fun multibindDevCommands(): Set<@JvmSuppressWildcards Command>
-
-		@Binds
-		@IntoSet
-		fun bindGetConfigCommand(getConfigCommand: GetConfigCommand): Command
 
 		@Binds
 		@DevCommand
@@ -85,6 +82,12 @@ public object BuiltInCommandsModule {
 	@IntoSet
 	internal fun provideCoinFlipCommand(configSupplier: ConfigSupplier): Command {
 		return CoinFlipCommand(configSupplier)
+	}
+
+	@Provides
+	@IntoSet
+	internal fun provideGetConfigCommand(configSupplier: ConfigSupplier, configFilePath: Path): Command {
+		return GetConfigCommand(configSupplier, configFilePath)
 	}
 
 	@Provides

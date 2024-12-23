@@ -11,11 +11,10 @@ import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.utils.FileUpload
 import java.nio.file.Path
-import javax.inject.Inject
 
-public class GetConfigCommand @Inject constructor(
+public class GetConfigCommand(
 	private val configSupplier: ConfigSupplier,
-	private val configFilePath: Path, // FIXME: qualifier
+	private val configFilePath: Path,
 ) : Command(name = CommandName.ofString("getconfig")) {
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
