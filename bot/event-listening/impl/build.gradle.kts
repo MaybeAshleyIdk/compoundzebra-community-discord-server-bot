@@ -15,6 +15,4 @@ dependencies {
 	api(projects.bot.logging)
 
 	implementation(libs.kotlinxCoroutinesCore)
-
-	implementation(libs.javaxInject)
 }

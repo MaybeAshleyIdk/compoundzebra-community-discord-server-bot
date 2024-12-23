@@ -126,7 +126,7 @@ include {
 
 		"private-message-event-handling".serviceWithoutWiring()
 
-		"event-listening".service()
+		"event-listening".serviceWithoutWiring()
 
 		"jda-factory"()
 		"wiring"()

@@ -30,7 +30,7 @@ dependencies {
 	implementation(projects.bot.configSource.implFile)
 	implementation(projects.bot.configSupplier.implCache)
 	implementation(projects.bot.emojiStats.impl)
-	implementation(projects.bot.eventListening.wiring)
+	implementation(projects.bot.eventListening.impl)
 	implementation(projects.bot.logging.implStderr)
 	implementation(projects.bot.messageEventHandlerMediation.impl)
 	implementation(projects.bot.polls.wiring)

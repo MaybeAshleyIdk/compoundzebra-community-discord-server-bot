@@ -18,11 +18,10 @@ import net.dv8tion.jda.api.events.GenericEvent
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.cancellation.CancellationException
 
-public class MainEventListenerImpl @Inject constructor(
+public class MainEventListenerImpl(
 	private val logger: Logger,
 	private val shutdownEventHandler: ShutdownEventHandler,
 	shutdownCallbackRegistry: ShutdownCallbackRegistry,

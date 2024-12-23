@@ -8,10 +8,12 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.emojistats.EmojiStatsManager
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.emojistats.EmojiStatsManagerImpl
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistening.EventListeningModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistening.MainEventListener
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistening.MainEventListenerImpl
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.jdafactory.JdaFactory
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.StderrLogger
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventhandlermediation.MessageEventHandlerMediator
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.ConfigModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules.MessageEventHandlingModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.PollsModule
@@ -37,7 +39,6 @@ import net.dv8tion.jda.api.JDA as Jda
 @Module(
 	includes = [
 		MessageEventHandlingModule::class,
-		EventListeningModule::class,
 	],
 )
 internal object BotModule {
@@ -152,6 +153,25 @@ internal object BotModule {
 	@Provides
 	fun providePrivateMessageEventHandler(logger: Logger): PrivateMessageEventHandler {
 		return PrivateMessageEventHandlerImpl(logger)
+	}
+
+	@Provides
+	fun bindMainEventListener(
+		logger: Logger,
+		shutdownEventHandler: ShutdownEventHandler,
+		shutdownCallbackRegistry: ShutdownCallbackRegistry,
+		messageEventHandlerMediator: MessageEventHandlerMediator,
+		pollEventHandler: PollEventHandler,
+		privateMessageEventHandler: PrivateMessageEventHandler,
+	): MainEventListener {
+		return MainEventListenerImpl(
+			logger,
+			shutdownEventHandler,
+			shutdownCallbackRegistry,
+			messageEventHandlerMediator,
+			pollEventHandler,
+			privateMessageEventHandler,
+		)
 	}
 
 	@Provides
