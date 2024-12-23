@@ -120,7 +120,7 @@ include {
 			}
 		}
 
-		"conditional-message-event-handling".service()
+		"conditional-message-event-handling".serviceWithoutWiring()
 
 		"message-event-handler-mediation".service()
 
