@@ -19,7 +19,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.eventhandling.PollEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.PollHolder
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.privatemessageeventhandling.PrivateMessageEventHandlingModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutService
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutServiceImpl
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.ShutdownModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbackregistraton.ShutdownCallbackRegistry
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequester
@@ -33,7 +34,6 @@ import net.dv8tion.jda.api.JDA as Jda
 
 @Module(
 	includes = [
-		SelfTimeoutModule::class,
 		ShutdownModule::class,
 		MessageEventHandlingModule::class,
 		PrivateMessageEventHandlingModule::class,
@@ -121,6 +121,11 @@ internal object BotModule {
 	@Provides
 	fun provideEmojiStatsManager(logger: Logger): EmojiStatsManager {
 		return EmojiStatsManagerImpl(logger)
+	}
+
+	@Provides
+	fun provideSelfTimeoutService(logger: Logger): SelfTimeoutService {
+		return SelfTimeoutServiceImpl(logger)
 	}
 
 	@Provides

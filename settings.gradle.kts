@@ -78,7 +78,7 @@ include {
 			"wiring"()
 		}
 
-		"self-timeout".service()
+		"self-timeout".serviceWithoutWiring()
 
 		"shutdown" {
 			"callbacks"()
