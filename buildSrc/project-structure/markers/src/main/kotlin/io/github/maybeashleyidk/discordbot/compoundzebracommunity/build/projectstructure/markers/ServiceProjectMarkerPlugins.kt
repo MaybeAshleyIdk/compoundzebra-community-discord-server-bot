@@ -32,10 +32,3 @@ public class CompositeServiceImplementationProjectMarkerPlugin : Plugin<Project>
 		project.markAsProjectType(ProjectType.SERVICE_IMPLEMENTATION_COMPOSITE)
 	}
 }
-
-public class ServiceWiringProjectMarkerPlugin : Plugin<Project> {
-
-	override fun apply(project: Project) {
-		project.markAsProjectType(ProjectType.SERVICE_WIRING)
-	}
-}

@@ -25,7 +25,6 @@ private val ALLOWED_CHILD_TYPES: Set<ProjectType> =
 			ProjectType.SERVICE_INTERFACE -> false
 			ProjectType.SERVICE_IMPLEMENTATION_STANDALONE -> false
 			ProjectType.SERVICE_IMPLEMENTATION_COMPOSITE -> false
-			ProjectType.SERVICE_WIRING -> false
 		}
 	}
 

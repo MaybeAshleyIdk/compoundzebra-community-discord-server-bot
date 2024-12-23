@@ -8,7 +8,6 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projects
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectstructure.projecttypepolicies.internal.service.COMPOSITE_SERVICE_IMPLEMENTATION_POLICY
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectstructure.projecttypepolicies.internal.service.SERVICE_INTERFACE_POLICY
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectstructure.projecttypepolicies.internal.service.SERVICE_POLICY
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectstructure.projecttypepolicies.internal.service.SERVICE_WIRING_POLICY
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectstructure.projecttypepolicies.internal.service.STANDALONE_SERVICE_IMPLEMENTATION_POLICY
 
 public fun ProjectType.selectPolicy(): ProjectDetailsPolicy {
@@ -23,6 +22,5 @@ public fun ProjectType.selectPolicy(): ProjectDetailsPolicy {
 		ProjectType.SERVICE_INTERFACE -> SERVICE_INTERFACE_POLICY
 		ProjectType.SERVICE_IMPLEMENTATION_STANDALONE -> STANDALONE_SERVICE_IMPLEMENTATION_POLICY
 		ProjectType.SERVICE_IMPLEMENTATION_COMPOSITE -> COMPOSITE_SERVICE_IMPLEMENTATION_POLICY
-		ProjectType.SERVICE_WIRING -> SERVICE_WIRING_POLICY
 	}
 }

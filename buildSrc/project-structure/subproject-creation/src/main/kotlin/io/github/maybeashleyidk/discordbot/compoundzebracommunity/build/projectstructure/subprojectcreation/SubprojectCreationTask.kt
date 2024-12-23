@@ -177,7 +177,6 @@ public abstract class SubprojectCreationTask : DefaultTask() {
 				ProjectType.SERVICE_INTERFACE -> "service-interface"
 				ProjectType.SERVICE_IMPLEMENTATION_STANDALONE -> "service-implementation.standalone"
 				ProjectType.SERVICE_IMPLEMENTATION_COMPOSITE -> "service-implementation.composite"
-				ProjectType.SERVICE_WIRING -> "service-wiring"
 			}
 
 		val gradleBuildFileTemplateResourceName = "gradlebuildfiles/$gradleBuildFileTemplateResourceBaseName.gradle.kts"
@@ -250,7 +249,6 @@ private fun ProjectType.hasSourceCode(): Boolean {
 		ProjectType.SERVICE_INTERFACE -> true
 		ProjectType.SERVICE_IMPLEMENTATION_STANDALONE -> true
 		ProjectType.SERVICE_IMPLEMENTATION_COMPOSITE -> false
-		ProjectType.SERVICE_WIRING -> true
 	}
 }
 

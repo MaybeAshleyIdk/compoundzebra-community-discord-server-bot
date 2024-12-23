@@ -40,25 +40,25 @@ include {
 
 		"token"()
 
-		"logging".serviceWithoutWiring(impl = "stderr")
+		"logging".service(impl = "stderr")
 
 		"snowflake"()
 		"snowflake-generator"()
 
 		"storage" {
-			"database".serviceWithoutWiring(impl = "sqlite")
+			"database".service(impl = "sqlite")
 			"wiring"()
 		}
 
 		"config"()
-		"config-serialization".serviceWithoutWiring(impl = "json")
-		"config-source".serviceWithoutWiring(impl = "file")
-		"config-cache".serviceWithoutWiring(impl = "memory")
-		"config-supplier".serviceWithoutWiring(impl = "cache")
+		"config-serialization".service(impl = "json")
+		"config-source".service(impl = "file")
+		"config-cache".service(impl = "memory")
+		"config-supplier".service(impl = "cache")
 
 		"generic-event-handler"()
 
-		"emoji-stats".serviceWithoutWiring()
+		"emoji-stats".service()
 
 		"polls" {
 			"id"()
@@ -66,27 +66,27 @@ include {
 			"option"()
 			"details"()
 
-			"management".serviceWithoutWiring()
-			"creation".serviceWithoutWiring(impl = "manager")
-			"holding".serviceWithoutWiring(impl = "manager")
-			"modification".serviceWithoutWiring(impl = "manager")
+			"management".service()
+			"creation".service(impl = "manager")
+			"holding".service(impl = "manager")
+			"modification".service(impl = "manager")
 
 			"component-protocol"()
 
-			"event-handling".serviceWithoutWiring()
+			"event-handling".service()
 
 			"wiring"()
 		}
 
-		"self-timeout".serviceWithoutWiring()
+		"self-timeout".service()
 
 		"shutdown" {
 			"callbacks"()
 
-			"management".serviceWithoutWiring()
-			"event-handling".serviceWithoutWiring(impl = "manager")
-			"callback-registration".serviceWithoutWiring(impl = "manager")
-			"requesting".serviceWithoutWiring(impl = "manager")
+			"management".service()
+			"event-handling".service(impl = "manager")
+			"callback-registration".service(impl = "manager")
+			"requesting".service(impl = "manager")
 
 			"wiring"()
 		}
@@ -95,7 +95,7 @@ include {
 			"name"()
 			"prefix"()
 
-			"message-event-handling".serviceWithoutWiring {
+			"message-event-handling".service {
 				"message-parser"()
 				"command"()
 
@@ -120,13 +120,13 @@ include {
 			}
 		}
 
-		"conditional-message-event-handling".serviceWithoutWiring()
+		"conditional-message-event-handling".service()
 
-		"message-event-handler-mediation".serviceWithoutWiring()
+		"message-event-handler-mediation".service()
 
-		"private-message-event-handling".serviceWithoutWiring()
+		"private-message-event-handling".service()
 
-		"event-listening".serviceWithoutWiring()
+		"event-listening".service()
 
 		"jda-factory"()
 		"wiring"()

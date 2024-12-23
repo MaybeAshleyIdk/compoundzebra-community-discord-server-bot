@@ -75,14 +75,9 @@ private object ServiceChildrenPolicy : ProjectChildrenPolicy {
 		check(childrenTypes.count(ProjectType::isServiceImplementation) == 1) {
 			"The $project must have exactly 1 child of type service-implementation (standalone or composite)"
 		}
-		when (childrenTypes.count(ProjectType::isServiceWiring)) {
-			0 -> Unit
-			1 -> project.logger.warn("The $project has a deprecated service-wiring child")
-			else -> error("The $project must have either none or one child of type service-wiring")
-		}
 
-		check(childrenTypes.size in 2..3) {
-			"The $project must have 2 or 3 children"
+		check(childrenTypes.size == 2) {
+			"The $project must have exactly 2 children"
 		}
 	}
 }
@@ -96,7 +91,6 @@ private fun ProjectType.isServiceInterface(): Boolean {
 		ProjectType.SERVICE_INTERFACE -> true
 		ProjectType.SERVICE_IMPLEMENTATION_STANDALONE -> false
 		ProjectType.SERVICE_IMPLEMENTATION_COMPOSITE -> false
-		ProjectType.SERVICE_WIRING -> false
 	}
 }
 
@@ -109,19 +103,5 @@ private fun ProjectType.isServiceImplementation(): Boolean {
 		ProjectType.SERVICE_INTERFACE -> false
 		ProjectType.SERVICE_IMPLEMENTATION_STANDALONE -> true
 		ProjectType.SERVICE_IMPLEMENTATION_COMPOSITE -> true
-		ProjectType.SERVICE_WIRING -> false
-	}
-}
-
-private fun ProjectType.isServiceWiring(): Boolean {
-	return when (this) {
-		ProjectType.STANDALONE -> false
-		ProjectType.NAMESPACE -> false
-		ProjectType.COMPOSITE -> false
-		ProjectType.SERVICE -> false
-		ProjectType.SERVICE_INTERFACE -> false
-		ProjectType.SERVICE_IMPLEMENTATION_STANDALONE -> false
-		ProjectType.SERVICE_IMPLEMENTATION_COMPOSITE -> false
-		ProjectType.SERVICE_WIRING -> true
 	}
 }
