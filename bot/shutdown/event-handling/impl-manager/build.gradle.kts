@@ -8,6 +8,4 @@ plugins {
 dependencies {
 	api(projects.bot.shutdown.eventHandling.api)
 	api(projects.bot.shutdown.management)
-
-	implementation(libs.javaxInject)
 }

@@ -4,7 +4,8 @@ import dagger.Module
 import dagger.Provides
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbackregistraton.ShutdownCallbackRegistrationModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.eventhandling.ShutdownEventHandlingModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.eventhandling.ShutdownEventHandler
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.eventhandling.ShutdownManagerEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.management.ShutdownManager
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.management.ShutdownManagerImpl
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequestingModule
@@ -15,7 +16,6 @@ import javax.inject.Singleton
 
 @Module(
 	includes = [
-		ShutdownEventHandlingModule::class,
 		ShutdownCallbackRegistrationModule::class,
 		ShutdownRequestingModule::class,
 	],
@@ -26,5 +26,10 @@ public object ShutdownModule {
 	@Singleton
 	internal fun provideShutdownManager(jdaProvider: Provider<JDA>, logger: Logger): ShutdownManager {
 		return ShutdownManagerImpl(Supplier(jdaProvider::get), logger)
+	}
+
+	@Provides
+	internal fun provideShutdownEventHandler(shutdownManager: ShutdownManager): ShutdownEventHandler {
+		return ShutdownManagerEventHandler(shutdownManager)
 	}
 }
