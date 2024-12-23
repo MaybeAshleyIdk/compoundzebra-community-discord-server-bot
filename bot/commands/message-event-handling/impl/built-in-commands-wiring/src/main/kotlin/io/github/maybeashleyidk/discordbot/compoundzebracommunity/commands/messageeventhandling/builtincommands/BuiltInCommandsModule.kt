@@ -1,6 +1,5 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands
 
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ElementsIntoSet
@@ -39,10 +38,6 @@ public object BuiltInCommandsModule {
 		@Multibinds
 		@DevCommand
 		fun multibindDevCommands(): Set<@JvmSuppressWildcards Command>
-
-		@Binds
-		@IntoSet
-		fun bindSourceCodeCommand(sourceCodeCommand: SourceCodeCommand): Command
 	}
 
 	@Provides
@@ -114,6 +109,12 @@ public object BuiltInCommandsModule {
 	@IntoSet
 	internal fun provideShutdownCommand(configSupplier: ConfigSupplier, shutdownRequester: ShutdownRequester): Command {
 		return ShutdownCommand(configSupplier, shutdownRequester)
+	}
+
+	@Provides
+	@IntoSet
+	internal fun provideSourceCodeCommand(): Command {
+		return SourceCodeCommand()
 	}
 
 	@Provides
