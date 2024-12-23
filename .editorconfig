@@ -24,6 +24,7 @@ ktlint_standard_no-blank-line-in-list = enabled
 ktlint_standard_no-consecutive-comments = enabled
 ktlint_standard_try-catch-finally-spacing = enabled
 
+ktlint_standard_class-signature = disabled
 ktlint_standard_discouraged-comment-location = disabled
 ktlint_standard_function-expression-body = disabled
 
