@@ -3,7 +3,8 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown
 import dagger.Module
 import dagger.Provides
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbackregistraton.ShutdownCallbackRegistrationModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbackregistraton.ShutdownCallbackRegistry
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbackregistraton.ShutdownManagerCallbackRegistry
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.eventhandling.ShutdownEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.eventhandling.ShutdownManagerEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.management.ShutdownManager
@@ -16,7 +17,6 @@ import javax.inject.Singleton
 
 @Module(
 	includes = [
-		ShutdownCallbackRegistrationModule::class,
 		ShutdownRequestingModule::class,
 	],
 )
@@ -31,5 +31,10 @@ public object ShutdownModule {
 	@Provides
 	internal fun provideShutdownEventHandler(shutdownManager: ShutdownManager): ShutdownEventHandler {
 		return ShutdownManagerEventHandler(shutdownManager)
+	}
+
+	@Provides
+	internal fun provideShutdownCallbackRegistry(shutdownManager: ShutdownManager): ShutdownCallbackRegistry {
+		return ShutdownManagerCallbackRegistry(shutdownManager)
 	}
 }

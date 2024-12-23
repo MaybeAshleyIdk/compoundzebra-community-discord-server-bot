@@ -85,7 +85,7 @@ include {
 
 			"management".serviceWithoutWiring()
 			"event-handling".serviceWithoutWiring(impl = "manager")
-			"callback-registration".service(impl = "manager")
+			"callback-registration".serviceWithoutWiring(impl = "manager")
 			"requesting".service(impl = "manager")
 
 			"wiring"()
