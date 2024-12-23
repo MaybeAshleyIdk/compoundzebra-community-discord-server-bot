@@ -35,6 +35,11 @@ public object CommandsMessageEventHandlingImplModule {
 	}
 
 	@Provides
+	internal fun provideCommandMessageParser(configSupplier: ConfigSupplier): CommandMessageParser {
+		return CommandMessageParser(configSupplier)
+	}
+
+	@Provides
 	@Reusable
 	internal fun provideBuiltInCommandsModule(
 		scope: DiScope,

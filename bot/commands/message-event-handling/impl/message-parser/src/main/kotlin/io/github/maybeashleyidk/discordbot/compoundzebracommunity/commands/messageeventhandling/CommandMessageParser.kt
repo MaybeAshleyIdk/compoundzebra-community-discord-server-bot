@@ -2,9 +2,8 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.mess
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
-import javax.inject.Inject
 
-public class CommandMessageParser @Inject constructor(
+public class CommandMessageParser(
 	private val configSupplier: ConfigSupplier,
 ) {
 
