@@ -4,7 +4,3 @@ plugins {
 	`java-library`
 	kotlin("jvm")
 }
-
-dependencies {
-	api(libs.javaxInject)
-}

@@ -10,22 +10,18 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.manag
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownManagerRequester
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequester
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.DiModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.Provider
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.asSupplier
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.getValue
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
+import java.util.function.Supplier
 import net.dv8tion.jda.api.JDA as Jda
 
 public class ShutdownModule(
 	scope: DiScope,
-	private val jda: Provider<Jda>,
-	logger: Provider<Logger>,
+	private val jdaSupplier: Supplier<Jda>,
+	private val logger: Logger,
 ) : DiModule(scope) {
 
-	private val logger: Logger by logger
-
 	private val shutdownManager: ShutdownManager by this.singleton {
-		ShutdownManagerImpl(this.jda.asSupplier(), this.logger)
+		ShutdownManagerImpl(this.jdaSupplier, this.logger)
 	}
 
 	public val shutdownEventHandler: ShutdownEventHandler

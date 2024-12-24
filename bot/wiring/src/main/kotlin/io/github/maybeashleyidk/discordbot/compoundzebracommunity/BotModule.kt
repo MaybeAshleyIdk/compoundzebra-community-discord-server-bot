@@ -34,6 +34,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.token.BotToken
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
 import net.dv8tion.jda.api.entities.Activity
 import java.nio.file.Path
+import java.util.function.Supplier
 import javax.inject.Provider
 import javax.inject.Singleton
 import net.dv8tion.jda.api.JDA as Jda
@@ -65,8 +66,8 @@ internal object BotModule {
 
 	@Provides
 	@Reusable
-	fun provideShutdownModule(scope: DiScope, jda: Provider<Jda>, logger: Provider<Logger>): ShutdownModule {
-		return ShutdownModule(scope, jda, logger)
+	fun provideShutdownModule(scope: DiScope, jdaProvider: Provider<Jda>, logger: Logger): ShutdownModule {
+		return ShutdownModule(scope, Supplier(jdaProvider::get), logger)
 	}
 
 	@Provides
@@ -88,10 +89,10 @@ internal object BotModule {
 	@Reusable
 	fun provideConfigModule(
 		scope: DiScope,
-		moshi: Provider<Moshi>,
-		botEnvironmentType: Provider<BotEnvironmentType>,
-		configFilePath: Provider<Path>,
-		logger: Provider<Logger>,
+		moshi: Moshi,
+		botEnvironmentType: BotEnvironmentType,
+		configFilePath: Path,
+		logger: Logger,
 	): ConfigModule {
 		return ConfigModule(scope, moshi, botEnvironmentType, configFilePath, logger)
 	}
@@ -105,9 +106,9 @@ internal object BotModule {
 	@Reusable
 	fun provideStorageModule(
 		scope: DiScope,
-		shutdownCallbackRegistry: Provider<ShutdownCallbackRegistry>,
-		shutdownRequester: Provider<ShutdownRequester>,
-		logger: Provider<Logger>,
+		shutdownCallbackRegistry: ShutdownCallbackRegistry,
+		shutdownRequester: ShutdownRequester,
+		logger: Logger,
 	): StorageModule {
 		return StorageModule(scope, shutdownCallbackRegistry, shutdownRequester, logger)
 	}
@@ -119,11 +120,7 @@ internal object BotModule {
 
 	@Provides
 	@Reusable
-	fun providePollsModule(
-		scope: DiScope,
-		logger: Provider<Logger>,
-		configSupplier: Provider<ConfigSupplier>,
-	): PollsModule {
+	fun providePollsModule(scope: DiScope, logger: Logger, configSupplier: ConfigSupplier): PollsModule {
 		return PollsModule(scope, logger, configSupplier)
 	}
 

@@ -12,26 +12,21 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutService
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequester
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.DiModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.Provider
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.getValue
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
 import java.nio.file.Path
 
 public class CommandsMessageEventHandlingImplModule(
 	scope: DiScope,
-	configSupplier: Provider<ConfigSupplier>,
-	configFilePath: Provider<Path>,
-	// emojiStatsManager: Provider<EmojiStatsManager>,
-	pollCreator: Provider<PollCreator>,
-	pollHolder: Provider<PollHolder>,
-	selfTimeoutService: Provider<SelfTimeoutService>,
-	shutdownRequester: Provider<ShutdownRequester>,
-	botEnvironmentType: Provider<BotEnvironmentType>,
-	logger: Provider<Logger>,
+	private val configSupplier: ConfigSupplier,
+	configFilePath: Path,
+	// emojiStatsManager: EmojiStatsManager,
+	pollCreator: PollCreator,
+	pollHolder: PollHolder,
+	selfTimeoutService: SelfTimeoutService,
+	shutdownRequester: ShutdownRequester,
+	botEnvironmentType: BotEnvironmentType,
+	private val logger: Logger,
 ) : DiModule(scope) {
-
-	private val configSupplier: ConfigSupplier by configSupplier
-	private val logger: Logger by logger
 
 	private val commandMessageParser: CommandMessageParser
 		get() {
@@ -41,7 +36,7 @@ public class CommandsMessageEventHandlingImplModule(
 	private val builtInCommandsModule: BuiltInCommandsModule by this.reusable {
 		BuiltInCommandsModule(
 			scope,
-			configSupplier,
+			this.configSupplier,
 			configFilePath,
 			// emojiStatsManager,
 			pollCreator,
@@ -49,7 +44,7 @@ public class CommandsMessageEventHandlingImplModule(
 			selfTimeoutService,
 			shutdownRequester,
 			botEnvironmentType,
-			logger,
+			this.logger,
 		)
 	}
 

@@ -22,33 +22,21 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.Se
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutService
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequester
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.DiModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.Provider
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.getValue
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
 import java.nio.file.Path
 
 public class BuiltInCommandsModule(
 	scope: DiScope,
-	configSupplier: Provider<ConfigSupplier>,
-	configFilePath: Provider<Path>,
-	// emojiStatsManager: Provider<EmojiStatsManager>,
-	pollCreator: Provider<PollCreator>,
-	pollHolder: Provider<PollHolder>,
-	selfTimeoutService: Provider<SelfTimeoutService>,
-	shutdownRequester: Provider<ShutdownRequester>,
-	botEnvironmentType: Provider<BotEnvironmentType>,
-	logger: Provider<Logger>,
+	private val configSupplier: ConfigSupplier,
+	private val configFilePath: Path,
+	// private val emojiStatsManager: EmojiStatsManager,
+	private val pollCreator: PollCreator,
+	private val pollHolder: PollHolder,
+	private val selfTimeoutService: SelfTimeoutService,
+	private val shutdownRequester: ShutdownRequester,
+	private val botEnvironmentType: BotEnvironmentType,
+	private val logger: Logger,
 ) : DiModule(scope) {
-
-	private val configSupplier: ConfigSupplier by configSupplier
-	private val configFilePath: Path by configFilePath
-	// private val emojiStatsManager: EmojiStatsManager by emojiStatsManager
-	private val pollCreator: PollCreator by pollCreator
-	private val pollHolder: PollHolder by pollHolder
-	private val selfTimeoutService: SelfTimeoutService by selfTimeoutService
-	private val shutdownRequester: ShutdownRequester by shutdownRequester
-	private val botEnvironmentType: BotEnvironmentType by botEnvironmentType
-	private val logger: Logger by logger
 
 	private val coinFlipCommand: CoinFlipCommand
 		get() {

@@ -13,18 +13,13 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.manageme
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.modification.PollManagerModifier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.modification.PollModifier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.DiModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.Provider
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.getValue
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
 
 public class PollsModule(
 	scope: DiScope,
-	logger: Provider<Logger>,
-	configSupplier: Provider<ConfigSupplier>,
+	private val logger: Logger,
+	private val configSupplier: ConfigSupplier,
 ) : DiModule(scope) {
-
-	private val logger: Logger by logger
-	private val configSupplier: ConfigSupplier by configSupplier
 
 	private val pollManager: PollManager by this.singleton {
 		PollManagerImpl(this.logger)

@@ -17,7 +17,6 @@ moshiKotlinCodegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", versi
 
 sqliteJdbc = "org.xerial:sqlite-jdbc:3.47.1.0"
 
-javaxInject = "javax.inject:javax.inject:1"
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 daggerCompiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 
