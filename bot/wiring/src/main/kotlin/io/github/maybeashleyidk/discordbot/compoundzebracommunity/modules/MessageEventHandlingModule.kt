@@ -18,7 +18,6 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.Se
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequester
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
 import java.nio.file.Path
-import javax.inject.Provider
 
 @Module
 internal object MessageEventHandlingModule {
@@ -27,15 +26,15 @@ internal object MessageEventHandlingModule {
 	@Reusable
 	internal fun provideCommandsMessageEventHandlingImplModule(
 		scope: DiScope,
-		configSupplier: Provider<ConfigSupplier>,
-		configFilePath: Provider<Path>,
-		// emojiStatsManager: Provider<EmojiStatsManager>,
-		pollCreator: Provider<PollCreator>,
-		pollHolder: Provider<PollHolder>,
-		selfTimeoutService: Provider<SelfTimeoutService>,
-		shutdownRequester: Provider<ShutdownRequester>,
-		botEnvironmentType: Provider<BotEnvironmentType>,
-		logger: Provider<Logger>,
+		configSupplier: ConfigSupplier,
+		configFilePath: Path,
+		// emojiStatsManager: EmojiStatsManager,
+		pollCreator: PollCreator,
+		pollHolder: PollHolder,
+		selfTimeoutService: SelfTimeoutService,
+		shutdownRequester: ShutdownRequester,
+		botEnvironmentType: BotEnvironmentType,
+		logger: Logger,
 	): CommandsMessageEventHandlingImplModule {
 		return CommandsMessageEventHandlingImplModule(
 			scope,

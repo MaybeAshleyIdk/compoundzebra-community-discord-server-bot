@@ -12,23 +12,16 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.DiModule
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.Provider
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.getValue
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
 import java.nio.file.Path
 
 internal class ConfigModule(
 	scope: DiScope,
-	moshi: Provider<Moshi>,
-	botEnvironmentType: Provider<BotEnvironmentType>,
-	configFilePath: Provider<Path>,
-	logger: Provider<Logger>,
+	private val moshi: Moshi,
+	private val botEnvironmentType: BotEnvironmentType,
+	private val configFilePath: Path,
+	private val logger: Logger,
 ) : DiModule(scope) {
-
-	private val moshi: Moshi by moshi
-	private val botEnvironmentType: BotEnvironmentType by botEnvironmentType
-	private val configFilePath: Path by configFilePath
-	private val logger: Logger by logger
 
 	private val configSerializer: ConfigSerializer
 		get() {
