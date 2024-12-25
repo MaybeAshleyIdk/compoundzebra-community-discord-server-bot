@@ -1,9 +1,5 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules
 
-import dagger.Module
-import dagger.Provides
-import dagger.Reusable
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.CommandMessageEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.CommandsMessageEventHandlingImplModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalmessageeventhandling.ConditionalMessageEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalmessageeventhandling.ConditionalMessageEventHandlerImpl
@@ -16,29 +12,27 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.PollHolder
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.selftimeout.SelfTimeoutService
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.requesting.ShutdownRequester
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.DiModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
 import java.nio.file.Path
 
-@Module
-internal object MessageEventHandlingModule {
+internal class MessageEventHandlingModule(
+	scope: DiScope,
+	private val configSupplier: ConfigSupplier,
+	configFilePath: Path,
+	// emojiStatsManager: EmojiStatsManager,
+	pollCreator: PollCreator,
+	pollHolder: PollHolder,
+	selfTimeoutService: SelfTimeoutService,
+	shutdownRequester: ShutdownRequester,
+	botEnvironmentType: BotEnvironmentType,
+	private val logger: Logger,
+) : DiModule(scope) {
 
-	@Provides
-	@Reusable
-	internal fun provideCommandsMessageEventHandlingImplModule(
-		scope: DiScope,
-		configSupplier: ConfigSupplier,
-		configFilePath: Path,
-		// emojiStatsManager: EmojiStatsManager,
-		pollCreator: PollCreator,
-		pollHolder: PollHolder,
-		selfTimeoutService: SelfTimeoutService,
-		shutdownRequester: ShutdownRequester,
-		botEnvironmentType: BotEnvironmentType,
-		logger: Logger,
-	): CommandsMessageEventHandlingImplModule {
-		return CommandsMessageEventHandlingImplModule(
+	private val commandsMessageEventHandlingImplModule: CommandsMessageEventHandlingImplModule by this.reusable {
+		CommandsMessageEventHandlingImplModule(
 			scope,
-			configSupplier,
+			this.configSupplier,
 			configFilePath,
 			// emojiStatsManager,
 			pollCreator,
@@ -46,30 +40,20 @@ internal object MessageEventHandlingModule {
 			selfTimeoutService,
 			shutdownRequester,
 			botEnvironmentType,
-			logger,
+			this.logger,
 		)
 	}
 
-	@Provides
-	internal fun provideCommandMessageEventHandler(
-		commandsMessageEventHandlingImplModule: CommandsMessageEventHandlingImplModule,
-	): CommandMessageEventHandler {
-		return commandsMessageEventHandlingImplModule.commandMessageEventHandlerImpl
-	}
+	private val conditionalMessageEventHandler: ConditionalMessageEventHandler
+		get() {
+			return ConditionalMessageEventHandlerImpl(this.configSupplier, this.logger)
+		}
 
-	@Provides
-	fun provideConditionalMessageEventHandler(
-		configSupplier: ConfigSupplier,
-		logger: Logger,
-	): ConditionalMessageEventHandler {
-		return ConditionalMessageEventHandlerImpl(configSupplier, logger)
-	}
-
-	@Provides
-	fun provideMessageEventHandlerMediator(
-		commandMessageEventHandler: CommandMessageEventHandler,
-		conditionalMessageEventHandler: ConditionalMessageEventHandler,
-	): MessageEventHandlerMediator {
-		return MessageEventHandlerMediatorImpl(commandMessageEventHandler, conditionalMessageEventHandler)
-	}
+	val messageEventHandlerMediator: MessageEventHandlerMediator
+		get() {
+			return MessageEventHandlerMediatorImpl(
+				this.commandsMessageEventHandlingImplModule.commandMessageEventHandlerImpl,
+				this.conditionalMessageEventHandler,
+			)
+		}
 }

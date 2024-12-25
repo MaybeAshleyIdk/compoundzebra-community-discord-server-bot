@@ -14,14 +14,11 @@ dependencies {
 	api(projects.bot.logging)
 	api(projects.bot.shutdown.callbackRegistration)
 
-	implementation(projects.bot.utils.di)
+	api(projects.bot.utils.di)
 
 	implementation(projects.bot.jdaFactory)
 
 	implementation(libs.moshi)
-
-	api(libs.dagger)
-	ksp(libs.daggerCompiler)
 
 	implementation(projects.bot.commands.messageEventHandling.impl)
 	implementation(projects.bot.conditionalMessageEventHandling.impl)

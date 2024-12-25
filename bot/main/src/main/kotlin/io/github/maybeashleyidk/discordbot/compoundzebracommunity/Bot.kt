@@ -3,6 +3,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbackregistraton.awaitShutdown
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.token.BotToken
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
 import kotlinx.coroutines.runBlocking
 import net.dv8tion.jda.api.entities.Activity
 import java.nio.file.Path
@@ -10,27 +11,28 @@ import java.nio.file.Path
 public object Bot {
 
 	public fun run(environmentType: BotEnvironmentType, token: BotToken, configFilePath: Path) {
-		val botComponent: BotComponent = DaggerBotComponent.factory()
-			.build(
+		val botModule =
+			BotModule(
+				scope = DiScope(),
 				environmentType,
 				token,
 				initialActivity = Activity.playing("you like a damn fiddle"),
 				configFilePath,
 			)
 
-		botComponent.logToken()
+		botModule.logToken()
 
-		botComponent.logger.logInfo("Waiting until the bot is connected...")
-		botComponent.lazyJda.get().awaitReady()
-		botComponent.logger.logInfo("Bot connected!")
+		botModule.logger.logInfo("Waiting until the bot is connected...")
+		botModule.lazyJda.value.awaitReady()
+		botModule.logger.logInfo("Bot connected!")
 
 		runBlocking {
-			botComponent.shutdownCallbackRegistry.awaitShutdown()
+			botModule.shutdownCallbackRegistry.awaitShutdown()
 		}
 	}
 }
 
-private fun BotComponent.logToken() {
+private fun BotModule.logToken() {
 	val msg: String =
 		buildString(13 + BotToken.TOKEN_STRING_LENGTH) {
 			this@buildString.append("Using token: ")
