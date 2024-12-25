@@ -3,11 +3,8 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.managem
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.id.PollId
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.snowflake.SnowflakeId
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.snowflakegenerator.SnowflakeIdGenerator
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-public class PollIdGenerator @Inject constructor() {
+internal class PollIdGenerator {
 
 	private val snowflakeIdGenerator: SnowflakeIdGenerator = SnowflakeIdGenerator()
 

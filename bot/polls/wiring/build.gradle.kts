@@ -8,12 +8,11 @@ plugins {
 }
 
 dependencies {
-	api(projects.bot.polls.creation.wiring)
-	api(projects.bot.polls.eventHandling.wiring)
-	api(projects.bot.polls.holding.wiring)
-	api(projects.bot.polls.management.wiring)
-	api(projects.bot.polls.modification.wiring)
+	api(projects.bot.polls.creation.implManager)
+	api(projects.bot.polls.eventHandling.impl)
+	api(projects.bot.polls.holding.implManager)
+	api(projects.bot.polls.management.impl)
+	api(projects.bot.polls.modification.implManager)
 
-	implementation(libs.dagger)
-	ksp(libs.daggerCompiler)
+	api(projects.bot.utils.di)
 }

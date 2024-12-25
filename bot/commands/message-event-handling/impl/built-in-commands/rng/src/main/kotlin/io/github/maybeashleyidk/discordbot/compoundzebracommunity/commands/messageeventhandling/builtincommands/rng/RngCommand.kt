@@ -13,10 +13,9 @@ import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.text.ParsePosition
 import java.util.Locale
-import javax.inject.Inject
 import kotlin.random.Random
 
-public class RngCommand @Inject constructor(
+public class RngCommand(
 	private val configSupplier: ConfigSupplier,
 ) : Command(name = CommandName.ofString("rng")) {
 

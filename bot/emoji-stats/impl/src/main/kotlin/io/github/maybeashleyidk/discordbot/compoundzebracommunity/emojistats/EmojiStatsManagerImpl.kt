@@ -26,13 +26,10 @@ import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.entities.emoji.EmojiUnion
 import net.dv8tion.jda.api.entities.emoji.RichCustomEmoji
 import java.util.concurrent.ConcurrentHashMap
-import javax.inject.Inject
 
 private val CUSTOM_EMOJI_REGEX_PATTERN: Regex = Regex("(?<!\\\\)<:[^:]+:(?<id>0|[1-9][0-9]*)>")
 
-public class EmojiStatsManagerImpl @Inject constructor(
-	private val logger: Logger,
-) : EmojiStatsManager {
+public class EmojiStatsManagerImpl(private val logger: Logger) : EmojiStatsManager {
 
 	override suspend fun countUsedEmojisOfUserInGuild(user: User, guild: Guild): Map<CustomEmoji, Long> {
 		return coroutineScope {

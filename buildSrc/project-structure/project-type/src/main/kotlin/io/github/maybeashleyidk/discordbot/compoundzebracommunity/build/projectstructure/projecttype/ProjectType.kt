@@ -24,22 +24,20 @@ public enum class ProjectType {
 	 * the composite project declares one or more of them as API dependency.
 	 *
 	 * The child projects are considered private; parent and sibling projects of the composite project should not
-	 * declare its children as dependencies. (DI wiring projects are exceptions)
+	 * declare its children as dependencies.
 	 */
 	COMPOSITE,
 
 	// region service
 
 	/**
-	 * A service project does not contain any source code itself, is a combination of its three child projects:
-	 *
-	 * * the interface ([SERVICE_INTERFACE])
-	 * * the implementation ([SERVICE_IMPLEMENTATION_STANDALONE] or [SERVICE_IMPLEMENTATION_COMPOSITE])
-	 * * the DI wiring ([SERVICE_WIRING])
+	 * A service project does not contain any source code itself, it is a combination of its two child projects:
+	 * the interface ([SERVICE_INTERFACE]) and
+	 * the implementation ([SERVICE_IMPLEMENTATION_STANDALONE] or [SERVICE_IMPLEMENTATION_COMPOSITE]).
 	 *
 	 * Similar to a composite project ([COMPOSITE]), a service project declares its interface child project as its only
 	 * API dependency.
-	 * All three children of a service project are also considered private, just like in a composite project.
+	 * Both children of a service project are also considered private, just like in a composite project.
 	 */
 	SERVICE,
 
@@ -76,15 +74,6 @@ public enum class ProjectType {
 	 * @see SERVICE_IMPLEMENTATION_STANDALONE
 	 */
 	SERVICE_IMPLEMENTATION_COMPOSITE,
-
-	/**
-	 * A service-wiring project is for defining the DI wiring of interface to implementation and is very similar to
-	 * a standalone project ([STANDALONE]) as it has no children.
-	 * In addition, a service-wiring project is named `wiring` and declares
-	 * its service-implementation ([SERVICE_IMPLEMENTATION_STANDALONE] or [SERVICE_IMPLEMENTATION_COMPOSITE]) sibling
-	 * project as an API dependency.
-	 */
-	SERVICE_WIRING,
 
 	// endregion
 }

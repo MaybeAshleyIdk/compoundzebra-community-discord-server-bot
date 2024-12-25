@@ -11,14 +11,10 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutin
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.strings.quoted
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Member
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-public class PollManagerImpl @Inject constructor(
-	private val pollIdGenerator: PollIdGenerator,
-	private val logger: Logger,
-) : PollManager {
+public class PollManagerImpl(private val logger: Logger) : PollManager {
+
+	private val pollIdGenerator: PollIdGenerator = PollIdGenerator()
 
 	private val activePolls: AtomicVal<MutableMap<PollId, PollDetails>> = AtomicVal(HashMap())
 

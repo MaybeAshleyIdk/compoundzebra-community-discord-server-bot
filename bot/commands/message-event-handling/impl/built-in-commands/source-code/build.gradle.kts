@@ -9,6 +9,4 @@ dependencies {
 	api(projects.bot.commands.messageEventHandling.impl.command)
 
 	implementation(projects.bot.utils.coroutinesJda)
-
-	implementation(libs.javaxInject)
 }

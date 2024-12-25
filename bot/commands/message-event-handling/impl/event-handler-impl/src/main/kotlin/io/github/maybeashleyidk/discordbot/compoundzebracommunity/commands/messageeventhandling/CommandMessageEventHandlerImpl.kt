@@ -10,12 +10,11 @@ import net.dv8tion.jda.api.entities.channel.ChannelType
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.events.GenericEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
-import javax.inject.Inject
 
-public class CommandMessageEventHandlerImpl @Inject constructor(
+public class CommandMessageEventHandlerImpl(
 	private val commandMessageParser: CommandMessageParser,
 	private val configSupplier: ConfigSupplier,
-	private val commands: Set<@JvmSuppressWildcards Command>,
+	private val commands: Set<Command>,
 	private val logger: Logger,
 ) : CommandMessageEventHandler {
 

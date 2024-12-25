@@ -10,6 +10,4 @@ dependencies {
 
 	implementation(projects.bot.logging)
 	implementation(projects.bot.utils.strings)
-
-	implementation(libs.javaxInject)
 }

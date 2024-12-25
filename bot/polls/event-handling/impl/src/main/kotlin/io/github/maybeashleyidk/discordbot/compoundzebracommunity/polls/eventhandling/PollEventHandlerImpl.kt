@@ -14,10 +14,8 @@ import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.events.GenericEvent
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent
-import javax.inject.Inject
 
-public class PollEventHandlerImpl @Inject constructor(
-	private val pollComponentProtocol: PollComponentProtocol,
+public class PollEventHandlerImpl(
 	private val pollModifier: PollModifier,
 	private val configSupplier: ConfigSupplier,
 ) : PollEventHandler {
@@ -36,7 +34,7 @@ public class PollEventHandlerImpl @Inject constructor(
 		// if a lot of votes are coming in at once, then voteOption() may block for an extended period of time
 		event.deferEdit().await()
 
-		val pollId: PollId = this.pollComponentProtocol.mapOptionsSelectMenuComponentIdToPollId(event.componentId)
+		val pollId: PollId = PollComponentProtocol.mapOptionsSelectMenuComponentIdToPollId(event.componentId)
 			?: return
 
 		val member: Member = event.member
@@ -60,7 +58,7 @@ public class PollEventHandlerImpl @Inject constructor(
 		// if a lot of votes are coming in at once, then close() may block for an extended period of time
 		event.deferEdit().await()
 
-		val pollId: PollId = this.pollComponentProtocol.mapCloseButtonComponentIdToPollId(event.componentId)
+		val pollId: PollId = PollComponentProtocol.mapCloseButtonComponentIdToPollId(event.componentId)
 			?: return
 
 		val member: Member = event.member

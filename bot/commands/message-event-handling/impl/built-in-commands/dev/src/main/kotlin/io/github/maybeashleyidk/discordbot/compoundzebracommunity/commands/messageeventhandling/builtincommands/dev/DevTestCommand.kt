@@ -6,9 +6,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messa
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.name.CommandName
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
-import javax.inject.Inject
 
-public class DevTestCommand @Inject constructor(
+public class DevTestCommand(
 ) : Command(name = CommandName.ofString("devtest")) {
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {

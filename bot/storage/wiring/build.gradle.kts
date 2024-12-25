@@ -8,8 +8,7 @@ plugins {
 }
 
 dependencies {
-	api(projects.bot.storage.database.wiring)
+	api(projects.bot.storage.database.implSqlite)
 
-	api(libs.dagger)
-	ksp(libs.daggerCompiler)
+	api(projects.bot.utils.di)
 }

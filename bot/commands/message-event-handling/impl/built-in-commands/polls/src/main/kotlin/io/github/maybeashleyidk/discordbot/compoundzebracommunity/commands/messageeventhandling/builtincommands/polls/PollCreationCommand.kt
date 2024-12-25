@@ -18,12 +18,10 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.interactions.components.buttons.Button
 import net.dv8tion.jda.api.interactions.components.selections.SelectOption
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu
-import javax.inject.Inject
 
-public class PollCreationCommand @Inject constructor(
+public class PollCreationCommand(
 	private val configSupplier: ConfigSupplier,
 	private val pollCreator: PollCreator,
-	private val pollComponentProtocol: PollComponentProtocol,
 ) : Command(name = CommandName.ofString("poll")) {
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
@@ -73,13 +71,13 @@ public class PollCreationCommand @Inject constructor(
 				}
 
 			val optionsMenu: StringSelectMenu = StringSelectMenu
-				.create(this.pollComponentProtocol.mapPollIdToOptionsSelectMenuComponentId(newPollDetails.id))
+				.create(PollComponentProtocol.mapPollIdToOptionsSelectMenuComponentId(newPollDetails.id))
 				.addOptions(selectOptions)
 				.build()
 
 			val closeButton: Button = Button
 				.primary(
-					this.pollComponentProtocol.mapPollIdToCloseButtonComponentId(newPollDetails.id),
+					PollComponentProtocol.mapPollIdToCloseButtonComponentId(newPollDetails.id),
 					config.strings.poll.action.close,
 				)
 

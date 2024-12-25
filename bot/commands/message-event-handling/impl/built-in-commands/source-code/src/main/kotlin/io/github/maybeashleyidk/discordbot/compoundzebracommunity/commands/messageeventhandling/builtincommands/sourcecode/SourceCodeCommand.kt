@@ -5,9 +5,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.name.
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutinesjda.await
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
-import javax.inject.Inject
 
-public class SourceCodeCommand @Inject constructor() : Command(CommandName.ofString("source" + "code")) {
+public class SourceCodeCommand : Command(CommandName.ofString("source" + "code")) {
 
 	private companion object {
 

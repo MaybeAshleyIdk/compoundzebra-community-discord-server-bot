@@ -2,25 +2,24 @@
 
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsource
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Configs
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configserialization.ConfigSerializer
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import okio.FileMetadata
 import okio.FileSystem
 import okio.Path.Companion.toOkioPath
 import java.time.Instant
-import javax.inject.Inject
 import okio.Path as OkioPath
 import java.nio.file.Path as NioPath
 
 /**
  * The functions of this class are not inherently thread-safe.
  */
-public class ConfigFileManager @Inject constructor(
+public class ConfigFileManager(
 	private val configSerializer: ConfigSerializer,
 	private val botEnvironmentType: BotEnvironmentType,
-	configFileNioPath: NioPath, // FIXME: this should have a qualifier, put in which module should be put it?
+	configFileNioPath: NioPath,
 ) : ConfigSource {
 
 	private val configFilePath: OkioPath = configFileNioPath.toOkioPath()

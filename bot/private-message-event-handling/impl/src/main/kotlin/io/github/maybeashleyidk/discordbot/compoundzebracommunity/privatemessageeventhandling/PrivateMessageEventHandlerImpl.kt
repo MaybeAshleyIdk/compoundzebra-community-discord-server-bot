@@ -5,9 +5,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.strings.
 import net.dv8tion.jda.api.entities.channel.ChannelType
 import net.dv8tion.jda.api.events.GenericEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
-import javax.inject.Inject
 
-public class PrivateMessageEventHandlerImpl @Inject constructor(
+public class PrivateMessageEventHandlerImpl(
 	private val logger: Logger,
 ) : PrivateMessageEventHandler {
 

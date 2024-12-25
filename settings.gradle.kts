@@ -32,6 +32,8 @@ include {
 			"coroutines-atomic"()
 
 			"coroutines-jda"()
+
+			"di"()
 		}
 
 		"environment-type"()
@@ -109,12 +111,12 @@ include {
 					"shutdown"()
 					"source-code"()
 				}
-				"built-in-commands-wiring"()
+				"built-in-commands-factory"()
 
 				"predefined-response-command"()
 
 				"event-handler-impl"()
-				"wiring"()
+				"event-handler-impl-factory"()
 			}
 		}
 

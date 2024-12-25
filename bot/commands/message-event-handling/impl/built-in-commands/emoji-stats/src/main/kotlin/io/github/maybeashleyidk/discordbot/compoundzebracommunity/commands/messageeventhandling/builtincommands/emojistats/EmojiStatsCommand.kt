@@ -10,9 +10,8 @@ import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.entities.emoji.CustomEmoji
 import java.text.NumberFormat
-import javax.inject.Inject
 
-public class EmojiStatsCommand @Inject constructor(
+public class EmojiStatsCommand(
 	private val configSupplier: ConfigSupplier,
 	private val emojiStatsManager: EmojiStatsManager,
 ) : Command(name = CommandName.ofString("emote" + "stats")) {

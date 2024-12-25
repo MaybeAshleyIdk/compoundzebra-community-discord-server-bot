@@ -10,10 +10,9 @@ import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.entities.Member
 import java.math.BigDecimal
 import java.time.Duration
-import javax.inject.Inject
 import kotlin.random.Random
 
-public class SelfTimeoutServiceImpl @Inject constructor(
+public class SelfTimeoutServiceImpl(
 	private val logger: Logger,
 ) : SelfTimeoutService {
 

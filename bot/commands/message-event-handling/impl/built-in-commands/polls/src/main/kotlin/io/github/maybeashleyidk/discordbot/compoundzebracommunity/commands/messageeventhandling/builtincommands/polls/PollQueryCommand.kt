@@ -12,9 +12,8 @@ import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
-import javax.inject.Inject
 
-public class PollQueryCommand @Inject constructor(
+public class PollQueryCommand(
 	private val configSupplier: ConfigSupplier,
 	private val pollHolder: PollHolder,
 ) : Command(name = CommandName.ofString("querypoll")) {

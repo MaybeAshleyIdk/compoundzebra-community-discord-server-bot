@@ -13,7 +13,4 @@ dependencies {
 	implementation(projects.bot.utils.coroutinesJda)
 
 	implementation(libs.kotlinxCoroutinesCore)
-
-	implementation(libs.dagger)
-	ksp(libs.daggerCompiler)
 }

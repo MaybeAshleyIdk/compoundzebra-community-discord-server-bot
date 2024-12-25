@@ -10,7 +10,6 @@ public interface IncludeDsl {
 		this@service {
 			"api"()
 			"impl"()
-			"wiring"()
 		}
 	}
 
@@ -18,7 +17,6 @@ public interface IncludeDsl {
 		this@service {
 			"api"()
 			"impl-$impl"()
-			"wiring"()
 		}
 	}
 
@@ -26,7 +24,6 @@ public interface IncludeDsl {
 		this@service {
 			"api"()
 			"impl"(implInclude)
-			"wiring"()
 		}
 	}
 }

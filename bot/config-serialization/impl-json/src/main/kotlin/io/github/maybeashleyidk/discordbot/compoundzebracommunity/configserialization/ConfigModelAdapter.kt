@@ -7,9 +7,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Command
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConditionalMessage
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.LanguageStrings
-import javax.inject.Inject
 
-public class ConfigModelAdapter @Inject constructor() {
+internal object ConfigModelAdapter {
 
 	internal fun transformConfig(configJson: ConfigJson): Config {
 		return Config(

@@ -15,7 +15,5 @@ dependencies {
 	implementation(libs.kotlinxCoroutinesCore)
 	implementation(libs.okio)
 
-	implementation(libs.javaxInject)
-
 	runtimeOnly(libs.sqliteJdbc)
 }

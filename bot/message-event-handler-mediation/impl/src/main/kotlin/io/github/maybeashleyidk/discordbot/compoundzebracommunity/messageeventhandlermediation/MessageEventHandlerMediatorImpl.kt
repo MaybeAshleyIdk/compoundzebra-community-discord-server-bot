@@ -4,9 +4,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messa
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalmessageeventhandling.ConditionalMessageEventHandler
 import kotlinx.coroutines.coroutineScope
 import net.dv8tion.jda.api.events.GenericEvent
-import javax.inject.Inject
 
-public class MessageEventHandlerMediatorImpl @Inject constructor(
+public class MessageEventHandlerMediatorImpl(
 	private val commandMessageEventHandler: CommandMessageEventHandler,
 	private val conditionalMessageEventHandler: ConditionalMessageEventHandler,
 ) : MessageEventHandlerMediator {

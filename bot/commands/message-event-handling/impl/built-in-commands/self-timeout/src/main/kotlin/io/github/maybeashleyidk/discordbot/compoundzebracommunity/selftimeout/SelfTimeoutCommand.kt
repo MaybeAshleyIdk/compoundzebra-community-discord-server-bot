@@ -6,9 +6,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutin
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
-import javax.inject.Inject
 
-public class SelfTimeoutCommand @Inject constructor(
+public class SelfTimeoutCommand(
 	private val selfTimeoutService: SelfTimeoutService,
 ) : Command(name = CommandName.ofString("TimeToDie".lowercase())) {
 

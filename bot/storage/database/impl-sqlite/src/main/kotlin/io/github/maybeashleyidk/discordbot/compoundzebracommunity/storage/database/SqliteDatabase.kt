@@ -18,13 +18,10 @@ import okio.Path.Companion.toPath
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.Statement
-import javax.inject.Inject
-import javax.inject.Singleton
 
 private val DB_FILE_PATH: Path = "storage.sqlite.db".toPath()
 
-@Singleton
-public class SqliteDatabase @Inject constructor(
+public class SqliteDatabase(
 	shutdownCallbackRegistry: ShutdownCallbackRegistry,
 	shutdownRequester: ShutdownRequester,
 	private val logger: Logger,

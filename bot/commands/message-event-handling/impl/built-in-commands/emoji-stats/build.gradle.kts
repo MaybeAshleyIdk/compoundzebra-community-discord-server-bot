@@ -11,6 +11,4 @@ dependencies {
 	api(projects.bot.emojiStats)
 
 	implementation(projects.bot.utils.coroutinesJda)
-
-	implementation(libs.javaxInject)
 }

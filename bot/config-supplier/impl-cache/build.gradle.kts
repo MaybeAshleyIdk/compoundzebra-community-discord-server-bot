@@ -8,6 +8,4 @@ plugins {
 dependencies {
 	api(projects.bot.configSupplier.api)
 	api(projects.bot.configCache)
-
-	implementation(libs.javaxInject)
 }

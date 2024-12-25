@@ -14,6 +14,4 @@ dependencies {
 
 	implementation(projects.bot.utils.strings)
 	implementation(projects.bot.utils.coroutinesJda)
-
-	implementation(libs.javaxInject)
 }

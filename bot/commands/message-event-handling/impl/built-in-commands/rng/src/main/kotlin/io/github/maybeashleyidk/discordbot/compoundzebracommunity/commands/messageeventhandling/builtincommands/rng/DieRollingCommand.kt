@@ -6,10 +6,9 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutin
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import java.text.NumberFormat
-import javax.inject.Inject
 import kotlin.random.Random
 
-public class DieRollingCommand @Inject constructor() : Command(name = CommandName.ofString("rtd")) {
+public class DieRollingCommand : Command(name = CommandName.ofString("rtd")) {
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val roll: Int = Random.nextInt(from = 1, until = 7)

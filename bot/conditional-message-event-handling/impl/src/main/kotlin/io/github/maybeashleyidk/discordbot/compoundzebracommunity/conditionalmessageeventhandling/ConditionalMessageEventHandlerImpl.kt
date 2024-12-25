@@ -12,9 +12,8 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.events.GenericEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.requests.RestAction
-import javax.inject.Inject
 
-public class ConditionalMessageEventHandlerImpl @Inject constructor(
+public class ConditionalMessageEventHandlerImpl(
 	private val configSupplier: ConfigSupplier,
 	private val logger: Logger,
 ) : ConditionalMessageEventHandler {
