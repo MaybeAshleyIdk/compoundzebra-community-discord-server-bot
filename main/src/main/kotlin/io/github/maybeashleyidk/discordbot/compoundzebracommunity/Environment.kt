@@ -50,11 +50,9 @@ internal object Environment {
 			return EnvironmentBotToken.UnsetOrEmpty
 		}
 
-		if (str.length != BotToken.TOKEN_STRING_LENGTH) {
-			return EnvironmentBotToken.InvalidLength
-		}
-
 		val token: BotToken = BotToken.ofString(str)
+			?: return EnvironmentBotToken.InvalidLength
+
 		return EnvironmentBotToken.Valid(token)
 	}
 }
