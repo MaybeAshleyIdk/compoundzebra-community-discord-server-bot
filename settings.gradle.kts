@@ -111,7 +111,7 @@ include {
 					"shutdown"()
 					"source-code"()
 				}
-				"built-in-commands-wiring"()
+				"built-in-commands-factory"()
 
 				"predefined-response-command"()
 

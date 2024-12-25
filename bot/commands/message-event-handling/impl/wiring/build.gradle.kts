@@ -9,7 +9,7 @@ plugins {
 
 dependencies {
 	api(projects.bot.commands.messageEventHandling.impl.messageParser)
-	api(projects.bot.commands.messageEventHandling.impl.builtInCommandsWiring)
+	api(projects.bot.commands.messageEventHandling.impl.builtInCommandsFactory)
 	api(projects.bot.commands.messageEventHandling.impl.predefinedResponseCommand)
 	api(projects.bot.commands.messageEventHandling.impl.eventHandlerImpl)
 

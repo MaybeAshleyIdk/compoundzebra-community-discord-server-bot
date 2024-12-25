@@ -1,6 +1,6 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands.BuiltInCommandsModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands.BuiltInCommandsFactory
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Action
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.CommandDefinition
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
@@ -33,9 +33,8 @@ public class CommandsMessageEventHandlingImplModule(
 			return CommandMessageParser(this.configSupplier)
 		}
 
-	private val builtInCommandsModule: BuiltInCommandsModule by this.reusable {
-		BuiltInCommandsModule(
-			scope,
+	private val builtInCommandsFactory: BuiltInCommandsFactory by this.reusable {
+		BuiltInCommandsFactory(
 			this.configSupplier,
 			configFilePath,
 			// emojiStatsManager,
@@ -61,7 +60,8 @@ public class CommandsMessageEventHandlingImplModule(
 
 	private val commands: Set<Command>
 		get() {
-			return (this.builtInCommandsModule.builtInCommands + this.configuredPredefinedResponseCommands)
+			val builtInCommands: Set<Command> = this.builtInCommandsFactory.create()
+			return (builtInCommands + this.configuredPredefinedResponseCommands)
 		}
 
 	public val commandMessageEventHandlerImpl: CommandMessageEventHandlerImpl
