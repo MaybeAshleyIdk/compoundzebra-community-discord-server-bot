@@ -116,7 +116,7 @@ include {
 				"predefined-response-command"()
 
 				"event-handler-impl"()
-				"wiring"()
+				"event-handler-impl-factory"()
 			}
 		}
 

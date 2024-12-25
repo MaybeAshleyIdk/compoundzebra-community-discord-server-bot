@@ -1,6 +1,6 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.CommandsMessageEventHandlingImplModule
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.CommandMessageEventHandlerImplFactory
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalmessageeventhandling.ConditionalMessageEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalmessageeventhandling.ConditionalMessageEventHandlerImpl
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
@@ -29,9 +29,8 @@ internal class MessageEventHandlingModule(
 	private val logger: Logger,
 ) : DiModule(scope) {
 
-	private val commandsMessageEventHandlingImplModule: CommandsMessageEventHandlingImplModule by this.reusable {
-		CommandsMessageEventHandlingImplModule(
-			scope,
+	private val commandMessageEventHandlerImplFactory: CommandMessageEventHandlerImplFactory by this.reusable {
+		CommandMessageEventHandlerImplFactory(
 			this.configSupplier,
 			configFilePath,
 			// emojiStatsManager,
@@ -52,7 +51,7 @@ internal class MessageEventHandlingModule(
 	val messageEventHandlerMediator: MessageEventHandlerMediator
 		get() {
 			return MessageEventHandlerMediatorImpl(
-				this.commandsMessageEventHandlingImplModule.commandMessageEventHandlerImpl,
+				this.commandMessageEventHandlerImplFactory.create(),
 				this.conditionalMessageEventHandler,
 			)
 		}
