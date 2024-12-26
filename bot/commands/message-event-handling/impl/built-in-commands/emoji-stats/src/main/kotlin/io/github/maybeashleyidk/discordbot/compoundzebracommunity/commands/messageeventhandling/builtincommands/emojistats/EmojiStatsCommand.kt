@@ -14,7 +14,7 @@ import java.text.NumberFormat
 public class EmojiStatsCommand(
 	private val configSupplier: ConfigSupplier,
 	private val emojiStatsManager: EmojiStatsManager,
-) : Command(name = CommandName.ofString("emote" + "stats")) {
+) : Command(name = CommandName("emote" + "stats")) {
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val loadingMessage: Message = catalystMessage

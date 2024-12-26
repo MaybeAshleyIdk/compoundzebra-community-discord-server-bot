@@ -22,14 +22,13 @@ import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu
 public class PollCreationCommand(
 	private val configSupplier: ConfigSupplier,
 	private val pollCreator: PollCreator,
-) : Command(name = CommandName.ofString("poll")) {
+) : Command(name = CommandName("poll")) {
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val description: PollDescription? = arguments.firstOrNull()
 			.orEmpty()
 			.trimAndSqueezeWhitespace()
-			.ifBlank { null }
-			?.let(PollDescription::ofString)
+			.let(PollDescription::ofString)
 		if (description == null) {
 			val config: Config = this.configSupplier.get()
 			textChannel.sendMessage(config.strings.command.poll.missingDescription).await()
@@ -41,8 +40,7 @@ public class PollCreationCommand(
 			.mapNotNull { optionLabel: String ->
 				optionLabel
 					.trimAndSqueezeWhitespace()
-					.ifBlank { null }
-					?.let(PollOptionLabel::ofString)
+					.let(PollOptionLabel::ofString)
 			}
 		if (optionLabels.size < 2) {
 			val config: Config = this.configSupplier.get()

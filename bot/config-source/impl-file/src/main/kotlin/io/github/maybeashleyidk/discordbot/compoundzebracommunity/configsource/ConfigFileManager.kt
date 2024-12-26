@@ -5,7 +5,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsource
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Configs
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configserialization.ConfigSerializer
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.buildtype.BotBuildType
 import okio.FileMetadata
 import okio.FileSystem
 import okio.Path.Companion.toOkioPath
@@ -18,7 +18,7 @@ import java.nio.file.Path as NioPath
  */
 public class ConfigFileManager(
 	private val configSerializer: ConfigSerializer,
-	private val botEnvironmentType: BotEnvironmentType,
+	private val botBuildType: BotBuildType,
 	configFileNioPath: NioPath,
 ) : ConfigSource {
 
@@ -48,7 +48,7 @@ public class ConfigFileManager(
 		}
 
 		FileSystem.SYSTEM.write(this.configFilePath) {
-			val initialConfig: Config = Configs.createInitial(this@ConfigFileManager.botEnvironmentType)
+			val initialConfig: Config = Configs.createInitial(this@ConfigFileManager.botBuildType)
 			this@ConfigFileManager.configSerializer.serialize(initialConfig, sink = this@write)
 		}
 	}

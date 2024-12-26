@@ -30,7 +30,7 @@ public class PollManagerImpl(private val logger: Logger) : PollManager {
 		val options: List<PollOption> = optionLabels
 			.mapIndexed { index: Int, optionLabel: PollOptionLabel ->
 				PollOption(
-					value = PollOptionValue.ofString("pollOption[$index]"),
+					value = PollOptionValue.ofString("pollOption[$index]")!!,
 					label = optionLabel,
 				)
 			}

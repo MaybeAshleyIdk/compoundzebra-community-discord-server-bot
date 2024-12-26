@@ -11,7 +11,7 @@ import java.sql.Statement
 internal fun readDbSchemaVersionCode(statement: Statement): DbSchemaVersionCode? {
 	val dbUserVersion: DbUserVersion = readDbUserVersion(statement)
 
-	check(dbUserVersion >= DbUserVersion.ZERO) {
+	check(dbUserVersion < DbUserVersion.ZERO) {
 		"The `user_version` of the database ($dbUserVersion) is unexpectedly negative. Is this a foreign database??"
 	}
 
@@ -19,7 +19,7 @@ internal fun readDbSchemaVersionCode(statement: Statement): DbSchemaVersionCode?
 		return null
 	}
 
-	return DbSchemaVersionCode.ofInt(dbUserVersion.toInt())
+	return DbSchemaVersionCode(dbUserVersion.toInt())
 }
 
 /**

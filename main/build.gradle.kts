@@ -10,6 +10,7 @@ plugins {
 	kotlin("jvm")
 
 	alias(libs.plugins.ktlint)
+	alias(libs.plugins.buildConstants)
 	alias(libs.plugins.shadow)
 }
 
@@ -19,6 +20,25 @@ version = "0.1.0-indev12"
 application {
 	applicationName = "czd-bot"
 	mainClass = "io.github.maybeashleyidk.discordbot.compoundzebracommunity.Main"
+}
+
+buildConstants {
+	"io.github.maybeashleyidk.discordbot.compoundzebracommunity.BuildConstants" {
+		@Suppress("unused")
+		val buildTypeName: String by constant {
+			val buildTypeStr: String? = project.findProperty("buildType")?.toString()
+
+			checkNotNull(buildTypeStr) {
+				"A build type must be explicitly given"
+			}
+
+			check(buildTypeStr in hashSetOf("development", "release")) {
+				"Invalid build type \"$buildTypeStr\""
+			}
+
+			buildTypeStr
+		}
+	}
 }
 
 ktlint {
@@ -76,14 +96,6 @@ tasks.run.configure {
 			.layout.projectDirectory
 			.dir("run").asFile
 			.also(File::mkdirs)
-	}
-
-	doFirst {
-		val environmentStr: String = System.getenv("CZD_BOT_ENVIRONMENT")
-			.orEmpty()
-			.ifEmpty { "dev" }
-
-		environment("CZD_BOT_ENVIRONMENT", environmentStr)
 	}
 
 	doFirst {

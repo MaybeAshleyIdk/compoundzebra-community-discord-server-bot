@@ -1,10 +1,10 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.buildtype.BotBuildType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.CommandMessageEventHandlerImplFactory
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalmessageeventhandling.ConditionalMessageEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalmessageeventhandling.ConditionalMessageEventHandlerImpl
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventhandlermediation.MessageEventHandlerMediator
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventhandlermediation.MessageEventHandlerMediatorImpl
@@ -25,7 +25,7 @@ internal class MessageEventHandlingModule(
 	pollHolder: PollHolder,
 	selfTimeoutService: SelfTimeoutService,
 	shutdownRequester: ShutdownRequester,
-	botEnvironmentType: BotEnvironmentType,
+	botBuildType: BotBuildType,
 	private val logger: Logger,
 ) : DiModule(scope) {
 
@@ -38,7 +38,7 @@ internal class MessageEventHandlingModule(
 			pollHolder,
 			selfTimeoutService,
 			shutdownRequester,
-			botEnvironmentType,
+			botBuildType,
 			this.logger,
 		)
 	}

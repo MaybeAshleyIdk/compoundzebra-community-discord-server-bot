@@ -1,26 +1,22 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.storage.database.internal.userversion
 
 @JvmInline
-internal value class DbUserVersion private constructor(private val integer: Int) : Comparable<DbUserVersion> {
-
-	override fun compareTo(other: DbUserVersion): Int {
-		return this.integer.compareTo(other.integer)
-	}
+internal value class DbUserVersion(private val versionInt: Int) : Comparable<DbUserVersion> {
 
 	fun toInt(): Int {
-		return this.integer
+		return this.versionInt
+	}
+
+	override fun compareTo(other: DbUserVersion): Int {
+		return this.versionInt.compareTo(other.versionInt)
 	}
 
 	override fun toString(): String {
-		return this.integer.toString()
+		return this.versionInt.toString()
 	}
 
 	companion object {
 
-		val ZERO: DbUserVersion = this.ofInt(0)
-
-		fun ofInt(integer: Int): DbUserVersion {
-			return DbUserVersion(integer)
-		}
+		val ZERO: DbUserVersion = DbUserVersion(0)
 	}
 }

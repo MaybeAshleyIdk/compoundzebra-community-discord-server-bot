@@ -33,7 +33,7 @@ jobs:
           printf 'CZD_BOT_VERSION_NAME=%s\n' "$tag_name" >> "$GITHUB_ENV"
 
       - name: Run Gradle
-        run: ./gradlew build :main:createGzippedExecutable
+        run: ./gradlew --project-prop=buildType=release build :main:createGzippedExecutable
 
       - name: Create release draft ${{ github.ref_name }}
         uses: softprops/action-gh-release@v2

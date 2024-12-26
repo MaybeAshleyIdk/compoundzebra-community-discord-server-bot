@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-	api(projects.bot.environmentType)
+	api(projects.bot.buildType)
 	api(projects.bot.token)
 
 	implementation(projects.bot.wiring)

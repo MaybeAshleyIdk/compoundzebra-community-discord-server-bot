@@ -1,7 +1,7 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
 import com.squareup.moshi.Moshi
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.buildtype.BotBuildType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistening.MainEventListener
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.eventlistening.MainEventListenerImpl
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.jdafactory.JdaFactory
@@ -37,17 +37,17 @@ public interface BotModule {
 
 public fun BotModule(
 	scope: DiScope,
-	environmentType: BotEnvironmentType,
+	buildType: BotBuildType,
 	token: BotToken,
 	initialActivity: Activity,
 	configFilePath: Path,
 ): BotModule {
-	return BotModuleImpl(scope, environmentType, token, initialActivity, configFilePath)
+	return BotModuleImpl(scope, buildType, token, initialActivity, configFilePath)
 }
 
 private class BotModuleImpl(
 	scope: DiScope,
-	environmentType: BotEnvironmentType,
+	buildType: BotBuildType,
 	override val token: BotToken,
 	private val initialActivity: Activity,
 	configFilePath: Path,
@@ -64,7 +64,7 @@ private class BotModuleImpl(
 		ConfigModule(
 			scope,
 			this.moshi,
-			environmentType,
+			buildType,
 			configFilePath,
 			this.logger,
 		)
@@ -100,7 +100,7 @@ private class BotModuleImpl(
 			this.pollsModule.pollHolder,
 			this.selfTimeoutService,
 			this.shutdownModule.shutdownRequester,
-			environmentType,
+			buildType,
 			this.logger,
 		)
 	}

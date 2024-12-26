@@ -1,6 +1,7 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.modules
 
 import com.squareup.moshi.Moshi
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.buildtype.BotBuildType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configcache.ConfigCache
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configcache.MemoryConfigCache
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configserialization.ConfigJsonSerializer
@@ -9,7 +10,6 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsource.C
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsource.ConfigSource
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigCacheSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.DiModule
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
@@ -18,7 +18,7 @@ import java.nio.file.Path
 internal class ConfigModule(
 	scope: DiScope,
 	private val moshi: Moshi,
-	private val botEnvironmentType: BotEnvironmentType,
+	private val botBuildType: BotBuildType,
 	private val configFilePath: Path,
 	private val logger: Logger,
 ) : DiModule(scope) {
@@ -30,7 +30,7 @@ internal class ConfigModule(
 
 	private val configSource: ConfigSource
 		get() {
-			return ConfigFileManager(this.configSerializer, this.botEnvironmentType, this.configFilePath)
+			return ConfigFileManager(this.configSerializer, this.botBuildType, this.configFilePath)
 		}
 
 	private val configCache: ConfigCache by this.singleton {

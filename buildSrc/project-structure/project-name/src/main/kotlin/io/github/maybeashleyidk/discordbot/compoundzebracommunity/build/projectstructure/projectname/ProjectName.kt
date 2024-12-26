@@ -1,11 +1,21 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectstructure.projectname
 
 @JvmInline
-public value class ProjectName private constructor(private val string: String) {
+public value class ProjectName private constructor(private val nameString: String) {
+
+	init {
+		require(this.nameString.isValidProjectName()) {
+			"Invalid project name \"${this.nameString}\""
+		}
+	}
+
+	override fun toString(): String {
+		return this.nameString
+	}
 
 	public companion object {
 
-		public fun ofStringOrNull(nameString: String): ProjectName? {
+		public fun ofString(nameString: String): ProjectName? {
 			if (!(nameString.isValidProjectName())) {
 				return null
 			}
@@ -13,20 +23,10 @@ public value class ProjectName private constructor(private val string: String) {
 			return ProjectName(nameString)
 		}
 	}
-
-	init {
-		require(this.string.isValidProjectName()) {
-			"Invalid project name \"${this.string}\""
-		}
-	}
-
-	override fun toString(): String {
-		return this.string
-	}
 }
 
 public fun String.toProjectName(): ProjectName {
-	val projectName: ProjectName? = ProjectName.ofStringOrNull(nameString = this)
+	val projectName: ProjectName? = ProjectName.ofString(nameString = this)
 
 	checkNotNull(projectName) {
 		"Invalid project name \"$projectName\""

@@ -13,7 +13,7 @@ internal fun readDbUserVersion(statement: Statement): DbUserVersion {
 	val userVersionInt: Int = statement.executeQuery(SQLITE_USER_VERSION_RETRIEVAL_STATEMENT)
 		.use(::extractDbUserVersionIntFromResultSet)
 
-	return DbUserVersion.ofInt(userVersionInt)
+	return DbUserVersion(userVersionInt)
 }
 
 private fun extractDbUserVersionIntFromResultSet(resultSet: ResultSet): Int {

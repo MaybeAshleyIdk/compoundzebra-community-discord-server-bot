@@ -12,7 +12,7 @@ dependencies {
 	api(projects.bot.polls.holding)
 	api(projects.bot.selfTimeout)
 	api(projects.bot.shutdown.requesting)
-	api(projects.bot.environmentType)
+	api(projects.bot.buildType)
 	api(projects.bot.logging)
 
 	implementation(projects.bot.commands.messageEventHandling.impl.messageParser)

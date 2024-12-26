@@ -1,15 +1,15 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.factories
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.buildtype.BotBuildType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.prefix.CommandPrefix
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.LanguageStrings
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 
-internal fun createFallbackConfig(botEnvironmentType: BotEnvironmentType): Config {
+internal fun createFallbackConfig(botBuildType: BotBuildType): Config {
 	val commandPrefix: CommandPrefix =
-		when (botEnvironmentType) {
-			BotEnvironmentType.DEVELOPMENT -> CommandPrefix.ofString("!!")
-			BotEnvironmentType.PRODUCTION -> CommandPrefix.ofString("!")
+		when (botBuildType) {
+			BotBuildType.DEVELOPMENT -> CommandPrefix.ofString("!!")!!
+			BotBuildType.RELEASE -> CommandPrefix.ofString("!")!!
 		}
 
 	return Config(

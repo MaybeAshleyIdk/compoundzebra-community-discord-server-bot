@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import java.text.NumberFormat
 import kotlin.random.Random
 
-public class DieRollingCommand : Command(name = CommandName.ofString("rtd")) {
+public class DieRollingCommand : Command(name = CommandName("rtd")) {
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val roll: Int = Random.nextInt(from = 1, until = 7)

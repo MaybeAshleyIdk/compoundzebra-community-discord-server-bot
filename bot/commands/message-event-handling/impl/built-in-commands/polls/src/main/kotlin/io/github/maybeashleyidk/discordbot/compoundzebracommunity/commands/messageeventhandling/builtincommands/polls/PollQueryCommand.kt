@@ -16,7 +16,7 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 public class PollQueryCommand(
 	private val configSupplier: ConfigSupplier,
 	private val pollHolder: PollHolder,
-) : Command(name = CommandName.ofString("querypoll")) {
+) : Command(name = CommandName("query" + "poll")) {
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val authorAsGuildMember: Member = catalystMessage.getAuthorAsGuildMember()

@@ -1,5 +1,6 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.buildtype.BotBuildType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.Command
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands.coinflip.CoinFlipCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands.config.GetConfigCommand
@@ -12,7 +13,6 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messa
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands.shutdown.ShutdownCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands.sourcecode.SourceCodeCommand
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation.PollCreator
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.PollHolder
@@ -29,14 +29,14 @@ public class BuiltInCommandsFactory(
 	private val pollHolder: PollHolder,
 	private val selfTimeoutService: SelfTimeoutService,
 	private val shutdownRequester: ShutdownRequester,
-	private val botEnvironmentType: BotEnvironmentType,
+	private val botBuildType: BotBuildType,
 	private val logger: Logger,
 ) {
 
 	private fun createDevCommands(): Set<Command> {
-		when (this.botEnvironmentType) {
-			BotEnvironmentType.DEVELOPMENT -> Unit
-			BotEnvironmentType.PRODUCTION -> return emptySet()
+		when (this.botBuildType) {
+			BotBuildType.DEVELOPMENT -> Unit
+			BotBuildType.RELEASE -> return emptySet()
 		}
 
 		return setOf(

@@ -5,50 +5,33 @@ import org.gradle.api.file.Directory
 import java.io.File
 
 @JvmInline
-internal value class ProjectPath private constructor(private val names: List<ProjectName>) {
-
-	companion object {
-
-		fun ofStringOrNull(pathString: String): ProjectPath? {
-			val names: List<ProjectName> = pathString
-				.replace('/', ':')
-				.replace(File.separatorChar, ':')
-				.removePrefix(":")
-				.split(":")
-				.map(ProjectName::ofStringOrNull)
-				.nonNullOrNull()
-				?.ifEmpty { null }
-				?: return null
-
-			return ProjectPath(names)
-		}
-	}
+internal value class ProjectPath private constructor(private val pathNames: List<ProjectName>) {
 
 	init {
-		require(this.names.isNotEmpty()) {
+		require(this.pathNames.isNotEmpty()) {
 			"The project path must consist of at least one project name"
 		}
 	}
 
 	val projectNames: Iterable<ProjectName>
 		get() {
-			return this.names
+			return this.pathNames
 		}
 
 	fun countNames(): Int {
-		return this.names.size
+		return this.pathNames.size
 	}
 
 	fun getFinalName(): ProjectName {
-		return this.names.last()
+		return this.pathNames.last()
 	}
 
 	fun startsWith(prefix: ProjectPath): Boolean {
-		return this.names.startsWith(prefix.names)
+		return this.pathNames.startsWith(prefix.pathNames)
 	}
 
 	fun removePrefix(prefix: ProjectPath): ProjectPath? {
-		val thisNamesWithoutPrefix: List<ProjectName> = this.names.removePrefix(prefix.names)
+		val thisNamesWithoutPrefix: List<ProjectName> = this.pathNames.removePrefix(prefix.pathNames)
 
 		if (thisNamesWithoutPrefix.isEmpty()) {
 			return null
@@ -58,7 +41,24 @@ internal value class ProjectPath private constructor(private val names: List<Pro
 	}
 
 	override fun toString(): String {
-		return this.names.joinToString(prefix = ":", separator = ":")
+		return this.pathNames.joinToString(prefix = ":", separator = ":")
+	}
+
+	companion object {
+
+		fun ofString(pathString: String): ProjectPath? {
+			val names: List<ProjectName> = pathString
+				.replace('/', ':')
+				.replace(File.separatorChar, ':')
+				.removePrefix(":")
+				.split(":")
+				.map(ProjectName::ofString)
+				.nonNullOrNull()
+				?.ifEmpty { null }
+				?: return null
+
+			return ProjectPath(names)
+		}
 	}
 }
 

@@ -2,41 +2,37 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.pref
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.strings.quoted
 
+private const val VALID_COMMAND_PREFIX_CHARS: String = "!#%&()+,-.:;=>?[]^{|}~"
+
 @JvmInline
-public value class CommandPrefix private constructor(private val string: String) {
-
-	public companion object {
-
-		private const val VALID_PREFIX_CHARS: String = "!#%&()+,-.:;=>?[]^{|}~"
-
-		public fun isValid(prefixString: String): Boolean {
-			return prefixString.isNotEmpty() && prefixString.all(this::isValidCommandPrefixChar)
-		}
-
-		public fun ofString(prefixString: String): CommandPrefix {
-			require(this.isValid(prefixString)) {
-				"Invalid command prefix string ${prefixString.quoted()}"
-			}
-
-			return CommandPrefix(prefixString)
-		}
-
-		private fun isValidCommandPrefixChar(ch: Char): Boolean {
-			return this.VALID_PREFIX_CHARS
-				.any { validPrefixChar: Char ->
-					validPrefixChar == ch
-				}
-		}
-	}
+public value class CommandPrefix private constructor(private val prefixString: String) {
 
 	init {
-		@Suppress("RemoveRedundantQualifierName")
-		require(CommandPrefix.isValid(this.string)) {
-			"Invalid command prefix string ${this.string.quoted()}"
+		require(isValidCommandPrefix(this.prefixString)) {
+			"Invalid command prefix string ${this.prefixString.quoted()}"
 		}
 	}
 
 	override fun toString(): String {
-		return this.string
+		return this.prefixString
 	}
+
+	public companion object {
+
+		public fun ofString(prefixString: String): CommandPrefix? {
+			if (!(isValidCommandPrefix(prefixString))) {
+				return null
+			}
+
+			return CommandPrefix(prefixString)
+		}
+	}
+}
+
+private fun isValidCommandPrefix(prefixString: String): Boolean {
+	return prefixString.isNotEmpty() && prefixString.all(::isValidCommandPrefixChar)
+}
+
+private fun isValidCommandPrefixChar(ch: Char): Boolean {
+	return VALID_COMMAND_PREFIX_CHARS.any(ch::equals)
 }

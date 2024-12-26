@@ -193,7 +193,7 @@ public abstract class SubprojectCreationTask : DefaultTask() {
 		return packageIgnoredProjectPathPrefixStrings
 			.map { packageIgnoredProjectPathPrefixStr: String ->
 				val packageIgnoredProjectPathPrefix: ProjectPath? =
-					ProjectPath.ofStringOrNull(packageIgnoredProjectPathPrefixStr)
+					ProjectPath.ofString(packageIgnoredProjectPathPrefixStr)
 
 				checkNotNull(packageIgnoredProjectPathPrefix) {
 					"Invalid Gradle project path \"$packageIgnoredProjectPathPrefixStr\""
@@ -207,7 +207,7 @@ public abstract class SubprojectCreationTask : DefaultTask() {
 		val baseFullyQualifiedPackageNameStr: String = this.basePackageName.get()
 
 		val baseFullyQualifiedPackageName: FullyQualifiedPackageName? =
-			FullyQualifiedPackageName.ofStringOrNull(baseFullyQualifiedPackageNameStr)
+			FullyQualifiedPackageName.ofString(baseFullyQualifiedPackageNameStr)
 
 		checkNotNull(baseFullyQualifiedPackageName) {
 			"Invalid fully-qualified package name \"$baseFullyQualifiedPackageNameStr\""
@@ -228,7 +228,7 @@ public abstract class SubprojectCreationTask : DefaultTask() {
 	private fun getSubprojectPath(): ProjectPath {
 		val subprojectPathStr: String = this.projectPath.get()
 
-		val subprojectPath: ProjectPath? = ProjectPath.ofStringOrNull(subprojectPathStr)
+		val subprojectPath: ProjectPath? = ProjectPath.ofString(subprojectPathStr)
 
 		checkNotNull(subprojectPath) {
 			"Invalid Gradle project path \"$subprojectPathStr\""
@@ -258,14 +258,14 @@ private fun ProjectPath.toFullyQualifiedPackageName(): FullyQualifiedPackageName
 		.map(ProjectName::toPackageName)
 		.toList()
 
-	return FullyQualifiedPackageName.ofPackageNames(packageNames)
+	return FullyQualifiedPackageName.ofPackageNames(packageNames)!!
 }
 
 private fun ProjectName.toPackageName(): PackageName {
 	val packageNameStr: String = this.toString()
 		.replace("-", "")
 
-	val packageName: PackageName? = PackageName.ofStringOrNull(packageNameStr)
+	val packageName: PackageName? = PackageName.ofString(packageNameStr)
 
 	checkNotNull(packageName) {
 		"Invalid package name: \"$packageNameStr\""

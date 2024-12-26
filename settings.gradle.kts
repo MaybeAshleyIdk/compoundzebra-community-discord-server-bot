@@ -36,7 +36,7 @@ include {
 			"di"()
 		}
 
-		"environment-type"()
+		"build-type"()
 
 		"token"()
 

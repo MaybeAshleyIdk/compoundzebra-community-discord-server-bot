@@ -14,7 +14,7 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 public class ShutdownCommand(
 	private val configSupplier: ConfigSupplier,
 	private val shutdownRequester: ShutdownRequester,
-) : Command(name = CommandName.Companion.ofString("shutdown")) {
+) : Command(name = CommandName("shutdown")) {
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val authorAsGuildMember: Member = catalystMessage.getAuthorAsGuildMember()
