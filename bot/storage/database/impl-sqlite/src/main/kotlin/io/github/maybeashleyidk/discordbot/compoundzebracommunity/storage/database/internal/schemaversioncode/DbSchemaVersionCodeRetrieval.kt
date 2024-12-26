@@ -19,7 +19,7 @@ internal fun readDbSchemaVersionCode(statement: Statement): DbSchemaVersionCode?
 		return null
 	}
 
-	return DbSchemaVersionCode.ofInt(dbUserVersion.toInt())
+	return DbSchemaVersionCode(dbUserVersion.toInt())
 }
 
 /**
