@@ -193,7 +193,7 @@ public abstract class SubprojectCreationTask : DefaultTask() {
 		return packageIgnoredProjectPathPrefixStrings
 			.map { packageIgnoredProjectPathPrefixStr: String ->
 				val packageIgnoredProjectPathPrefix: ProjectPath? =
-					ProjectPath.ofStringOrNull(packageIgnoredProjectPathPrefixStr)
+					ProjectPath.ofString(packageIgnoredProjectPathPrefixStr)
 
 				checkNotNull(packageIgnoredProjectPathPrefix) {
 					"Invalid Gradle project path \"$packageIgnoredProjectPathPrefixStr\""
@@ -228,7 +228,7 @@ public abstract class SubprojectCreationTask : DefaultTask() {
 	private fun getSubprojectPath(): ProjectPath {
 		val subprojectPathStr: String = this.projectPath.get()
 
-		val subprojectPath: ProjectPath? = ProjectPath.ofStringOrNull(subprojectPathStr)
+		val subprojectPath: ProjectPath? = ProjectPath.ofString(subprojectPathStr)
 
 		checkNotNull(subprojectPath) {
 			"Invalid Gradle project path \"$subprojectPathStr\""

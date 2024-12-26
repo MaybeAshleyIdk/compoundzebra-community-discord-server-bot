@@ -5,11 +5,48 @@ import org.gradle.api.file.Directory
 import java.io.File
 
 @JvmInline
-internal value class ProjectPath private constructor(private val names: List<ProjectName>) {
+internal value class ProjectPath private constructor(private val pathNames: List<ProjectName>) {
+
+	init {
+		require(this.pathNames.isNotEmpty()) {
+			"The project path must consist of at least one project name"
+		}
+	}
+
+	val projectNames: Iterable<ProjectName>
+		get() {
+			return this.pathNames
+		}
+
+	fun countNames(): Int {
+		return this.pathNames.size
+	}
+
+	fun getFinalName(): ProjectName {
+		return this.pathNames.last()
+	}
+
+	fun startsWith(prefix: ProjectPath): Boolean {
+		return this.pathNames.startsWith(prefix.pathNames)
+	}
+
+	fun removePrefix(prefix: ProjectPath): ProjectPath? {
+		val thisNamesWithoutPrefix: List<ProjectName> = this.pathNames.removePrefix(prefix.pathNames)
+
+		if (thisNamesWithoutPrefix.isEmpty()) {
+			return null
+		}
+
+		return ProjectPath(thisNamesWithoutPrefix)
+	}
+
+	override fun toString(): String {
+		return this.pathNames.joinToString(prefix = ":", separator = ":")
+	}
 
 	companion object {
 
-		fun ofStringOrNull(pathString: String): ProjectPath? {
+		fun ofString(pathString: String): ProjectPath? {
 			val names: List<ProjectName> = pathString
 				.replace('/', ':')
 				.replace(File.separatorChar, ':')
@@ -22,43 +59,6 @@ internal value class ProjectPath private constructor(private val names: List<Pro
 
 			return ProjectPath(names)
 		}
-	}
-
-	init {
-		require(this.names.isNotEmpty()) {
-			"The project path must consist of at least one project name"
-		}
-	}
-
-	val projectNames: Iterable<ProjectName>
-		get() {
-			return this.names
-		}
-
-	fun countNames(): Int {
-		return this.names.size
-	}
-
-	fun getFinalName(): ProjectName {
-		return this.names.last()
-	}
-
-	fun startsWith(prefix: ProjectPath): Boolean {
-		return this.names.startsWith(prefix.names)
-	}
-
-	fun removePrefix(prefix: ProjectPath): ProjectPath? {
-		val thisNamesWithoutPrefix: List<ProjectName> = this.names.removePrefix(prefix.names)
-
-		if (thisNamesWithoutPrefix.isEmpty()) {
-			return null
-		}
-
-		return ProjectPath(thisNamesWithoutPrefix)
-	}
-
-	override fun toString(): String {
-		return this.names.joinToString(prefix = ":", separator = ":")
 	}
 }
 
