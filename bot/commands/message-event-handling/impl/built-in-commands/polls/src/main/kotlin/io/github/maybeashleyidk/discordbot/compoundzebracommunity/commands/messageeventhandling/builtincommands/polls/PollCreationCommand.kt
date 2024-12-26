@@ -28,8 +28,7 @@ public class PollCreationCommand(
 		val description: PollDescription? = arguments.firstOrNull()
 			.orEmpty()
 			.trimAndSqueezeWhitespace()
-			.ifBlank { null }
-			?.let(PollDescription::ofString)
+			.let(PollDescription::ofString)
 		if (description == null) {
 			val config: Config = this.configSupplier.get()
 			textChannel.sendMessage(config.strings.command.poll.missingDescription).await()
