@@ -18,7 +18,7 @@ internal class IncludeDslImpl private constructor(
 	}
 
 	override operator fun String.invoke(childrenInclude: IncludeDsl.() -> Unit) {
-		val projectName: ProjectName? = ProjectName.ofStringOrNull(this@invoke)
+		val projectName: ProjectName? = ProjectName.ofString(this@invoke)
 
 		checkNotNull(projectName) {
 			"Invalid project name \"$projectName\""
@@ -28,7 +28,7 @@ internal class IncludeDslImpl private constructor(
 	}
 
 	override operator fun String.invoke() {
-		val projectName: ProjectName? = ProjectName.ofStringOrNull(this@invoke)
+		val projectName: ProjectName? = ProjectName.ofString(this@invoke)
 
 		checkNotNull(projectName) {
 			"Invalid project name \"$projectName\""
@@ -69,6 +69,6 @@ internal class IncludeDslImpl private constructor(
 		val parentProjectNameSingularStr: String = this.parentProject.name.toString().removeSuffix("s")
 		val projectNameStr = "$parentProjectNameSingularStr-$requestedNewProjectName"
 
-		return ProjectName.ofString(projectNameStr)
+		return ProjectName.ofString(projectNameStr)!!
 	}
 }
