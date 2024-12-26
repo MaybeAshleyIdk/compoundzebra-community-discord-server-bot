@@ -3,6 +3,14 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.snowflake
 @JvmInline
 public value class SnowflakeId private constructor(private val value: ULong) : Comparable<SnowflakeId> {
 
+	override fun compareTo(other: SnowflakeId): Int {
+		return this.value.compareTo(other.value)
+	}
+
+	override fun toString(): String {
+		return this.value.toString()
+	}
+
 	public companion object {
 
 		private const val TIMESTAMP_MASK: Long = 0x3FFFFFFFFFFL
@@ -24,13 +32,5 @@ public value class SnowflakeId private constructor(private val value: ULong) : C
 			val value: ULong = timestampPart or workedIdPart or sequenceNrPart
 			return this.ofULong(value)
 		}
-	}
-
-	override fun compareTo(other: SnowflakeId): Int {
-		return this.value.compareTo(other.value)
-	}
-
-	override fun toString(): String {
-		return this.value.toString()
 	}
 }
