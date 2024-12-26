@@ -40,8 +40,7 @@ public class PollCreationCommand(
 			.mapNotNull { optionLabel: String ->
 				optionLabel
 					.trimAndSqueezeWhitespace()
-					.ifBlank { null }
-					?.let(PollOptionLabel::ofString)
+					.let(PollOptionLabel::ofString)
 			}
 		if (optionLabels.size < 2) {
 			val config: Config = this.configSupplier.get()
