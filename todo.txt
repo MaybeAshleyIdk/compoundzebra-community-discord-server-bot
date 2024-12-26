@@ -20,8 +20,6 @@
 
 * [config, moved to storage] dynamic response commands
 
-* [internal/codebase] qualifier for the config file path
-
 * [public] command for adding response commands
 
 * [public] help command
