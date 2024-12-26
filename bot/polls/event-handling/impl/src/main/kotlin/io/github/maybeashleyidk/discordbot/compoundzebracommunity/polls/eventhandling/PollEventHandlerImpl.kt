@@ -41,7 +41,6 @@ public class PollEventHandlerImpl(
 			?: return
 
 		val optionValue: PollOptionValue = event.values.singleOrNull()
-			?.ifEmpty { null }
 			?.let(PollOptionValue::ofString)
 			?: return
 
