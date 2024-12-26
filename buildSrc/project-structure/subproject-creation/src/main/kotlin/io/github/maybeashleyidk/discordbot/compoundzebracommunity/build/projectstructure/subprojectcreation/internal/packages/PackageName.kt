@@ -3,27 +3,27 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.project
 import org.gradle.api.file.Directory
 
 @JvmInline
-internal value class PackageName private constructor(private val string: String) {
+internal value class PackageName private constructor(private val nameString: String) {
+
+	init {
+		require(this.nameString.isValidPackageName()) {
+			"Invalid package name \"${this.nameString}\""
+		}
+	}
+
+	override fun toString(): String {
+		return this.nameString
+	}
 
 	companion object {
 
-		fun ofStringOrNull(nameString: String): PackageName? {
+		fun ofString(nameString: String): PackageName? {
 			if (!(nameString.isValidPackageName())) {
 				return null
 			}
 
 			return PackageName(nameString)
 		}
-	}
-
-	init {
-		require(this.string.isValidPackageName()) {
-			"Invalid package name \"${this.string}\""
-		}
-	}
-
-	override fun toString(): String {
-		return this.string
 	}
 }
 

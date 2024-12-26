@@ -20,7 +20,7 @@ internal value class FullyQualifiedPackageName private constructor(val packageNa
 		fun ofString(fullyQualifiedPackageNameString: String): FullyQualifiedPackageName? {
 			val names: List<PackageName> = fullyQualifiedPackageNameString
 				.split(".")
-				.map(PackageName::ofStringOrNull)
+				.map(PackageName::ofString)
 				.nonNullOrNull()
 				?.ifEmpty { null }
 				?: return null

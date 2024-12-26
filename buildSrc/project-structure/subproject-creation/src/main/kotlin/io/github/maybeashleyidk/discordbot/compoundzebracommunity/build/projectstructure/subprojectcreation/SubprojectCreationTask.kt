@@ -265,7 +265,7 @@ private fun ProjectName.toPackageName(): PackageName {
 	val packageNameStr: String = this.toString()
 		.replace("-", "")
 
-	val packageName: PackageName? = PackageName.ofStringOrNull(packageNameStr)
+	val packageName: PackageName? = PackageName.ofString(packageNameStr)
 
 	checkNotNull(packageName) {
 		"Invalid package name: \"$packageNameStr\""
