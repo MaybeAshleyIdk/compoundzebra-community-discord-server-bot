@@ -2,7 +2,6 @@ rootProject.name = "compoundzebra-community-discord-server-bot"
 
 pluginManagement {
 	includeBuild(rootProject.projectDir.resolve("projects-structure-system").toString())
-	includeBuild(rootProject.projectDir.resolve("include-dsl").toString())
 
 	repositories {
 		mavenCentral()
@@ -13,7 +12,6 @@ pluginManagement {
 plugins {
 	id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
 	id("projects-structure-system")
-	id("include-dsl")
 }
 
 dependencyResolutionManagement {
