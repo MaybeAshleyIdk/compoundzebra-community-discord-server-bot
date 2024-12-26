@@ -12,6 +12,7 @@ pluginManagement {
 
 plugins {
 	id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
+	id("projects-structure-system")
 	id("include-dsl")
 }
 
@@ -25,8 +26,8 @@ dependencyResolutionManagement {
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include {
-	"bot" {
-		"utils" {
+	"bot"(composite) {
+		"utils"(namespace) {
 			"strings"()
 
 			"coroutines-read-write-mutex"()
@@ -41,66 +42,66 @@ include {
 
 		"token"()
 
-		"logging".service(impl = "stderr")
+		"logging"(service, impl = "stderr")
 
 		"snowflake"()
 		"snowflake-generator"()
 
-		"storage" {
-			"database".service(impl = "sqlite")
+		"storage"(namespace) {
+			"database"(service, impl = "sqlite")
 			"wiring"()
 		}
 
 		"config"()
-		"config-serialization".service(impl = "json")
-		"config-source".service(impl = "file")
-		"config-cache".service(impl = "memory")
-		"config-supplier".service(impl = "cache")
+		"config-serialization"(service, impl = "json")
+		"config-source"(service, impl = "file")
+		"config-cache"(service, impl = "memory")
+		"config-supplier"(service, impl = "cache")
 
 		"generic-event-handler"()
 
-		"emoji-stats".service()
+		"emoji-stats"(service)
 
-		"polls" {
+		"polls"(namespace) {
 			"id"()
 			"description"()
 			"option"()
 			"details"()
 
-			"management".service()
-			"creation".service(impl = "manager")
-			"holding".service(impl = "manager")
-			"modification".service(impl = "manager")
+			"management"(service)
+			"creation"(service, impl = "manager")
+			"holding"(service, impl = "manager")
+			"modification"(service, impl = "manager")
 
 			"component-protocol"()
 
-			"event-handling".service()
+			"event-handling"(service)
 
 			"wiring"()
 		}
 
-		"self-timeout".service()
+		"self-timeout"(service)
 
-		"shutdown" {
+		"shutdown"(namespace) {
 			"callbacks"()
 
-			"management".service()
-			"event-handling".service(impl = "manager")
-			"callback-registration".service(impl = "manager")
-			"requesting".service(impl = "manager")
+			"management"(service)
+			"event-handling"(service, impl = "manager")
+			"callback-registration"(service, impl = "manager")
+			"requesting"(service, impl = "manager")
 
 			"wiring"()
 		}
 
-		"commands" {
-			"name"()
+		"commands"(namespace) {
+			"command-name"().inDirectory("name")
 			"prefix"()
 
-			"message-event-handling".service {
+			"message-event-handling"(service) {
 				"message-parser"()
 				"command"()
 
-				"built-in-commands" {
+				"built-in-commands"(namespace) {
 					"coin-flip"()
 					"config"()
 					"dev"()
@@ -121,13 +122,13 @@ include {
 			}
 		}
 
-		"conditional-message-event-handling".service()
+		"conditional-message-event-handling"(service)
 
-		"message-event-handler-mediation".service()
+		"message-event-handler-mediation"(service)
 
-		"private-message-event-handling".service()
+		"private-message-event-handling"(service)
 
-		"event-listening".service()
+		"event-listening"(service)
 
 		"jda-factory"()
 		"wiring"()
