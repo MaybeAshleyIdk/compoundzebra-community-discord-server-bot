@@ -29,7 +29,7 @@ wget -O- 'https://github.com/MaybeAshleyIdk/compoundzebra-community-discord-serv
 
 ## Usage ##
 
-The execute the JAR file, a Java 21 (or above) runtime is required.  
+To execute the JAR file, a Java 21 (or above) runtime is required.  
 The bot token must be supplied in the environment variable `DISCORD_BOT_TOKEN`.
 
 ```sh
