@@ -1,0 +1,28 @@
+name: Build & test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+
+jobs:
+  build-and-tes:
+    name: Build & test
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 23
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build & test bot
+        run: ./gradlew --project-prop=buildType=development build :main:createGzippedExecutable

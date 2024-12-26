@@ -1,0 +1,44 @@
+name: Create release draft
+
+on:
+  push:
+    tags:
+      - "!v[0-9]+.[0-9]+.[0-9]+-indev[0-9]+"
+      - "!v[0-9]+.[0-9]+.[0-9]+-rc[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  create-release-draft:
+    name: Create release draft ${{ github.ref_name }}
+
+    permissions:
+      contents: write
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 23
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build & test bot
+        run: ./gradlew --project-prop=buildType=release build :main:createGzippedExecutable
+
+      - name: Save version name
+        run: printf 'RELEASE_VERSION_NAME=%s\n' "${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+
+      - name: Create release draft
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Version ${{ env.RELEASE_VERSION_NAME }}
+          fail_on_unmatched_files: true
+          files: czd-bot-*.gz
+          draft: true

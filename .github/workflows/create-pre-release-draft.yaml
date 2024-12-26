@@ -1,4 +1,4 @@
-name: Create Pre-Release Draft
+name: Create pre-release draft
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
       - "v[0-9]+.[0-9]+.[0-9]+-rc[0-9]+"
 
 jobs:
-  create-prerelease:
-    name: Create Pre-Release Draft ${{ github.ref_name }}
+  create-pre-release-draft:
+    name: Create pre-release draft ${{ github.ref_name }}
 
     permissions:
       contents: write
@@ -19,28 +19,25 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: zulu
-          java-version: 22
+          distribution: temurin
+          java-version: 23
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
 
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Save version name
-        run: |
-          tag_name="$GITHUB_REF_NAME"
-          tag_name="${tag_name#v}"
-          printf 'CZD_BOT_VERSION_NAME=%s\n' "$tag_name" >> "$GITHUB_ENV"
-
-      - name: Run Gradle
+      - name: Build & test bot
         run: ./gradlew --project-prop=buildType=release build :main:createGzippedExecutable
 
-      - name: Create pre-release draft ${{ github.ref_name }}
+      - name: Save version name
+        run: printf 'PRE_RELEASE_VERSION_NAME=%s\n' "${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+
+      - name: Create pre-release draft
         uses: softprops/action-gh-release@v2
         with:
-          name: Version ${{ env.CZD_BOT_VERSION_NAME }}
+          name: Version ${{ env.PRE_RELEASE_VERSION_NAME }}
           prerelease: true
           fail_on_unmatched_files: true
           files: czd-bot-*.gz
