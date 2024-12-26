@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 
 public class SelfTimeoutCommand(
 	private val selfTimeoutService: SelfTimeoutService,
-) : Command(name = CommandName.ofString("TimeToDie".lowercase())) {
+) : Command(name = CommandName("TimeToDie".lowercase())) {
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val author: Member = catalystMessage.getAuthorAsGuildMember()

@@ -166,7 +166,7 @@ private fun Map<String, CommandDetailsJson>.mapToCommandDefinitions(): Set<Comma
 	return this
 		.mapTo(LinkedHashSet(this.size)) { (commandNameStr: String, details: CommandDetailsJson) ->
 			CommandDefinition(
-				commandName = CommandName.ofString(commandNameStr),
+				commandName = CommandName(commandNameStr),
 				action = details.action.mapToAction(),
 			)
 		}
@@ -203,14 +203,7 @@ private fun Set<CommandName>.mapToStrings(): Set<String> {
 }
 
 private fun Set<String>.mapToCommandNamesIfValid(): Set<CommandName> {
-	return this
-		.mapNotNullTo(LinkedHashSet(this.size)) { commandNameString: String ->
-			if (!(CommandName.isValid(commandNameString))) {
-				return@mapNotNullTo null
-			}
-
-			CommandName.ofString(commandNameString)
-		}
+	return this.mapNotNullTo(LinkedHashSet(this.size), CommandName::ofString)
 }
 
 private fun ActionJson.mapToAction(): Action {

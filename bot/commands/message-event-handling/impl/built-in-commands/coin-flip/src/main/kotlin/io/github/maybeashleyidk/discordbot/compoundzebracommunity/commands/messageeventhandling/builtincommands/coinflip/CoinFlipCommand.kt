@@ -11,7 +11,7 @@ import kotlin.random.Random
 
 public class CoinFlipCommand(
 	private val configSupplier: ConfigSupplier,
-) : Command(name = CommandName.ofString("coin")) {
+) : Command(name = CommandName("coin")) {
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val isHeads: Boolean = Random.nextBoolean()

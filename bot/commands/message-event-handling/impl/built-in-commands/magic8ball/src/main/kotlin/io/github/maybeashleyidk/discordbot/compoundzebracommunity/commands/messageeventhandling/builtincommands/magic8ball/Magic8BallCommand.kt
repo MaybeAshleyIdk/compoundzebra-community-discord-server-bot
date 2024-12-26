@@ -12,7 +12,7 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 public class Magic8BallCommand(
 	private val configSupplier: ConfigSupplier,
 	private val logger: Logger,
-) : Command(name = CommandName.ofString("8ball")) {
+) : Command(name = CommandName("8ball")) {
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val config: Config = this.configSupplier.get()

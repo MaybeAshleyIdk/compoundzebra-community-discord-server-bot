@@ -6,7 +6,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutin
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 
-public class SourceCodeCommand : Command(CommandName.ofString("source" + "code")) {
+public class SourceCodeCommand : Command(CommandName("source" + "code")) {
 
 	private companion object {
 

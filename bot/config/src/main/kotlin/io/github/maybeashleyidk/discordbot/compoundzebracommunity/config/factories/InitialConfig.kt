@@ -13,7 +13,7 @@ internal fun createInitialConfig(botEnvironmentType: BotEnvironmentType): Config
 			commandDefinitions = fallbackConfig.commandDefinitions +
 				setOf(
 					CommandDefinition(
-						commandName = CommandName.ofString("ping"),
+						commandName = CommandName("ping"),
 						action = Action.Response(message = "pong"),
 					),
 				),
