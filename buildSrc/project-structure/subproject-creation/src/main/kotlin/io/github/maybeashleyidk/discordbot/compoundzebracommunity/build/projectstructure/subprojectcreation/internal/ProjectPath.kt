@@ -15,7 +15,7 @@ internal value class ProjectPath private constructor(private val names: List<Pro
 				.replace(File.separatorChar, ':')
 				.removePrefix(":")
 				.split(":")
-				.map(ProjectName::ofStringOrNull)
+				.map(ProjectName::ofString)
 				.nonNullOrNull()
 				?.ifEmpty { null }
 				?: return null
