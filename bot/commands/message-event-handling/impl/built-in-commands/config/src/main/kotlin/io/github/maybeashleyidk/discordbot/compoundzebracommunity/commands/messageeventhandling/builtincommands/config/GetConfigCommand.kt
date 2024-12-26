@@ -15,7 +15,7 @@ import java.nio.file.Path
 public class GetConfigCommand(
 	private val configSupplier: ConfigSupplier,
 	private val configFilePath: Path,
-) : Command(name = CommandName("getconfig")) {
+) : Command(name = CommandName("get" + "config")) {
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 		val authorAsGuildMember: Member = catalystMessage.getAuthorAsGuildMember()

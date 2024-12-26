@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 
 public class DevTestCommand(
-) : Command(name = CommandName("devtest")) {
+) : Command(name = CommandName("dev" + "test")) {
 
 	override suspend fun execute(arguments: List<String>, catalystMessage: Message, textChannel: TextChannel) {
 	}
