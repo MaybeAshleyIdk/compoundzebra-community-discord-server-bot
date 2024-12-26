@@ -8,8 +8,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttyp
 internal fun createFallbackConfig(botEnvironmentType: BotEnvironmentType): Config {
 	val commandPrefix: CommandPrefix =
 		when (botEnvironmentType) {
-			BotEnvironmentType.DEVELOPMENT -> CommandPrefix.ofString("!!")
-			BotEnvironmentType.PRODUCTION -> CommandPrefix.ofString("!")
+			BotEnvironmentType.DEVELOPMENT -> CommandPrefix.ofString("!!")!!
+			BotEnvironmentType.PRODUCTION -> CommandPrefix.ofString("!")!!
 		}
 
 	return Config(

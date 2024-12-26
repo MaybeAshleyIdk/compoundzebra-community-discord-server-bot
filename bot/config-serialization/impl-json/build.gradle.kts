@@ -10,6 +10,8 @@ plugins {
 dependencies {
 	api(projects.bot.configSerialization.api)
 
+	implementation(projects.bot.utils.strings)
+
 	implementation(libs.moshi)
 	ksp(libs.moshiKotlinCodegen)
 }

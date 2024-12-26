@@ -7,6 +7,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Command
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.ConditionalMessage
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.LanguageStrings
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.strings.quoted
 
 internal object ConfigModelAdapter {
 
@@ -14,7 +15,9 @@ internal object ConfigModelAdapter {
 		return Config(
 			strings = configJson.strings.toLanguageStrings(),
 			botAdminUserIds = configJson.botAdminUserIds.orEmpty(),
-			commandPrefix = CommandPrefix.ofString(configJson.commandPrefix),
+			commandPrefix = checkNotNull(CommandPrefix.ofString(configJson.commandPrefix)) {
+				"Invalid command prefix string ${configJson.commandPrefix.quoted()}"
+			},
 			commandDefinitions = configJson.commands.orEmpty().mapToCommandDefinitions(),
 			conditionalMessages = configJson.conditionalMessages.orEmpty().mapToConditionalMessages(),
 			disabledCommandNames = configJson.disabledCommandNames.orEmpty().mapToCommandNamesIfValid(),
