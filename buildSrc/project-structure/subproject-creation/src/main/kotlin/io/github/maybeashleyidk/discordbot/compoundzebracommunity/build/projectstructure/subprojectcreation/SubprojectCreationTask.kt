@@ -207,7 +207,7 @@ public abstract class SubprojectCreationTask : DefaultTask() {
 		val baseFullyQualifiedPackageNameStr: String = this.basePackageName.get()
 
 		val baseFullyQualifiedPackageName: FullyQualifiedPackageName? =
-			FullyQualifiedPackageName.ofStringOrNull(baseFullyQualifiedPackageNameStr)
+			FullyQualifiedPackageName.ofString(baseFullyQualifiedPackageNameStr)
 
 		checkNotNull(baseFullyQualifiedPackageName) {
 			"Invalid fully-qualified package name \"$baseFullyQualifiedPackageNameStr\""
@@ -258,7 +258,7 @@ private fun ProjectPath.toFullyQualifiedPackageName(): FullyQualifiedPackageName
 		.map(ProjectName::toPackageName)
 		.toList()
 
-	return FullyQualifiedPackageName.ofPackageNames(packageNames)
+	return FullyQualifiedPackageName.ofPackageNames(packageNames)!!
 }
 
 private fun ProjectName.toPackageName(): PackageName {

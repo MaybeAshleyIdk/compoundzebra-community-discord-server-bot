@@ -3,11 +3,21 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.project
 import org.gradle.api.file.Directory
 
 @JvmInline
-internal value class FullyQualifiedPackageName private constructor(private val names: List<PackageName>) {
+internal value class FullyQualifiedPackageName private constructor(val packageNames: List<PackageName>) {
+
+	init {
+		require(this.packageNames.isNotEmpty()) {
+			"A fully-qualified package name must consist of at least one package name"
+		}
+	}
+
+	override fun toString(): String {
+		return this.packageNames.joinToString(separator = ".")
+	}
 
 	companion object {
 
-		fun ofStringOrNull(fullyQualifiedPackageNameString: String): FullyQualifiedPackageName? {
+		fun ofString(fullyQualifiedPackageNameString: String): FullyQualifiedPackageName? {
 			val names: List<PackageName> = fullyQualifiedPackageNameString
 				.split(".")
 				.map(PackageName::ofStringOrNull)
@@ -18,28 +28,13 @@ internal value class FullyQualifiedPackageName private constructor(private val n
 			return FullyQualifiedPackageName(names)
 		}
 
-		fun ofPackageNames(names: List<PackageName>): FullyQualifiedPackageName {
-			require(names.isNotEmpty()) {
-				"A fully-qualified package name must consist of at least one package name"
+		fun ofPackageNames(names: List<PackageName>): FullyQualifiedPackageName? {
+			if (names.isEmpty()) {
+				return null
 			}
 
 			return FullyQualifiedPackageName(names)
 		}
-	}
-
-	init {
-		require(this.names.isNotEmpty()) {
-			"A fully-qualified package name must consist of at least one package name"
-		}
-	}
-
-	val packageNames: List<PackageName>
-		get() {
-			return this.names
-		}
-
-	override fun toString(): String {
-		return this.names.joinToString(separator = ".")
 	}
 }
 
