@@ -1,11 +1,11 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.buildtype.BotBuildType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.builtincommands.BuiltInCommandsFactory
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Action
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.CommandDefinition
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.creation.PollCreator
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.holding.PollHolder
@@ -21,7 +21,7 @@ public class CommandMessageEventHandlerImplFactory(
 	private val pollHolder: PollHolder,
 	private val selfTimeoutService: SelfTimeoutService,
 	private val shutdownRequester: ShutdownRequester,
-	private val botEnvironmentType: BotEnvironmentType,
+	private val botBuildType: BotBuildType,
 	private val logger: Logger,
 ) {
 
@@ -34,7 +34,7 @@ public class CommandMessageEventHandlerImplFactory(
 			this.pollHolder,
 			this.selfTimeoutService,
 			this.shutdownRequester,
-			this.botEnvironmentType,
+			this.botBuildType,
 			this.logger,
 		)
 

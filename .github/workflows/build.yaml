@@ -25,4 +25,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Gradle
-        run: ./gradlew build :main:createExecutable
+        run: ./gradlew --project-prop=buildType=development build :main:createExecutable

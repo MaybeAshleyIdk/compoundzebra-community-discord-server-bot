@@ -1,6 +1,6 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity
 
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.environmenttype.BotEnvironmentType
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.buildtype.BotBuildType
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbackregistraton.awaitShutdown
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.token.BotToken
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.di.scope.DiScope
@@ -10,11 +10,11 @@ import java.nio.file.Path
 
 public object Bot {
 
-	public fun run(environmentType: BotEnvironmentType, token: BotToken, configFilePath: Path) {
+	public fun run(buildType: BotBuildType, token: BotToken, configFilePath: Path) {
 		val botModule =
 			BotModule(
 				scope = DiScope(),
-				environmentType,
+				buildType,
 				token,
 				initialActivity = Activity.playing("you like a damn fiddle"),
 				configFilePath,

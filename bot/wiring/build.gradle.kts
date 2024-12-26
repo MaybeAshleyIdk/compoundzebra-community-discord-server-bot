@@ -9,7 +9,7 @@ plugins {
 
 dependencies {
 	api(`jda-without-opusJava`)
-	api(projects.bot.environmentType)
+	api(projects.bot.buildType)
 	api(projects.bot.token)
 	api(projects.bot.logging)
 	api(projects.bot.shutdown.callbackRegistration)
