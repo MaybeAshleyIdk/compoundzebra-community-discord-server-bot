@@ -1,6 +1,7 @@
 rootProject.name = "compoundzebra-community-discord-server-bot"
 
 pluginManagement {
+	includeBuild(rootProject.projectDir.resolve("projects-structure-system").toString())
 	includeBuild(rootProject.projectDir.resolve("include-dsl").toString())
 
 	repositories {
