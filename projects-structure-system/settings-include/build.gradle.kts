@@ -7,4 +7,5 @@ dependencies {
 
 	implementation(projects.includeDsl.impl)
 	implementation(projects.projectPath)
+	implementation(projects.structuredProjectInfo)
 }

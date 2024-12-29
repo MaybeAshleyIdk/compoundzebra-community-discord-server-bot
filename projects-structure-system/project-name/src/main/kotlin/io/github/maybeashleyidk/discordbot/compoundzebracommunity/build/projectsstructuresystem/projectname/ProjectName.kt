@@ -1,7 +1,9 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectsstructuresystem.projectname
 
+import java.io.Serializable
+
 @JvmInline
-public value class ProjectName private constructor(private val nameString: String) {
+public value class ProjectName private constructor(private val nameString: String) : Serializable {
 
 	init {
 		require(this.nameString.isValidProjectName()) {

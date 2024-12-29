@@ -16,6 +16,7 @@ include(
 
 include(
 	":service-implementation-name",
+	":structured-project-info",
 	":include-dsl:api",
 	":include-dsl:impl",
 	":settings-include",

@@ -1,12 +1,15 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectsstructuresystem.serviceimplementationname
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectsstructuresystem.projectname.ProjectName
+import java.io.Serializable
 
 private val IMPL_PROJECT_NAME: ProjectName = ProjectName.ofString("impl")!!
 private const val IMPL_PREFIX: String = "impl-"
 
 @JvmInline
-public value class ServiceImplementationName private constructor(private val projectNameWithoutPrefix: ProjectName?) {
+public value class ServiceImplementationName private constructor(
+	private val projectNameWithoutPrefix: ProjectName?,
+) : Serializable {
 
 	public fun toFullProjectName(): ProjectName {
 		if (this.projectNameWithoutPrefix == null) {
