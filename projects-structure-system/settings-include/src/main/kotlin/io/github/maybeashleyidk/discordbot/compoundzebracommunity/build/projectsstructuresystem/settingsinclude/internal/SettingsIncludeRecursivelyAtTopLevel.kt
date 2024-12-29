@@ -7,8 +7,6 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projects
 import org.gradle.api.initialization.ProjectDescriptor
 import org.gradle.api.initialization.Settings
 
-private val SERVICE_INTERFACE_PROJECT_NAME: ProjectName = ProjectName.ofString("api")!!
-
 internal fun Settings.includeRecursivelyAtTopLevel(topLevelProjects: Map<ProjectName, ProjectInclusionInfoDetails>) {
 	this.includeRecursively(parentProjectPath = ProjectPath.Root, projects = topLevelProjects)
 }

@@ -5,8 +5,22 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projects
 @JvmInline
 public value class ProjectPath private constructor(private val pathNames: List<ProjectName>) {
 
+	public data class SplitFirstResult(
+		public val firstName: ProjectName,
+		public val restPath: ProjectPath,
+	)
+
 	public operator fun plus(projectName: ProjectName): ProjectPath {
 		return ProjectPath(this.pathNames + projectName)
+	}
+
+	public fun splitFirst(): SplitFirstResult? {
+		val firstName: ProjectName = this.pathNames.firstOrNull()
+			?: return null
+
+		val restPath = ProjectPath(this.pathNames.drop(1))
+
+		return SplitFirstResult(firstName, restPath)
 	}
 
 	override fun toString(): String {

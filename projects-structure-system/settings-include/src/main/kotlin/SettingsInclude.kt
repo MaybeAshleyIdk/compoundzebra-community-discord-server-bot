@@ -8,8 +8,8 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projects
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectsstructuresystem.projectname.ProjectName
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectsstructuresystem.settingsinclude.internal.ProjectEnforcementIsolatedAction
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectsstructuresystem.settingsinclude.internal.includeRecursivelyAtTopLevel
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectsstructuresystem.settingsinclude.internal.toStructuredProjectInfoDetailsMap
-import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectsstructuresystem.structuredprojectinfo.StructuredRootProjectInfo
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectsstructuresystem.settingsinclude.internal.toProjectDetailsMap
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.build.projectsstructuresystem.structuredprojectinfo.ProjectDetails
 import org.gradle.api.initialization.Settings
 
 public fun Settings.include(include: IncludeDsl.() -> Unit) {
@@ -18,7 +18,8 @@ public fun Settings.include(include: IncludeDsl.() -> Unit) {
 
 	this.includeRecursivelyAtTopLevel(topLevelProjectInclusionInfoDetailsMap)
 
-	val structuredRootProjectInfo =
-		StructuredRootProjectInfo(topLevelProjectInclusionInfoDetailsMap.toStructuredProjectInfoDetailsMap())
-	this.gradle.lifecycle.afterProject(ProjectEnforcementIsolatedAction(structuredRootProjectInfo))
+	val topLevelProjectDetailsMap: Map<ProjectName, ProjectDetails.NonRoot> =
+		topLevelProjectInclusionInfoDetailsMap.toProjectDetailsMap()
+	val rootProjectDetails = ProjectDetails.Root(topLevelProjectDetailsMap)
+	this.gradle.lifecycle.afterProject(ProjectEnforcementIsolatedAction(rootProjectDetails))
 }
