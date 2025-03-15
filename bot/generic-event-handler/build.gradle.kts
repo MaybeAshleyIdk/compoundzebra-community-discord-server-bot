@@ -7,4 +7,5 @@ plugins {
 
 dependencies {
 	api(`jda-without-opusJava`)
+	api(projects.bot.utils.eventHandlingResult)
 }
