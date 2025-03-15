@@ -4,47 +4,47 @@ Sorts channels of a category based on member activity of the previous month, eve
 the most active channels are sorted at the top, the least active channels are sorted at the bottom
 
 command:
-	/autoChannelsSorting edit <targetCategory: ChannelCategory>
-	/autoChannelsSorting show <targetCategory: ChannelCategory>
-	/autoChannelsSorting enable <targetCategory: ChannelCategory>
-	/autoChannelsSorting disable <targetCategory: ChannelCategory>
-	/autoChannelsSorting remove <targetCategory: ChannelCategory>
+	/auto-channels-sorting edit <targetCategory: ChannelCategory>
+	/auto-channels-sorting show <targetCategory: ChannelCategory>
+	/auto-channels-sorting enable <targetCategory: ChannelCategory>
+	/auto-channels-sorting disable <targetCategory: ChannelCategory>
+	/auto-channels-sorting remove <targetCategory: ChannelCategory>
 
 	show:
-		> /autoChannelsSorting show 0000000000000000000
+		> /auto-channels-sorting show 0000000000000000000
 		< No automatic channels sorting has been set up for the channel category _"{categoryName}"_
 
-		> /autoChannelsSorting show 0000000000000000000
+		> /auto-channels-sorting show 0000000000000000000
 		< The automatic channels sorting rules for the channel category _"{categoryName}"_ are:
 		  ```
 		  {sortingRules}
 		  ```
 
-		> /autoChannelsSorting show 0000000000000000000
+		> /auto-channels-sorting show 0000000000000000000
 		< The automatic channels sorting rules for the channel category _"{categoryName}"_ are: (currently *disabled*)
 		  ```
 		  {sortingRules}
 		  ```
 
 	enable:
-		> /autoChannelsSorting enable 0000000000000000000
+		> /auto-channels-sorting enable 0000000000000000000
 		< The automatic channels sorting for the channel category _"{categoryName}"_ has been **enabled** again
 
-		> /autoChannelsSorting enable 0000000000000000000
+		> /auto-channels-sorting enable 0000000000000000000
 		< The automatic channels sorting for the channel category _"{categoryName}"_ is already enabled
 
 	disable:
-		> /autoChannelsSorting enable 0000000000000000000
+		> /auto-channels-sorting enable 0000000000000000000
 		< The automatic channels sorting for the channel category _"{categoryName}"_ has been **disabled**
 
-		> /autoChannelsSorting enable 0000000000000000000
+		> /auto-channels-sorting enable 0000000000000000000
 		< The automatic channels sorting for the channel category _"{categoryName}"_ is already disabled
 
 	remove:
-		> /autoChannelsSorting remove 0000000000000000000
+		> /auto-channels-sorting remove 0000000000000000000
 		< The automatic channels sorting setup for the channel category _"{categoryName}"_ has been removed
 
-		> /autoChannelsSorting remove 0000000000000000000
+		> /auto-channels-sorting remove 0000000000000000000
 		< No automatic channels sorting has been set up for the channel category _"{categoryName}"_
 
 	edit:

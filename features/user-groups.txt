@@ -93,16 +93,16 @@ Permission string syntax:
 === user groups management command ===
 
 
-usage: /userGroups add <name: String>
-   or: /userGroups list
-   or: /userGroups show <name: String>
-   or: /userGroups edit <name: String>
-   or: /userGroups rename <name: String> <newName: String>
-   or: /userGroups remove <name: String>
-   or: /userGroups edit-hierarchy
+usage: /user-groups add <name: String>
+   or: /user-groups list
+   or: /user-groups show <name: String>
+   or: /user-groups edit <name: String>
+   or: /user-groups rename <name: String> <newName: String>
+   or: /user-groups remove <name: String>
+   or: /user-groups edit-hierarchy
 
 
-modal of /userGroups edit: (add subcommand should also just open this and not have a <name> argument)
+modal of /user-groups edit: (add subcommand should also just open this and not have a <name> argument)
 
 	+------------------------------------------------+
 	| Name                                           |
@@ -138,39 +138,39 @@ modal of /userGroups edit: (add subcommand should also just open this and not ha
 
 examples:
 
-< /userGroups list
+< /user-groups list
 > No user groups have been added yet
 
 
-< /userGroups add Plebs
+< /user-groups add Plebs
 > The new (empty) user group _"Plebs"_ has been added
 
-< /userGroups add plebs
+< /user-groups add plebs
 > A user group with the name _"Plebs"_ already exists
 
-< /userGroups edit plebs
+< /user-groups edit plebs
 
-< /userGroups list
+< /user-groups list
 > * _"Plebs"_
 
-< /userGroups show plebs
+< /user-groups show plebs
 > The user group _"Plebs"_ contains the following rules:
 > * @everyone is included
 > (the full list of members is too big to display)
 (allow_mentions would be off for this message)
 
 
-< /userGroups add admin
+< /user-groups add admin
 > The new (empty) user group _"admin"_ has been added
 
-< /userGroups rename admin Admins
+< /user-groups rename admin Admins
 > The user group _"admin"_ was renamed to _"Admins"_
 
-< /userGroups show admins
+< /user-groups show admins
 > The user group _"Admins"_ contains no rules
 
 
-< /userGroups remove plebs
+< /user-groups remove plebs
 > The user group _"Plebs"_ was removed
 
 

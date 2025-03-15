@@ -1,15 +1,15 @@
-/scheduledMessages list
-/scheduledMessages show <name: String>
+/scheduled-messages list
+/scheduled-messages show <name: String>
 
-/scheduledMessages create
-/scheduledMessages edit <name: String>
-/scheduledMessages remove <name: String>
+/scheduled-messages create
+/scheduled-messages edit <name: String>
+/scheduled-messages remove <name: String>
 
-/scheduledMessages enable <name: String>
-/scheduledMessages disable <name: String>
+/scheduled-messages enable <name: String>
+/scheduled-messages disable <name: String>
 
 
-commands `/scheduledMessages create|edit` opens modal:
+commands `/scheduled-messages create|edit` opens modal:
 
 	+------------------------------------------------+
 	| Name                                           |
