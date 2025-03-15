@@ -8,7 +8,6 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.id.PollI
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.modification.PollModifier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.polls.option.PollOptionValue
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutinesjda.await
-import kotlinx.coroutines.coroutineScope
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.events.GenericEvent
@@ -21,11 +20,9 @@ public class PollEventHandlerImpl(
 ) : PollEventHandler {
 
 	override suspend fun handleEvent(event: GenericEvent) {
-		coroutineScope {
-			when (event) {
-				is StringSelectInteractionEvent -> this@PollEventHandlerImpl.onStringSelectInteractionEvent(event)
-				is ButtonInteractionEvent -> this@PollEventHandlerImpl.onButtonInteractionEvent(event)
-			}
+		when (event) {
+			is StringSelectInteractionEvent -> this.onStringSelectInteractionEvent(event)
+			is ButtonInteractionEvent -> this.onButtonInteractionEvent(event)
 		}
 	}
 

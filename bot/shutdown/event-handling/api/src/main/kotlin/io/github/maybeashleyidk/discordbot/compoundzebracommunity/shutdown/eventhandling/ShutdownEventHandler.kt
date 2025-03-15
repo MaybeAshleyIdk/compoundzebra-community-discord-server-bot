@@ -9,5 +9,5 @@ public interface ShutdownEventHandler {
 		SHUTTING_DOWN,
 	}
 
-	public suspend fun handleEvent(event: GenericEvent): Status
+	public fun handleEvent(event: GenericEvent): Status
 }

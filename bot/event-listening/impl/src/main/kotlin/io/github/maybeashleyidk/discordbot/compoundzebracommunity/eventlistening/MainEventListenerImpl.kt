@@ -10,10 +10,11 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callb
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbacks.OnBeforeShutdownCallback
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.eventhandling.ShutdownEventHandler
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import net.dv8tion.jda.api.events.GenericEvent
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -48,7 +49,8 @@ public class MainEventListenerImpl(
 	private var isShuttingDownOrIsShutDown: Boolean = false
 
 	private val incomingEventsThreadPool: ExecutorService = Executors.newCachedThreadPool()
-	private val incomingEventsCoroutineContext: CoroutineContext = this.incomingEventsThreadPool.asCoroutineDispatcher()
+	private val incomingEventsCoroutineScope: CoroutineScope =
+		CoroutineScope(this.incomingEventsThreadPool.asCoroutineDispatcher() + SupervisorJob())
 
 	private val eventHandlersThreadPool: ExecutorService = Executors.newCachedThreadPool()
 	private val eventHandlersCoroutineContext: CoroutineContext = this.eventHandlersThreadPool.asCoroutineDispatcher()
@@ -70,11 +72,9 @@ public class MainEventListenerImpl(
 			return
 		}
 
-		// each incoming event gets its own coroutine scope
-		CoroutineScope(this.incomingEventsCoroutineContext)
-			.launch {
-				this@MainEventListenerImpl.handleEvent(event)
-			}
+		this.incomingEventsCoroutineScope.launch {
+			this@MainEventListenerImpl.handleEvent(event)
+		}
 	}
 
 	private suspend fun handleEvent(event: GenericEvent) {
@@ -84,26 +84,23 @@ public class MainEventListenerImpl(
 			ShutdownEventHandler.Status.SHUTTING_DOWN -> return
 		}
 
-		val eventHandlingJobs: List<Job> = this.otherEventHandlers
-			.map { eventHandler: GenericEventHandler ->
-				// each event handler get its own coroutine scope
-				CoroutineScope(this.eventHandlersCoroutineContext)
-					.launch {
+		withContext(this.eventHandlersCoroutineContext) {
+			this@MainEventListenerImpl.otherEventHandlers
+				.map { eventHandler: GenericEventHandler ->
+					this@withContext.launch {
 						this@MainEventListenerImpl.executeEventHandler(eventHandler, event)
 					}
-			}
-
-		eventHandlingJobs.joinAll()
+				}
+				.joinAll()
+		}
 	}
 
 	private suspend fun executeEventHandler(eventHandler: GenericEventHandler, event: GenericEvent) {
 		try {
 			eventHandler.handleEvent(event)
+		} catch (e: CancellationException) {
+			throw e
 		} catch (e: Throwable) {
-			if (e is CancellationException) {
-				throw e
-			}
-
 			this.logger.logError(e, "Event handler $eventHandler threw an exception")
 
 			if (e !is Exception) {

@@ -2,9 +2,8 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.emojistats
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutinesjda.await
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Guild
@@ -32,20 +31,20 @@ private val CUSTOM_EMOJI_REGEX_PATTERN: Regex = Regex("(?<!\\\\)<:[^:]+:(?<id>0|
 public class EmojiStatsManagerImpl(private val logger: Logger) : EmojiStatsManager {
 
 	override suspend fun countUsedEmojisOfUserInGuild(user: User, guild: Guild): Map<CustomEmoji, Long> {
-		return coroutineScope {
-			val emojiIdCounter: MutableMap<EmojiSnowflakeId, Long> = ConcurrentHashMap()
+		val emojiIdCounter: MutableMap<EmojiSnowflakeId, Long> = ConcurrentHashMap()
 
+		coroutineScope {
 			guild.channels
 				.map { guildChannel: GuildChannel ->
-					this@coroutineScope.async {
+					this@coroutineScope.launch {
 						this@EmojiStatsManagerImpl
 							.countUsedEmojisOfUserInGuildChannel(emojiIdCounter, user, guildChannel)
 					}
 				}
-				.awaitAll()
-
-			return@coroutineScope this@EmojiStatsManagerImpl.mapEmojiIdCounterToEmojiCounter(guild, emojiIdCounter)
+				.joinAll()
 		}
+
+		return this.mapEmojiIdCounterToEmojiCounter(guild, emojiIdCounter)
 	}
 
 	private suspend fun countUsedEmojisOfUserInGuildChannel(
