@@ -15,4 +15,5 @@ dependencies {
 	api(projects.bot.logging)
 
 	implementation(libs.kotlinxCoroutinesCore)
+	implementation(projects.bot.utils.coroutinesJda)
 }

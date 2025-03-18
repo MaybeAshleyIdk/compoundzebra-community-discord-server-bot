@@ -9,6 +9,7 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callb
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbacks.OnAfterShutdownCallback
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbacks.OnBeforeShutdownCallback
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.eventhandling.ShutdownEventHandler
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutinesjda.await
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.eventhandlingresult.EventHandlingResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -22,7 +23,11 @@ import net.dv8tion.jda.api.events.GenericEvent
 import net.dv8tion.jda.api.events.StatusChangeEvent
 import net.dv8tion.jda.api.events.guild.GuildReadyEvent
 import net.dv8tion.jda.api.events.http.HttpRequestEvent
+import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent
 import net.dv8tion.jda.api.events.session.ReadyEvent
+import net.dv8tion.jda.api.interactions.components.ActionRow
+import net.dv8tion.jda.api.interactions.components.buttons.Button
+import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -52,6 +57,39 @@ public class MainEventListenerImpl(
 			pollEventHandler,
 			privateMessageEventHandler,
 			LogUninterestingEventTypeHandler,
+			object : GenericEventHandler {
+
+				override suspend fun handleEvent(event: GenericEvent): EventHandlingResult {
+//					StringSelectInteractionEvent
+					if (event !is MessageContextInteractionEvent) {
+						return EventHandlingResult.NotHandled
+					}
+
+					if (event.name != "test") {
+						return EventHandlingResult.NotHandled
+					}
+
+					event
+						.reply("### Quote this message?")
+						.addComponents(
+							ActionRow.of(
+								StringSelectMenu.create("is_nsfw")
+									.addOption("NSFW", "true")
+									.addOption("SFW", "false")
+									.setDefaultValues("false")
+									.build(),
+							),
+							ActionRow.of(
+								Button.primary("submit", "Quote it!")
+									.asDisabled(),
+							),
+						)
+						.setEphemeral(true)
+						.await()
+
+					return EventHandlingResult.Handled
+				}
+			},
 		)
 
 	@Volatile

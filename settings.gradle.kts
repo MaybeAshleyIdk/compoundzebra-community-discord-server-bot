@@ -122,6 +122,10 @@ include {
 			}
 		}
 
+		"slash-commands" {
+
+		}
+
 		"conditional-message-event-handling".service()
 
 		"message-event-handler-mediation".service()

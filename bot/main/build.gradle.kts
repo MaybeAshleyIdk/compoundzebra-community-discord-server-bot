@@ -12,4 +12,6 @@ dependencies {
 	implementation(projects.bot.wiring)
 
 	implementation(libs.kotlinxCoroutinesCore)
+	implementation(projects.bot.utils.coroutinesJda)
+	implementation(projects.bot.slashCommands)
 }
