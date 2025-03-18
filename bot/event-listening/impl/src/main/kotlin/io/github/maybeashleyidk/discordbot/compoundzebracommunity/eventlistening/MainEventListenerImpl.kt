@@ -9,17 +9,26 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callb
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbacks.OnAfterShutdownCallback
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.callbacks.OnBeforeShutdownCallback
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.shutdown.eventhandling.ShutdownEventHandler
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.eventhandlingresult.EventHandlingResult
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.asCoroutineDispatcher
-import kotlinx.coroutines.joinAll
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import net.dv8tion.jda.api.events.GatewayPingEvent
 import net.dv8tion.jda.api.events.GenericEvent
+import net.dv8tion.jda.api.events.StatusChangeEvent
+import net.dv8tion.jda.api.events.guild.GuildReadyEvent
+import net.dv8tion.jda.api.events.http.HttpRequestEvent
+import net.dv8tion.jda.api.events.session.ReadyEvent
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.cancellation.CancellationException
+import kotlin.reflect.KClass
 
 public class MainEventListenerImpl(
 	private val logger: Logger,
@@ -42,13 +51,15 @@ public class MainEventListenerImpl(
 			messageEventHandlerMediator,
 			pollEventHandler,
 			privateMessageEventHandler,
+			LogUninterestingEventTypeHandler,
 		)
 
 	@Volatile
 	private var isShuttingDownOrIsShutDown: Boolean = false
 
 	private val incomingEventsThreadPool: ExecutorService = Executors.newCachedThreadPool()
-	private val incomingEventsCoroutineContext: CoroutineContext = this.incomingEventsThreadPool.asCoroutineDispatcher()
+	private val incomingEventsCoroutineScope: CoroutineScope =
+		CoroutineScope(this.incomingEventsThreadPool.asCoroutineDispatcher() + SupervisorJob())
 
 	private val eventHandlersThreadPool: ExecutorService = Executors.newCachedThreadPool()
 	private val eventHandlersCoroutineContext: CoroutineContext = this.eventHandlersThreadPool.asCoroutineDispatcher()
@@ -70,11 +81,9 @@ public class MainEventListenerImpl(
 			return
 		}
 
-		// each incoming event gets its own coroutine scope
-		CoroutineScope(this.incomingEventsCoroutineContext)
-			.launch {
-				this@MainEventListenerImpl.handleEvent(event)
-			}
+		this.incomingEventsCoroutineScope.launch {
+			this@MainEventListenerImpl.handleEvent(event)
+		}
 	}
 
 	private suspend fun handleEvent(event: GenericEvent) {
@@ -84,31 +93,38 @@ public class MainEventListenerImpl(
 			ShutdownEventHandler.Status.SHUTTING_DOWN -> return
 		}
 
-		val eventHandlingJobs: List<Job> = this.otherEventHandlers
-			.map { eventHandler: GenericEventHandler ->
-				// each event handler get its own coroutine scope
-				CoroutineScope(this.eventHandlersCoroutineContext)
-					.launch {
-						this@MainEventListenerImpl.executeEventHandler(eventHandler, event)
+		val results: List<EventHandlingResult?> =
+			withContext(this.eventHandlersCoroutineContext) {
+				this@MainEventListenerImpl.otherEventHandlers
+					.map { eventHandler: GenericEventHandler ->
+						this@withContext.async {
+							this@MainEventListenerImpl.executeEventHandler(eventHandler, event)
+						}
 					}
+					.awaitAll()
 			}
 
-		eventHandlingJobs.joinAll()
+		if (EventHandlingResult.Handled !in results) {
+			this.logger.logInfo("The event $event was not handled by any event handler")
+		}
 	}
 
-	private suspend fun executeEventHandler(eventHandler: GenericEventHandler, event: GenericEvent) {
-		try {
+	private suspend fun executeEventHandler(
+		eventHandler: GenericEventHandler,
+		event: GenericEvent,
+	): EventHandlingResult? {
+		return try {
 			eventHandler.handleEvent(event)
+		} catch (e: CancellationException) {
+			throw e
 		} catch (e: Throwable) {
-			if (e is CancellationException) {
-				throw e
-			}
-
-			this.logger.logError(e, "Event handler $eventHandler threw an exception")
+			this.logger.logError(e, "Event handler $eventHandler threw an exception trying to handle the event $event")
 
 			if (e !is Exception) {
 				throw e
 			}
+
+			null
 		}
 	}
 
@@ -132,5 +148,24 @@ public class MainEventListenerImpl(
 
 		if (!incomingEventsThreadPoolTerminated) this.incomingEventsThreadPool.shutdownNow()
 		if (!eventHandlersThreadPoolTerminated) this.eventHandlersThreadPool.shutdownNow()
+	}
+}
+
+private object LogUninterestingEventTypeHandler : GenericEventHandler {
+
+	private val uninterestingEventClasses: List<Class<out GenericEvent>> =
+		setOf(
+			StatusChangeEvent::class,
+			HttpRequestEvent::class,
+			GatewayPingEvent::class,
+			GuildReadyEvent::class,
+			ReadyEvent::class,
+		).map(KClass<out GenericEvent>::java)
+
+	override suspend fun handleEvent(event: GenericEvent): EventHandlingResult {
+		return when (event.javaClass in this.uninterestingEventClasses) {
+			true -> EventHandlingResult.Handled
+			false -> EventHandlingResult.NotHandled
+		}
 	}
 }

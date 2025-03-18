@@ -5,6 +5,9 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutinesjda.await
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.eventhandlingresult.EventHandlingResult
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.eventhandlingresult.EventHandlingResult.Handled
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.eventhandlingresult.EventHandlingResult.NotHandled
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.strings.quoted
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.ChannelType
@@ -18,15 +21,15 @@ public class ConditionalMessageEventHandlerImpl(
 	private val logger: Logger,
 ) : ConditionalMessageEventHandler {
 
-	public override suspend fun handleEvent(event: GenericEvent) {
+	public override suspend fun handleEvent(event: GenericEvent): EventHandlingResult {
 		if (event !is MessageReceivedEvent) {
-			return
+			return NotHandled
 		}
 
 		val message: Message = event.message
 
 		if (shouldBotIgnoreMessage(message)) {
-			return
+			return NotHandled
 		}
 
 		val textChannel: TextChannel = message.channel.asTextChannel()
@@ -56,9 +59,13 @@ public class ConditionalMessageEventHandlerImpl(
 					}
 			}
 			.toList()
-			.ifEmpty { null }
-			?.allOf()
-			?.await()
+			.ifEmpty {
+				return@handleEvent NotHandled
+			}
+			.allOf()
+			.await()
+
+		return Handled
 	}
 }
 

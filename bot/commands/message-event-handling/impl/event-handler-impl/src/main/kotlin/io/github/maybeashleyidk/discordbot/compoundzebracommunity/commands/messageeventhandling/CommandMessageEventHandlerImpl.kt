@@ -4,6 +4,9 @@ import io.github.maybeashleyidk.discordbot.compoundzebracommunity.config.Config
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.configsupplier.ConfigSupplier
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.logging.Logger
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.coroutinesjda.await
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.eventhandlingresult.EventHandlingResult
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.eventhandlingresult.EventHandlingResult.Handled
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.eventhandlingresult.EventHandlingResult.NotHandled
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.strings.quoted
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.ChannelType
@@ -18,15 +21,15 @@ public class CommandMessageEventHandlerImpl(
 	private val logger: Logger,
 ) : CommandMessageEventHandler {
 
-	public override suspend fun handleEvent(event: GenericEvent): Boolean {
+	public override suspend fun handleEvent(event: GenericEvent): EventHandlingResult {
 		if (event !is MessageReceivedEvent) {
-			return false
+			return NotHandled
 		}
 
 		val message: Message = event.message
 
 		if (shouldBotIgnoreMessage(message)) {
-			return false
+			return NotHandled
 		}
 
 		val textChannel: TextChannel = message.channel.asTextChannel()
@@ -36,7 +39,7 @@ public class CommandMessageEventHandlerImpl(
 
 		return when (commandMessageParseResult) {
 			is CommandMessageParseResult.NotACommandMessage -> {
-				false
+				NotHandled
 			}
 
 			is CommandMessageParseResult.InvalidCommandName -> {
@@ -47,7 +50,7 @@ public class CommandMessageEventHandlerImpl(
 
 				textChannel.sendMessage(msg).await()
 
-				true
+				Handled
 			}
 
 			is CommandMessageParseResult.Success -> {
@@ -58,7 +61,7 @@ public class CommandMessageEventHandlerImpl(
 						textChannel,
 					)
 
-				true
+				Handled
 			}
 		}
 	}

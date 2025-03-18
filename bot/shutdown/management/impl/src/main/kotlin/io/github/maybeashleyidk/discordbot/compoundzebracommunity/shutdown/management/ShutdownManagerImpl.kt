@@ -154,7 +154,7 @@ public class ShutdownManagerImpl(
 
 	// endregion
 
-	override suspend fun handleShutdownEvent(event: GenericEvent): EventHandlingResultStatus {
+	override fun handleShutdownEvent(event: GenericEvent): EventHandlingResultStatus {
 		if (event !is ShutdownEvent) {
 			return EventHandlingResultStatus.STILL_RUNNING
 		}

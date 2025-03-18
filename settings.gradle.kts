@@ -33,6 +33,8 @@ include {
 
 			"coroutines-jda"()
 
+			"event-handling-result"()
+
 			"di"()
 		}
 

@@ -2,7 +2,7 @@ package io.github.maybeashleyidk.discordbot.compoundzebracommunity.messageeventh
 
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling.CommandMessageEventHandler
 import io.github.maybeashleyidk.discordbot.compoundzebracommunity.conditionalmessageeventhandling.ConditionalMessageEventHandler
-import kotlinx.coroutines.coroutineScope
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.eventhandlingresult.EventHandlingResult
 import net.dv8tion.jda.api.events.GenericEvent
 
 public class MessageEventHandlerMediatorImpl(
@@ -10,15 +10,15 @@ public class MessageEventHandlerMediatorImpl(
 	private val conditionalMessageEventHandler: ConditionalMessageEventHandler,
 ) : MessageEventHandlerMediator {
 
-	override suspend fun handleEvent(event: GenericEvent) {
-		coroutineScope {
-			val consumed: Boolean = this@MessageEventHandlerMediatorImpl.commandMessageEventHandler.handleEvent(event)
+	override suspend fun handleEvent(event: GenericEvent): EventHandlingResult {
+		@Suppress("MoveVariableDeclarationIntoWhen")
+		val result: EventHandlingResult = this.commandMessageEventHandler.handleEvent(event)
 
-			if (consumed) {
-				return@coroutineScope
-			}
-
-			this@MessageEventHandlerMediatorImpl.conditionalMessageEventHandler.handleEvent(event)
+		when (result) {
+			EventHandlingResult.NotHandled -> Unit
+			EventHandlingResult.Handled -> return result
 		}
+
+		return this.conditionalMessageEventHandler.handleEvent(event)
 	}
 }

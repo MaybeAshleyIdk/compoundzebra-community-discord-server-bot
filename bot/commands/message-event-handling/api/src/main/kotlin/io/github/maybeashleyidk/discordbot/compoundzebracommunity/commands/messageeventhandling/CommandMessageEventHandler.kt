@@ -1,11 +1,9 @@
 package io.github.maybeashleyidk.discordbot.compoundzebracommunity.commands.messageeventhandling
 
+import io.github.maybeashleyidk.discordbot.compoundzebracommunity.utils.eventhandlingresult.EventHandlingResult
 import net.dv8tion.jda.api.events.GenericEvent
 
 public interface CommandMessageEventHandler {
 
-	/**
-	 * Returns a boolean that indicates whether the event was consumed or not.
-	 */
-	public suspend fun handleEvent(event: GenericEvent): Boolean
+	public suspend fun handleEvent(event: GenericEvent): EventHandlingResult
 }
